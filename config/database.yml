@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: remets_development
+
+test:
+  <<: *default
+  database: remets_test
+
+production:
+  <<: *default
+  url: <%= ENV['HEROKU_POSTGRESQL_AQUA_URL'] %>
