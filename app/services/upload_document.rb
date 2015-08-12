@@ -19,20 +19,22 @@ class WordTokenizer
 end
 
 class UploadDocument
-
   DEFAULT_SHINGLE_COUNT = 128
+  DEFAULT_MODULO = 3
 
   def initialize(content_io,
     sanitizer: TextSanitizer.new,
     hasher: SHA1Hasher.new,
     tokenizer: WordTokenizer.new,
-    shingle_count: DEFAULT_SHINGLE_COUNT)
+    shingle_count: DEFAULT_SHINGLE_COUNT,
+    modulo: DEFAULT_MODULO)
 
     @content_io = content_io
     @sanitizer = sanitizer
     @hasher = hasher
     @tokenizer = tokenizer
     @shingle_count = shingle_count
+    @modulo = modulo
   end
 
   def call
@@ -58,6 +60,7 @@ class UploadDocument
 
   def create_shingles
     @tokenizer.tokenize(sanitized_content).each do |tokens|
+      byebug
     end
   end
 
