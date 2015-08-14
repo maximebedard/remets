@@ -1,4 +1,5 @@
 class Document < ActiveRecord::Base
-  validates :content, presence: true
+  validates :signature, presence: true
+  validates :text, presence: true
   validates :url, presence: true
 end

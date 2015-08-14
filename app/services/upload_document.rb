@@ -1,6 +1,8 @@
 class TextSanitizer
+  include ActionView::Helpers::SanitizeHelper
+
   def sanitize(value)
-    ActionView::Helpers::SanitizeHelper.strip_tags(value).downcase
+    super(value).downcase
   end
 end
 
@@ -59,13 +61,13 @@ class UploadDocument
   end
 
   def create_shingles
-    @tokenizer.tokenize(sanitized_content).each do |tokens|
-      byebug
-    end
+    # @tokenizer.tokenize(sanitized_content).each do |tokens|
+    #   byebug
+    # end
   end
 
   def signature
-    @signature ||= @hasher.hash()
+    @signature ||= @hasher.hash(sanitized_content)
   end
 
   def sanitized_content
@@ -73,11 +75,11 @@ class UploadDocument
   end
 
   def content
-    @content ||= @document_io.read
+    @content ||= @content_io.read
   end
 
   def uploaded_url
-    @uploaded_url ||= Rails.root.join('public', 'uploads', 'documents',
-      "#{SecureRandom.hex(10)}-#{@document_io.original_filename.downcase}")
+    @uploaded_url ||= Rails.root.join('public', 'uploads',
+      "#{SecureRandom.hex(10)}-#{@content_io.original_filename.downcase}")
   end
 end
