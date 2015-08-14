@@ -1,4 +1,4 @@
-class DocumentsController < ApplicationController
+class SubmissionsController < ApplicationController
   def index
   end
 
@@ -6,8 +6,8 @@ class DocumentsController < ApplicationController
   end
 
   def create
-    @document = UploadDocument.new(document_params[:content])
-    respond_with @document
+    @service = SubmissionService.new(document_params)
+    respond_with @service.document
   end
 
   private
