@@ -1,8 +1,10 @@
 class Submission < ActiveRecord::Base
   mount_uploader :document, DocumentUploader
 
-  validate :document, presence: true
-  validate :document_signature, presence: true
+  validates :document, presence: true
+  validates :document_signature, presence: true
 
-  has_many :shingles
+  def document_content
+    @document_content ||= File.open(self.document.current_path, 'r').read
+  end
 end

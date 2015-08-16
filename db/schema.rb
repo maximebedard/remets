@@ -11,19 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810113008) do
+ActiveRecord::Schema.define(version: 20150814021811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "documents", force: :cascade do |t|
-    t.string "signature"
-    t.string "url"
-    t.text   "text"
-  end
-
-  create_table "shingles", force: :cascade do |t|
-    t.string "signature"
+  create_table "submissions", force: :cascade do |t|
+    t.string  "document"
+    t.string  "document_signature"
+    t.integer "shingles",           array: true
   end
 
 end
