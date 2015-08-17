@@ -16,7 +16,7 @@ class Submission < ActiveRecord::Base
     self.class.where.not(id: self.id).map do |s|
       compare(s)
     end.sort_by do |c|
-      c.accuracy
+      c.resemblance
     end
   end
 end

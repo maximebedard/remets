@@ -12,13 +12,13 @@ class SubmissionComparaison
     @submission2 = submission2
   end
 
-  def accuracy
-    @accuracy ||= calculate_accuracy
+  def resemblance
+    @resemblance ||= calculate_resemblance
   end
 
   private
 
-  def calculate_accuracy
+  def calculate_resemblance
     num = @submission1.shingles & @submission2.shingles
     denum = @submission1.shingles | @submission2.shingles
     num.size.to_f / denum.size
