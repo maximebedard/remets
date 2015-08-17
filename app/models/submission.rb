@@ -7,4 +7,16 @@ class Submission < ActiveRecord::Base
   def document_content
     @document_content ||= File.open(self.document.current_path, 'r').read
   end
+
+  def compare(other_submission)
+    SubmissionComparaison.new(self, other_submission)
+  end
+
+  def compare_all
+    self.class.where.not(id: self.id).map do |s|
+      compare(s)
+    end.sort_by do |c|
+      c.accuracy
+    end
+  end
 end

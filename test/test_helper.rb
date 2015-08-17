@@ -5,9 +5,9 @@ require 'mocha/mini_test'
 require 'byebug'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  CarrierWave.root = 'test/fixtures/files'
+
   include ActionDispatch::TestProcess
 end

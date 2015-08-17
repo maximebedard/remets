@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SubmissionCreationServiceTest < ActiveSupport::TestCase
   setup do
-    @fixture = fixture_file_upload('files/text_document.txt')
+    @fixture = fixture_file_upload('files/submissions/document/605975481/text_document1.txt')
     @service = SubmissionCreationService.new({ document: @fixture })
   end
 

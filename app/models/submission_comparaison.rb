@@ -19,5 +19,8 @@ class SubmissionComparaison
   private
 
   def calculate_accuracy
+    num = @submission1.shingles & @submission2.shingles
+    denum = @submission1.shingles | @submission2.shingles
+    num.size.to_f / denum.size
   end
 end
