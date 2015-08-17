@@ -1,11 +1,3 @@
-class WordTokenizer
-  REGEX = /[\w\']+(?:\:\/\/[\w\.\/]+){0,1}/
-
-  def tokenize(value)
-    value.scan(REGEX)
-  end
-end
-
 class SubmissionCreationService
   DEFAULT_SHINGLE_COUNT = 4
   DEFAULT_MODULO = 3
@@ -14,13 +6,13 @@ class SubmissionCreationService
 
   def initialize(submission_params,
     scraper: Scraper.new,
-    tokenizer: WordTokenizer.new,
+    lexer: Lexer.new,
     shingle_count: DEFAULT_SHINGLE_COUNT,
     modulo: DEFAULT_MODULO)
 
     @submission_params = submission_params
     @scraper = scraper
-    @tokenizer = tokenizer
+    @lexer = lexer
     @shingle_count = shingle_count
     @modulo = modulo
   end
@@ -55,7 +47,7 @@ class SubmissionCreationService
 
   def each_shingle(content, &block)
     shingle = []
-    @tokenizer.tokenize(content).each do |token|
+    @lexer.tokenize(content).each do |token|
       shingle << token
       next if shingle.size != @shingle_count
 
