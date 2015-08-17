@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :documents
+  resources :submissions, only: [:show, :new, :create]
 end

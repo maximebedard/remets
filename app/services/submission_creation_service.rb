@@ -1,6 +1,6 @@
 class SubmissionCreationService
   DEFAULT_SHINGLE_COUNT = 4
-  DEFAULT_MODULO = 3
+  DEFAULT_ENTROPY = 3
 
   attr_reader :submission
 
@@ -8,13 +8,13 @@ class SubmissionCreationService
     scraper: Scraper.new,
     lexer: Lexer.new,
     shingle_count: DEFAULT_SHINGLE_COUNT,
-    modulo: DEFAULT_MODULO)
+    entropy: DEFAULT_ENTROPY)
 
     @submission_params = submission_params
     @scraper = scraper
     @lexer = lexer
     @shingle_count = shingle_count
-    @modulo = modulo
+    @entropy = entropy
   end
 
   def call
@@ -37,7 +37,7 @@ class SubmissionCreationService
     each_shingle(sanitized_document_content) do |shingle|
       test = Signature.sign(shingle.join(' '))[0,7].to_i(16)
 
-      if test % @modulo == 0
+      if test % @entropy == 0
         shingles << test
       end
     end
@@ -45,6 +45,7 @@ class SubmissionCreationService
     @submission.shingles = shingles
   end
 
+  # Yields shingles (or n-gram) for the specified content
   def each_shingle(content, &block)
     shingle = []
     @lexer.tokenize(content).each do |token|

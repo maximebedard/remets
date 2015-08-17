@@ -1,18 +1,21 @@
 class SubmissionsController < ApplicationController
-  def index
+  def show
+    Submission.find(params[:id])
   end
 
   def new
+    @submission = Submission.new
   end
 
   def create
-    @service = SubmissionService.new(document_params)
-    respond_with @service.document
+    @submission = SubmissionService.new(document_params).call
+    respond_with @submission
   end
 
   private
 
   def document_params
-    params.require(:document).permit(:content)
+    params.require(:document)
+          .permit(:content)
   end
 end
