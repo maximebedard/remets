@@ -1,23 +1,23 @@
 
-submission1: # generated id: 605975481
-  document: 'text_document1.txt'
-  document_signature: '72ec4740d278c025ba50879f3d3dbdb4'
+document1: # generated id: 605975481
+  file: 'text_document1.txt'
+  signature: '72ec4740d278c025ba50879f3d3dbdb4'
   shingles:
     - 254149830
     - 156990633
     - 49670451
     - 124562433
 
-submission2: # generated id: 605975482
-  document: 'text_document2.txt'
-  document_signature: '5217b285752c8ffabd8f676f3ef0b518'
+document2: # generated id: 605975482
+  file: 'text_document2.txt'
+  signature: '5217b285752c8ffabd8f676f3ef0b518'
   shingles:
     - 254149830
     - 241494486
 
 platypus: # generated id: 605975483
-  document: 'platypus1.txt'
-  document_signature: 'f7ab89f0ec24d85b63b1b8c10e158f76'
+  file: 'platypus1.txt'
+  signature: 'f7ab89f0ec24d85b63b1b8c10e158f76'
   shingles:
     - 163535136
     - 68653962
@@ -99,8 +99,8 @@ platypus: # generated id: 605975483
     - 237030213
 
 awesome_platypus: # generated id: 605975484
-  document: 'platypus2.txt'
-  document_signature: 'ba9fdf76ca64af686919289e2d792dac'
+  file: 'platypus2.txt'
+  signature: 'ba9fdf76ca64af686919289e2d792dac'
   shingles:
     - 163535136
     - 68653962

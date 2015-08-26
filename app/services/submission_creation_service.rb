@@ -19,7 +19,7 @@ class SubmissionCreationService
 
   def call
     create_submission
-    create_shingles
+    create_documents
     complete_submission
 
     submission
@@ -29,20 +29,31 @@ class SubmissionCreationService
 
   def create_submission
     @submission = Submission.new(@submission_params)
-    @submission.document_signature = Signature.sign(sanitized_document_content)
   end
 
-  def create_shingles
+  def create_documents
+    @submission.documents.each do |document|
+      sanitized_content = @scraper.text(document.content)
+
+      document.signature = Signature.sign(sanitized_content)
+      document.shingles = shingles_for_document(sanitized_content)
+    end
+  end
+
+  def complete_submission
+    @submission.save!
+  end
+
+  def shingles_for_document(content)
     shingles = []
-    each_shingle(sanitized_document_content) do |shingle|
+    each_shingle(content) do |shingle|
       test = Signature.sign(shingle.join(' '))[0,7].to_i(16)
 
       if test % @entropy == 0
         shingles << test
       end
     end
-
-    @submission.shingles = shingles
+    shingles
   end
 
   # Yields shingles (or n-gram) for the specified content
@@ -56,13 +67,5 @@ class SubmissionCreationService
 
       shingle.shift
     end
-  end
-
-  def complete_submission
-    @submission.save!
-  end
-
-  def sanitized_document_content
-    @scraper.text(@submission.document_content)
   end
 end
