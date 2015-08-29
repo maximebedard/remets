@@ -1,5 +1,6 @@
 
 document1: # generated id: 605975481
+  submission: log121_lab1
   file: 'text_document1.txt'
   signature: '72ec4740d278c025ba50879f3d3dbdb4'
   shingles:
@@ -9,6 +10,7 @@ document1: # generated id: 605975481
     - 124562433
 
 document2: # generated id: 605975482
+  submission: log240_lab1
   file: 'text_document2.txt'
   signature: '5217b285752c8ffabd8f676f3ef0b518'
   shingles:
@@ -16,6 +18,7 @@ document2: # generated id: 605975482
     - 241494486
 
 platypus: # generated id: 605975483
+  submission: log121_lab1
   file: 'platypus1.txt'
   signature: 'f7ab89f0ec24d85b63b1b8c10e158f76'
   shingles:
@@ -99,6 +102,7 @@ platypus: # generated id: 605975483
     - 237030213
 
 awesome_platypus: # generated id: 605975484
+  submission: log240_lab1
   file: 'platypus2.txt'
   signature: 'ba9fdf76ca64af686919289e2d792dac'
   shingles:

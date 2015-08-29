@@ -8,14 +8,14 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = SubmissionService.new(document_params).call
-    respond_with @submission
+    @submission = SubmissionCreationService.new(submission_params).call
+    render :new, @submission
   end
 
   private
 
-  def document_params
-    params.require(:document)
-          .permit(:content)
+  def submission_params
+    params.require(:submission)
+          .permit(documents_attributes:[:file])
   end
 end

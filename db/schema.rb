@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150826021049) do
   end
 
   create_table "submissions", force: :cascade do |t|
+    t.integer "user_id"
   end
 
 end

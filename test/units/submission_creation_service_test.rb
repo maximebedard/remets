@@ -5,7 +5,7 @@ class SubmissionCreationServiceTest < ActiveSupport::TestCase
     @fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
     @service = SubmissionCreationService.new({
       documents_attributes: [
-        { file: @fixture }
+        @fixture
       ]
     })
   end

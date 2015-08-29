@@ -18,6 +18,8 @@ class SubmissionCreationService
   end
 
   def call
+    update_document_params
+
     create_submission
     create_documents
     complete_submission
@@ -26,6 +28,11 @@ class SubmissionCreationService
   end
 
   private
+
+  def update_document_params
+    documents_params = @submission_params.fetch(:documents_attributes, []).map { |doc| { file: doc } }
+    @submission_params.update(documents_attributes: documents_params)
+  end
 
   def create_submission
     @submission = Submission.new(@submission_params)
