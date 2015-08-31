@@ -9,7 +9,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = SubmissionCreationService.new(submission_params).call
-    render :new, @submission
+    render action: :new, status: :created
   end
 
   private
