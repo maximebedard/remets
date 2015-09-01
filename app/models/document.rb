@@ -11,6 +11,6 @@ class Document < ActiveRecord::Base
   end
 
   def extension
-    self.file.file.extension.downcase
+    @extension ||= self.file.file.extension.downcase
   end
 end
