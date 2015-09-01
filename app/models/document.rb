@@ -9,4 +9,8 @@ class Document < ActiveRecord::Base
   def content
     @content ||= File.open(self.file.current_path, 'r').read
   end
+
+  def extension
+    self.file.file.extension.downcase
+  end
 end

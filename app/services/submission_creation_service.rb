@@ -1,19 +1,17 @@
 class SubmissionCreationService
-  DEFAULT_SHINGLE_COUNT = 4
+  DEFAULT_KGRAMS = 4
   DEFAULT_ENTROPY = 3
 
   attr_reader :submission
 
   def initialize(submission_params,
-    scraper: Scraper.new,
-    lexer: Lexer.new,
-    shingle_count: DEFAULT_SHINGLE_COUNT,
+    tokenizer: Tokenizer.new,
+    kgrams: DEFAULT_KGRAMS,
     entropy: DEFAULT_ENTROPY)
 
     @submission_params = submission_params
-    @scraper = scraper
-    @lexer = lexer
-    @shingle_count = shingle_count
+    @tokenizer = tokenizer
+    @kgrams = kgrams
     @entropy = entropy
   end
 
@@ -40,10 +38,10 @@ class SubmissionCreationService
 
   def create_documents
     @submission.documents.each do |document|
-      sanitized_content = @scraper.text(document.content)
+      scrubbed_content = Scrubber.for_document(document).scrubbed_content
 
-      document.signature = Signature.sign(sanitized_content)
-      document.shingles = shingles_for_document(sanitized_content)
+      document.signature = Signature.sign(scrubbed_content)
+      document.shingles = kgrams_for_document(scrubbed_content)
     end
   end
 
@@ -51,9 +49,10 @@ class SubmissionCreationService
     @submission.save!
   end
 
-  def shingles_for_document(content)
+  def kgrams_for_document(content)
     shingles = []
-    each_shingle(content) do |shingle|
+    each_kgrams(content) do |shingle|
+      # We take only the first 8 bytes
       test = Signature.sign(shingle.join(' '))[0,7].to_i(16)
 
       if test % @entropy == 0
@@ -64,11 +63,11 @@ class SubmissionCreationService
   end
 
   # Yields shingles (or n-gram) for the specified content
-  def each_shingle(content, &block)
+  def each_kgrams(content, &block)
     shingle = []
-    @lexer.tokenize(content).each do |token|
+    @tokenizer.tokenize(content).each do |token|
       shingle << token
-      next if shingle.size != @shingle_count
+      next if shingle.size != @kgrams
 
       yield(shingle)
 
