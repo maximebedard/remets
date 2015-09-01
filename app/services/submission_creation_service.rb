@@ -1,17 +1,17 @@
 class SubmissionCreationService
-  DEFAULT_KGRAMS = 4
+  DEFAULT_SHINGLE_COUNT = 4
   DEFAULT_ENTROPY = 3
 
   attr_reader :submission
 
   def initialize(submission_params,
     tokenizer: Tokenizer.new,
-    kgrams: DEFAULT_KGRAMS,
+    shingle_count: DEFAULT_SHINGLE_COUNT,
     entropy: DEFAULT_ENTROPY)
 
     @submission_params = submission_params
     @tokenizer = tokenizer
-    @kgrams = kgrams
+    @shingle_count = shingle_count
     @entropy = entropy
   end
 
@@ -28,7 +28,10 @@ class SubmissionCreationService
   private
 
   def update_document_params
-    documents_params = @submission_params.fetch(:documents_attributes, []).map { |doc| { file: doc } }
+    documents_params =
+      @submission_params.fetch(:documents_attributes, []).map do |doc|
+        { file: doc }
+      end
     @submission_params.update(documents_attributes: documents_params)
   end
 
@@ -41,7 +44,7 @@ class SubmissionCreationService
       scrubbed_content = Scrubber.for_document(document).scrubbed_content
 
       document.signature = Signature.sign(scrubbed_content)
-      document.shingles = kgrams_for_document(scrubbed_content)
+      document.shingles = shingles_for_document(scrubbed_content)
     end
   end
 
@@ -49,9 +52,9 @@ class SubmissionCreationService
     @submission.save!
   end
 
-  def kgrams_for_document(content)
+  def shingles_for_document(content)
     shingles = []
-    each_kgrams(content) do |shingle|
+    each_shingles(content) do |shingle|
       # We take only the first 8 bytes
       test = Signature.sign(shingle.join(' '))[0,7].to_i(16)
 
@@ -63,11 +66,11 @@ class SubmissionCreationService
   end
 
   # Yields shingles (or n-gram) for the specified content
-  def each_kgrams(content, &block)
+  def each_shingles(content, &block)
     shingle = []
     @tokenizer.tokenize(content).each do |token|
       shingle << token
-      next if shingle.size != @kgrams
+      next if shingle.size != @shingle_count
 
       yield(shingle)
 
