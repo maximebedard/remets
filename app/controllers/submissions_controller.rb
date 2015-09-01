@@ -1,4 +1,8 @@
 class SubmissionsController < ApplicationController
+  def index
+    Submission.all
+  end
+
   def show
     Submission.find(params[:id])
   end

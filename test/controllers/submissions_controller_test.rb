@@ -5,6 +5,11 @@ class SubmissionsControllerTest < ActionController::TestCase
     @submission = submissions(:log121_lab1)
   end
 
+  test '#index' do
+    get :index
+    assert_response :ok
+  end
+
   test '#show' do
     get :show, id: @submission.id
     assert_response :ok

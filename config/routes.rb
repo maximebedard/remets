@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :submissions, only: [:show, :new, :create]
+  resources :submissions, except: [:destroy, :edit, :update]
 end
