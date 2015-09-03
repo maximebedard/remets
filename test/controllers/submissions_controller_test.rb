@@ -35,4 +35,9 @@ class SubmissionsControllerTest < ActionController::TestCase
     assert assigns(:submission)
     assert_response :ok
   end
+
+  test '#index with json format'
+  test '#show with json format'
+  test '#create with json format'
+  test '#new with json format'
 end
