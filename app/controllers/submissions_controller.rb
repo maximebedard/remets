@@ -1,19 +1,24 @@
 class SubmissionsController < ApplicationController
+  respond_to :html, :json
+
   def index
-    Submission.all
+    @submissions = Submission.all
+    respond_with(@submissions)
   end
 
   def show
-    Submission.find(params[:id])
+    @submission = Submission.find(params[:id])
+    respond_with(@submission)
   end
 
   def new
     @submission = Submission.new
+    respond_with(@submission)
   end
 
   def create
     @submission = SubmissionCreationService.new(submission_params).call
-    render action: :new, status: :created
+    respond_with(@submission)
   end
 
   private

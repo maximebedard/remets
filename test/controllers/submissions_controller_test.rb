@@ -16,13 +16,13 @@ class SubmissionsControllerTest < ActionController::TestCase
   end
 
   test '#create' do
-    fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
+    document_fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
 
     post :create, submission: {
-      documents_attributes: [fixture]
+      documents_attributes: [document_fixture]
     }
 
-    assert_response :created
+    assert_redirected_to assigns(:submission)
   end
 
   test '#new' do
