@@ -7,11 +7,15 @@ class SubmissionsControllerTest < ActionController::TestCase
 
   test '#index' do
     get :index
+
+    assert assigns(:submissions)
     assert_response :ok
   end
 
   test '#show' do
     get :show, id: @submission.id
+
+    assert assigns(:submission)
     assert_response :ok
   end
 
@@ -27,6 +31,8 @@ class SubmissionsControllerTest < ActionController::TestCase
 
   test '#new' do
     get :new
+
+    assert assigns(:submission)
     assert_response :ok
   end
 end
