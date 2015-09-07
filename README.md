@@ -20,3 +20,16 @@ source ./some-folder-not-in-the-repo/secrets.sh
 ## Deployment
 
 The deployment process is made using heroku pipeline. WIP.
+
+## TODOs
+
+- [ ] Store user sessions in cookies (remember me)
+- [ ] Create a distinction between text file and source file
+- [ ] Extract into jobs
+  - [ ] Text analysis job
+    - [ ] Shingling
+    - [ ] Winnowing
+  - [ ] Source analysis job
+    - [ ] Research algorithms available
+- [ ] Performance comparaisons
+
