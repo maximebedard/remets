@@ -7,5 +7,4 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     prompt: 'select_account'
 
   OmniAuth.config.logger = Rails.logger
-
 end
