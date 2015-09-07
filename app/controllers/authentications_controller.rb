@@ -1,6 +1,6 @@
 class AuthenticationsController < ApplicationController
   def passthru
-    render text: 'Provider not found', status: :not_found
+    render text: 'Provider not found.', status: :not_found
   end
 
   def create
@@ -15,6 +15,6 @@ class AuthenticationsController < ApplicationController
   end
 
   def failure
-    render text: 'damn...'
+    render text: 'Something went wrong.'
   end
 end
