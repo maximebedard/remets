@@ -1,1 +1,5 @@
-<%= link_to 'sign in from google', '/auth/google/' %>
+<% if authenticated? %>
+  <%= link_to 'sign out', auth_destroy_path %>
+<% else %>
+  <%= link_to 'sign in from google', '/auth/google/' %>
+<% end %>

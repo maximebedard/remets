@@ -12,6 +12,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'responders'
 gem 'jbuilder'
+
+gem 'devise'
 gem 'omniauth-google-oauth2'
 
 group :development do
