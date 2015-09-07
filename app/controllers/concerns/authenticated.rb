@@ -8,7 +8,7 @@ module Authenticated
   end
 
   def current_user
-    @current_user ||= User.find(session[:_remets_user_id]) if session[:_remets_user_id]
+    @current_user ||= User.find(session[Remets::AUTH_SESSION_KEY]) if session[Remets::AUTH_SESSION_KEY]
   end
 
   def signed_in?

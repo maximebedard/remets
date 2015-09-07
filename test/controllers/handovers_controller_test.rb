@@ -30,10 +30,10 @@ class HandoversControllerTest < ActionController::TestCase
   end
 
 
-  test '#index with json format'
-  test '#show with json format'
-  test '#new with json format'
-  test '#create with json format'
-  test '#edit with json format'
-  test '#update with json format'
+  test '#index with json'
+  test '#show with json'
+  test '#new with json'
+  test '#create with json'
+  test '#edit with json'
+  test '#update with json'
 end

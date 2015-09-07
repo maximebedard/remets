@@ -1,43 +1,13 @@
 require 'test_helper'
 
-class SubmissionsControllerTest < ActionController::TestCase
-  setup do
-    @submission = submissions(:log121_lab1)
-  end
+class AuthenticationsControllerTest < ActionController::TestCase
+  test '#passthru renders a provider not found message'
+  test '#passthru redirect to create when the provider is google'
 
-  test '#index' do
-    get :index
+  test '#create assigns the session with the current user'
+  test '#creates logs in the user if it already exists'
+  test '#create creates the user if it does not already exists'
 
-    assert assigns(:submissions)
-    assert_response :ok
-  end
-
-  test '#show' do
-    get :show, id: @submission.id
-
-    assert assigns(:submission)
-    assert_response :ok
-  end
-
-  test '#create' do
-    document_fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
-
-    post :create, submission: {
-      documents_attributes: [document_fixture]
-    }
-
-    assert_redirected_to assigns(:submission)
-  end
-
-  test '#new' do
-    get :new
-
-    assert assigns(:submission)
-    assert_response :ok
-  end
-
-  test '#index with json format'
-  test '#show with json format'
-  test '#create with json format'
-  test '#new with json format'
+  test '#destroy clears the user session'
+  test '#failure renders a failure message'
 end
