@@ -1,16 +1,12 @@
 class AuthenticationsController < ApplicationController
-  def passthru
-    render text: 'Provider not found.', status: :not_found
-  end
-
   def create
     user = User.from_omniauth(request.env['omniauth.auth'])
-    session[:_remets_user_id] = user.id
+    session[Remets::AUTH_SESSION_KEY] = user.id
     redirect_to root_path
   end
 
   def destroy
-    session.delete(:_remets_user_id)
+    session.delete(Remets::AUTH_SESSION_KEY)
     redirect_to root_path
   end
 

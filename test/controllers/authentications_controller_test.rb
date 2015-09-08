@@ -1,31 +1,29 @@
 require 'test_helper'
 
 class AuthenticationsControllerTest < ActionController::TestCase
-  test '#passthru renders a provider not found message' do
-    skip
+  test '#create with an existing user' do
+    mock_auth_request
+    assert_no_difference 'User.count' do
+      post :create, provider: :google
+    end
+    assert_redirected_to '/'
   end
 
-  test '#passthru redirect to create when the provider is google' do
-    skip
+  test '#create with a new user' do
+    mock_auth_request(uid: 1234567, info: { name: 'Roger Lemieux', email: 'lemieux.roger@gmail.com' })
+    assert_difference 'User.count' do
+      post :create, provider: :google
+    end
+    assert_redirected_to '/'
   end
 
-  test '#create assigns the session with the current user' do
-    skip
+  test '#destroy' do
+    get :destroy
+    assert_redirected_to '/'
+    assert_nil session[Remets::AUTH_SESSION_KEY]
   end
 
-  test '#creates logs in the user if it already exists' do
-    skip
-  end
-
-  test '#create creates the user if it does not already exists' do
-    skip
-  end
-
-  test '#destroy clears the user session' do
-    skip
-  end
-
-  test '#failure renders a failure message' do
+  test '#failure' do
     skip
   end
 end
