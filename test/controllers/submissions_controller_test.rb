@@ -36,19 +36,8 @@ class SubmissionsControllerTest < ActionController::TestCase
     assert_response :ok
   end
 
-  test '#index with json' do
-    skip
-  end
-
-  test '#show with json' do
-    skip
-  end
-
-  test '#create with json' do
-    skip
-  end
-
-  test '#new with json' do
-    skip
-  end
+  # test '#index with json'
+  # test '#show with json'
+  # test '#create with json'
+  # test '#new with json'
 end

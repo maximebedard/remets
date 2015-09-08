@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Remets
 
-  AUTH_SESSION_KEY= :_remets_user_id
+  AUTH_SESSION_KEY = :_remets_user_id
 
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

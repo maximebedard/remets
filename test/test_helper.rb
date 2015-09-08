@@ -12,5 +12,5 @@ class ActiveSupport::TestCase
   CarrierWave.root = 'test/fixtures/files'
 
   include ActionDispatch::TestProcess
-  include Remets::MockAuthentication
 end
+
