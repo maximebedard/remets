@@ -6,34 +6,50 @@ class HandoversControllerTest < ActionController::TestCase
   end
 
   test '#index' do
-    get :index
-    assert_response :ok
+    skip
   end
 
   test '#show' do
-    get :show, id: @handover.id
-    assert_response :ok
+    skip
   end
 
   test '#new' do
-    get :new
-    assert_response :ok
+    skip
   end
 
   test '#create' do
+    skip
   end
 
   test '#edit' do
+    skip
   end
 
   test '#update' do
+    skip
   end
 
+  test '#index with json' do
+    skip
+  end
 
-  test '#index with json'
-  test '#show with json'
-  test '#new with json'
-  test '#create with json'
-  test '#edit with json'
-  test '#update with json'
+  test '#show with json' do
+    skip
+  end
+
+  test '#new with json' do
+    skip
+  end
+
+  test '#create with json' do
+    skip
+  end
+
+  test '#edit with json' do
+    skip
+  end
+
+  test '#update with json' do
+    skip
+  end
 end
