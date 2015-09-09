@@ -1,12 +1,12 @@
 class AuthenticationsController < ApplicationController
   def create
     user = User.from_omniauth(request.env['omniauth.auth'])
-    session[Remets::AUTH_SESSION_KEY] = user.id
+    self.current_user = user
     redirect_to root_path
   end
 
   def destroy
-    session.delete(Remets::AUTH_SESSION_KEY)
+    self.current_user = nil
     redirect_to root_path
   end
 
