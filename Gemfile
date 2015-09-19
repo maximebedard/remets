@@ -16,7 +16,7 @@ gem 'sidekiq'
 gem 'omniauth-google-oauth2'
 
 group :development do
-  gem 'byebug'
+  gem 'pry-byebug'
   gem 'better_errors'
 end
 

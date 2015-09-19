@@ -3,8 +3,8 @@ class CreateDocument < ActiveRecord::Migration
     create_table :documents do |t|
       t.references :submission
       t.string :file
-      t.string :signature
-      t.integer :shingles, array: true
+      t.integer :fingerprint, array: true, default: []
+      t.integer :indexes, array: true, default: []
     end
   end
 end

@@ -4,7 +4,6 @@ class Document < ActiveRecord::Base
   belongs_to :submission
 
   validates :file, presence: true
-  validates :signature, presence: true
 
   def content
     @content ||= File.open(self.file.current_path, 'r').read
@@ -12,5 +11,13 @@ class Document < ActiveRecord::Base
 
   def extension
     @extension ||= self.file.file.extension.downcase
+  end
+
+  def windows
+    self.indexes.zip(self.fingerprints)
+  end
+
+  def windows=(value)
+    self.indexes, self.fingerprints = value.transpose
   end
 end
