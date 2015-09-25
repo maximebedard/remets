@@ -5,7 +5,7 @@ module Scrubbers
     self.supported_extensions = ['htm', 'html', 'xhtml']
 
     def scrub
-      sanitize(content)
+      strip_tags(sanitize(content))
     end
   end
 end

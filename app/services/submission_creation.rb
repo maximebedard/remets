@@ -8,7 +8,8 @@ class SubmissionCreation
   def call
     update_document_params
     create_submission
-    enqueue_fingerprinting_job
+    fingerprint_documents
+    complete_submission
 
     submission
   end
@@ -24,12 +25,17 @@ class SubmissionCreation
   end
 
   def create_submission
-    @submission = Submission.create(@submission_params)
+    @submission = Submission.new(@submission_params)
   end
 
-  def enqueue_fingerprinting_job
+  def fingerprint_documents
+    service = Winnowing.new
     @submission.documents.each do |document|
-      DocumentFingerprintingWorker.perform_later(document.id)
+      document.windows = service.call(document.content)
     end
+  end
+
+  def complete_submission
+    submission.save!
   end
 end
