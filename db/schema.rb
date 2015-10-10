@@ -11,17 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904114037) do
+ActiveRecord::Schema.define(version: 20150926225705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "document_matches", force: :cascade do |t|
+    t.integer "reference_document_id"
+    t.integer "compared_document_id"
+    t.integer "matching_fingerprints", default: [], array: true
+  end
+
   create_table "documents", force: :cascade do |t|
     t.integer "submission_id"
     t.string  "file"
-    t.string  "signature"
-    t.integer "shingles",      array: true
+    t.integer "fingerprints",  default: [], array: true
+    t.integer "indexes",       default: [], array: true
   end
+
+  add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
 
   create_table "handovers", force: :cascade do |t|
     t.integer  "user_id"

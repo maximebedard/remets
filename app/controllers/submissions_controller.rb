@@ -17,7 +17,7 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = SubmissionCreationService.new(submission_params).call
+    @submission = SubmissionCreation.new(submission_params).call
     respond_with(@submission)
   end
 

@@ -5,8 +5,14 @@ class Document < ActiveRecord::Base
 
   validates :file, presence: true
 
+  scope :all_but_self, -> (document) { where.not(id: document.id) }
+
   def content
     @content ||= File.open(self.file.current_path, 'r').read
+  end
+
+  def scrubbed_content
+    @sanitized_content ||= Scrubber.for_document(self).scrubbed_content
   end
 
   def extension
@@ -14,7 +20,7 @@ class Document < ActiveRecord::Base
   end
 
   def windows
-    self.indexes.zip(self.fingerprints)
+    @windows ||= self.indexes.zip(self.fingerprints)
   end
 
   def windows=(value)

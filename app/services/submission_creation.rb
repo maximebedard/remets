@@ -5,7 +5,7 @@ class SubmissionCreation
     @submission_params = submission_params
   end
 
-  def call
+  def perform
     update_document_params
     create_submission
     fingerprint_documents
@@ -31,7 +31,7 @@ class SubmissionCreation
   def fingerprint_documents
     service = Winnowing.new
     @submission.documents.each do |document|
-      document.windows = service.call(document.content)
+      document.windows = service.winnow(document.content)
     end
   end
 

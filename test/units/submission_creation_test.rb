@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class SubmissionCreationServiceTest < ActiveSupport::TestCase
+class SubmissionCreationTest < ActiveSupport::TestCase
   setup do
     @fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
-    @service = SubmissionCreationService.new({
+    @service = SubmissionCreation.new({
       documents_attributes: [
         @fixture
       ]
