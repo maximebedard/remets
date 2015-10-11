@@ -12,15 +12,12 @@ class Document < ActiveRecord::Base
     @content ||= File.open(file.current_path, 'r').read
   end
 
-  def has_scrubbed_version?
+  def sanitized?
     !file.scrubbed.nil?
   end
 
-  def scrubbed_content
-    @scrubbed_content ||=
-      if has_scrubbed_version?
-        File.open(file.scrubbed.current_path, 'r').read
-      end
+  def sanitized_content
+    @sanitized_content ||= File.open(file.scrubbed.current_path, 'r').read if sanitized?
   end
 
   def extension

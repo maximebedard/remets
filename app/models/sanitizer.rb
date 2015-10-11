@@ -14,14 +14,14 @@ class Sanitizer
       AVAILABLE_SANITIZERS.flat_map(&:supported_extensions).include?(ext)
     end
 
-    def for_extension(ext, **options)
+    def for_extension(ext)
       AVAILABLE_SANITIZERS.detect do |sanitizer|
         sanitizer.supported_extensions.include?(ext)
       end
     end
 
-    def for_document(document, **options)
-      for_extension(document.extension, options)
+    def for_document(document)
+      for_extension(document.extension)
     end
   end
 
