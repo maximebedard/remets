@@ -10,14 +10,19 @@ class Scrubber
       Scrubbers::TextScrubber
     ]
 
-    def for_extension(ext, content, **options)
+    def can_be_scrubbed?(ext)
+      AVAILABLE_SCRUBBERS.map(&:supported_extensions)
+        .flatten.include?(ext)
+    end
+
+    def for_extension(ext, **options)
       AVAILABLE_SCRUBBERS.detect do |scrubber|
         scrubber.supported_extensions.include?(ext)
-      end.new(content, options)
+      end
     end
 
     def for_document(document, **options)
-      for_extension(document.extension, document.content, options)
+      for_extension(document.extension, options)
     end
   end
 

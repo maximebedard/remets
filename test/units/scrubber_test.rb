@@ -15,34 +15,42 @@ class ScrubberTest < ActiveSupport::TestCase
     assert_equal 'i am a pirate!', @scrubber.scrubbed_content
   end
 
+  test '#can_be_scrubbed? returns true if there is supported scrubber' do
+    assert Scrubber.can_be_scrubbed?('html')
+  end
+
+  test '#can_be_scrubbed? returns false if there is no supported scrubber' do
+    refute Scrubber.can_be_scrubbed?('yolo')
+  end
+
   test '#for_extension returns the html scrubber' do
-    assert_instance_of Scrubbers::HtmlScrubber,
-      @scrubber.class.for_extension('html', 'test')
+    assert_equal Scrubbers::HtmlScrubber,
+      Scrubber.for_extension('html')
   end
 
   test '#for_extension returns the text scrubber' do
-    assert_instance_of Scrubbers::TextScrubber,
-      @scrubber.class.for_extension('txt', 'test')
+    assert_equal Scrubbers::TextScrubber,
+      Scrubber.for_extension('txt')
   end
 
   test '#for_extension returns the doc scrubber' do
-    assert_instance_of Scrubbers::DocScrubber,
-      @scrubber.class.for_extension('doc', 'test')
+    assert_equal Scrubbers::DocScrubber,
+      Scrubber.for_extension('doc')
   end
 
   test '#for_extension returns the docx scrubber' do
-    assert_instance_of Scrubbers::DocxScrubber,
-      @scrubber.class.for_extension('docx', 'test')
+    assert_equal Scrubbers::DocxScrubber,
+      Scrubber.for_extension('docx')
   end
 
   test '#for_extension returns the pdf scrubber' do
-    assert_instance_of Scrubbers::PdfScrubber,
-      @scrubber.class.for_extension('pdf', 'test')
+    assert_equal Scrubbers::PdfScrubber,
+      Scrubber.for_extension('pdf')
   end
 
   test '#for_document returns the appropriate scrubber for the document' do
-    document = mock(extension: 'html', content: 'test')
-    assert_instance_of Scrubbers::HtmlScrubber,
-      @scrubber.class.for_document(document)
+    document = mock(extension: 'html')
+    assert_equal Scrubbers::HtmlScrubber,
+      Scrubber.for_document(document)
   end
 end
