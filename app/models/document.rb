@@ -5,7 +5,7 @@ class Document < ActiveRecord::Base
 
   validates :file, presence: true
 
-  scope :all_but_self, -> (document) { where.not(id: document.id) }
+  scope :all_except, -> (document) { where.not(id: document.id) }
 
   def content
     @content ||= File.open(self.file.current_path, 'r').read

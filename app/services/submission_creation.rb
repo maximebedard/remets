@@ -31,7 +31,7 @@ class SubmissionCreation
   def fingerprint_documents
     service = Winnowing.new
     @submission.documents.each do |document|
-      document.windows = service.winnow(document.content)
+      document.windows = service.perform(document.content)
     end
   end
 

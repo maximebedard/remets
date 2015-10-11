@@ -10,14 +10,14 @@ class SubmissionCreationTest < ActiveSupport::TestCase
     })
   end
 
-  test '#call creates a new submission' do
+  test '#perform creates a new submission' do
     assert_difference ["Submission.count", "Document.count"] do
-      @service.call
+      @service.perform
     end
   end
 
-  test '#call add shingles to the sumbission' do
-    submission = @service.call
+  test '#perform add shingles to the sumbission' do
+    submission = @service.perform
     assert_equal \
       [254149830, 156990633, 49670451, 124562433].sort,
       submission.documents.first.shingles.sort
