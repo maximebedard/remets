@@ -8,7 +8,7 @@ class Document < ActiveRecord::Base
   scope :all_except, -> (document) { where.not(id: document.id) }
 
   def content
-    @content ||= File.open(self.file.current_path, 'r').read
+    @content ||= File.open(file.current_path, 'r').read
   end
 
   def scrubbed_content
@@ -16,11 +16,11 @@ class Document < ActiveRecord::Base
   end
 
   def extension
-    @extension ||= self.file.file.extension.downcase
+    @extension ||= file.file.extension.downcase
   end
 
   def windows
-    @windows ||= self.indexes.zip(self.fingerprints)
+    @windows ||= indexes.zip(fingerprints)
   end
 
   def windows=(value)

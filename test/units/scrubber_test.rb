@@ -8,11 +8,11 @@ class ScrubberTest < ActiveSupport::TestCase
   end
 
   setup do
-    @scrubber = TestScrubber.new("I AM A PIRATE!")
+    @scrubber = TestScrubber.new('I AM A PIRATE!')
   end
 
   test '#scrubbed_content returns the sanitized content' do
-    assert_equal "i am a pirate!", @scrubber.scrubbed_content
+    assert_equal 'i am a pirate!', @scrubber.scrubbed_content
   end
 
   test '#for_extension returns the html scrubber' do

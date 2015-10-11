@@ -22,7 +22,7 @@ class Scrubber
   end
 
   attr_reader :content,
-              :options
+    :options
 
   def initialize(content, **options)
     @content = content

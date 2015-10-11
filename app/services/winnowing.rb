@@ -23,12 +23,12 @@ class Winnowing
   private
 
   def tokenize(value)
-    0.upto(value.size-1).to_a.zip(value.chars)
+    0.upto(value.size - 1).to_a.zip(value.chars)
   end
 
   def sanitize(indexed_tokens)
-    indexed_tokens.map    { |token| [token[0], token[1].downcase] }
-                  .select { |token| token[1] =~ /\w/ }
+    indexed_tokens.map { |token| [token[0], token[1].downcase] }
+      .select { |token| token[1] =~ /\w/ }
   end
 
   def kgrams(indexed_tokens, k: 5)
@@ -38,7 +38,7 @@ class Winnowing
       ret << (yield indexed_tokens)
     else
       0.upto(n - k + 1) do |i|
-        ret << (yield indexed_tokens[i,(i+k)])
+        ret << (yield indexed_tokens[i, (i + k)])
       end
     end
     ret

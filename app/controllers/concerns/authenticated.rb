@@ -3,8 +3,8 @@ module Authenticated
 
   included do
     helper_method :current_user,
-                  :signed_in?,
-                  :signed_out?
+      :signed_in?,
+      :signed_out?
   end
 
   def current_user
@@ -17,7 +17,7 @@ module Authenticated
   end
 
   def signed_in?
-    !!current_user
+    !current_user.nil?
   end
 
   def signed_out?

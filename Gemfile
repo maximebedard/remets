@@ -18,6 +18,7 @@ gem 'omniauth-google-oauth2'
 group :development do
   gem 'pry-byebug'
   gem 'better_errors'
+  gem 'rubocop'
 end
 
 group :test do

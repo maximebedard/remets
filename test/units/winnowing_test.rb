@@ -4,8 +4,4 @@ class WinnowingTest < ActiveSupport::TestCase
   setup do
     @service = Winnowing.new
   end
-
-  test '#winnow' do
-    
-  end
 end

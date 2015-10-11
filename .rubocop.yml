@@ -1,0 +1,75 @@
+AllCops:
+  Exclude:
+    - bin/**/*
+  RunRailsCops: true
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/EndAlignment:
+  AlignWith: variable
+
+Metrics/AbcSize:
+  Max: 32
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/CyclomaticComplexity:
+  Max: 4
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - test/**/*
+
+Metrics/MethodLength:
+  Max: 32
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/CommentAnnotation:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/IndentHash:
+  EnforcedStyle: consistent
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
+    '%w': '()'
+    '%W': '()'
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/SingleSpaceBeforeFirstArg:
+  Exclude:
+    - db/schema.rb
+    - config/puma.rb
+
+Style/SpaceAroundOperators:
+  Exclude:
+    - config/puma.rb
+
+Style/EmptyLinesAroundBlockBody:
+  Exclude:
+    - db/schema.rb
+
+Style/StringLiterals:
+  Enabled: false
+  Exclude:
+    - db/schema.rb

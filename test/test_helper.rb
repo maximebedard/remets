@@ -1,5 +1,5 @@
 unless ENV['SECRET_KEY_BASE']
-  STDERR.puts "\e[31m => Please load the environment secrets before running the test suite\e[0m"
+  STDERR.puts '\e[31m=> Please load the environment secrets before running the test suite\e[0m'
   exit 1
 end
 
@@ -9,7 +9,7 @@ require 'rails/test_help'
 require 'mocha/mini_test'
 require 'pry'
 
-Dir[Rails.root.join("test/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('test/support/**/*.rb')].each { |f| require f }
 
 class ActiveSupport::TestCase
   fixtures :all
@@ -18,4 +18,3 @@ class ActiveSupport::TestCase
 
   include ActionDispatch::TestProcess
 end
-
