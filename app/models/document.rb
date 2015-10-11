@@ -2,6 +2,7 @@ class Document < ActiveRecord::Base
   mount_uploader :file, FileUploader
 
   belongs_to :submission
+  has_one :user, through: :submission
 
   validates :file, presence: true
 
@@ -11,8 +12,15 @@ class Document < ActiveRecord::Base
     @content ||= File.open(file.current_path, 'r').read
   end
 
+  def has_scrubbed_version?
+    !file.scrubbed.nil?
+  end
+
   def scrubbed_content
-    @sanitized_content ||= Scrubber.for_document(self).scrubbed_content
+    @scrubbed_content ||=
+      if has_scrubbed_version?
+        File.open(file.scrubbed.current_path, 'r').read
+      end
   end
 
   def extension
