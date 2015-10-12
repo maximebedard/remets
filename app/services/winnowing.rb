@@ -5,7 +5,7 @@ class Winnowing
   end
 
   def perform(content)
-    sanitized_tokens = sanitize(tokenize(content))
+    sanitized_tokens = sanitize(tokenize(content)) # this should be extracted
 
     fingerprints =
       kgrams(sanitized_tokens, k: @kgrams_size) do |kgram|

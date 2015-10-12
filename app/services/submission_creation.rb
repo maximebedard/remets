@@ -9,7 +9,6 @@ class SubmissionCreation
     update_document_params
     create_submission
     fingerprint_documents
-    complete_submission
 
     submission
   end
@@ -25,17 +24,12 @@ class SubmissionCreation
   end
 
   def create_submission
-    @submission = Submission.new(@submission_params)
+    @submission = Submission.create(@submission_params)
   end
 
   def fingerprint_documents
-    service = Winnowing.new
     @submission.documents.each do |document|
-      document.windows = service.perform(document.content)
+      DocumentFingerprintingWorker.perform_async(document.id)
     end
-  end
-
-  def complete_submission
-    submission.save!
   end
 end

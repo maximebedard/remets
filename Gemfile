@@ -13,6 +13,7 @@ gem 'turbolinks'
 gem 'responders'
 gem 'jbuilder'
 gem 'sidekiq'
+gem 'sinatra', require: false
 gem 'omniauth-google-oauth2'
 
 group :development do

@@ -16,10 +16,11 @@ class SubmissionCreationTest < ActiveSupport::TestCase
     end
   end
 
-  test '#perform add shingles to the sumbission' do
+  test '#perform fingerprints the document content' do
     submission = @service.perform
-    assert_equal \
-      [254149830, 156990633, 49670451, 124562433].sort,
-      submission.documents.first.shingles.sort
+    document = submission.documents.first
+
+    assert_not_empty document.indexes
+    assert_not_empty document.fingerprints
   end
 end

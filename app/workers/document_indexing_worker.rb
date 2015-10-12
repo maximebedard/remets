@@ -4,7 +4,7 @@ class DocumentIndexingWorker
   def perform(document_id)
     document = Document.find(document_id)
 
-    Document.all_except(document).find_in_batches do |compared|
+    Document.where.not(id: document.id).find_in_batches do |compared|
       matching_fingerprints = document.fingerprints & compared.fingerprints
 
       DocumentMatch.create!(
