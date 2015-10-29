@@ -6,6 +6,8 @@ class Document < ActiveRecord::Base
 
   validates :file, presence: true
 
+  scope :all_except, -> (document) { where.not(id: document.id) }
+
   def content
     @content ||= File.open(file.current_path, 'r').read
   end

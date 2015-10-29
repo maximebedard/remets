@@ -5,6 +5,16 @@ class FileUploader < CarrierWave::Uploader::Base
     process :sanitize_content
   end
 
+  def store_dir
+    Rails.root.join(
+      'public',
+      'uploads',
+      model.class.to_s.underscore.pluralize,
+      mounted_as.to_s,
+      model.id.to_s
+    )
+  end
+
   private
 
   def can_be_sanitized?(file)

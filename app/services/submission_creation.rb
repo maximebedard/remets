@@ -6,7 +6,6 @@ class SubmissionCreation
   end
 
   def perform
-    update_document_params
     create_submission
     fingerprint_documents
 
@@ -15,19 +14,13 @@ class SubmissionCreation
 
   private
 
-  def update_document_params
-    documents_params =
-      @submission_params.fetch(:documents_attributes, []).map do |doc|
-        { file: doc }
-      end
-    @submission_params.update(documents_attributes: documents_params)
-  end
-
   def create_submission
     @submission = Submission.create(@submission_params)
   end
 
   def fingerprint_documents
+    return unless @submission.valid?
+
     @submission.documents.each do |document|
       DocumentFingerprintingWorker.perform_async(document.id)
     end

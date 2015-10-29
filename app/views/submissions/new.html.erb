@@ -1,3 +1,7 @@
-<%= form_for @submission do |f| %>
-  <%= f.file_field :document %>
+<%= form_for @submission, html: { multipart: true } do |f| %>
+  <%= f.label :documents_attributes %>
+  <%= f.file_field :documents_attributes,
+    multiple: true,
+    name: 'submission[documents_attributes][][file]' %>
+  <%= f.submit %>
 <% end %>

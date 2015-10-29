@@ -1,5 +1,5 @@
 unless ENV['SECRET_KEY_BASE']
-  STDERR.puts '\e[31m=> Please load the environment secrets before running the test suite\e[0m'
+  STDERR.puts "\e[31m=> Please load the environment secrets before running the test suite\e[0m"
   exit 1
 end
 

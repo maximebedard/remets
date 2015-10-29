@@ -4,7 +4,7 @@ class Sanitizer
     attr_reader :available_sanitizers
 
     def inherited(subclass)
-      self.available_sanitizers << subclass
+      available_sanitizers << subclass
     end
 
     def can_be_sanitized?(ext)
