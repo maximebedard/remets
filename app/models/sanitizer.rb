@@ -1,21 +1,18 @@
 class Sanitizer
   class << self
     attr_accessor :supported_extensions
+    attr_reader :available_sanitizers
 
-    AVAILABLE_SANITIZERS = [
-      Sanitizers::DocSanitizer,
-      Sanitizers::DocxSanitizer,
-      Sanitizers::HtmlSanitizer,
-      Sanitizers::PdfSanitizer,
-      Sanitizers::TextSanitizer
-    ]
+    def inherited(subclass)
+      self.available_sanitizers << subclass
+    end
 
     def can_be_sanitized?(ext)
-      AVAILABLE_SANITIZERS.flat_map(&:supported_extensions).include?(ext)
+      available_sanitizers.flat_map(&:supported_extensions).include?(ext)
     end
 
     def for_extension(ext)
-      AVAILABLE_SANITIZERS.detect do |sanitizer|
+      available_sanitizers.detect do |sanitizer|
         sanitizer.supported_extensions.include?(ext)
       end
     end
@@ -24,6 +21,8 @@ class Sanitizer
       for_extension(document.extension)
     end
   end
+
+  @available_sanitizers = []
 
   attr_reader :content,
     :options
