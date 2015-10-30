@@ -15,5 +15,5 @@
 /log/*.log
 /tmp
 
-/public/uploads
+/uploads
 /test/fixtures/files/uploads

@@ -14,7 +14,5 @@ Dir[Rails.root.join('test/support/**/*.rb')].each { |f| require f }
 class ActiveSupport::TestCase
   fixtures :all
 
-  CarrierWave.root = 'test/fixtures/files'
-
   include ActionDispatch::TestProcess
 end

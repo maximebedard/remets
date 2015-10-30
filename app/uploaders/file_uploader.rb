@@ -1,18 +1,19 @@
 class FileUploader < CarrierWave::Uploader::Base
-  storage :file
-
   version :sanitized, if: :can_be_sanitized? do
     process :sanitize_content
   end
 
+  def filename
+    "#{SecureRandom.hex}.#{file.extension}"
+  end
+
   def store_dir
-    Rails.root.join(
-      'public',
-      'uploads',
-      model.class.to_s.underscore.pluralize,
-      mounted_as.to_s,
-      model.id.to_s
-    )
+    byebug
+    "#{super}/#{model.class.to_s.underscore}"
+  end
+
+  def cache_dir
+    "#{super}/#{model.class.to_s.underscore}"
   end
 
   private
