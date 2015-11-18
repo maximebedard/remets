@@ -2,10 +2,10 @@ class DocumentFingerprintingWorker
   include Sidekiq::Worker
 
   def perform(document_id)
-    document = Document.find(document_id)
+    # document = Document.find(document_id)
 
-    fingerprint(document)
-    index(document)
+    # fingerprint(document)
+    # index(document)
   end
 
   def fingerprint(document)

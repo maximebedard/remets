@@ -1,14 +1,13 @@
 class Document < ActiveRecord::Base
   mount_uploader :file_ptr, FileUploader
 
-  delegate :file, to: :file_ptr
-
   belongs_to :submission
   has_one :user, through: :submission
 
   validates :file, presence: true
 
   scope :all_except, -> (document) { where.not(id: document.id) }
+  delegate :file, to: :file_ptr
 
   def content
     @content ||= File.open(file_ptr.current_path, 'r').read

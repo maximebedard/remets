@@ -4,7 +4,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    "#{SecureRandom.hex}.#{file.extension}"
+    @filename ||= "#{SecureRandom.hex}.#{file.extension}"
   end
 
   def store_dir

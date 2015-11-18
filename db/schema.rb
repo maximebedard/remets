@@ -23,10 +23,13 @@ ActiveRecord::Schema.define(version: 20150926225705) do
   end
 
   create_table "documents", force: :cascade do |t|
-    t.integer "submission_id"
-    t.string  "file_ptr"
-    t.integer "fingerprints",  default: [], array: true
-    t.integer "indexes",       default: [], array: true
+    t.integer  "submission_id"
+    t.string   "file_ptr"
+    t.integer  "fingerprints",     default: [], array: true
+    t.integer  "indexes",          default: [], array: true
+    t.datetime "fingerprinted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
