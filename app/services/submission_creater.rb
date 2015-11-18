@@ -1,4 +1,4 @@
-class SubmissionCreation
+class SubmissionCreater
   attr_reader :submission
 
   def initialize(submission_params)

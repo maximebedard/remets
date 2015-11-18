@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class WinnowingTest < ActiveSupport::TestCase
+class WinnowerTest < ActiveSupport::TestCase
   setup do
     @service = Winnowing.new
   end

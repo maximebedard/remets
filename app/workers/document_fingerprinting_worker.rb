@@ -9,9 +9,8 @@ class DocumentFingerprintingWorker
   end
 
   def fingerprint(document)
-    service = Winnowing.new
-    windows = service.winnow(document.sanitized_content)
-    document.update(windows: windows)
+    windows = Winnower.windows_from_content(document.sanitized_content)
+    document.update!(windows: windows)
   end
 
   def index(document)

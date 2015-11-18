@@ -8,7 +8,6 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    byebug
     "#{super}/#{model.class.to_s.underscore}"
   end
 

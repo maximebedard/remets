@@ -1,14 +1,24 @@
-class Winnowing
+class Winnower
+  class << self
+    def windows_from_content(content, *options)
+      new(options).perform(ContentTokenizer.sanitize_and_tokenize(content))
+    end
+
+    def windows_from_tokens(tokens, *options)
+      new(options).perform(tokens)
+    end
+  end
+
+  private
+
   def initialize(window_size: 4, kgrams_size: 5)
     @window_size = window_size
     @kgrams_size = kgrams_size
   end
 
-  def perform(content)
-    sanitized_tokens = sanitize(tokenize(content)) # this should be extracted
-
+  def perform(tokens)
     fingerprints =
-      kgrams(sanitized_tokens, k: @kgrams_size) do |kgram|
+      kgrams(tokens, k: @kgrams_size) do |kgram|
         fingerprint(kgram)
       end
 
@@ -18,17 +28,6 @@ class Winnowing
       end
 
     windows
-  end
-
-  private
-
-  def tokenize(value)
-    0.upto(value.size - 1).to_a.zip(value.chars)
-  end
-
-  def sanitize(indexed_tokens)
-    indexed_tokens.map { |token| [token[0], token[1].downcase] }
-      .select { |token| token[1] =~ /\w/ }
   end
 
   def kgrams(indexed_tokens, k: 5)
