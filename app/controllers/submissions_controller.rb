@@ -25,6 +25,6 @@ class SubmissionsController < ApplicationController
 
   def submission_params
     params.require(:submission)
-      .permit(documents_attributes: [:file])
+      .permit(documents_attributes: [:file_ptr])
   end
 end

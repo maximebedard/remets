@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20150926225705) do
 
   create_table "documents", force: :cascade do |t|
     t.integer "submission_id"
-    t.string  "file"
+    t.string  "file_ptr"
     t.integer "fingerprints",  default: [], array: true
     t.integer "indexes",       default: [], array: true
   end
