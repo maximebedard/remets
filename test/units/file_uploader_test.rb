@@ -43,9 +43,9 @@ class FileUploaderTest < ActiveSupport::TestCase
       @uploader.cache_dir
   end
 
-  # test '#sanitized creates a sanitized version when the format is supported'
-  # test '#sanitized does not create a sanitized version when there is no extension'
-  # test '#sanitized does not create a sanitized version when the format is unsupported'
+  test '#sanitized creates a sanitized version when the format is supported'
+  test '#sanitized does not create a sanitized version when there is no extension'
+  test '#sanitized does not create a sanitized version when the format is unsupported'
 
   private
 

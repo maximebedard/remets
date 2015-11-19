@@ -15,10 +15,9 @@ class SubmissionCreaterTest < ActiveSupport::TestCase
   end
 
   test '#perform fingerprints the document content' do
-    submission = @service.perform
+    submission = @service.perform.reload
     document = submission.documents.first
 
-    assert_not_empty document.indexes
-    assert_not_empty document.fingerprints
+    assert_not_empty document.windows
   end
 end
