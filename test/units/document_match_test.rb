@@ -1,4 +1,5 @@
 require 'test_helper'
 
-class DocumentComparaisonTest < ActiveSupport::TestCase
+class DocumentMatchTest < ActiveSupport::TestCase
+  test 'todo'
 end

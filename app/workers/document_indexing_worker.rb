@@ -15,4 +15,3 @@ class DocumentIndexingWorker
     end
   end
 end
-
