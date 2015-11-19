@@ -4,7 +4,12 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    @filename ||= "#{SecureRandom.hex}.#{file.extension}"
+    @filename =
+      if name = model.read_attribute(mounted_as)
+        name
+      else
+        [SecureRandom.hex, file.extension.presence].compact.join('.')
+      end
   end
 
   def store_dir

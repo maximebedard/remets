@@ -7,5 +7,9 @@ CarrierWave.configure do |config|
   config.store_dir = 'uploads'
   config.cache_dir = 'uploads/tmp'
 
-  config.root = 'test/fixtures/files' if Rails.env.test?
+  if Rails.env.test?
+    config.root = 'test/fixtures/files'
+    config.storage = :file
+    config.enable_processing = true
+  end
 end
