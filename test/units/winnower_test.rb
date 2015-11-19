@@ -10,11 +10,23 @@ class WinnowerTest < ActiveSupport::TestCase
       windows
   end
 
+  test '#windows_from_tokens with nil returns an empty set' do
+    windows = Winnower.windows_from_tokens(nil)
+
+    assert_equal Set.new, windows
+  end
+
   test '#windows_from_content' do
-    windows = Winnower.windows_from_content("hello")
+    windows = Winnower.windows_from_content('hello')
 
     assert_equal Set.new([[0, 17229]]),
       windows
+  end
+
+  test '#windows_from_content with nil returns an empty set' do
+    windows = Winnower.windows_from_content(nil)
+
+    assert_equal Set.new, windows
   end
 
   test '#windows_from_content minimize repetition' do

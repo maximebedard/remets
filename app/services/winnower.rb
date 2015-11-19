@@ -26,6 +26,8 @@ class Winnower
   end
 
   def perform(tokens)
+    return Set.new unless tokens.present?
+
     fingerprints =
       self.class.enum_kgrams(tokens, k: @kgrams_size).map do |kgram|
         fingerprint(kgram)
