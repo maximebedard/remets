@@ -43,21 +43,42 @@ class FileUploaderTest < ActiveSupport::TestCase
       @uploader.cache_dir
   end
 
-  test '#sanitized creates a sanitized version when the format is supported'
-  test '#sanitized does not create a sanitized version when there is no extension'
-  test '#sanitized does not create a sanitized version when the format is unsupported'
+  test '#sanitized creates a sanitized version when the format is supported' do
+    SecureRandom.stubs(hex: 'HENRY')
+    @uploader.store!(sanitizable_file)
+
+    assert @uploader.version_exists?(:sanitized)
+  end
+
+  test '#sanitized does not create a sanitized version when there is no extension' do
+    SecureRandom.stubs(hex: 'HENRY')
+    @uploader.store!(file_without_extension)
+
+    refute @uploader.version_exists?(:sanitized)
+  end
+
+  test '#sanitized does not create a sanitized version when the format is unsupported' do
+    SecureRandom.stubs(hex: 'HENRY')
+    @uploader.store!(unsanitizable_file)
+
+    refute @uploader.version_exists?(:sanitized)
+  end
 
   private
 
   def sanitizable_file
-    @sanitizable_file ||= File.open('test/fixtures/files/documents/file/605975483/platypus1.txt')
+    @sanitizable_file ||= File.open("#{file_fixtures_path}/605975483/platypus1.txt")
   end
 
   def unsanitizable_file
-    @unsanitizable_file ||= File.open('test/fixtures/files/documents/file/605975485/platypus.jpg')
+    @unsanitizable_file ||= File.open("#{file_fixtures_path}/605975485/platypus.jpg")
   end
 
   def file_without_extension
-    @file_without_extension ||= File.open('test/fixtures/files/documents/file/605975486/platypus')
+    @file_without_extension ||= File.open("#{file_fixtures_path}/605975486/platypus")
+  end
+
+  def file_fixtures_path
+    'test/fixtures/files/documents/file'
   end
 end
