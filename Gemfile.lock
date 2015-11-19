@@ -146,6 +146,8 @@ GEM
     pry-byebug (3.2.0)
       byebug (~> 5.0)
       pry (~> 0.10)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     puma (2.14.0)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -214,6 +216,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    statsd-instrument (2.0.10)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
@@ -241,6 +244,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg
   pry-byebug
+  pry-rails
   puma
   rails (= 4.2.4)
   responders
@@ -248,6 +252,7 @@ DEPENDENCIES
   sass-rails
   sidekiq
   sinatra
+  statsd-instrument
   turbolinks
   uglifier
 

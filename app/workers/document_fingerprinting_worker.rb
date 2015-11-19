@@ -3,13 +3,15 @@ class DocumentFingerprintingWorker
 
   def perform(document_id)
     document = Document.find(document_id)
+    windows = Winnower.windows_from_content(document.sanitized_content).to_a
+    binding.pry
+    return unless windows.present?
 
-    fingerprint(document)
+    update(document, windows)
     index(document)
   end
 
-  def fingerprint(document)
-    windows = Winnower.windows_from_content(document.sanitized_content)
+  def update(document, windows)
     document.update!(
       windows: windows,
       fingerprinted_at: Time.zone.now
