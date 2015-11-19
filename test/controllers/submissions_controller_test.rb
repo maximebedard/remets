@@ -23,7 +23,7 @@ class SubmissionsControllerTest < ActionController::TestCase
     document_fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
 
     post :create, submission: {
-      documents_attributes: [document_fixture]
+      documents_attributes: [{ file_ptr: document_fixture }]
     }
 
     assert_redirected_to assigns(:submission)
