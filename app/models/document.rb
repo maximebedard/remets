@@ -17,6 +17,10 @@ class Document < ActiveRecord::Base
     file_ptr.version_exists?(:sanitized)
   end
 
+  def fingerprinted?
+    fingerprinted_at.present?
+  end
+
   def sanitized_content
     @sanitized_content ||= File.open(file_ptr.sanitized.current_path, 'r').read if sanitized?
   end

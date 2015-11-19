@@ -14,3 +14,7 @@ platypus: # generated id: 605975483
 awesome_platypus: # generated id: 605975484
   submission: log240_lab1
   file_ptr: 'platypus2.txt'
+
+platypus_image: # generated id: 605975484
+  submission: log240_lab1
+  file_ptr: 'platypus.jpg'

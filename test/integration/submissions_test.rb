@@ -1,14 +1,57 @@
 require 'test_helper'
 
 class SubmissionsTest < ActionDispatch::IntegrationTest
-  test 'Create a submission with a sanitizable document' do
-    @file = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
+  test 'create a submission with a sanitizable document' do
+    @file = fixture_file_upload('files/documents/file/605975483/platypus1.txt')
 
-    post '/submissions', submission: { documents_attributes: [@file] }
+    post '/submissions', submission: { documents_attributes: [{ file_ptr: @file }] }
+    @submission = Submission.last
+    @document = @submission.documents.first
 
-    assert_equal 1, 2
+    assert_equal 1, @submission.documents.size
+    assert_redirected_to @submission
+
+    assert_not_empty @document.fingerprints
+    assert @document.fingerprinted?
+    assert @document.sanitized?
   end
 
-  test 'Create a submission with an unsanitizable document'
-  test 'Create a submission with documents of both types'
+  test 'create a submission with an unsanitizable document' do
+    @file = fixture_file_upload('files/documents/file/605975485/platypus.jpg')
+
+    post '/submissions', submission: { documents_attributes: [{ file_ptr: @file }] }
+    @submission = Submission.last
+    @document = @submission.documents.first
+
+    assert_equal 1, @submission.documents.size
+    assert_redirected_to @submission
+
+    assert_empty @document.fingerprints
+    refute @document.fingerprinted?
+    refute @document.sanitized?
+  end
+
+  test 'create a submission with documents of both types' do
+    @file1 = fixture_file_upload('files/documents/file/605975483/platypus1.txt')
+    @file2 = fixture_file_upload('files/documents/file/605975485/platypus.jpg')
+
+    post '/submissions', submission: {
+      documents_attributes: [
+        { file_ptr: @file1 },
+        { file_ptr: @file2 }
+      ]
+    }
+    @submission = Submission.last
+    @document1, @document2 = @submission.documents
+
+    assert_redirected_to @submission
+
+    assert_not_empty @document1.fingerprints
+    assert @document1.fingerprinted?
+    assert @document1.sanitized?
+
+    assert_empty @document2.fingerprints
+    refute @document2.fingerprinted?
+    refute @document2.sanitized?
+  end
 end

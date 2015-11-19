@@ -17,7 +17,6 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    binding.pry
     @submission = SubmissionCreater.new(submission_params).perform
     respond_with(@submission)
   end
