@@ -3,7 +3,7 @@ require 'test_helper'
 class WinnowerTest < ActiveSupport::TestCase
   test '#windows_from_tokens' do
     windows = Winnower.windows_from_tokens([
-      [0, 'h'], [1, 'e'], [2, 'l'], [3, 'l'], [4, 'o'],
+      [0, 'h'], [1, 'e'], [2, 'l'], [3, 'l'], [4, 'o']
     ])
 
     assert_equal Set.new([[0, 17229]]),
@@ -43,9 +43,11 @@ class WinnowerTest < ActiveSupport::TestCase
       kgram.map(&:last).join
     end
 
-    assert_equal %w(adoru dorun orunr runru unrun nrunr runru
-      unrun nruna runad unado nador adoru dorun
-      orunr runru unrun), kgrams
+    assert_equal \
+      %w(adoru dorun orunr runru unrun nrunr runru
+         unrun nruna runad unado nador adoru dorun
+         orunr runru unrun),
+      kgrams
   end
 
   test '#enum_kgrams returns an enumerator that yields all the elements in a single kgram when < k' do

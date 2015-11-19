@@ -18,10 +18,7 @@ class Document < ActiveRecord::Base
   end
 
   def sanitized_content
-    @sanitized_content ||=
-      if sanitized?
-        File.open(file_ptr.sanitized.current_path, 'r').read
-      end
+    @sanitized_content ||= File.open(file_ptr.sanitized.current_path, 'r').read if sanitized?
   end
 
   def windows
