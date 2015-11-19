@@ -1,6 +1,6 @@
 class ContentTokenizer
   class << self
-    def sanitize_and_tokenize(content)
+    def tokenize_and_sanitize(content)
       sanitize(tokenize(content))
     end
 

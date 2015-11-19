@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
   def download
     @document = Document.find(document_id)
 
-    if @document.file&.extension == extension
+    if @document.file.extension == extension
       send_file @document.file_ptr.current_path,
         disposition: :inline
     else

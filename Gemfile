@@ -20,6 +20,7 @@ group :development do
   gem 'pry-byebug'
   gem 'better_errors'
   gem 'rubocop'
+  gem 'binding_of_caller'
 end
 
 group :test do

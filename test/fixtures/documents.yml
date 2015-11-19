@@ -1,16 +1,16 @@
 
 document1: # generated id: 605975481
   submission: log121_lab1
-  file: 'text_document1.txt'
+  file_ptr: 'text_document1.txt'
 
 document2: # generated id: 605975482
   submission: log240_lab1
-  file: 'text_document2.txt'
+  file_ptr: 'text_document2.txt'
 
 platypus: # generated id: 605975483
   submission: log121_lab1
-  file: 'platypus1.txt'
+  file_ptr: 'platypus1.txt'
 
 awesome_platypus: # generated id: 605975484
   submission: log240_lab1
-  file: 'platypus2.txt'
+  file_ptr: 'platypus2.txt'

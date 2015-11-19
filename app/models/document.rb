@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
   belongs_to :submission
   has_one :user, through: :submission
 
-  validates :file, presence: true
+  validates :file_ptr, presence: true
 
   scope :all_except, -> (document) { where.not(id: document.id) }
   delegate :file, to: :file_ptr
@@ -14,11 +14,14 @@ class Document < ActiveRecord::Base
   end
 
   def sanitized?
-    !file_ptr.sanitized.nil?
+    file_ptr.version_exists?(:sanitized)
   end
 
   def sanitized_content
-    @sanitized_content ||= File.open(file_ptr.sanitized.current_path, 'r').read if sanitized?
+    @sanitized_content ||=
+      if sanitized?
+        File.open(file_ptr.sanitized.current_path, 'r').read
+      end
   end
 
   def windows
