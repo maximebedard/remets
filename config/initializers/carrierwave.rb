@@ -9,7 +9,5 @@ CarrierWave.configure do |config|
 
   if Rails.env.test?
     config.root = 'test/fixtures/files'
-    config.store_dir = 'test/fixtures/files/uploads'
-    config.cache_dir = 'test/fixtures/files/uploads/tmp'
   end
 end

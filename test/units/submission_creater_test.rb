@@ -4,9 +4,7 @@ class SubmissionCreaterTest < ActiveSupport::TestCase
   setup do
     @fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
     @service = SubmissionCreater.new(
-      documents_attributes: [
-        @fixture
-      ]
+      documents_attributes: [{ file_ptr: @fixture }]
     )
   end
 

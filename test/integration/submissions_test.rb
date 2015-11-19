@@ -12,6 +12,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     assert_redirected_to @submission
 
     assert_not_empty @document.fingerprints
+    assert_not_empty @document.indexes
     assert @document.fingerprinted?
     assert @document.sanitized?
   end
@@ -27,6 +28,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     assert_redirected_to @submission
 
     assert_empty @document.fingerprints
+    assert_empty @document.indexes
     refute @document.fingerprinted?
     refute @document.sanitized?
   end
@@ -47,10 +49,12 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     assert_redirected_to @submission
 
     assert_not_empty @document1.fingerprints
+    assert_not_empty @document1.indexes
     assert @document1.fingerprinted?
     assert @document1.sanitized?
 
     assert_empty @document2.fingerprints
+    assert_empty @document2.indexes
     refute @document2.fingerprinted?
     refute @document2.sanitized?
   end
