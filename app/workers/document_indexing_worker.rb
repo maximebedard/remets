@@ -4,7 +4,7 @@ class DocumentIndexingWorker
   def perform(document_id)
     reference = Document.find(document_id)
 
-    Document.all_except(reference).find_each do |compared|
+    Document.all_fingerprinted_except(reference).find_each do |compared|
       matching_fingerprints = reference.fingerprints & compared.fingerprints
 
       DocumentMatch.create!(
@@ -15,3 +15,4 @@ class DocumentIndexingWorker
     end
   end
 end
+

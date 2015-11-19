@@ -6,7 +6,10 @@ class Document < ActiveRecord::Base
 
   validates :file_ptr, presence: true
 
-  scope :all_except, -> (document) { where.not(id: document.id) }
+  scope :all_fingerprinted_except, -> (document) {
+    where.not(id: document.id).
+    where('array_length(fingerprints, 1) > 0')
+  }
   delegate :file, to: :file_ptr
 
   def content

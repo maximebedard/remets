@@ -4,7 +4,7 @@ class DocumentFingerprintingWorker
   def perform(document_id)
     document = Document.find(document_id)
     windows = Winnower.windows_from_content(document.sanitized_content).to_a
-    binding.pry
+
     return unless windows.present?
 
     update(document, windows)

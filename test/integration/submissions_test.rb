@@ -34,13 +34,13 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   end
 
   test 'create a submission with documents of both types' do
-    @file1 = fixture_file_upload('files/documents/file/605975483/platypus1.txt')
-    @file2 = fixture_file_upload('files/documents/file/605975485/platypus.jpg')
+    @file1 = fixture_file_upload('files/documents/file/605975485/platypus.jpg')
+    @file2 = fixture_file_upload('files/documents/file/605975483/platypus1.txt')
 
     post '/submissions', submission: {
       documents_attributes: [
-        { file_ptr: @file1 },
-        { file_ptr: @file2 }
+        { file_ptr: @file2 },
+        { file_ptr: @file1 }
       ]
     }
     @submission = Submission.last
@@ -48,14 +48,14 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to @submission
 
-    assert_not_empty @document1.fingerprints
-    assert_not_empty @document1.indexes
-    assert @document1.fingerprinted?
-    assert @document1.sanitized?
+    assert_empty @document1.fingerprints
+    assert_empty @document1.indexes
+    refute @document1.fingerprinted?
+    refute @document1.sanitized?
 
-    assert_empty @document2.fingerprints
-    assert_empty @document2.indexes
-    refute @document2.fingerprinted?
-    refute @document2.sanitized?
+    assert_not_empty @document2.fingerprints
+    assert_not_empty @document2.indexes
+    assert @document2.fingerprinted?
+    assert @document2.sanitized?
   end
 end
