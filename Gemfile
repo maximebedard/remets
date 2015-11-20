@@ -27,4 +27,5 @@ end
 
 group :test do
   gem 'mocha'
+  gem "codeclimate-test-reporter", require: false
 end

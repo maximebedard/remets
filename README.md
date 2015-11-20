@@ -1,5 +1,7 @@
 # [remets](http://remets.herokuapp.com)
 
+[![Circle CI](https://circleci.com/gh/maximebedard/remets.svg?style=svg)](https://circleci.com/gh/maximebedard/remets) [![Code Climate](https://codeclimate.com/github/maximebedard/remets/badges/gpa.svg)](https://codeclimate.com/github/maximebedard/remets) [![Test Coverage](https://codeclimate.com/github/maximebedard/remets/badges/coverage.svg)](https://codeclimate.com/github/maximebedard/remets/coverage)
+
 Handing over documents, made simple.
 
 ## Getting started
