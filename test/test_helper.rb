@@ -4,12 +4,14 @@ unless ENV['SECRET_KEY_BASE']
 end
 
 ENV['RAILS_ENV'] ||= 'test'
+
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'mocha/mini_test'
-require 'pry'
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+require "pry-rails"
 
 Dir[Rails.root.join('test/support/**/*.rb')].each { |f| require f }
 
