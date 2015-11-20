@@ -5,10 +5,7 @@ Rails.application.routes.draw do
   resources :handovers, except: [:destroy]
   resources :documents, only: [:show] do
     collection do
-      match ':id.:extension',
-        to: 'documents#download',
-        via: [:get],
-        as: :download
+      match ':id.:extension', to: 'documents#download', via: [:get], as: :download
     end
   end
 

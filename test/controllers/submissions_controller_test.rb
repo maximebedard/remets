@@ -20,11 +20,9 @@ class SubmissionsControllerTest < ActionController::TestCase
   end
 
   test '#create' do
-    document_fixture = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
+    file = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
 
-    post :create, submission: {
-      documents_attributes: [{ file_ptr: document_fixture }]
-    }
+    post :create, submission: { documents_attributes: [{ file_ptr: file }] }
 
     assert_redirected_to assigns(:submission)
   end
@@ -35,9 +33,4 @@ class SubmissionsControllerTest < ActionController::TestCase
     assert assigns(:submission)
     assert_response :ok
   end
-
-  # test '#index with json'
-  # test '#show with json'
-  # test '#create with json'
-  # test '#new with json'
 end
