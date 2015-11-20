@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class SubmissionsControllerTest < ActionController::TestCase
+  include Remets::DocumentFileUploadHelper
+
   setup do
     @submission = submissions(:log121_lab1)
   end
@@ -20,7 +22,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   end
 
   test '#create' do
-    file = fixture_file_upload('files/documents/file/605975481/text_document1.txt')
+    file = sanitizable_file_upload
 
     post :create, submission: { documents_attributes: [{ file_ptr: file }] }
 

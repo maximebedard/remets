@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class SubmissionsTest < ActionDispatch::IntegrationTest
+  include Remets::DocumentFileUploadHelper
+
   test 'create a submission with a sanitizable document' do
-    @file = fixture_file_upload('files/documents/file/605975483/platypus1.txt')
+    @file = sanitizable_file_upload
 
     post '/submissions', submission: { documents_attributes: [{ file_ptr: @file }] }
     @submission = Submission.last
@@ -18,7 +20,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   end
 
   test 'create a submission with an unsanitizable document' do
-    @file = fixture_file_upload('files/documents/file/605975485/platypus.jpg')
+    @file = unsanitizable_file_upload
 
     post '/submissions', submission: { documents_attributes: [{ file_ptr: @file }] }
     @submission = Submission.last
@@ -34,8 +36,8 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   end
 
   test 'create a submission with documents of both types' do
-    @file1 = fixture_file_upload('files/documents/file/605975485/platypus.jpg')
-    @file2 = fixture_file_upload('files/documents/file/605975483/platypus1.txt')
+    @file1 = unsanitizable_file_upload
+    @file2 = sanitizable_file_upload
 
     post '/submissions', submission: {
       documents_attributes: [

@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class FileUploaderTest < ActiveSupport::TestCase
+  include Remets::DocumentFileUploadHelper
+
   class FileUploaderModel
     def read_attribute(*)
       nil
@@ -14,21 +16,21 @@ class FileUploaderTest < ActiveSupport::TestCase
 
   test '#filename uses a random hex' do
     SecureRandom.stubs(hex: 'HENRY')
-    @uploader.store!(sanitizable_file)
+    @uploader.store!(sanitizable_file_upload)
 
     assert_equal 'HENRY.txt', @uploader.filename
   end
 
   test '#filename uses the model filename when present' do
     @model.stubs(:read_attribute).with(:file_ptr).returns('HENRY.txt')
-    @uploader.store!(sanitizable_file)
+    @uploader.store!(sanitizable_file_upload)
 
     assert_equal 'HENRY.txt', @uploader.filename
   end
 
   test '#filename returns the basepath without the extension when the file has no extension' do
     SecureRandom.stubs(hex: 'HENRY')
-    @uploader.store!(file_without_extension)
+    @uploader.store!(without_extension_file_upload)
 
     assert_equal 'HENRY', @uploader.filename
   end
@@ -45,40 +47,22 @@ class FileUploaderTest < ActiveSupport::TestCase
 
   test '#sanitized creates a sanitized version when the format is supported' do
     SecureRandom.stubs(hex: 'HENRY')
-    @uploader.store!(sanitizable_file)
+    @uploader.store!(sanitizable_file_upload)
 
     assert @uploader.version_exists?(:sanitized)
   end
 
   test '#sanitized does not create a sanitized version when there is no extension' do
     SecureRandom.stubs(hex: 'HENRY')
-    @uploader.store!(file_without_extension)
+    @uploader.store!(without_extension_file_upload)
 
     refute @uploader.version_exists?(:sanitized)
   end
 
   test '#sanitized does not create a sanitized version when the format is unsupported' do
     SecureRandom.stubs(hex: 'HENRY')
-    @uploader.store!(unsanitizable_file)
+    @uploader.store!(unsanitizable_file_upload)
 
     refute @uploader.version_exists?(:sanitized)
-  end
-
-  private
-
-  def sanitizable_file
-    @sanitizable_file ||= File.open("#{file_fixtures_path}/605975483/platypus1.txt")
-  end
-
-  def unsanitizable_file
-    @unsanitizable_file ||= File.open("#{file_fixtures_path}/605975485/platypus.jpg")
-  end
-
-  def file_without_extension
-    @file_without_extension ||= File.open("#{file_fixtures_path}/605975486/platypus")
-  end
-
-  def file_fixtures_path
-    'test/fixtures/files/documents/file'
   end
 end
