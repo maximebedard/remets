@@ -17,6 +17,9 @@ gem 'statsd-instrument'
 gem 'sinatra', require: false
 gem 'omniauth-google-oauth2'
 
+gem "sprockets", ">=3.4.0"
+gem "sprockets-es6", require: "sprockets/es6"
+
 group :development do
   gem 'pry-byebug'
   gem 'pry-rails'
