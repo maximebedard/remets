@@ -9,6 +9,6 @@ class CreateDocument < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :documents, :fingerprints, using: 'gin'
+    add_index :documents, :fingerprints, using: "gin"
   end
 end

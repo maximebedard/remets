@@ -1,6 +1,6 @@
 class AuthenticationsController < ApplicationController
   def create
-    user = User.from_omniauth(request.env['omniauth.auth'])
+    user = User.from_omniauth(request.env["omniauth.auth"])
     self.current_user = user
     redirect_to root_path
   end
@@ -11,6 +11,6 @@ class AuthenticationsController < ApplicationController
   end
 
   def failure
-    render text: 'Something went wrong.'
+    render text: "Something went wrong."
   end
 end

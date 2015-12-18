@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class SubmissionsControllerTest < ActionController::TestCase
   include Remets::DocumentFileUploadHelper
@@ -7,21 +7,21 @@ class SubmissionsControllerTest < ActionController::TestCase
     @submission = submissions(:log121_lab1)
   end
 
-  test '#index' do
+  test "#index" do
     get :index
 
     assert assigns(:submissions)
     assert_response :ok
   end
 
-  test '#show' do
+  test "#show" do
     get :show, id: @submission.id
 
     assert assigns(:submission)
     assert_response :ok
   end
 
-  test '#create' do
+  test "#create" do
     file = sanitizable_file_upload
 
     post :create, submission: { documents_attributes: [{ file_ptr: file }] }
@@ -29,7 +29,7 @@ class SubmissionsControllerTest < ActionController::TestCase
     assert_redirected_to assigns(:submission)
   end
 
-  test '#new' do
+  test "#new" do
     get :new
 
     assert assigns(:submission)

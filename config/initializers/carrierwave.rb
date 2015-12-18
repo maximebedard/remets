@@ -4,11 +4,11 @@ CarrierWave.configure do |config|
   config.storage = :file
 
   config.root = Rails.root
-  config.store_dir = 'uploads'
-  config.cache_dir = 'uploads/tmp'
+  config.store_dir = "uploads"
+  config.cache_dir = "uploads/tmp"
 
   if Rails.env.test?
-    config.root = 'test/fixtures/files'
+    config.root = "test/fixtures/files"
     config.storage = :file
     config.enable_processing = true
   end

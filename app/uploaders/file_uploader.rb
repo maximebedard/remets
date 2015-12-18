@@ -8,7 +8,7 @@ class FileUploader < CarrierWave::Uploader::Base
       if name = model.read_attribute(mounted_as)
         name
       else
-        [SecureRandom.hex, file.extension.presence].compact.join('.')
+        [SecureRandom.hex, file.extension.presence].compact.join(".")
       end
   end
 
@@ -36,6 +36,6 @@ class FileUploader < CarrierWave::Uploader::Base
 
   def manipulate!(&block)
     cache_stored_file! unless cached?
-    File.open(current_path, 'r+', &block)
+    File.open(current_path, "r+", &block)
   end
 end

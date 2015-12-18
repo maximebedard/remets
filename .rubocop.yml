@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - bin/**/*
+    - db/schema.rb
   RunRailsCops: true
 
 Lint/AssignmentInCondition:
@@ -18,10 +19,14 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 4
 
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
 Metrics/LineLength:
   Max: 120
-  Exclude:
-    - test/**/*
 
 Metrics/MethodLength:
   Max: 32
@@ -55,21 +60,3 @@ Style/PercentLiteralDelimiters:
 
 Style/SignalException:
   EnforcedStyle: only_raise
-
-Style/SingleSpaceBeforeFirstArg:
-  Exclude:
-    - db/schema.rb
-    - config/puma.rb
-
-Style/SpaceAroundOperators:
-  Exclude:
-    - config/puma.rb
-
-Style/EmptyLinesAroundBlockBody:
-  Exclude:
-    - db/schema.rb
-
-Style/StringLiterals:
-  Enabled: false
-  Exclude:
-    - db/schema.rb

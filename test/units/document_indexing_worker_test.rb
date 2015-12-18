@@ -1,5 +1,5 @@
-require 'test_helper'
+require "test_helper"
 
 class DocumentIndexingWorkerTest < ActiveSupport::TestCase
-  test 'todo'
+  test "todo"
 end

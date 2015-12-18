@@ -1,12 +1,12 @@
-require 'test_helper'
+require "test_helper"
 
 class SubmissionsTest < ActionDispatch::IntegrationTest
   include Remets::DocumentFileUploadHelper
 
-  test 'create a submission with a sanitizable document' do
+  test "create a submission with a sanitizable document" do
     @file = sanitizable_file_upload
 
-    post '/submissions', submission: { documents_attributes: [{ file_ptr: @file }] }
+    post "/submissions", submission: { documents_attributes: [{ file_ptr: @file }] }
     @submission = Submission.last
     @document = @submission.documents.first
 
@@ -19,10 +19,10 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     assert @document.sanitized?
   end
 
-  test 'create a submission with an unsanitizable document' do
+  test "create a submission with an unsanitizable document" do
     @file = unsanitizable_file_upload
 
-    post '/submissions', submission: { documents_attributes: [{ file_ptr: @file }] }
+    post "/submissions", submission: { documents_attributes: [{ file_ptr: @file }] }
     @submission = Submission.last
     @document = @submission.documents.first
 
@@ -35,14 +35,14 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     refute @document.sanitized?
   end
 
-  test 'create a submission with documents of both types' do
+  test "create a submission with documents of both types" do
     @file1 = unsanitizable_file_upload
     @file2 = sanitizable_file_upload
 
-    post '/submissions', submission: {
+    post "/submissions", submission: {
       documents_attributes: [
         { file_ptr: @file2 },
-        { file_ptr: @file1 }
+        { file_ptr: @file1 },
       ]
     }
     @submission = Submission.last

@@ -8,13 +8,13 @@ class Document < ActiveRecord::Base
 
   scope :all_fingerprinted_except, lambda { |document|
     where.not(id: document.id)
-      .where('array_length(fingerprints, 1) > 0')
+      .where("array_length(fingerprints, 1) > 0")
   }
 
   delegate :file, to: :file_ptr
 
   def content
-    @content ||= File.open(file_ptr.current_path, 'r').read
+    @content ||= File.open(file_ptr.current_path, "r").read
   end
 
   def sanitized?
@@ -26,7 +26,7 @@ class Document < ActiveRecord::Base
   end
 
   def sanitized_content
-    @sanitized_content ||= File.open(file_ptr.sanitized.current_path, 'r').read if sanitized?
+    @sanitized_content ||= File.open(file_ptr.sanitized.current_path, "r").read if sanitized?
   end
 
   def windows

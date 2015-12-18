@@ -14,7 +14,7 @@ class DocumentFingerprintingWorker
   def update(document, windows)
     document.update!(
       windows: windows,
-      fingerprinted_at: Time.zone.now
+      fingerprinted_at: Time.zone.now,
     )
   end
 

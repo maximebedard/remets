@@ -10,7 +10,7 @@ class DocumentIndexingWorker
       DocumentMatch.create!(
         reference_document: reference,
         compared_document: compared,
-        matching_fingerprints: matching_fingerprints
+        matching_fingerprints: matching_fingerprints,
       )
     end
   end

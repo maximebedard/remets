@@ -2,7 +2,7 @@ class Winnower
   class << self
     def windows_from_content(content, *options)
       new(*options).perform(
-        ContentTokenizer.tokenize_and_sanitize(content || '')
+        ContentTokenizer.tokenize_and_sanitize(content || "")
       )
     end
 
