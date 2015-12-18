@@ -3,11 +3,11 @@ class DocumentFingerprintingWorker
 
   def perform(document_id)
     document = Document.find(document_id)
-    windows = Winnower.windows_from_content(document.sanitized_content).to_a
+    windows = Winnower.windows_from_content(document.sanitized_content)
 
     return unless windows.present?
 
-    update(document, windows)
+    update(document, windows.to_a)
     index(document)
   end
 

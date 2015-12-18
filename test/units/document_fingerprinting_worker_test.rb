@@ -1,5 +1,6 @@
 require 'test_helper'
 
 class DocumentFingerprintingWorkerTest < ActiveSupport::TestCase
-  test 'todo'
+  test '#perform raises when the document is not found'
+  test '#'
 end
