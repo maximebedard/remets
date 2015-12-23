@@ -16,7 +16,8 @@ class SubmissionCreaterTest < ActiveSupport::TestCase
     end
   end
 
-  test "#perform creates a submission with multiple documents"
+  test "#perform creates a submission with multiple documents" do
+  end
 
   test "#perform fingerprints a single document content" do
     submission = @service.perform.reload
@@ -25,5 +26,6 @@ class SubmissionCreaterTest < ActiveSupport::TestCase
     assert_not_empty document.windows
   end
 
-  test "#perform fingerprints multiple documents content"
+  test "#perform fingerprints multiple documents content" do
+  end
 end

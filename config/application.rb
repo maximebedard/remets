@@ -10,5 +10,6 @@ module Remets
   AUTH_SESSION_KEY = :_remets_user_id
 
   class Application < Rails::Application
+    config.active_job.queue_adapter = :sidekiq
   end
 end

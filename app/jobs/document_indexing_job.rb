@@ -1,5 +1,5 @@
-class DocumentIndexingWorker
-  include Sidekiq::Worker
+class DocumentIndexingJob < ActiveJob::Base
+  queue_as :default
 
   def perform(document_id)
     reference = Document.find(document_id)
