@@ -22,7 +22,7 @@ class SubmissionCreater
     return unless @submission.valid?
 
     @submission.documents.each do |document|
-      DocumentFingerprintingWorker.perform_async(document.id)
+      DocumentFingerprintingJob.perform_later(document.id)
     end
   end
 end

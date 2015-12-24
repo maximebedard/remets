@@ -30,7 +30,7 @@ class Document < ActiveRecord::Base
   end
 
   def windows
-    @windows ||= indexes.zip(fingerprints)
+    indexes.zip(fingerprints)
   end
 
   def windows=(value)

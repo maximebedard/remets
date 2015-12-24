@@ -1,13 +1,13 @@
-class DocumentFingerprintingWorker
-  include Sidekiq::Worker
+class DocumentFingerprintingJob < ActiveJob::Base
+  queue_as :default
 
   def perform(document_id)
     document = Document.find(document_id)
-    windows = Winnower.windows_from_content(document.sanitized_content)
+    windows = Winnower.windows_from_content(document.sanitized_content).to_a
 
     return unless windows.present?
 
-    update(document, windows.to_a)
+    update(document, windows)
     index(document)
   end
 
@@ -19,6 +19,6 @@ class DocumentFingerprintingWorker
   end
 
   def index(document)
-    DocumentIndexingWorker.perform_async(document.id)
+    DocumentIndexingJob.perform_later(document.id)
   end
 end

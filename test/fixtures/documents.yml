@@ -1,9 +1,9 @@
 
-document1: # generated id: 605975481
+bragging: # generated id: 605975481
   submission: log121_lab1
   file_ptr: 'text_document1.txt'
 
-document2: # generated id: 605975482
+more_bragging: # generated id: 605975482
   submission: log240_lab1
   file_ptr: 'text_document2.txt'
 
@@ -22,3 +22,7 @@ platypus_image: # generated id: 605975485
 platypus_with_no_extension: # generated id: 605975486
   submission: log240_lab1
   file_ptr: 'platypus'
+
+empty: # generated id: 605975487
+  submission: log240_lab1
+  file_ptr: 'empty.txt'

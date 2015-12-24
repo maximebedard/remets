@@ -6,8 +6,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   test "create a submission with a sanitizable document" do
     @file = sanitizable_file_upload
 
-    post "/submissions", submission: { documents_attributes: [{ file_ptr: @file }] }
-    @submission = Submission.last
+    submit(files: [@file])
     @document = @submission.documents.first
 
     assert_equal 1, @submission.documents.size
@@ -22,8 +21,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   test "create a submission with an unsanitizable document" do
     @file = unsanitizable_file_upload
 
-    post "/submissions", submission: { documents_attributes: [{ file_ptr: @file }] }
-    @submission = Submission.last
+    submit(files: [@file])
     @document = @submission.documents.first
 
     assert_equal 1, @submission.documents.size
@@ -35,17 +33,11 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     refute @document.sanitized?
   end
 
-  test "create a submission with documents of both types" do
+  test "create a submission with a sanitizable and an unsanitizable documents" do
     @file1 = unsanitizable_file_upload
     @file2 = sanitizable_file_upload
 
-    post "/submissions", submission: {
-      documents_attributes: [
-        { file_ptr: @file2 },
-        { file_ptr: @file1 },
-      ]
-    }
-    @submission = Submission.last
+    submit(files: [@file1, @file2])
     @document1, @document2 = @submission.documents
 
     assert_redirected_to @submission
@@ -59,5 +51,16 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     assert_not_empty @document2.indexes
     assert @document2.fingerprinted?
     assert @document2.sanitized?
+  end
+
+  private
+
+  def submit(files: [])
+    perform_enqueued_jobs do
+      post "/submissions", submission: {
+        documents_attributes: files.map { |f| { file_ptr: f } }
+      }
+      @submission = Submission.last
+    end
   end
 end

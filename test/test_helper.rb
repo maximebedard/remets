@@ -19,4 +19,5 @@ class ActiveSupport::TestCase
   fixtures :all
 
   include ActionDispatch::TestProcess
+  include ActiveJob::TestHelper
 end
