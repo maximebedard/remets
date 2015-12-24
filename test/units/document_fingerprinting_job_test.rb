@@ -38,4 +38,10 @@ class DocumentFingerprintingJobTest < ActiveSupport::TestCase
       DocumentFingerprintingJob.perform_now(@document.id)
     end
   end
+
+  test "#perform raises when the document no longer exists" do
+    assert_raises ActiveRecord::RecordNotFound do
+      DocumentFingerprintingJob.perform_now(1337)
+    end
+  end
 end

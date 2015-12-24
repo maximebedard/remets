@@ -29,6 +29,13 @@ class SubmissionCreaterTest < ActiveSupport::TestCase
     end
   end
 
+  test "#perform does not fingerprints when the submission is invalid" do
+    Submission.any_instance.stubs(:valid?).returns(false)
+    assert_no_enqueued_jobs do
+      perform(files: [sanitizable_file_upload])
+    end
+  end
+
   private
 
   def perform(files: [])
