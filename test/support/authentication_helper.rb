@@ -3,33 +3,33 @@ module Remets
     extend ActiveSupport::Concern
 
     included do
-      setup do
-        enable_test_mode
-        setup_providers
-      end
-    end
-
-    def enable_test_mode
       OmniAuth.config.test_mode = true
     end
 
-    def setup_providers
-      OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new(
-        provider: "google",
-        uid: "123545",
-        info: {
-          name: "Gaston Rinfrette",
-          email: "rinfrette.gaston@gmail.com",
-        },
+    def mock_auth(provider, **options)
+      OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new(
+        provider: provider,
+        **options,
       )
     end
 
-    def mock_auth_request(provider)
-      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[provider]
-      request.env["omniauth.auth"]
+    def mock_auth_request(provider, **options)
+      request.env["omniauth.auth"] = mock_auth(provider, options)
     end
 
-    def supported_providers
+    def mock_auth_for(provider, user:)
+      mock_auth(
+        provider,
+        uid: user.uid,
+        info: user.attributes.symbolize_keys.slice(:name, :email),
+      )
+    end
+
+    def mock_auth_request_for(provider, user:)
+      request.env["omniauth.auth"] = mock_auth_for(provider, user: user)
+    end
+
+    def self.auth_providers
       [:google]
     end
   end
