@@ -4,9 +4,6 @@ class FileUploaderTest < ActiveSupport::TestCase
   include Remets::DocumentFileUploadHelper
 
   class FileUploaderModel
-    def read_attribute(*)
-      nil
-    end
   end
 
   setup do
@@ -22,7 +19,7 @@ class FileUploaderTest < ActiveSupport::TestCase
   end
 
   test "#filename uses the model filename when present" do
-    @model.stubs(:read_attribute).with(:file_ptr).returns("HENRY.txt")
+    @model.instance_variable_set(:@file_ptr_secure_token, "HENRY")
     @uploader.store!(sanitizable_file_upload)
 
     assert_equal "HENRY.txt", @uploader.filename

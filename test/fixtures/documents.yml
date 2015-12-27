@@ -1,28 +1,27 @@
-
-bragging: # generated id: 605975481
+bragging:
   submission: log121_lab1
-  file_ptr: 'text_document1.txt'
+  file_ptr: <%= upload(Document, :file_ptr, "text_document1.txt") %>
 
-more_bragging: # generated id: 605975482
+fraudulent_bragging:
   submission: log240_lab1
-  file_ptr: 'text_document2.txt'
+  file_ptr: <%= upload(Document, :file_ptr, "text_document2.txt") %>
 
-platypus: # generated id: 605975483
+empty:
+  submission: log240_lab1
+  file_ptr: <%= upload(Document, :file_ptr, "empty.txt") %>
+
+platypus:
   submission: log121_lab1
-  file_ptr: 'platypus1.txt'
+  file_ptr: <%= upload(Document, :file_ptr, "platypus1.txt") %>
 
-awesome_platypus: # generated id: 605975484
+fraudulent_platypus:
   submission: log240_lab1
-  file_ptr: 'platypus2.txt'
+  file_ptr: <%= upload(Document, :file_ptr, "platypus2.txt") %>
 
-platypus_image: # generated id: 605975485
+platypus_image:
   submission: log240_lab1
-  file_ptr: 'platypus.jpg'
+  file_ptr: <%= upload(Document, :file_ptr, "platypus.jpg") %>
 
-platypus_with_no_extension: # generated id: 605975486
+platypus_with_no_extension:
   submission: log240_lab1
-  file_ptr: 'platypus'
-
-empty: # generated id: 605975487
-  submission: log240_lab1
-  file_ptr: 'empty.txt'
+  file_ptr: <%= upload(Document, :file_ptr, "platypus") %>
