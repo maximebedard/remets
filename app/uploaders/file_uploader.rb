@@ -4,12 +4,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    @filename =
-      if name = model.read_attribute(mounted_as)
-        name
-      else
-        [SecureRandom.hex, file.extension.presence].compact.join(".")
-      end
+    [secure_token, file.extension.presence].compact.join(".") if original_filename.present?
   end
 
   def store_dir
@@ -21,6 +16,11 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   private
+
+  def secure_token
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.hex)
+  end
 
   def can_be_sanitized?(file)
     Sanitizer.can_be_sanitized?(file.extension)
