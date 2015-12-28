@@ -1,5 +1,5 @@
 class Submission < ActiveRecord::Base
-  has_many :documents
+  has_many :documents, as: :documentable
 
   belongs_to :handover
   belongs_to :user

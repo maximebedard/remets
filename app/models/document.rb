@@ -1,8 +1,8 @@
 class Document < ActiveRecord::Base
   mount_uploader :file_ptr, FileUploader
 
-  belongs_to :submission
-  has_one :user, through: :submission
+  belongs_to :documentable, polymorphic: true
+  has_one :user, through: :documentable
 
   validates :file_ptr, presence: true
 

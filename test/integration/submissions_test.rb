@@ -38,7 +38,8 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     @file2 = sanitizable_file_upload
 
     submit(files: [@file1, @file2])
-    @document1, @document2 = @submission.documents
+    @document1 = @submission.documents.first
+    @document2 = @submission.documents.second
 
     assert_redirected_to @submission
 
