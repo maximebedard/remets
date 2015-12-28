@@ -17,7 +17,10 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission = SubmissionCreater.new(submission_params).perform
+    @submission = Fingerprinter.new(
+      Submission.new,
+      submission_params,
+    ).call
     respond_with(@submission)
   end
 
