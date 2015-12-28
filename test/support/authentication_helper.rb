@@ -6,6 +6,14 @@ module Remets
       OmniAuth.config.test_mode = true
     end
 
+    def mock_auth_failure(provider, message = :invalid_credentials)
+      OmniAuth.config.mock_auth[provider] = message
+    end
+
+    def mock_auth_request_failure(provider, message = :invalid_credentials)
+      request.env["omniauth.auth"] = mock_auth_failure(provider, message)
+    end
+
     def mock_auth(provider, **options)
       OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new(
         provider: provider,

@@ -28,6 +28,12 @@ class AuthenticationsControllerTest < ActionController::TestCase
     assert_redirected_to "/"
   end
 
+  test "#failure" do
+    get :failure
+    assert_response :ok
+    assert_equal "Something went wrong.", response.body
+  end
+
   test "#destroy" do
     get :destroy
     assert_redirected_to "/"

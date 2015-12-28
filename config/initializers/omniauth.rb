@@ -7,4 +7,10 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     prompt: "select_account"
 
   OmniAuth.config.logger = Rails.logger
+
+  if Rails.env.test?
+    OmniAuth.config.on_failure = proc do |env|
+      OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+    end
+  end
 end
