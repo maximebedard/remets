@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150926225705) do
 
   create_table "handovers", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

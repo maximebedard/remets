@@ -1,5 +1,11 @@
 gaston:
-  name: 'Gaston Rinfrette'
-  email: 'rinfrette.gaston@gmail.com'
-  provider: 'google'
-  uid: '123545'
+  name: "Gaston Rinfrette"
+  email: "rinfrette.gaston@gmail.com"
+  provider: "google"
+  uid: "123545"
+
+henry:
+  name: "Henry Lemieux"
+  email: "henry.lemieux@gmail.com"
+  provider: "google"
+  uid: "54321"
