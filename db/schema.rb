@@ -23,15 +23,17 @@ ActiveRecord::Schema.define(version: 20150926225705) do
   end
 
   create_table "documents", force: :cascade do |t|
-    t.integer  "submission_id"
+    t.integer  "documentable_id"
+    t.string   "documentable_type"
     t.string   "file_ptr"
-    t.integer  "fingerprints",     default: [], null: false, array: true
-    t.integer  "indexes",          default: [], null: false, array: true
+    t.integer  "fingerprints",      default: [], null: false, array: true
+    t.integer  "indexes",           default: [], null: false, array: true
     t.datetime "fingerprinted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "documents", ["documentable_type", "documentable_id"], name: "index_documents_on_documentable_type_and_documentable_id", using: :btree
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
 
   create_table "handovers", force: :cascade do |t|
