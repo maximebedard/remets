@@ -4,6 +4,6 @@ class DocumentMatch < ActiveRecord::Base
 
   validates :reference_document_id,
     :compared_document_id,
-    :matching_fingerprints,
+    :fingerprints,
     presence: true
 end

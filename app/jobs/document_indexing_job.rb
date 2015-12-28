@@ -6,11 +6,12 @@ class DocumentIndexingJob < ActiveJob::Base
 
     Document.all_fingerprinted_except(reference).find_each do |compared|
       matching_fingerprints = reference.fingerprints & compared.fingerprints
+      next if matching_fingerprints.blank?
 
       DocumentMatch.create!(
         reference_document: reference,
         compared_document: compared,
-        matching_fingerprints: matching_fingerprints,
+        fingerprints: matching_fingerprints,
       )
     end
   end

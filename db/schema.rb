@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150926225705) do
   create_table "document_matches", force: :cascade do |t|
     t.integer "reference_document_id"
     t.integer "compared_document_id"
-    t.integer "matching_fingerprints", default: [], array: true
+    t.integer "fingerprints",          default: [], array: true
   end
 
   create_table "documents", force: :cascade do |t|

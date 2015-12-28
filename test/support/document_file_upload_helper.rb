@@ -11,5 +11,9 @@ module Remets
     def without_extension_file_upload
       fixture_file_upload("files/documents/platypus")
     end
+
+    def empty_file_upload
+      fixture_file_upload("files/documents/empty.txt")
+    end
   end
 end
