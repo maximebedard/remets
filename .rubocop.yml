@@ -52,6 +52,12 @@ Style/MultilineOperationIndentation:
 Style/NumericLiterals:
   Enabled: false
 
+Style/MethodDefParentheses:
+  Enabled: true
+
+Style/MethodCallParentheses:
+  Enabled: true
+
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     '%i': '()'
