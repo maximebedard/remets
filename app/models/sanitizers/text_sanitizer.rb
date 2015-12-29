@@ -3,7 +3,7 @@ module Sanitizers
     self.supported_extensions = %w(txt)
 
     def sanitize
-      content # TODO: actually do some cleanup here...
+      content
     end
   end
 end
