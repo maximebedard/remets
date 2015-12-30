@@ -5,7 +5,7 @@ gem "rails", "4.2.4"
 gem "pg"
 gem "puma"
 gem "carrierwave"
-gem 'bootstrap-sass', '~> 3.3.6'
+gem "bootstrap-sass", "~> 3.3.6"
 gem "sass-rails"
 gem "uglifier"
 gem "coffee-rails"

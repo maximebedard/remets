@@ -1,7 +1,7 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-  get 'home/index'
+  get "home/index"
 
   resources :submissions, except: [:destroy, :edit, :update]
   resources :handovers, except: [:destroy]
