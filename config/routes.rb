@@ -1,6 +1,8 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
+  get 'home/index'
+
   resources :submissions, except: [:destroy, :edit, :update]
   resources :handovers, except: [:destroy]
   resources :documents, only: [:show] do
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root "handovers#index"
+  root "home#index"
 
   get "/auth/:provider", to: "authentications#passthru", as: :auth_authorize, constraints: { provider: /google/ }
   get "/auth/:provider/callback", to: "authentications#create", as: :auth_callback

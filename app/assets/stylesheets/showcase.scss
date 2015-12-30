@@ -1,0 +1,22 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+main.showcase {
+  //background-color: $brand-primary;
+  background-image: linear-gradient(to bottom, $brand-primary 0, darken($brand-primary, 5%) 100%);
+  color: white;
+  height: 50vh;
+
+  .showcase-flex {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    font-size: 8rem;
+    text-shadow: 1px 1px #2F2F2F;
+  }
+}
