@@ -7,19 +7,21 @@ Handing over documents, made simple.
 ## Getting started
 
 ```sh
-brew install pg
+brew install postgres redis
 bundle exec rake db:create db:migrate
 bundle exec rails server # go to localhost:3000
 
 # To load secrets
 source ./some-folder-not-in-the-repo/secrets.sh
+
+# Running the test suite and static code analysis
+bundle exec rake
 ```
 
-## Styleguide
+## Contributing
 
-[Ruby style guide](https://github.com/styleguide/ruby)
-
-## Deployment
-
-The deployment process is made using heroku pipeline. WIP.
-
+Fork it ( https://github.com/maximebedard/remets/fork )
+Create your feature branch (git checkout -b my-new-feature)
+Commit your changes (git commit -am 'Add some feature')
+Push to the branch (git push origin my-new-feature)
+Create a new Pull Request
