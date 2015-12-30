@@ -6,6 +6,12 @@ gaston:
 
 henry:
   name: "Henry Lemieux"
-  email: "henry.lemieux@gmail.com"
+  email: "lemieux.henry@gmail.com"
   provider: "google"
-  uid: "54321"
+  uid: "654321"
+
+marcel:
+  name: "Marcel Gratton"
+  email: "gratton.marcel@gmail.com"
+  provider: "google"
+  uid: "555555"

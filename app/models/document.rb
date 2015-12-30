@@ -2,7 +2,6 @@ class Document < ActiveRecord::Base
   mount_uploader :file_ptr, FileUploader
 
   belongs_to :documentable, polymorphic: true
-  has_one :user, through: :documentable
 
   validates :file_ptr, presence: true
 
@@ -12,6 +11,7 @@ class Document < ActiveRecord::Base
   }
 
   delegate :file, to: :file_ptr
+  delegate :user, to: :documentable
 
   def content
     @content ||= File.open(file_ptr.current_path, "r").read
