@@ -5,17 +5,13 @@ class Document < ActiveRecord::Base
 
   validates :file_ptr, presence: true
 
-  scope :all_fingerprinted_except, lambda { |document|
+  scope :all_fingerprinted_except, lambda do |document|
     where.not(id: document.id)
       .where("array_length(fingerprints, 1) > 0")
-  }
+  end
 
   delegate :file, to: :file_ptr
   delegate :user, to: :documentable
-
-  def content
-    @content ||= File.open(file_ptr.current_path, "r").read
-  end
 
   def sanitized?
     file_ptr.version_exists?(:sanitized)
@@ -23,6 +19,10 @@ class Document < ActiveRecord::Base
 
   def fingerprinted?
     fingerprinted_at.present?
+  end
+
+  def content
+    @content ||= File.open(file_ptr.current_path, "r").read
   end
 
   def sanitized_content
