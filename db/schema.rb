@@ -17,9 +17,11 @@ ActiveRecord::Schema.define(version: 20150926225705) do
   enable_extension "plpgsql"
 
   create_table "document_matches", force: :cascade do |t|
-    t.integer "reference_document_id"
-    t.integer "compared_document_id"
-    t.integer "fingerprints",          default: [], array: true
+    t.integer  "reference_document_id"
+    t.integer  "compared_document_id"
+    t.integer  "fingerprints",          default: [], array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "documents", force: :cascade do |t|
