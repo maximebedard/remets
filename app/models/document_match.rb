@@ -6,4 +6,15 @@ class DocumentMatch < ActiveRecord::Base
     :compared_document_id,
     :fingerprints,
     presence: true
+
+  def self.create_from!(reference, compared)
+    matching_fingerprints = reference.fingerprints & compared.fingerprints
+    return unless matching_fingerprints.present?
+
+    create!(
+      reference_document: reference,
+      compared_document: compared,
+      fingerprints: matching_fingerprints,
+    )
+  end
 end
