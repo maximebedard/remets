@@ -21,3 +21,7 @@ class ActiveSupport::TestCase
   include ActionDispatch::TestProcess
   include ActiveJob::TestHelper
 end
+
+class ActionController::TestCase
+  include Remets::SessionHelper
+end

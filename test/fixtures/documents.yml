@@ -3,11 +3,11 @@ bragging:
   file_ptr: <%= upload(Document, :file_ptr, "text_document1.txt") %>
 
 fraudulent_bragging:
-  documentable: log240_lab1 (Submission)
+  documentable: log121_lab1 (Submission)
   file_ptr: <%= upload(Document, :file_ptr, "text_document2.txt") %>
 
 empty:
-  documentable: log240_lab1 (Submission)
+  documentable: log121_lab1 (Submission)
   file_ptr: <%= upload(Document, :file_ptr, "empty.txt") %>
 
 platypus:
@@ -15,15 +15,15 @@ platypus:
   file_ptr: <%= upload(Document, :file_ptr, "platypus1.txt") %>
 
 fraudulent_platypus:
-  documentable: log240_lab1 (Submission)
+  documentable: log121_lab1 (Submission)
   file_ptr: <%= upload(Document, :file_ptr, "platypus2.txt") %>
 
 platypus_image:
-  documentable: log240_lab1 (Submission)
+  documentable: log121_lab1 (Submission)
   file_ptr: <%= upload(Document, :file_ptr, "platypus.jpg") %>
 
 platypus_with_no_extension:
-  documentable: log240_lab1 (Submission)
+  documentable: log121_lab1 (Submission)
   file_ptr: <%= upload(Document, :file_ptr, "platypus") %>
 
 makefile_boilerplate:

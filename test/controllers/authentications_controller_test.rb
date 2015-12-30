@@ -16,7 +16,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     mock_auth_request_for(
       :google,
       user: User.new(
-        uid: "654321",
+        uid: "754321",
         name: "Roger Lemieux",
         email: "lemieux.roger@gmail.com",
       ),

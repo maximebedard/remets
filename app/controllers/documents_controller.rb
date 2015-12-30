@@ -1,9 +1,12 @@
 class DocumentsController < ApplicationController
   def show
+    @document = Document.find(document_id)
+    authorize(@document)
   end
 
   def download
     @document = Document.find(document_id)
+    authorize(@document)
 
     if @document.file.extension == extension
       send_file @document.file_ptr.current_path,

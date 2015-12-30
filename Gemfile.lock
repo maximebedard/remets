@@ -141,6 +141,8 @@ GEM
       byebug (~> 8.0)
       pry (~> 0.10)
     puma (2.15.3)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -246,6 +248,7 @@ DEPENDENCIES
   pg
   pry-byebug
   puma
+  pundit
   rails (= 4.2.4)
   responders
   rubocop
