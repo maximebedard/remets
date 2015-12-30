@@ -17,6 +17,7 @@ gem "sidekiq"
 gem "statsd-instrument"
 gem "sinatra", require: false
 gem "omniauth-google-oauth2"
+gem "pundit"
 
 gem "sprockets", ">=3.4.0"
 gem "sprockets-es6", require: "sprockets/es6"
