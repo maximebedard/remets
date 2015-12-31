@@ -1,0 +1,26 @@
+<div class="table table-striped" class="files" id="previews" style="display:none">
+  <div id="template" class="file-row row">
+    <!-- This is used as the file preview template -->
+    <div class="col-lg-2">
+        <span class="preview"><img class="img-responsive" data-dz-thumbnail /></span>
+    </div>
+    <div class="col-lg-3">
+        <p class="name" data-dz-name></p>
+        <strong class="error text-danger" data-dz-errormessage></strong>
+    </div>
+    <div class="col-lg-3">
+        <p class="size" data-dz-size></p>
+        <div class="progress progress-bar-success progress-complete" style="display:none" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+        </div>
+        <div class="progress progress-striped active progress-in-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-bar progress-bar-info" style="width:0%;" data-dz-uploadprogress></div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+      <button data-dz-remove class="btn btn-danger delete">
+        <i class="glyphicon glyphicon-trash"></i>
+        <span>Remove</span>
+      </button>
+    </div>
+  </div>
+</div>

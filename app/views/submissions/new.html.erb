@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
@@ -6,7 +5,7 @@
     </div>
     <div class="col-lg-12">
       <div class="form-group">
-        <%= button_tag 'Add new submission', type: 'button', id: 'submit-all',
+        <%= button_tag 'Add new submission', type: 'button',
           class: 'btn btn-default btn-success fileinput-button' %>
         <%= button_tag 'Upload all submissions', type: 'button', id: 'submit-all',
           class: 'btn btn-default' %>
@@ -24,15 +23,12 @@
       <% end %>
     </div>
   </div>
-
 </div>
-
+<%= render partial: 'dropzoneTemplate' %>
 <%= javascript_tag do %>
   Dropzone.options.newSubmission = newDropzoneConfig({
     paramName: 'submission[documents_attributes][][file_ptr]',
-    submitButtonId: 'submit-all'
+    submitButtonId: 'submit-all',
+    previewTemplate: document.querySelector("#previews").innerHTML
   });
 <% end %>
-
-
-

@@ -3,14 +3,13 @@ function newDropzoneConfig(props) {
     paramName: props.paramName,
     autoProcessQueue: false,
     uploadMultiple: false,
-    addRemoveLinks: true,
     clickable: ".fileinput-button",
+    previewTemplate: props.previewTemplate,
     init: function() {
       let submitButton = document.getElementById(props.submitButtonId);
-      let self = this;
 
-      submitButton.addEventListener("click", function() {
-        self.processQueue(); // Tell Dropzone to process all queued files.
+      submitButton.addEventListener("click", () => {
+        this.processQueue(); // Tell Dropzone to process all queued files.
       });
 
       this.on("addedfile", function() {
@@ -18,7 +17,15 @@ function newDropzoneConfig(props) {
       });
 
       this.on('sending', function(file, xhr, formData) {
+      });
 
+      this.on('success', (file)=> {
+        file.previewElement.getElementsByClassName('progress-complete')[0].style['display'] = 'block';
+        file.previewElement.getElementsByClassName('progress-in-progress')[0].style['display'] = 'none';
+      });
+
+      this.on('queuecomplete', () => {
+        console.log('redirect!'); //TODO : redirect to the project page? I guess?
       });
     }
   }
