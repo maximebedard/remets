@@ -1,7 +1,38 @@
-<%= form_for @submission, html: { multipart: true } do |f| %>
-  <%= f.label :documents_attributes %>
-  <%= f.file_field :documents_attributes,
-    multiple: true,
-    name: 'submission[documents_attributes][][file_ptr]' %>
-  <%= f.submit %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>New Submission</h1>
+    </div>
+    <div class="col-lg-12">
+      <div class="form-group">
+        <%= button_tag 'Add new submission', type: 'button', id: 'submit-all',
+          class: 'btn btn-default btn-success fileinput-button' %>
+        <%= button_tag 'Upload all submissions', type: 'button', id: 'submit-all',
+          class: 'btn btn-default' %>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <%= form_for @submission, html: { multipart: true, id: 'newSubmission', class: 'dropzone'} do |f| %>
+        <div class="fallback">
+          <%= f.label :documents_attributes %>
+          <%= f.file_field :documents_attributes,
+            multiple: true,
+            name: 'submission[documents_attributes][][file_ptr]' %>
+          <%= f.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<%= javascript_tag do %>
+  Dropzone.options.newSubmission = newDropzoneConfig({
+    paramName: 'submission[documents_attributes][][file_ptr]',
+    submitButtonId: 'submit-all'
+  });
 <% end %>
+
+
+
