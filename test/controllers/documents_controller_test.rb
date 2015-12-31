@@ -42,7 +42,7 @@ class DocumentsControllerTest < ActionController::TestCase
     end
   end
 
-  test "#download is not authorized when you are not the owner not the creator of the handover" do
+  test "#download is not authorized when you are not the owner nor the creator of the handover" do
     sign_in(users(:marcel))
 
     assert_raises(Pundit::NotAuthorizedError) do
@@ -50,7 +50,7 @@ class DocumentsControllerTest < ActionController::TestCase
     end
   end
 
-  test "#show is not authorized when you are not the owner not the creator of the handover" do
+  test "#show is not authorized when you are not the owner nor the creator of the handover" do
     sign_in(users(:marcel))
 
     assert_raises(Pundit::NotAuthorizedError) do
