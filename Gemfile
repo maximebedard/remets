@@ -25,7 +25,7 @@ gem "sprockets-es6", require: "sprockets/es6"
 group :development do
   gem "pry-byebug"
   gem "better_errors"
-  gem "rubocop"
+  gem "rubocop", require: false
   gem "binding_of_caller"
 end
 
