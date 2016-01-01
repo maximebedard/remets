@@ -20,8 +20,12 @@ function newDropzoneConfig(props) {
       });
 
       this.on('success', (file)=> {
-        file.previewElement.getElementsByClassName('progress-complete')[0].style['display'] = 'block';
-        file.previewElement.getElementsByClassName('progress-in-progress')[0].style['display'] = 'none';
+        //give enough time for the animation to finish.
+        setTimeout(() => {
+          file.previewElement.getElementsByClassName('progress-complete')[0].style['display'] = 'block';
+          file.previewElement.getElementsByClassName('progress-in-progress')[0].style['display'] = 'none';
+          file.previewElement.getElementsByClassName('delete')[0].remove();
+        }, 1000);
       });
 
       this.on('queuecomplete', () => {
