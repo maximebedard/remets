@@ -13,16 +13,16 @@ class Document < ActiveRecord::Base
   delegate :file, to: :file_ptr
   delegate :user, to: :documentable
 
-  def content
-    @content ||= File.open(file_ptr.current_path, "r").read
-  end
-
   def sanitized?
     file_ptr.version_exists?(:sanitized)
   end
 
   def fingerprinted?
     fingerprinted_at.present?
+  end
+
+  def content
+    @content ||= File.open(file_ptr.current_path, "r").read
   end
 
   def sanitized_content
