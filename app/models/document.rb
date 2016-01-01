@@ -5,10 +5,10 @@ class Document < ActiveRecord::Base
 
   validates :file_ptr, presence: true
 
-  scope :all_fingerprinted_except, lambda do |document|
+  scope :all_fingerprinted_except, lambda { |document|
     where.not(id: document.id)
       .where("array_length(fingerprints, 1) > 0")
-  end
+  }
 
   delegate :file, to: :file_ptr
   delegate :user, to: :documentable
