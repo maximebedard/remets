@@ -25,10 +25,12 @@
   </div>
 </div>
 <%= render partial: 'dropzoneTemplate' %>
-<%= javascript_tag do %>
-  Dropzone.options.newSubmission = newDropzoneConfig({
-    paramName: 'submission[documents_attributes][][file_ptr]',
-    submitButtonId: 'submit-all',
-    previewTemplate: document.querySelector("#previews").innerHTML
-  });
+<%= content_for :scripts do %>
+  <%= javascript_tag do %>
+    Dropzone.options.newSubmission = newDropzoneConfig({
+      paramName: () => { return "submission[documents_attributes][][file_ptr]" } ,
+      submitButtonId: 'submit-all',
+      previewTemplate: document.querySelector("#previews").innerHTML
+    });
+  <% end %>
 <% end %>

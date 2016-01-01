@@ -2,7 +2,7 @@ function newDropzoneConfig(props) {
   return {
     paramName: props.paramName,
     autoProcessQueue: false,
-    uploadMultiple: false,
+    uploadMultiple: true,
     clickable: ".fileinput-button",
     previewTemplate: props.previewTemplate,
     init: function() {
