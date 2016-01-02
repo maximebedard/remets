@@ -7,9 +7,13 @@ module LogWithBinaryTruncate
   protected
 
   TRUNCATE_LENGTH = 100
+  TRUNCATE_COLUMNS = %w(indexes fingerprints)
+
   def log(sql, name = "SQL", binds = [], statement_name = nil, &block)
     b = binds.map do |k, v|
-      v = v.truncate(TRUNCATE_LENGTH) if v.is_a?(String) && v.size > TRUNCATE_LENGTH
+      if v.is_a?(String) && v.size > TRUNCATE_LENGTH && TRUNCATE_COLUMNS.include?(k.name)
+        v = v.truncate(TRUNCATE_LENGTH)
+      end
       [k, v]
     end
 
