@@ -30,6 +30,8 @@ class FileUploader < CarrierWave::Uploader::Base
     manipulate! do |file|
       sanitizer = Sanitizer.for_extension(File.extname(file.path)[1..-1])
       sanitizer = sanitizer.new(file.read)
+
+      file.seek(0)
       file.write(sanitizer.sanitize)
     end
   end

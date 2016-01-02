@@ -8,7 +8,7 @@ class Fingerprinter
 
   def call
     deep_extract_archive
-    assign_and_persist
+    update
     fingerprint_documents
 
     submission_or_handover
@@ -20,9 +20,8 @@ class Fingerprinter
     # this is where we will extract archive recursively.
   end
 
-  def assign_and_persist
-    @submission_or_handover.attributes = @params
-    @submission_or_handover.save
+  def update
+    @submission_or_handover.update(@params)
   end
 
   def fingerprint_documents
