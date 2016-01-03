@@ -1,25 +1,38 @@
 class DocumentMatch < ActiveRecord::Base
   belongs_to :reference_document, class_name: Document
   belongs_to :compared_document, class_name: Document
+  belongs_to :match, inverse_of: :document_matches
 
-  validates :reference_document_id,
+  delegate :fingerprints, to: :match
+
+  validates(
+    :reference_document_id,
     :compared_document_id,
-    :fingerprints,
-    presence: true
+    :match,
+    presence: true,
+  )
 
   scope :relevant_matches, lambda { |document|
-    where(reference_document_id: document.id)
+    joins(:match)
+      .where(reference_document_id: document.id)
       .order("array_length(fingerprints, 1) DESC")
   }
 
   def self.create_from!(reference, compared)
-    matching_fingerprints = reference.fingerprints & compared.fingerprints
-    return unless matching_fingerprints.present?
+    fingerprints = reference.fingerprints & compared.fingerprints
+    return unless fingerprints.present?
+
+    match = Match.create!(fingerprints: fingerprints)
 
     create!(
       reference_document: reference,
       compared_document: compared,
-      fingerprints: matching_fingerprints,
+      match: match,
+    )
+    create!(
+      reference_document: compared,
+      compared_document: reference,
+      match: match,
     )
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926225705) do
+ActiveRecord::Schema.define(version: 20160103173113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150926225705) do
   create_table "document_matches", force: :cascade do |t|
     t.integer  "reference_document_id"
     t.integer  "compared_document_id"
-    t.integer  "fingerprints",          default: [], array: true
+    t.integer  "match_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,6 +43,10 @@ ActiveRecord::Schema.define(version: 20150926225705) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "fingerprints", default: [], array: true
   end
 
   create_table "submissions", force: :cascade do |t|
