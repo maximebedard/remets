@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :submissions, except: [:destroy, :edit, :update]
   resources :handovers, except: [:destroy]
   resources :documents, only: [:show] do
-    collection do
-      match ":id.:extension", to: "documents#download", via: [:get], as: :download
+    member do
+      get :download
     end
   end
 

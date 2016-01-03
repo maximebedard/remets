@@ -10,7 +10,7 @@ class Document < ActiveRecord::Base
       .where("array_length(fingerprints, 1) > 0")
   }
 
-  delegate :file, to: :file_ptr
+  delegate :file, :filename, to: :file_ptr
   delegate :user, to: :documentable
 
   def sanitized?

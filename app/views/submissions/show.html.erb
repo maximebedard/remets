@@ -1,3 +1,6 @@
+<h1>Submissions</h1>
+
+<h2>Documents</h2>
 <% @submission.documents.each do |document| %>
-  <%= document.file_ptr.url %>
+  <%= link_to "Download #{document.filename}", download_document_path(document) %>
 <% end %>
