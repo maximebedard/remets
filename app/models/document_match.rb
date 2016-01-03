@@ -1,7 +1,7 @@
 class DocumentMatch < ActiveRecord::Base
   belongs_to :reference_document, class_name: Document
   belongs_to :compared_document, class_name: Document
-  belongs_to :match
+  belongs_to :match, inverse_of: :document_matches
 
   validates(
     :reference_document_id,
