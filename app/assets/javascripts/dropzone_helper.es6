@@ -6,7 +6,10 @@ function newDropzone(props) {
     autoProcessQueue: false,
     uploadMultiple: true,
     init: function() {
-      this.element.querySelector("input[type=submit]").addEventListener("click", (e) => {
+      const progressBar = Turbolinks.enableProgressBar();
+      const submitButton =  this.element.querySelector('input[type=submit]');
+
+      submitButton.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
         this.processQueue();
@@ -18,18 +21,36 @@ function newDropzone(props) {
 
       this.on('sendingmultiple', function() {
         // Gets triggered when the form is actually being sent.
-        // Hide the success button or the complete form.
+        let deleteButtons = this.element.querySelectorAll('[data-dz-remove]');
+        for (let i = 0; i < deleteButtons.length; i++) {
+          deleteButtons[i].disabled = true;
+        }
+        submitButton.disabled = true;
+        progressBar.start();
       });
 
       this.on('successmultiple', (files, response) => {
         // Gets triggered when the files have successfully been sent.
-        // Redirect user or notify of success.
+        //TODO - Redirect user
+        progressBar.done();
       });
 
       this.on('errormultiple', (files, response) => {
         // Gets triggered when there was an error sending the files.
         // Maybe show form again, and notify user of error
+        //TODO - actually trigger errors. Backend needs to send error json
+        progressBar.done();
+        progressBar._reset();
+        console.log('error!!');
       });
+
+      this.on('totaluploadprogress', (uploadProgress, totalBytes, totalBytesSent) => {
+        //Strangely enough, this gets called when we trigger data-dz-removed...
+        //Check to see if the bytes are not zero before advancing the progress bar.
+        if (totalBytes !== 0 && totalBytesSent !== 0)
+          progressBar.advanceTo(uploadProgress);
+      });
+
     }
   }
 }
