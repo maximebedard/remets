@@ -1,0 +1,25 @@
+<% record_klass = record.class.to_s.underscore %>
+<% param_name = "#{record_klass}[documents_attributes][][file_ptr]" %>
+
+<div class="dz-default">
+  <div class="dz-message">
+    Drop files here or click to upload.
+  </div>
+  <div class="dz-previews-container"></div>
+  <div class="fallback">
+    <%= form.label :documents_attributes %>
+    <%= form.file_field :documents_attributes, multiple: true, name: param_name %>
+  </div>
+</div>
+
+<%= render partial: "shared/dropzone_preview" %>
+
+<%= content_for :scripts do %>
+  <%= javascript_tag do %>
+    Dropzone.options.<%= "new#{record_klass.camelize}" %> = newDropzone({
+      paramName: "<%= record_klass %>[documents_attributes][][file_ptr]",
+      previewTemplate: document.querySelector("#preview-template").innerHTML,
+      previewsContainer: ".dz-previews-container",
+    });
+  <% end %>
+<% end %>
