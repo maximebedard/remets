@@ -5,3 +5,15 @@ log121_lab1:
 log240_lab1:
   handover: log240_lab1
   user: henry
+
+log550_lab1_1:
+  handover: log550_lab1
+  user: henry
+
+log550_lab1_2:
+  handover: log550_lab1
+  user: henry
+
+log550_lab1_3:
+  handover: log550_lab1
+  user: henry

@@ -1,7 +1,7 @@
 class Fingerprinter
   attr_accessor :submission_or_handover
 
-  def initialize(submission_or_handover, params)
+  def initialize(submission_or_handover, params = {})
     @submission_or_handover = submission_or_handover
     @params = params
   end
