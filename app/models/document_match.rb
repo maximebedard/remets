@@ -3,8 +3,6 @@ class DocumentMatch < ActiveRecord::Base
   belongs_to :compared_document, class_name: Document
   belongs_to :match, inverse_of: :document_matches
 
-  delegate :fingerprints, to: :match
-
   validates(
     :reference_document_id,
     :compared_document_id,
@@ -15,7 +13,7 @@ class DocumentMatch < ActiveRecord::Base
   scope :relevant_matches, lambda { |document|
     joins(:match)
       .where(reference_document_id: document.id)
-      .order("array_length(fingerprints, 1) DESC")
+      .sort_by(&:similarity)
   }
 
   def self.create_from!(reference, compared)
@@ -24,21 +22,21 @@ class DocumentMatch < ActiveRecord::Base
 
     match = Match.create!(fingerprints: fingerprints)
 
-    document_match1 = create!(
-      reference_document: reference,
-      compared_document: compared,
-      match: match,
-    )
-    document_match2 = create!(
-      reference_document: compared,
-      compared_document: reference,
-      match: match,
-    )
-
-    [document_match1, document_match2]
+    [
+      create!(
+        reference_document: reference,
+        compared_document: compared,
+        match: match,
+      ),
+      create!(
+        reference_document: compared,
+        compared_document: reference,
+        match: match,
+      ),
+    ]
   end
 
   def similarity
-    fingerprints.size.to_f / compared_document.fingerprints.size
+    match.fingerprints.size.to_f / compared_document.fingerprints.size
   end
 end

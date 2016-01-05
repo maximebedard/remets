@@ -39,11 +39,11 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
     match1 = DocumentMatch.first
     match2 = DocumentMatch.second
 
-    assert_equal [1234], match1.fingerprints
+    assert_equal [1234], match1.match.fingerprints
     assert_equal reference, match1.reference_document
     assert_equal compared, match1.compared_document
 
-    assert_equal [1234], match2.fingerprints
+    assert_equal [1234], match2.match.fingerprints
     assert_equal compared, match2.reference_document
     assert_equal reference, match2.compared_document
   end
