@@ -28,36 +28,36 @@ platypus_with_no_extension:
 
 makefile_boilerplate:
   documentable: log121_lab1 (Handover)
-  file_ptr: <%= upload(Document, :file_ptr, "makefile")
+  file_ptr: <%= upload(Document, :file_ptr, "makefile") %>
 
 empty_boilerplate:
   documentable: log121_lab1 (Handover)
-  file_ptr: <%= upload(Document, :file_ptr, "empty.txt")
+  file_ptr: <%= upload(Document, :file_ptr, "empty.txt") %>
 
 unsanitizable_boilerplate:
   documentable: log121_lab1 (Handover)
-  file_ptr: <%= upload(Document, :file_ptr, "platypus.jpg")
+  file_ptr: <%= upload(Document, :file_ptr, "platypus.jpg") %>
 
 recursive_fibonacci:
   documentable: log550_lab1_1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "recursive/main.c")
+  file_ptr: <%= upload(Document, :file_ptr, "recursive/main.c") %>
 
 recursive_fibonacci_readme:
   documentable: log550_lab1_1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "recursive/README.txt")
+  file_ptr: <%= upload(Document, :file_ptr, "recursive/README.txt") %>
 
 iterative_fibonacci:
   documentable: log550_lab1_2 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "iterative/main.c")
+  file_ptr: <%= upload(Document, :file_ptr, "iterative/main.c") %>
 
 iterative_fibonacci_readme:
   documentable: log550_lab1_2 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "iterative/README.txt")
+  file_ptr: <%= upload(Document, :file_ptr, "iterative/README.txt") %>
 
 ternary_fibonacci:
   documentable: log550_lab1_3 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "ternary/main.c")
+  file_ptr: <%= upload(Document, :file_ptr, "ternary/main.c") %>
 
 ternary_fibonacci_readme:
   documentable: log550_lab1_3 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "ternary/README.txt")
+  file_ptr: <%= upload(Document, :file_ptr, "ternary/README.txt") %>
