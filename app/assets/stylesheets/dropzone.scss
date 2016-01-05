@@ -1,3 +1,6 @@
+.dz-controls {
+  margin: 10px 0;
+}
 .dz-default {
   min-height: 150px;
   border: 2px solid rgba(#2691F0, 0.9);
@@ -10,6 +13,23 @@
     margin: 2em 0;
     font-size: 2rem;
     font-weight: bold;
+
+    .click-me {
+      text-decoration: underline;
+      color: #2691F0;
+      cursor: pointer;
+    }
+  }
+
+  .dz-previews-container {
+    .file-row {
+      margin: 5px 0;
+      padding: 8px 0;
+    }
+
+    .file-row:nth-child(even) {
+      background-color: #FAFAFA;
+    }
   }
 }
 

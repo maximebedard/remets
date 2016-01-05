@@ -1,6 +1,6 @@
 <% unless @__dropzone_preview_rendered %>
   <% @__dropzone_preview_rendered = true %>
-  <div id="preview-template" class="table table-striped" style="display:none">
+  <div id="preview-template" style="display:none">
     <div class="file-row row">
       <div class="col-lg-2">
         <span class="preview"><img class="img-responsive" data-dz-thumbnail /></span>
@@ -11,13 +11,6 @@
       </div>
       <div class="col-lg-3">
         <p class="size" data-dz-size></p>
-        <div class="progress progress-bar-success progress-complete" style="display:none" role="progressbar"
-          aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
-        </div>
-        <div class="progress progress-striped active progress-in-progress" role="progressbar"
-          aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div class="progress-bar progress-bar-info" style="width:0%;" data-dz-uploadprogress></div>
-        </div>
       </div>
       <div class="col-lg-4">
         <button data-dz-remove class="btn btn-danger delete">
