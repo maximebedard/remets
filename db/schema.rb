@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20160103173113) do
     t.integer  "documentable_id"
     t.string   "documentable_type"
     t.string   "file_ptr"
-    t.integer  "fingerprints",      default: [], null: false, array: true
-    t.integer  "indexes",           default: [], null: false, array: true
+    t.string   "file_secure_token"
+    t.string   "file_original_name"
+    t.integer  "fingerprints",       default: [], null: false, array: true
+    t.integer  "indexes",            default: [], null: false, array: true
     t.datetime "fingerprinted_at"
     t.datetime "created_at"
     t.datetime "updated_at"

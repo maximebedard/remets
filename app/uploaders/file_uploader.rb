@@ -1,4 +1,6 @@
 class FileUploader < CarrierWave::Uploader::Base
+  before :cache, :update_original_filename
+
   version :sanitized, if: :can_be_sanitized? do
     process :sanitize_content
   end
@@ -18,8 +20,11 @@ class FileUploader < CarrierWave::Uploader::Base
   private
 
   def secure_token
-    var = :"@#{mounted_as}_secure_token"
-    model.instance_variable_get(var) || model.instance_variable_set(var, SecureRandom.hex)
+    model.file_secure_token ||= SecureRandom.hex
+  end
+
+  def update_original_filename(file)
+    model.file_original_name ||= file.original_filename.downcase if file.respond_to?(:original_filename)
   end
 
   def can_be_sanitized?(file)

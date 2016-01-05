@@ -1,6 +1,6 @@
-<h1>Submissions</h1>
+<h1>Submission</h1>
 
 <h2>Documents</h2>
 <% @submission.documents.each do |document| %>
-  <%= link_to "Download #{document.filename}", download_document_path(document) %>
+  <%= link_to "Download #{document.file_original_name}", download_document_path(document) %>
 <% end %>
