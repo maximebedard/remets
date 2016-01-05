@@ -37,3 +37,27 @@ empty_boilerplate:
 unsanitizable_boilerplate:
   documentable: log121_lab1 (Handover)
   file_ptr: <%= upload(Document, :file_ptr, "platypus.jpg")
+
+recursive_fibonacci:
+  documentable: log550_lab1_1 (Submission)
+  file_ptr: <%= upload(Document, :file_ptr, "recursive/main.c")
+
+recursive_fibonacci_readme:
+  documentable: log550_lab1_1 (Submission)
+  file_ptr: <%= upload(Document, :file_ptr, "recursive/README.txt")
+
+iterative_fibonacci:
+  documentable: log550_lab1_2 (Submission)
+  file_ptr: <%= upload(Document, :file_ptr, "iterative/main.c")
+
+iterative_fibonacci_readme:
+  documentable: log550_lab1_2 (Submission)
+  file_ptr: <%= upload(Document, :file_ptr, "iterative/README.txt")
+
+ternary_fibonacci:
+  documentable: log550_lab1_3 (Submission)
+  file_ptr: <%= upload(Document, :file_ptr, "ternary/main.c")
+
+ternary_fibonacci_readme:
+  documentable: log550_lab1_3 (Submission)
+  file_ptr: <%= upload(Document, :file_ptr, "ternary/README.txt")
