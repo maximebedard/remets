@@ -24,15 +24,21 @@ class DocumentMatch < ActiveRecord::Base
 
     match = Match.create!(fingerprints: fingerprints)
 
-    create!(
+    document_match1 = create!(
       reference_document: reference,
       compared_document: compared,
       match: match,
     )
-    create!(
+    document_match2 = create!(
       reference_document: compared,
       compared_document: reference,
       match: match,
     )
+
+    [document_match1, document_match2]
+  end
+
+  def similarity
+    fingerprints.size.to_f / compared_document.fingerprints.size
   end
 end
