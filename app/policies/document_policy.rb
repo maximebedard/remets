@@ -1,10 +1,14 @@
 class DocumentPolicy < ApplicationPolicy
+  def index?
+    admin?
+  end
+
   def show?
-    owner? || handover_creator?
+    admin? || owner? || handover_creator?
   end
 
   def download?
-    owner? || handover_creator?
+    admin? || owner? || handover_creator?
   end
 
   private

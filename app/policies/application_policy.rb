@@ -50,4 +50,10 @@ class ApplicationPolicy
       scope
     end
   end
+
+  private
+
+  def admin?
+    Remets::ADMINISTRATOR_EMAILS.include?(@user && @user.email)
+  end
 end

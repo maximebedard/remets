@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   def index
     @documents = Document.all
+    authorize(@documents)
   end
 
   def show
