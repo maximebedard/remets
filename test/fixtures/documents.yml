@@ -1,63 +1,63 @@
 bragging:
   documentable: log121_lab1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "text_document1.txt") %>
+  <%= document_upload_yaml("text_document1.txt") %>
 
 fraudulent_bragging:
   documentable: log121_lab1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "text_document2.txt") %>
+  <%= document_upload_yaml("text_document2.txt") %>
 
 empty:
   documentable: log121_lab1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "empty.txt") %>
+  <%= document_upload_yaml("empty.txt") %>
 
 platypus:
   documentable: log121_lab1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "platypus1.txt") %>
+  <%= document_upload_yaml("platypus1.txt") %>
 
 fraudulent_platypus:
   documentable: log121_lab1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "platypus2.txt") %>
+  <%= document_upload_yaml("platypus2.txt") %>
 
 platypus_image:
   documentable: log121_lab1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "platypus.jpg") %>
+  <%= document_upload_yaml("platypus.jpg") %>
 
 platypus_with_no_extension:
   documentable: log121_lab1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "platypus") %>
+  <%= document_upload_yaml("platypus") %>
 
 makefile_boilerplate:
   documentable: log121_lab1 (Handover)
-  file_ptr: <%= upload(Document, :file_ptr, "makefile") %>
+  <%= document_upload_yaml("makefile") %>
 
 empty_boilerplate:
   documentable: log121_lab1 (Handover)
-  file_ptr: <%= upload(Document, :file_ptr, "empty.txt") %>
+  <%= document_upload_yaml("empty.txt") %>
 
 unsanitizable_boilerplate:
   documentable: log121_lab1 (Handover)
-  file_ptr: <%= upload(Document, :file_ptr, "platypus.jpg") %>
+  <%= document_upload_yaml("platypus.jpg") %>
 
 recursive_fibonacci:
   documentable: log550_lab1_1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "recursive/main.c") %>
+  <%= document_upload_yaml("recursive/main.c") %>
 
 recursive_fibonacci_readme:
   documentable: log550_lab1_1 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "recursive/README.txt") %>
+  <%= document_upload_yaml("recursive/README.txt") %>
 
 iterative_fibonacci:
   documentable: log550_lab1_2 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "iterative/main.c") %>
+  <%= document_upload_yaml("iterative/main.c") %>
 
 iterative_fibonacci_readme:
   documentable: log550_lab1_2 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "iterative/README.txt") %>
+  <%= document_upload_yaml("iterative/README.txt") %>
 
 ternary_fibonacci:
   documentable: log550_lab1_3 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "ternary/main.c") %>
+  <%= document_upload_yaml("ternary/main.c") %>
 
 ternary_fibonacci_readme:
   documentable: log550_lab1_3 (Submission)
-  file_ptr: <%= upload(Document, :file_ptr, "ternary/README.txt") %>
+  <%= document_upload_yaml("ternary/README.txt") %>

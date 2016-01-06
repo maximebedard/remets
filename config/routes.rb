@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :submissions, except: [:destroy, :edit, :update]
   resources :handovers, except: [:destroy]
-  resources :documents, only: [:show] do
+  resources :documents, only: [:show, :index] do
     member do
       get :download
     end
