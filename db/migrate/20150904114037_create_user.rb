@@ -5,6 +5,7 @@ class CreateUser < ActiveRecord::Migration
       t.string :provider
       t.string :name
       t.string :email
+      t.string :role, default: "user", null: false
     end
   end
 end

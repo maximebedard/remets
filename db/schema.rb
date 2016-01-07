@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160103173113) do
     t.string "provider"
     t.string "name"
     t.string "email"
+    t.string "role",     default: "user", null: false
   end
 
 end

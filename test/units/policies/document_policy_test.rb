@@ -3,8 +3,24 @@ require "test_helper"
 class DocumentPolicyTest < ActiveSupport::TestCase
   include Remets::PolicyAssertions
 
+  test "#index? is true when an admin" do
+    assert_permit(users(:pierre), Document.all, :index)
+  end
+
+  test "#index? is false when a user" do
+    refute_permit(users(:gaston), Document.all, :index)
+  end
+
+  test "#index? is false when not authenticated" do
+    refute_permit(nil, Document.all, :index)
+  end
+
   test "#show? is true when an admin" do
-    assert_permit(User.new(email: "maxim3.bedard@gmail.com"), documents(:platypus), :show)
+    assert_permit(users(:pierre), documents(:platypus), :show)
+  end
+
+  test "#show? is false when not authenticated" do
+    refute_permit(nil, documents(:platypus), :show)
   end
 
   test "#show? is true when the owner of the document" do
@@ -20,7 +36,11 @@ class DocumentPolicyTest < ActiveSupport::TestCase
   end
 
   test "#download? is true when an admin" do
-    assert_permit(User.new(email: "maxim3.bedard@gmail.com"), documents(:platypus), :download)
+    assert_permit(users(:pierre), documents(:platypus), :download)
+  end
+
+  test "#download? is false when not authenticated" do
+    refute_permit(nil, documents(:platypus), :download)
   end
 
   test "#download? is true when the owner of the document" do

@@ -1,17 +1,23 @@
 class DocumentPolicy < ApplicationPolicy
   def index?
-    admin?
+    authenticated? && admin?
   end
 
   def show?
-    admin? || owner? || handover_creator?
+    authenticated? && (admin? || owner? || handover_creator?)
   end
 
   def download?
-    admin? || owner? || handover_creator?
+    authenticated? && (admin? || owner? || handover_creator?)
   end
 
   private
+
+  delegate :admin?, to: :user
+
+  def authenticated?
+    !user.nil?
+  end
 
   def owner?
     record.documentable.user == user
