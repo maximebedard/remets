@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   validates :name, :email, :uid, :provider, :role, presence: true
   validates :role, inclusion: { in: ROLES }
+  validates :email, uniqueness: true
 
   def self.from_omniauth(auth)
     where(provider: auth["provider"], uid: auth["uid"]).first_or_create do |user|
