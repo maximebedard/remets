@@ -1,8 +1,13 @@
 namespace :users do
-  task :promote do
-    role = ENV["ROLE"] || "user"
+  AVAILABLE_ROLES = %w(user admin)
+
+  task promote: :environment do
+    role = ENV["ROLE"] || "admin"
     email = ENV["EMAIL"] || raise("EMAIL must be specified")
 
-    User.find_by!(email: email).update!(role: role)
+    raise("ROLE must be #{AVAILABLE_ROLES.join(',')}") unless AVAILABLE_ROLES.include?(role)
+    raise("User with email #{email} does not exists.") unless user = User.find_by(email: email)
+
+    user.update!(role: role)
   end
 end
