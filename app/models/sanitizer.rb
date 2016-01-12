@@ -3,10 +3,6 @@ class Sanitizer
     attr_accessor :supported_extensions
     attr_reader :available_sanitizers
 
-    def inherited(subclass)
-      available_sanitizers << subclass
-    end
-
     def can_be_sanitized?(ext)
       available_sanitizers.flat_map(&:supported_extensions).include?(ext)
     end
@@ -22,7 +18,13 @@ class Sanitizer
     end
   end
 
-  @available_sanitizers = []
+  @available_sanitizers = [
+    Sanitizers::DocSanitizer,
+    Sanitizers::DocxSanitizer,
+    Sanitizers::HtmlSanitizer,
+    Sanitizers::PdfSanitizer,
+    Sanitizers::TextSanitizer,
+  ]
 
   attr_reader :content,
     :options
