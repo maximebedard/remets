@@ -13,21 +13,21 @@ class DocumentIndexingJob < ActiveJob::Base
   #
   #  # Upload document 2 => 2 matches
   #  perform(2) # => nil
-  #  # reference_id | compared_id | match_id
-  #  # -------------+-------------+----------
-  #  #            1 |           2 |        1
-  #  #            2 |           1 |        1
+  #  # reference_id | compared_id | fingerprints | similarity
+  #  # -------------+-------------+--------------+-----------
+  #  #            1 |           2 |          [a] |         s
+  #  #            2 |           1 |          [a] |         s
   #
   #  # Upload document 3 => 6 matches
   #  perform(3) # => nil
-  #  # reference_id | compared_id | match_id
-  #  # -------------+-------------+----------
-  #  #            1 |           2 |        1
-  #  #            2 |           1 |        1
-  #  #            3 |           1 |        2
-  #  #            3 |           2 |        2
-  #  #            1 |           3 |        2
-  #  #            2 |           3 |        2
+  #  # reference_id | compared_id | fingerprints | similarity
+  #  # -------------+-------------+--------------+-----------
+  #  #            1 |           2 |          [a] |         s
+  #  #            2 |           1 |          [a] |         s
+  #  #            3 |           1 |          [b] |         s
+  #  #            3 |           2 |          [c] |         s
+  #  #            1 |           3 |          [b] |         s
+  #  #            2 |           3 |          [c] |         s
   #
   # Notes: This is pretty bad because it's in O((n-1)!). A way to improve it would be to add matches using and
   # querying using the following query: SELECT * FROM document_matches where reference_document_id = ?
