@@ -12,13 +12,6 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
     end
   end
 
-  test "#perform add matches for n-1 documents fingerprinted" do
-    Document.update_all(fingerprints: [1234])
-    assert_difference("Match.count", Document.count - 1) do
-      DocumentIndexingJob.perform_now(documents(:platypus).id)
-    end
-  end
-
   test "#perform does nothing when no documents are fingerprinted" do
     assert_no_difference("DocumentMatch.count") do
       DocumentIndexingJob.perform_now(documents(:platypus).id)
@@ -26,24 +19,23 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
   end
 
   test "#perform add a match with the intersection of fingerprints" do
-    [Document, DocumentMatch, Match].each(&:destroy_all)
+    [Document, DocumentMatch].each(&:destroy_all)
 
     reference = Document.create!(file_ptr: empty_file_upload, windows: [[0, 1234], [1, 9876], [4, 5678]])
     compared = Document.create!(file_ptr: empty_file_upload, windows: [[0, 1234], [1, 3456], [4, 6666]])
 
     assert_difference("DocumentMatch.count", 2) do
-      assert_difference("Match.count") do
-        DocumentIndexingJob.perform_now(reference.id)
-      end
+      DocumentIndexingJob.perform_now(reference.id)
     end
+
     match1 = DocumentMatch.first
     match2 = DocumentMatch.second
 
-    assert_equal [1234], match1.match.fingerprints
+    assert_equal [1234], match1.fingerprints
     assert_equal reference, match1.reference_document
     assert_equal compared, match1.compared_document
 
-    assert_equal [1234], match2.match.fingerprints
+    assert_equal [1234], match2.fingerprints
     assert_equal compared, match2.reference_document
     assert_equal reference, match2.compared_document
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103173113) do
+ActiveRecord::Schema.define(version: 20150926225705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20160103173113) do
   create_table "document_matches", force: :cascade do |t|
     t.integer  "reference_document_id"
     t.integer  "compared_document_id"
-    t.integer  "match_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "fingerprints",          default: [], null: false, array: true
+    t.float    "similarity"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "documents", force: :cascade do |t|
@@ -33,8 +34,8 @@ ActiveRecord::Schema.define(version: 20160103173113) do
     t.integer  "fingerprints",       default: [], null: false, array: true
     t.integer  "indexes",            default: [], null: false, array: true
     t.datetime "fingerprinted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "documents", ["documentable_type", "documentable_id"], name: "index_documents_on_documentable_type_and_documentable_id", using: :btree
@@ -43,12 +44,8 @@ ActiveRecord::Schema.define(version: 20160103173113) do
   create_table "handovers", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "matches", force: :cascade do |t|
-    t.integer "fingerprints", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -60,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160103173113) do
     t.string "uid"
     t.string "provider"
     t.string "name"
-    t.string "email"
+    t.string "email",                     null: false
     t.string "role",     default: "user", null: false
   end
 

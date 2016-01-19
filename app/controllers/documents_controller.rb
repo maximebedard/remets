@@ -6,6 +6,8 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
+    @relevant_matches = DocumentMatch.relevant_matches(@document)
+
     authorize(@document)
   end
 

@@ -3,8 +3,9 @@ class CreateDocumentMatch < ActiveRecord::Migration
     create_table :document_matches do |t|
       t.integer :reference_document_id
       t.integer :compared_document_id
-      t.integer :match_id
-      t.timestamps
+      t.integer :fingerprints, array: true, default: [], null: false
+      t.float :similarity
+      t.timestamps null: false
     end
   end
 end
