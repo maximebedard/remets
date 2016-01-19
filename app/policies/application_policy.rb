@@ -1,6 +1,9 @@
 class ApplicationPolicy
   attr_reader :user, :record
 
+  class NotAuthenticatedError < StandardError
+  end
+
   def initialize(user, record)
     @user = user
     @record = record
@@ -32,6 +35,14 @@ class ApplicationPolicy
 
   def destroy?
     false
+  end
+
+  def authenticate!
+    raise NotAuthenticatedError unless authenticated?
+  end
+
+  def authenticated?
+    !user.nil?
   end
 
   def scope

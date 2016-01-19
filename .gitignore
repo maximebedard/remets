@@ -18,3 +18,5 @@
 /uploads
 /test/fixtures/uploads
 /coverage
+
+.byebug_history

@@ -41,4 +41,32 @@ class ApplicationPolicyTest < ActiveSupport::TestCase
   test "#scope" do
     assert_equal Document, @policy.scope
   end
+
+  test "#authenticated?" do
+    assert @policy.authenticated?
+  end
+
+  test "#authenticated? is false when the current user is nil" do
+    @policy = ApplicationPolicy.new(
+      nil,
+      documents(:platypus),
+    )
+
+    refute @policy.authenticated?
+  end
+
+  test "#authenticate!" do
+    assert_nil @policy.authenticate!
+  end
+
+  test "#authenticate! raises when the current user is nil" do
+    @policy = ApplicationPolicy.new(
+      nil,
+      documents(:platypus),
+    )
+
+    assert_raises(ApplicationPolicy::NotAuthenticatedError) do
+      @policy.authenticate!
+    end
+  end
 end
