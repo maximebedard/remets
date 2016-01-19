@@ -3,7 +3,7 @@ require Rails.root.join("test/support/fixture_upload_helper")
 
 namespace :cache do
   task purge: :environment do
-    [DocumentMatch, Match].each(&:destroy_all)
+    [DocumentMatch].each(&:destroy_all)
   end
 
   task build: :environment do

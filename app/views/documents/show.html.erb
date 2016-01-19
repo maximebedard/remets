@@ -18,7 +18,7 @@
 <h2>Relevant documents</h2>
 
 <ul>
-  <% DocumentMatch.relevant_matches(@document).each do |document_match| %>
-    <li><%= link_to "#{document_match.compared_document.file_original_name} (#{document_match.similarity})", download_document_path(document_match.compared_document) %></li>
+  <% @relevant_matches.each do |match| %>
+    <li><%= link_to "#{match.compared_document.file_original_name} (#{match.similarity})", download_document_path(match.compared_document) %></li>
   <% end %>
 </ul>
