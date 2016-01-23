@@ -30,13 +30,13 @@ class AuthenticationsControllerTest < ActionController::TestCase
 
   test "#failure" do
     get :failure
-    assert_response :ok
-    assert_equal "Something went wrong.", response.body
+    assert_redirected_to root_path
+    assert_equal "An error occured when authenticating with Google.", flash[:alert]
   end
 
   test "#destroy" do
     get :destroy
-    assert_redirected_to "/"
+    assert_redirected_to root_path
     assert_nil session[Remets::AUTH_SESSION_KEY]
   end
 end

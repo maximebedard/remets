@@ -20,35 +20,57 @@ class DocumentsControllerTest < ActionController::TestCase
     assert_response :ok
   end
 
+  test "#index" do
+    sign_in(users(:pierre))
+
+    get :index
+
+    assert_response :ok
+  end
+
+  test "#index is not authorized when signed out" do
+    sign_out
+
+    get :index
+    assert_redirected_to auth_authorize_path(:google, origin: documents_url)
+  end
+
   test "#download is not authorized when signed out" do
     sign_out
 
-    assert_raises(Pundit::NotAuthorizedError) do
-      get :download, id: @document.id, extension: @document.file.extension
-    end
+    params = { id: @document.id, extension: @document.file.extension }
+    get :download, params
+    assert_redirected_to auth_authorize_path(:google, origin: download_document_url(params))
   end
 
   test "#show is not authorized when signed out" do
     sign_out
 
-    assert_raises(Pundit::NotAuthorizedError) do
-      get :show, id: @document.id
-    end
+    params = { id: @document.id }
+    get :show, params
+    assert_redirected_to auth_authorize_path(:google, origin: document_url(params))
+  end
+
+  test "#index is not authorized when you are not an admin" do
+    get :index
+
+    assert_redirected_to root_path
+    assert_equal "You are not authorized to perform this action.", flash[:alert]
   end
 
   test "#download is not authorized when you are not the owner nor the creator of the handover" do
     sign_in(users(:marcel))
 
-    assert_raises(Pundit::NotAuthorizedError) do
-      get :download, id: @document.id, extension: @document.file.extension
-    end
+    get :download, id: @document.id, extension: @document.file.extension
+    assert_redirected_to root_path
+    assert_equal "You are not authorized to perform this action.", flash[:alert]
   end
 
   test "#show is not authorized when you are not the owner nor the creator of the handover" do
     sign_in(users(:marcel))
 
-    assert_raises(Pundit::NotAuthorizedError) do
-      get :show, id: @document.id
-    end
+    get :show, id: @document.id
+    assert_redirected_to root_path
+    assert_equal "You are not authorized to perform this action.", flash[:alert]
   end
 end
