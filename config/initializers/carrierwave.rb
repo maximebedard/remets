@@ -13,7 +13,6 @@ CarrierWave.configure do |config|
     config.root = "test/fixtures"
     config.storage = :file
   when Rails.env.production?
-    config.fog_provider = "fog/aws"
     config.storage = :fog
     config.fog_credentials = {
       provider: "AWS",
