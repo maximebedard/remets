@@ -14,6 +14,7 @@ module Remets
     config.assets.precompile = %w(manifest.js)
     config.autoload_paths += %W(
       #{config.root}/app/policies/concerns
+      #{config.root}/app/uploaders/concerns
     )
   end
 end
