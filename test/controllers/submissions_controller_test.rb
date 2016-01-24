@@ -1,7 +1,7 @@
 require "test_helper"
 
 class SubmissionsControllerTest < ActionController::TestCase
-  include Remets::DocumentFileUploadHelper
+  include Remets::SanitizedDocumentFileUploadHelper
 
   setup do
     @submission = submissions(:log121_lab1)

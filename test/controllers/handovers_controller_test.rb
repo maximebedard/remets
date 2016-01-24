@@ -1,7 +1,7 @@
 require "test_helper"
 
 class HandoversControllerTest < ActionController::TestCase
-  include Remets::DocumentFileUploadHelper
+  include Remets::SanitizedDocumentFileUploadHelper
 
   setup do
     @handover = handovers(:log121_lab1)

@@ -1,4 +1,4 @@
-class FileUploader < CarrierWave::Uploader::Base
+class SanitizedFileUploader < CarrierWave::Uploader::Base
   before :cache, :update_original_filename
 
   version :sanitized, if: :can_be_sanitized? do

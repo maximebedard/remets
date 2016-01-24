@@ -1,7 +1,7 @@
 require "test_helper"
 
 class SubmissionsTest < ActionDispatch::IntegrationTest
-  include Remets::DocumentFileUploadHelper
+  include Remets::SanitizedDocumentFileUploadHelper
 
   test "create a submission with a sanitizable document" do
     @file = sanitizable_file_upload

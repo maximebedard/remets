@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  mount_uploader :file_ptr, FileUploader
+  mount_uploader :file_ptr, SanitizedFileUploader
 
   belongs_to :documentable, polymorphic: true
 

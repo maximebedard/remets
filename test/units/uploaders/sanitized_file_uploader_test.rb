@@ -1,7 +1,7 @@
 require "test_helper"
 
-class FileUploaderTest < ActiveSupport::TestCase
-  include Remets::DocumentFileUploadHelper
+class SanitizedFileUploaderTest < ActiveSupport::TestCase
+  include Remets::SanitizedDocumentFileUploadHelper
 
   class FileUploaderModel
     attr_accessor :file_secure_token, :file_original_name
@@ -9,7 +9,7 @@ class FileUploaderTest < ActiveSupport::TestCase
 
   setup do
     @model = FileUploaderModel.new
-    @uploader = FileUploader.new(@model, :file_ptr)
+    @uploader = SanitizedFileUploader.new(@model, :file_ptr)
   end
 
   test "#filename uses a random hex" do
@@ -34,12 +34,12 @@ class FileUploaderTest < ActiveSupport::TestCase
   end
 
   test "#store_dir returns the upload dir scoped to the model" do
-    assert_equal "uploads/file_uploader_test/file_uploader_model",
+    assert_equal "uploads/sanitized_file_uploader_test/file_uploader_model",
       @uploader.store_dir
   end
 
   test "#cache_dir returns the upload temp dir scoped to the model" do
-    assert_equal "uploads/tmp/file_uploader_test/file_uploader_model",
+    assert_equal "uploads/tmp/sanitized_file_uploader_test/file_uploader_model",
       @uploader.cache_dir
   end
 

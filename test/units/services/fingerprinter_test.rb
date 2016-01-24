@@ -49,7 +49,7 @@ module FingerprinterTests
 end
 
 class SubmissionFingerprinterTest < ActiveSupport::TestCase
-  include Remets::DocumentFileUploadHelper
+  include Remets::SanitizedDocumentFileUploadHelper
   include FingerprinterTests
 
   setup do
@@ -58,7 +58,7 @@ class SubmissionFingerprinterTest < ActiveSupport::TestCase
 end
 
 class HandoverFingerprinterTest < ActiveSupport::TestCase
-  include Remets::DocumentFileUploadHelper
+  include Remets::SanitizedDocumentFileUploadHelper
   include FingerprinterTests
 
   setup do

@@ -1,7 +1,7 @@
 require "test_helper"
 
 class DocumentIndexingJobTest < ActiveSupport::TestCase
-  include Remets::DocumentFileUploadHelper
+  include Remets::SanitizedDocumentFileUploadHelper
 
   self.use_transactional_fixtures = true
 

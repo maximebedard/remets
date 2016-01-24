@@ -1,5 +1,5 @@
 module Remets
-  module DocumentFileUploadHelper
+  module SanitizedDocumentFileUploadHelper
     def sanitizable_file_upload
       fixture_file_upload("files/documents/text_document1.txt")
     end
