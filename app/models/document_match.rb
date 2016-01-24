@@ -1,11 +1,12 @@
 class DocumentMatch < ActiveRecord::Base
   belongs_to :reference_document, class_name: Document
   belongs_to :compared_document, class_name: Document
+  belongs_to :match
 
   validates(
     :reference_document_id,
     :compared_document_id,
-    :fingerprints,
+    :match_id,
     :similarity,
     presence: true,
   )
@@ -24,17 +25,19 @@ class DocumentMatch < ActiveRecord::Base
     fingerprints = reference.fingerprints & compared.fingerprints
     return unless fingerprints.present?
 
+    match = Match.create!(fingerprints: fingerprints)
+
     [
       create!(
         reference_document: reference,
         compared_document: compared,
-        fingerprints: fingerprints, # this makes me sad :(
+        match: match,
         similarity: fingerprints.size.to_f / compared.fingerprints.size,
       ),
       create!(
         reference_document: compared,
         compared_document: reference,
-        fingerprints: fingerprints, # this makes me sad :(
+        match: match,
         similarity: fingerprints.size.to_f / reference.fingerprints.size,
       ),
     ]
