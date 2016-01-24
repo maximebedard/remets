@@ -1,5 +1,5 @@
 namespace :users do
-  AVAILABLE_ROLES = %w(user admin)
+  AVAILABLE_ROLES = %w(user admin).freeze
 
   task promote: :environment do
     role = ENV["ROLE"] || "admin"

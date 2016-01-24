@@ -7,7 +7,7 @@ module LogWithBinaryTruncate
   protected
 
   TRUNCATE_LENGTH = 100
-  TRUNCATE_COLUMNS = %w(indexes fingerprints)
+  TRUNCATE_COLUMNS = %w(indexes fingerprints).freeze
 
   def log(sql, name = "SQL", binds = [], statement_name = nil, &block)
     b = binds.map do |k, v|

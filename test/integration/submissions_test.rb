@@ -59,7 +59,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   def submit(files: [])
     perform_enqueued_jobs do
       post "/submissions", submission: {
-        documents_attributes: files.map { |f| { file_ptr: f } }
+        documents_attributes: files.map { |f| { file_ptr: f } },
       }
       @submission = Submission.last
     end

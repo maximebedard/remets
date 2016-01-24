@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  ADMIN_ROLE, USER_ROLE = %w(admin user).map(&:freeze)
-  ROLES = [ADMIN_ROLE, USER_ROLE].freeze
+  ADMIN_ROLE = "admin".freeze
+  USER_ROLE = "user".freeze
+  ROLES = [USER_ROLE, ADMIN_ROLE].freeze
 
   validates :name, :email, :uid, :provider, :role, presence: true
   validates :role, inclusion: { in: ROLES }

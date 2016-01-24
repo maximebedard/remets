@@ -2,9 +2,9 @@ require "test_helper"
 
 class WinnowerTest < ActiveSupport::TestCase
   test "#windows_from_tokens" do
-    windows = Winnower.windows_from_tokens([
-      [0, "h"], [1, "e"], [2, "l"], [3, "l"], [4, "o"]
-    ])
+    windows = Winnower.windows_from_tokens(
+      [[0, "h"], [1, "e"], [2, "l"], [3, "l"], [4, "o"]],
+    )
 
     assert_equal Set.new([[0, 17229]]),
       windows
