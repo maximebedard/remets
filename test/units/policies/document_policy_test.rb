@@ -17,7 +17,7 @@ class DocumentPolicyTest < ActiveSupport::TestCase
     refute_permit(users(:gaston), Document.all, :index)
   end
 
-  test "#index? is false when not authenticated" do
+  test "#index? raises when not authenticated" do
     assert_permit_raises(nil, Document.all, :index, ApplicationPolicy::NotAuthenticatedError)
   end
 
@@ -25,7 +25,7 @@ class DocumentPolicyTest < ActiveSupport::TestCase
     assert_permit(users(:pierre), documents(:platypus), :show)
   end
 
-  test "#show? is false when not authenticated" do
+  test "#show? raises when not authenticated" do
     assert_permit_raises(nil, documents(:platypus), :show, ApplicationPolicy::NotAuthenticatedError)
   end
 
@@ -45,7 +45,7 @@ class DocumentPolicyTest < ActiveSupport::TestCase
     assert_permit(users(:pierre), documents(:platypus), :download)
   end
 
-  test "#download? is false when not authenticated" do
+  test "#download? raises when not authenticated" do
     assert_permit_raises(nil, documents(:platypus), :download, ApplicationPolicy::NotAuthenticatedError)
   end
 
