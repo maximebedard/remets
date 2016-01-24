@@ -1,8 +1,5 @@
 class DocumentPolicy < ApplicationPolicy
-  def initialize(*)
-    super
-    authenticate!
-  end
+  include MustBeAuthenticated
 
   def index?
     admin?

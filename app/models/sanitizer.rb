@@ -38,7 +38,7 @@ class Sanitizer
     sanitize.downcase
   end
 
-  protected
+  private
 
   def sanitize
     raise NotImplementedError
