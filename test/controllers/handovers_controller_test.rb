@@ -27,7 +27,8 @@ class HandoversControllerTest < ActionController::TestCase
       :update,
       id: @handover.id,
       handover: {
-        name: "pants",
+        title: "pants",
+        reference_documents_attributes: [{ file_ptr: file }],
         documents_attributes: [{ file_ptr: file }],
       },
     )
@@ -46,10 +47,9 @@ class HandoversControllerTest < ActionController::TestCase
     post(
       :create,
       handover: {
-        name: "pants",
-        documents_attributes: [
-          { file_ptr: file },
-        ],
+        title: "pants",
+        reference_documents_attributes: [{ file_ptr: file }],
+        documents_attributes: [{ file_ptr: file }],
       },
     )
     assert_redirected_to assigns(:handover)

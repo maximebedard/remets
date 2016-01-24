@@ -36,6 +36,11 @@ class HandoversController < ApplicationController
 
   def handover_params
     params.require(:handover)
-      .permit(:name, documents_attributes: [:file_ptr])
+      .permit(
+        :title,
+        :description,
+        reference_documents_attributes: [:file_ptr],
+        documents_attributes: [:file_ptr],
+      )
   end
 end
