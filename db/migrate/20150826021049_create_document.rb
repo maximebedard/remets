@@ -1,7 +1,7 @@
 class CreateDocument < ActiveRecord::Migration
   def change
     create_table :documents do |t|
-      t.references :submission
+      t.integer :submission_id
       t.string :file_ptr
       t.string :file_secure_token
       t.string :file_original_name

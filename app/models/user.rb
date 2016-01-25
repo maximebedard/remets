@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   USER_ROLE = "user".freeze
   ROLES = [USER_ROLE, ADMIN_ROLE].freeze
 
+  has_many :organizations, through: :user_organizations
+
   validates :name, :email, :uid, :provider, :role, presence: true
   validates :role, inclusion: { in: ROLES }
   validates :email, uniqueness: true
