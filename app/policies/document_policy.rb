@@ -18,13 +18,10 @@ class DocumentPolicy < ApplicationPolicy
   delegate :admin?, to: :user
 
   def owner?
-    record.documentable.user == user
+    record.submission.user == user
   end
 
   def handover_creator?
-    return true unless record.documentable.is_a?(Submission)
-
-    submission = record.documentable
-    submission.handover.user == user
+    record.submission.handover.user == user
   end
 end

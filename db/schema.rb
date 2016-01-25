@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124041704) do
+ActiveRecord::Schema.define(version: 20160125000200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "boilerplate_documents", force: :cascade do |t|
+    t.integer  "handover_id"
+    t.string   "file_ptr"
+    t.string   "file_secure_token"
+    t.string   "file_original_name"
+    t.integer  "fingerprints",       default: [], null: false, array: true
+    t.integer  "indexes",            default: [], null: false, array: true
+    t.datetime "fingerprinted_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "boilerplate_documents", ["fingerprints"], name: "index_boilerplate_documents_on_fingerprints", using: :gin
 
   create_table "document_matches", force: :cascade do |t|
     t.integer  "reference_document_id"
@@ -26,8 +40,7 @@ ActiveRecord::Schema.define(version: 20160124041704) do
   end
 
   create_table "documents", force: :cascade do |t|
-    t.integer  "documentable_id"
-    t.string   "documentable_type"
+    t.integer  "submission_id"
     t.string   "file_ptr"
     t.string   "file_secure_token"
     t.string   "file_original_name"
@@ -38,7 +51,6 @@ ActiveRecord::Schema.define(version: 20160124041704) do
     t.datetime "updated_at",                      null: false
   end
 
-  add_index "documents", ["documentable_type", "documentable_id"], name: "index_documents_on_documentable_type_and_documentable_id", using: :btree
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
 
   create_table "handovers", force: :cascade do |t|

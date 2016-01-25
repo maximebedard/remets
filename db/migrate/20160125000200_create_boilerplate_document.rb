@@ -1,7 +1,7 @@
-class CreateDocument < ActiveRecord::Migration
+class CreateBoilerplateDocument < ActiveRecord::Migration
   def change
-    create_table :documents do |t|
-      t.references :submission
+    create_table :boilerplate_documents do |t|
+      t.references :handover
       t.string :file_ptr
       t.string :file_secure_token
       t.string :file_original_name
@@ -11,6 +11,6 @@ class CreateDocument < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :documents, :fingerprints, using: "gin"
+    add_index :boilerplate_documents, :fingerprints, using: "gin"
   end
 end
