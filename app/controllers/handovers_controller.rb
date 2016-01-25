@@ -40,7 +40,7 @@ class HandoversController < ApplicationController
         :title,
         :description,
         reference_documents_attributes: [:file_ptr],
-        documents_attributes: [:file_ptr],
+        boilerplate_documents_attributes: [:file_ptr],
       )
   end
 end
