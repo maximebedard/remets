@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   ROLES = [USER_ROLE, ADMIN_ROLE].freeze
 
   has_many :organizations, through: :user_organizations
+  has_many :submissions
+  has_many :handovers
 
   validates :name, :email, :uid, :provider, :role, presence: true
   validates :role, inclusion: { in: ROLES }
