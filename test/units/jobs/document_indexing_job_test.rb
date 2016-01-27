@@ -57,6 +57,21 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
     end
   end
 
+  test "#perform delete previous matches" do
+    DocumentMatch.create!(
+      reference_document: documents(:platypus),
+      compared_document: documents(:fraudulent_platypus),
+      match: Match.create!(fingerprints: [1234, 4567]),
+      similarity: 0.5,
+    )
+
+    Document.stubs(:all_fingerprinted_except).returns(Document.none)
+
+    assert_difference("DocumentMatch.count", -1) do
+      DocumentIndexingJob.perform_now(documents(:platypus).id)
+    end
+  end
+
   test "#perform raises when the document no longer exists" do
     assert_raises ActiveRecord::RecordNotFound do
       DocumentIndexingJob.perform_now(1337)

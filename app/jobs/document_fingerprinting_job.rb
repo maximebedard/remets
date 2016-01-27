@@ -8,7 +8,6 @@ class DocumentFingerprintingJob < ActiveJob::Base
     return unless windows.present?
 
     update(document, windows)
-    index(document)
   end
 
   def update(document, windows)
@@ -16,9 +15,5 @@ class DocumentFingerprintingJob < ActiveJob::Base
       windows: windows,
       fingerprinted_at: Time.zone.now,
     )
-  end
-
-  def index(document)
-    DocumentIndexingJob.perform_later(document.id)
   end
 end
