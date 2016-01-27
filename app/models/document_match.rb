@@ -22,23 +22,20 @@ class DocumentMatch < ActiveRecord::Base
   }
 
   def self.create_from!(reference, compared)
-    fingerprints = reference.fingerprints & compared.fingerprints
-    return unless fingerprints.present?
-
-    match = Match.create!(fingerprints: fingerprints)
+    return unless match = Matcher.new(reference, compared).call
 
     [
       create!(
         reference_document: reference,
         compared_document: compared,
         match: match,
-        similarity: fingerprints.size.to_f / compared.fingerprints.size,
+        similarity: match.fingerprints.size.to_f / compared.fingerprints.size,
       ),
       create!(
         reference_document: compared,
         compared_document: reference,
         match: match,
-        similarity: fingerprints.size.to_f / reference.fingerprints.size,
+        similarity: match.fingerprints.size.to_f / reference.fingerprints.size,
       ),
     ]
   end
