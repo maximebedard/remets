@@ -34,6 +34,7 @@ class DocumentIndexingJob < ActiveJob::Base
   # OR compared_document_id = ? ORDER BY array_length(fingerprints, 1) DESC
   def perform(document_id)
     reference = Document.find(document_id)
+    reference.document_matches.destroy_all
 
     Document.all_fingerprinted_except(reference).find_each do |compared|
       DocumentMatch.create_from!(reference, compared)
