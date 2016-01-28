@@ -15,11 +15,11 @@ function newDropzone(props) {
         this.processQueue();
       });
 
-      this.on("addedfile", function() {
+      this.on("addedfile", () => {
         console.log('file added');
       });
 
-      this.on('sendingmultiple', function() {
+      this.on('sendingmultiple', () => {
         // Gets triggered when the form is actually being sent.
         let deleteButtons = this.element.querySelectorAll('[data-dz-remove]');
         for (let i = 0; i < deleteButtons.length; i++) {
