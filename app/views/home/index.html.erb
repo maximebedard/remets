@@ -1,31 +1,75 @@
-<main class="showcase">
-  <div class="showcase-flex container">
-    <div class="content text-center">
-      <h1>Remets</h1>
-      <p>Handing off papers has never been easier.</p>
-      <% if signed_in? %>
-        <%= link_to 'Sign out', auth_destroy_path %>
-      <% else %>
-        <%= link_to 'Sign in from Google', auth_authorize_path(:google), class: "btn btn-default btn-lg" %>
-      <% end %>
+<div class="container showcase-image">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= image_tag("splash_page.png", class: "img-responsive img-rounded",
+        style: "margin:0 auto; max-width: 500px", alt: "Replace me please") %>
     </div>
   </div>
-</main>
-<div class="featurette container">
-  <h1>Feature 1</h1>
-  <p>
-    Jujubes cake pastry oat cake liquorice. Marzipan toffee apple pie donut pudding. Oat cake apple pie sweet bonbon. Cookie sesame snaps dragée pie candy fruitcake jelly topping. Tiramisu macaroon candy canes biscuit. Chocolate cake dragée bonbon. Jelly-o bear claw wafer marshmallow carrot cake sugar plum donut carrot cake. Dessert sweet roll wafer soufflé cotton candy. Lemon drops pudding marzipan macaroon. Muffin gummies fruitcake ice cream cotton candy cheesecake halvah wafer wafer. Cotton candy powder lollipop jujubes sweet. Brownie cake lollipop. Croissant pudding tiramisu.
-  </p>
 </div>
-<div class="featurette container">
-  <h1>Feature 2</h1>
-  <p>
-    Jujubes cake pastry oat cake liquorice. Marzipan toffee apple pie donut pudding. Oat cake apple pie sweet bonbon. Cookie sesame snaps dragée pie candy fruitcake jelly topping. Tiramisu macaroon candy canes biscuit. Chocolate cake dragée bonbon. Jelly-o bear claw wafer marshmallow carrot cake sugar plum donut carrot cake. Dessert sweet roll wafer soufflé cotton candy. Lemon drops pudding marzipan macaroon. Muffin gummies fruitcake ice cream cotton candy cheesecake halvah wafer wafer. Cotton candy powder lollipop jujubes sweet. Brownie cake lollipop. Croissant pudding tiramisu.
-  </p>
-</div>
-<div class="featurette container">
-  <h1>Feature 3</h1>
-  <p>
-    Jujubes cake pastry oat cake liquorice. Marzipan toffee apple pie donut pudding. Oat cake apple pie sweet bonbon. Cookie sesame snaps dragée pie candy fruitcake jelly topping. Tiramisu macaroon candy canes biscuit. Chocolate cake dragée bonbon. Jelly-o bear claw wafer marshmallow carrot cake sugar plum donut carrot cake. Dessert sweet roll wafer soufflé cotton candy. Lemon drops pudding marzipan macaroon. Muffin gummies fruitcake ice cream cotton candy cheesecake halvah wafer wafer. Cotton candy powder lollipop jujubes sweet. Brownie cake lollipop. Croissant pudding tiramisu.
-  </p>
+<div class="container">
+  <!-- Blurbl + Login -->
+  <section class="row">
+    <div class="col-lg-6">
+      <h1>Smartastic Document handing!</h1>
+      <h3>Easily create assignments, automagically detect plagiarism and much more!</h3>
+    </div>
+    <div class="col-lg-6">
+      <div class="showcase-signup-zone">
+        <form>
+          <div class="form-group">
+            <input type="email" class="form-control" id="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-6">
+                 <input type="text" class="form-control" id="fullname" placeholder="Full Name">
+              </div>
+              <div class="col-lg-6">
+                <input type="password" class="form-control" id="password" placeholder="Password">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-large btn-primary form-control">Register for free!</button>
+        </form>
+        <div class="line-behind-text"><span class="line-behind-text__text">or</span></div>
+        <%= link_to 'Sign-up with Google!', auth_authorize_path(:google),
+          class: "btn btn-large btn-success form-control" %>
+      </div>
+    </div>
+  </section>
+  <!-- Featurettes! -->
+  <div class="line-behind-text line-behind-section"><span class="line-behind-text__text">Features</span></div>
+  <section class="row">
+    <div class="col-lg-6">
+      <h1>Feature 1</h1>
+        <p>
+          Jujubes cake pastry oat cake liquorice. Marzipan toffee apple pie donut pudding. Oat cake apple pie sweet bonbon. Cookie sesame snaps dragée pie candy fruitcake jelly topping. Tiramisu macaroon candy canes biscuit. Chocolate cake dragée bonbon. Jelly-o bear claw wafer marshmallow carrot cake sugar plum donut carrot cake. Dessert sweet roll wafer soufflé cotton candy. Lemon drops pudding marzipan macaroon. Muffin gummies fruitcake ice cream cotton candy cheesecake halvah wafer wafer. Cotton candy powder lollipop jujubes sweet. Brownie cake lollipop. Croissant pudding tiramisu.
+        </p>
+    </div>
+    <div class="col-lg-6">
+      <!-- INSERT IMAGE HERE -->
+    </div>
+  </section>
+  <section class="row">
+    <div class="col-lg-6">
+      <!-- INSERT IMAGE HERE -->
+    </div>
+    <div class="col-lg-6">
+      <h1>Feature 2</h1>
+        <p>
+          Jujubes cake pastry oat cake liquorice. Marzipan toffee apple pie donut pudding. Oat cake apple pie sweet bonbon. Cookie sesame snaps dragée pie candy fruitcake jelly topping. Tiramisu macaroon candy canes biscuit. Chocolate cake dragée bonbon. Jelly-o bear claw wafer marshmallow carrot cake sugar plum donut carrot cake. Dessert sweet roll wafer soufflé cotton candy. Lemon drops pudding marzipan macaroon. Muffin gummies fruitcake ice cream cotton candy cheesecake halvah wafer wafer. Cotton candy powder lollipop jujubes sweet. Brownie cake lollipop. Croissant pudding tiramisu.
+        </p>
+    </div>
+  </section>
+  <section class="row">
+    <div class="col-lg-6">
+      <h1>Feature 3</h1>
+        <p>
+          Jujubes cake pastry oat cake liquorice. Marzipan toffee apple pie donut pudding. Oat cake apple pie sweet bonbon. Cookie sesame snaps dragée pie candy fruitcake jelly topping. Tiramisu macaroon candy canes biscuit. Chocolate cake dragée bonbon. Jelly-o bear claw wafer marshmallow carrot cake sugar plum donut carrot cake. Dessert sweet roll wafer soufflé cotton candy. Lemon drops pudding marzipan macaroon. Muffin gummies fruitcake ice cream cotton candy cheesecake halvah wafer wafer. Cotton candy powder lollipop jujubes sweet. Brownie cake lollipop. Croissant pudding tiramisu.
+        </p>
+    </div>
+    <div class="col-lg-6">
+      <!-- INSERT IMAGE HERE -->
+    </div>
+  </section>
 </div>

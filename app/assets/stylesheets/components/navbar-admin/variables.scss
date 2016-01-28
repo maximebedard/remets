@@ -1,0 +1,23 @@
+//=== Admin navbar
+$navbar-admin-color:                      #4c4c4c !default;
+$navbar-admin-bg:                         #F2F2F2 !default;
+$navbar-admin-border:                     transparent !default;
+
+$navbar-admin-link-color:                 lighten($gray-light, 15%) !default;
+$navbar-admin-link-hover-color:           #fff !default;
+$navbar-admin-link-hover-bg:              darken($navbar-admin-bg, 10%) !default;
+$navbar-admin-link-active-color:          $navbar-admin-link-hover-color !default;
+$navbar-admin-link-active-bg:             darken($navbar-admin-bg, 10%) !default;
+$navbar-admin-link-disabled-color:        #444 !default;
+$navbar-admin-link-disabled-bg:           transparent !default;
+
+$navbar-admin-brand-color:                $navbar-admin-link-color !default;
+$navbar-admin-brand-hover-color:          #fff !default;
+$navbar-admin-brand-hover-bg:             transparent !default;
+
+$navbar-admin-toggle-hover-bg:            #333 !default;
+$navbar-admin-toggle-icon-bar-bg:         #fff !default;
+$navbar-admin-toggle-border-color:        #333 !default;
+
+$navbar-admin-active-underline-size: -3px; //Negative values since we are using insets
+$navbar-admin-active-underline-color: darken($navbar-admin-link-hover-bg, 5%);

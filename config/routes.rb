@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   root "home#index"
 
+  get "/home", to: "dashboard#index"
+
   get "/auth/:provider", to: "authentications#passthru", as: :auth_authorize, constraints: { provider: /google/ }
   get "/auth/:provider/callback", to: "authentications#create", as: :auth_callback
   get "/auth/destroy", to: "authentications#destroy"

@@ -22,6 +22,7 @@ gem "jquery-rails"
 gem "turbolinks"
 gem "sprockets", ">=3.4.0"
 gem "sprockets-es6", require: "sprockets/es6"
+gem 'font-awesome-sass'
 
 group :development do
   gem "pry-byebug"
