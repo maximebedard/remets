@@ -5,7 +5,8 @@ class Matcher
   end
 
   def call
-    fingerprints = (reference.fingerprints & compared.fingerprints) - boilerplate_fingerprints
+    fingerprints = reference.fingerprints & compared.fingerprints
+    fingerprints -= boilerplate_fingerprints + same_submission_fingerprints
     return unless fingerprints.present?
 
     Match.create!(fingerprints: fingerprints)
@@ -16,6 +17,12 @@ class Matcher
   attr_reader :reference, :compared
 
   def boilerplate_fingerprints
-    reference.submission.handover.boilerplate_documents.pluck(:fingerprints).flatten
+    reference.submission.handover.boilerplate_documents
+      .pluck(:fingerprints).flatten
+  end
+
+  def same_submission_fingerprints
+    reference.submission.documents.all_fingerprinted_except(reference)
+      .pluck(:fingerprints).flatten
   end
 end

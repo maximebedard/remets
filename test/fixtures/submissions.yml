@@ -1,8 +1,12 @@
-log121_lab1:
+log121_lab1_1:
   handover: log121_lab1
   user: henry
 
-log240_lab1:
+log121_lab1_2:
+  handover: log121_lab1
+  user: marcel
+
+log240_lab1_1:
   handover: log240_lab1
   user: henry
 
@@ -12,8 +16,8 @@ log550_lab1_1:
 
 log550_lab1_2:
   handover: log550_lab1
-  user: henry
+  user: marcel
 
 log550_lab1_3:
   handover: log550_lab1
-  user: henry
+  user: pierre
