@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :document_matches, only: [:show]
 
   root "home#index"
+  get "/home", to: "home#home"
 
   get "/auth/:provider", to: "authentications#passthru", as: :auth_authorize, constraints: { provider: /google/ }
   get "/auth/:provider/callback", to: "authentications#create", as: :auth_callback

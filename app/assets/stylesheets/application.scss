@@ -1,11 +1,16 @@
 //Bootstrap overrides
-$brand-primary: #DC4D3B;
+@import "bootstrap-overrides";
 
 //Import bootstrap into our project
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+//Make things more awesome with font-awesome
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 //Import our custom components
 @import "showcase";
 @import "dropzone";
+@import "components/module";
 

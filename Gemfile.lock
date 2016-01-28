@@ -193,6 +193,8 @@ GEM
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-sass (4.5.0)
+      sass (>= 3.2)
     formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -361,6 +363,7 @@ DEPENDENCIES
   carrierwave
   codeclimate-test-reporter
   fog
+  font-awesome-sass
   jbuilder
   jquery-rails
   mocha
