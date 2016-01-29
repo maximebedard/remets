@@ -5,15 +5,6 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
 
   self.use_transactional_fixtures = true
 
-  test "#perform add document matches for (n - 1) * 2 documents fingerprinted" do
-    Document.update_all(fingerprints: [1234])
-    assert_difference("DocumentMatch.count", (Document.count - 1) * 2) do
-      assert_difference("Match.count", Document.count - 1) do
-        DocumentIndexingJob.perform_now(documents(:platypus).id)
-      end
-    end
-  end
-
   test "#perform does nothing when no documents are fingerprinted" do
     assert_no_difference("DocumentMatch.count", "Match.count") do
       DocumentIndexingJob.perform_now(documents(:platypus).id)
@@ -23,11 +14,11 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
   test "#perform add a match with the intersection of fingerprints" do
     [Document, DocumentMatch, Match].each(&:destroy_all)
 
-    reference = submissions(:log121_lab1).documents.create!(
+    reference = submissions(:log121_lab1_1).documents.create!(
       file_ptr: empty_file_upload,
       windows: [[0, 1234], [1, 9876], [4, 5678]],
     )
-    compared = submissions(:log121_lab1).documents.create!(
+    compared = submissions(:log121_lab1_2).documents.create!(
       file_ptr: empty_file_upload,
       windows: [[0, 1234], [1, 3456], [4, 6666]],
     )
@@ -54,12 +45,13 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
   end
 
   test "#perform does not add a match when the intersection is empty" do
-    Document.destroy_all
-    reference = submissions(:log121_lab1).documents.create!(
+    [Document, DocumentMatch, Match].each(&:destroy_all)
+
+    reference = submissions(:log121_lab1_1).documents.create!(
       file_ptr: empty_file_upload,
       windows: [[0, 1234], [1, 9876], [4, 5678]],
     )
-    _compared = submissions(:log121_lab1).documents.create!(
+    _compared = submissions(:log121_lab1_2).documents.create!(
       file_ptr: empty_file_upload,
       windows: [[0, 4321], [1, 3456], [4, 6666]],
     )

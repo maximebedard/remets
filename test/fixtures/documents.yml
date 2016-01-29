@@ -1,29 +1,29 @@
 bragging:
-  submission: log121_lab1
+  submission: log121_lab1_1
   <%= document_upload_yaml("text_document1.txt") %>
 
 fraudulent_bragging:
-  submission: log121_lab1
+  submission: log121_lab1_2
   <%= document_upload_yaml("text_document2.txt") %>
 
 empty:
-  submission: log121_lab1
+  submission: log121_lab1_1
   <%= document_upload_yaml("empty.txt") %>
 
 platypus:
-  submission: log121_lab1
+  submission: log121_lab1_1
   <%= document_upload_yaml("platypus1.txt") %>
 
 fraudulent_platypus:
-  submission: log121_lab1
+  submission: log121_lab1_2
   <%= document_upload_yaml("platypus2.txt") %>
 
 platypus_image:
-  submission: log121_lab1
+  submission: log121_lab1_1
   <%= document_upload_yaml("platypus.jpg") %>
 
 platypus_with_no_extension:
-  submission: log121_lab1
+  submission: log121_lab1_1
   <%= document_upload_yaml("platypus") %>
 
 recursive_fibonacci:

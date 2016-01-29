@@ -4,7 +4,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   include Remets::SanitizedDocumentFileUploadHelper
 
   setup do
-    @submission = submissions(:log121_lab1)
+    @submission = submissions(:log121_lab1_1)
   end
 
   test "#index" do
