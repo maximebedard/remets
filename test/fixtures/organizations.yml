@@ -1,2 +1,7 @@
 ets:
+  name: "École de technologie supérieure"
+  user: gaston
+
+ulaval:
+  name: "Université Laval"
   user: gaston
