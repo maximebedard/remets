@@ -1,5 +1,5 @@
 module Remets
-  module FixtureUploadHelper
+  module FixturesHelper
     def document_upload_yaml(basename)
       uploader = upload(Document, basename)
 
@@ -8,6 +8,10 @@ module Remets
           file_original_name: #{uploader.model.file_original_name}
           file_secure_token: #{uploader.model.file_secure_token}
       YAML
+    end
+
+    def password(value = "password")
+      BCrypt::Password.create(value, cost: 4)
     end
 
     private
@@ -35,4 +39,4 @@ module Remets
   end
 end
 
-ActiveRecord::FixtureSet.context_class.include Remets::FixtureUploadHelper
+ActiveRecord::FixtureSet.context_class.include Remets::FixturesHelper

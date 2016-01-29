@@ -6,6 +6,7 @@ gem "pg"
 gem "puma"
 gem "sinatra", require: false
 gem "sidekiq"
+gem "bcrypt"
 
 gem "responders"
 gem "jbuilder"

@@ -1,25 +1,29 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-  get "home/index"
-
-  resources :submissions, except: [:destroy, :edit, :update]
-  resources :handovers, except: [:destroy]
-  resources :documents, only: [:show, :index] do
+  resources :submissions, only: [:index, :show, :new, :create]
+  resources :handovers, only: [:index, :show, :new, :create, :edit, :update]
+  resources :documents, only: [:index, :show] do
     member do
       get :download
     end
   end
   resources :document_matches, only: [:show]
+  resources :users, only: [:create]
+  resources :dashboard, only: [:index]
 
   root "home#index"
 
-  get "/home", to: "dashboard#index"
-
-  get "/auth/:provider", to: "authentications#passthru", as: :auth_authorize, constraints: { provider: /google/ }
-  get "/auth/:provider/callback", to: "authentications#create", as: :auth_callback
-  get "/auth/destroy", to: "authentications#destroy"
-  get "/auth/failure", to: "authentications#failure"
+  scope :auth, controller: :authentications, as: :auth do
+    oauth_constraints = { constraints: { provider: /google/ } }
+    get "/new", action: "new"
+    get "/", to: redirect("/auth/new"), as: :index
+    post "/", action: "create"
+    match "/destroy", action: "destroy", via: [:get, :post]
+    get "/:provider", action: "passthru", as: :authorize, **oauth_constraints
+    get "/:provider/callback", action: "callback", as: :callback, **oauth_constraints
+    get "/failure", action: "failure"
+  end
 
   mount Sidekiq::Web, at: "/workers"
 end
