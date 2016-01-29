@@ -6,7 +6,8 @@ class Matcher
 
   def call
     fingerprints = reference.fingerprints & compared.fingerprints
-    fingerprints -= boilerplate_fingerprints + same_submission_fingerprints
+    fingerprints -= boilerplate_fingerprints
+    fingerprints -= same_submission_fingerprints
     return unless fingerprints.present?
 
     Match.create!(fingerprints: fingerprints)
