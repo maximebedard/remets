@@ -25,11 +25,14 @@ gem "sprockets", ">=3.4.0"
 gem "sprockets-es6", require: "sprockets/es6"
 gem "font-awesome-sass"
 
+group :development, :test do
+  gem "rubocop", require: false
+end
+
 group :development do
   gem "pry-byebug"
   gem "better_errors"
   gem "binding_of_caller"
-  gem "rubocop", require: false
 end
 
 group :test do
