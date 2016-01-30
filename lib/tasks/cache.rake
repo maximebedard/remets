@@ -1,5 +1,5 @@
 require "active_record/fixtures"
-require Rails.root.join("test/support/fixture_upload_helper")
+require Rails.root.join("test/support/fixtures_helper")
 
 namespace :cache do
   task purge: :environment do

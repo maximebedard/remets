@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20160125013520) do
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.string  "name"
-    t.integer "user_id"
+    t.string  "name",    null: false
+    t.integer "user_id", null: false
   end
 
   create_table "reference_documents", force: :cascade do |t|
@@ -95,8 +95,10 @@ ActiveRecord::Schema.define(version: 20160125013520) do
     t.string "uid"
     t.string "provider"
     t.string "name"
-    t.string "email",                     null: false
-    t.string "role",     default: "user", null: false
+    t.string "password_digest",                  null: false
+    t.string "remember_digest"
+    t.string "email",                            null: false
+    t.string "role",            default: "user", null: false
   end
 
 end

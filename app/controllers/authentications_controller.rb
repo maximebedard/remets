@@ -1,13 +1,25 @@
 class AuthenticationsController < ApplicationController
+  def new
+  end
+
   def create
-    user = User.from_omniauth(request.env["omniauth.auth"])
-    self.current_user = user
-    redirect_to after_authenticated_path
+    @email = auth_params[:email]
+    if @user = User.from_auth(email: @email, password: auth_params[:password])
+      sign_in_and_redirect(dashboard_index_path)
+    else
+      flash.now[:alert] = "Email/Password combination does not match"
+      render "new"
+    end
+  end
+
+  def callback
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+    sign_in_and_redirect
   end
 
   def destroy
     self.current_user = nil
-    redirect_to root_path
+    redirect_to(root_path)
   end
 
   def failure
@@ -19,5 +31,14 @@ class AuthenticationsController < ApplicationController
 
   def after_authenticated_path
     request.env["omniauth.origin"] || session["omniauth.origin"] || root_path
+  end
+
+  def sign_in_and_redirect(path = after_authenticated_path)
+    self.current_user = @user
+    redirect_to(path)
+  end
+
+  def auth_params
+    params.require(:authentication).permit(:email, :password)
   end
 end

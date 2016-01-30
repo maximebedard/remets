@@ -1,0 +1,18 @@
+<%= form_for(:authentication, url: auth_path) do |f| %>
+  <div class="form-group">
+    <%= f.email_field :email, value: @email, class: "form-control", placeholder: "Email" %>
+  </div>
+  <div class="form-group">
+    <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+  </div>
+  <%= f.submit "Sign in!", class: "btn btn-large btn-primary form-control" %>
+<% end %>
+<div class="line-behind-text"><span class="line-behind-text__text">or</span></div>
+<div class="form-group">
+  <%= link_to "Register!", auth_authorize_path(:google),
+  class: "btn btn-large btn-info form-control" %>
+</div>
+<div class="form-group">
+  <%= link_to "Sign-up with Google!", auth_authorize_path(:google),
+  class: "btn btn-large btn-success form-control" %>
+</div>
