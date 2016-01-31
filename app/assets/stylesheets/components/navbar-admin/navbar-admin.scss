@@ -1,5 +1,9 @@
 @import "variables";
 
+.navbar-fixed-top ~ .container {
+  margin-top: 90px;
+}
+
 .navbar-admin {
   background-color: $navbar-admin-bg;
   border-color: $navbar-admin-border;

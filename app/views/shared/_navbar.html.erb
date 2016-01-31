@@ -12,8 +12,15 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
-        <li class="active"><a href="#">Handovers</a></li>
-        <li><a href="#">Submissions</a></li>
+        <%= render partial: "shared/nav_link",
+          locals: {cname: 'dashboard', label: 'Dashboard', link: dashboard_index_path} %>
+
+        <%= render partial: "shared/nav_link",
+          locals: {cname: 'handovers', label: 'Handovers', link: handovers_path} %>
+
+        <%= render partial: "shared/nav_link",
+          locals: {cname: 'submissions', label: 'Submissions', link: submissions_path} %>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Sign-in</a></li>
