@@ -12,14 +12,17 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
-        <%= render partial: "shared/nav_link",
-          locals: {cname: 'dashboard', label: 'Dashboard', link: dashboards_path} %>
+        <li class="<%= active_on_controller("dashboards") %>">
+          <%= link_to "Dashboard", dashboards_path %>
+        </li>
 
-        <%= render partial: "shared/nav_link",
-          locals: {cname: 'handovers', label: 'Handovers', link: handovers_path} %>
+        <li class="<%= active_on_controller("handovers") %>">
+          <%= link_to "Handovers", handovers_path %>
+        </li>
 
-        <%= render partial: "shared/nav_link",
-          locals: {cname: 'submissions', label: 'Submissions', link: submissions_path} %>
+        <li class="<%= active_on_controller("submissions") %>">
+          <%= link_to "Submissions", submissions_path %>
+        </li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
