@@ -31,7 +31,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
   test "#create with an existing user" do
     post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "password" }
     assert_equal session[Remets::AUTH_SESSION_KEY], users(:gaston).id
-    assert_redirected_to dashboard_index_path
+    assert_redirected_to dashboards_path
   end
 
   test "#create with an existing user but invalid password" do

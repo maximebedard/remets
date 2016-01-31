@@ -5,7 +5,7 @@ class AuthenticationsController < ApplicationController
   def create
     @email = auth_params[:email]
     if @user = User.from_auth(email: @email, password: auth_params[:password])
-      sign_in_and_redirect(dashboard_index_path)
+      sign_in_and_redirect(dashboards_path)
     else
       flash.now[:alert] = "Email/Password combination does not match"
       render "new"

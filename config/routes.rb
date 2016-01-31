@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   end
   resources :document_matches, only: [:show]
   resources :users, only: [:create]
-  resources :dashboard, only: [:index]
+  resources :dashboards, only: [:index]
+  resources :registrations, only: [:new, :create]
 
   root "home#index"
 
