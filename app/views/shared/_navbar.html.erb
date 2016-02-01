@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <!--todo : add logo here -->
-      <a class="navbar-brand" href="#">Remets</a>
+      <%= link_to "Remets", root_path, class: "navbar-brand" %>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
@@ -26,9 +26,14 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign-in</a></li>
+        <li class="<%= active_on_controller("authentications") %>">
+          <% if signed_in? %>
+            <%= link_to current_user.name, "#" %>
+          <% else %>
+            <%= link_to "Sign in", auth_new_path %>
+          <% end %>
+        </li>
       </ul>
-      <!-- todo : logged in user menu -->
-    </div><!--/.nav-collapse -->
+    </div>
   </div>
 </nav>
