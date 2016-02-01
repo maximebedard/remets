@@ -1,14 +1,15 @@
 <% record_klass = record.class.to_s.underscore %>
-<% param_name = "#{record_klass}[documents_attributes][][file_ptr]" %>
+<% param_name = "#{record_klass}[#{method}][][file_ptr]" %>
+<% dropzone_id = "new#{record_klass.camelize}#{method.to_s.camelize}" %>
 
-<div class="dz-default">
+<div class="dz-default" id="<%= dropzone_id.underscore.dasherize %>">
   <div class="dz-message">
     Drop files here or <span class='click-me'>click here</span> to upload.
   </div>
   <div class="dz-previews-container"></div>
   <div class="fallback">
-    <%= form.label :documents_attributes %>
-    <%= form.file_field :documents_attributes, multiple: true, name: param_name %>
+    <%= form.label method %>
+    <%= form.file_field method, multiple: true, name: param_name %>
   </div>
 </div>
 
@@ -16,8 +17,8 @@
 
 <%= content_for :scripts do %>
   <%= javascript_tag do %>
-    Dropzone.options.<%= "new#{record_klass.camelize}" %> = newDropzone({
-      paramName: "<%= record_klass %>[documents_attributes][][file_ptr]",
+    Dropzone.options.<%= dropzone_id %> = newDropzone({
+      paramName: "<%= param_name %>",
       previewTemplate: document.querySelector("#preview-template").innerHTML,
       previewsContainer: ".dz-previews-container",
     });

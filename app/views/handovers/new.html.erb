@@ -32,7 +32,21 @@
             <i class="fa fa-info-circle"></i>
           </a>
         </label>
-        <%= render partial: "shared/dropzone", locals: { record: @handover, form: f } %>
+        <%= render partial: "shared/dropzone",
+          locals: {
+            record: @handover,
+            form: f,
+            method: :reference_documents
+          }
+        %>
+
+        <%= render partial: "shared/dropzone",
+          locals: {
+            record: @handover,
+            form: f,
+            method: :boilerplate_documents
+          }
+        %>
         <div class="dz-controls">
           <%= f.submit 'Create Submission', class: 'btn btn-success' %>
         </div>
