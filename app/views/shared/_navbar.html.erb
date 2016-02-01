@@ -26,13 +26,22 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="<%= active_on_controller("authentications") %>">
-          <% if signed_in? %>
-            <%= link_to current_user.name, "#" %>
-          <% else %>
+        <% if signed_in? %>
+          <li class="dropdown">
+            <%= link_to "#", data: { toggle: "dropdown" }, html: { role: "button", aria_haspopup: "true", aria_expanded: "false" } do %>
+              <%= current_user.name %><span class="caret"></span>
+            <% end %>
+            <ul class="dropdown-menu">
+              <li><a href="#">Settings</a></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Sign out", auth_destroy_path %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="<%= active_on_controller("authentications") %>">
             <%= link_to "Sign in", auth_new_path %>
-          <% end %>
-        </li>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
