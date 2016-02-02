@@ -25,16 +25,25 @@ module Remets
       request.env["omniauth.auth"] = mock_auth(provider, options)
     end
 
-    def mock_auth_for(provider, user:)
+    def mock_auth_for(provider, user:, authorization: nil)
+      authorization ||= user.authorizations.find_by(provider: provider)
+      credentials = authorization.try!(:attributes).try!(:symbolize_keys) || {}
+      info = user.attributes.symbolize_keys
+
       mock_auth(
         provider,
-        uid: user.uid,
-        info: user.attributes.symbolize_keys.slice(:name, :email),
+        uid: credentials[:uid],
+        info: info.slice(:name, :email),
+        credentials: credentials.slice(:token, :secret),
       )
     end
 
-    def mock_auth_request_for(provider, user:)
-      request.env["omniauth.auth"] = mock_auth_for(provider, user: user)
+    def mock_auth_request_for(provider, user:, authorization: nil)
+      request.env["omniauth.auth"] = mock_auth_for(
+        provider,
+        user: user,
+        authorization: authorization,
+      )
     end
 
     def self.auth_providers

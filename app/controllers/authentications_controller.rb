@@ -13,7 +13,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def callback
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = User.from_omniauth(request.env["omniauth.auth"], current_user)
     sign_in_and_redirect
   end
 

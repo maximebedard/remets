@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :user_organizations
   has_many :submissions
   has_many :handovers
+  has_many :authorizations
 
   has_secure_password
 
@@ -36,14 +37,14 @@ class User < ActiveRecord::Base
   attr_reader :remember_token
 
   class << self
-    def from_omniauth(params)
-      where(provider: params["provider"], uid: params["uid"]).first_or_create do |user|
-        user.uid = params["uid"]
-        user.provider = params["provider"]
-        user.email = params["info"]["email"]
-        user.name = params["info"]["name"]
-        user.password = SecureRandom.hex
-      end
+    def from_omniauth(params, current_user)
+      authorization =
+        with_authorization(params) do |auth|
+          current_user ||= with_user(params)
+          auth.user = current_user
+        end
+
+      authorization.user
     end
 
     def from_auth(email:, password:)
@@ -60,6 +61,36 @@ class User < ActiveRecord::Base
         end
 
       BCrypt::Password.create(value, cost: cost)
+    end
+
+    private
+
+    def with_authorization(params)
+      Authorization.where(
+        provider: params["provider"],
+        uid: params["uid"],
+        token: params["credentials"]["token"],
+        secret: params["credentials"]["secret"],
+      ).first_or_create do |auth|
+        auth.provider = params["provider"]
+        auth.uid = params["uid"]
+        auth.token = params["credentials"]["token"]
+        auth.secret = params["credentials"]["secret"]
+
+        yield(auth) if block_given?
+      end
+    end
+
+    def with_user(params)
+      User.where(
+        email: params["info"]["email"],
+      ).first_or_initialize do |user|
+        user.name = params["info"]["name"]
+        user.email = params["info"]["email"]
+        user.password = SecureRandom.hex
+
+        yield(user) if block_given?
+      end
     end
   end
 
