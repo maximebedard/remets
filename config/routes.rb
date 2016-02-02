@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :document_matches, only: [:show]
   resources :users, only: [:create]
   resources :dashboards, only: [:index]
-  resources :registrations, only: [:new, :create]
+
+  resource :registration, only: [:new, :create]
+  resource :account, only: [:edit, :update]
 
   root "home#index"
 
