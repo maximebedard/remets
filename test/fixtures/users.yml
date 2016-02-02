@@ -2,30 +2,22 @@ gaston:
   name: "Gaston Rinfrette"
   email: "rinfrette.gaston@gmail.com"
   password_digest: <%= password %>
-  provider: "google"
-  uid: "123545"
   role: "user"
 
 henry:
   name: "Henry Lemieux"
   email: "lemieux.henry@gmail.com"
   password_digest: <%= password %>
-  provider: "google"
-  uid: "654321"
   role: "user"
 
 marcel:
   name: "Marcel Gratton"
   email: "gratton.marcel@gmail.com"
   password_digest: <%= password %>
-  provider: "google"
-  uid: "555555"
   role: "user"
 
 pierre:
   name: "Pierre Paul"
   email: "pierre.paul@gmail.com"
   password_digest: <%= password %>
-  provider: "google"
-  uid: "123123"
   role: "admin"

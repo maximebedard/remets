@@ -5,7 +5,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
 
   test "#callback with an existing user using oauth" do
     mock_auth_request_for(:google, user: users(:gaston))
-    assert_no_difference "User.count" do
+    assert_no_difference("User.count", "Authorization.count") do
       post :callback, provider: :google
     end
     assert_equal session[Remets::AUTH_SESSION_KEY], users(:gaston).id
@@ -16,15 +16,41 @@ class AuthenticationsControllerTest < ActionController::TestCase
     mock_auth_request_for(
       :google,
       user: User.new(
-        uid: "754321",
         name: "Roger Lemieux",
         email: "lemieux.roger@gmail.com",
       ),
+      authorization: Authorization.new(
+        provider: "google",
+        uid: "987654321",
+        secret: "90980784187ec4f28447539e10ea80c3",
+        token: "3f1a00866f78690b758bb2ad28bb73fa",
+      ),
     )
-    assert_difference "User.count" do
+    assert_difference(["User.count", "Authorization.count"]) do
       post :callback, provider: :google
     end
     assert_equal session[Remets::AUTH_SESSION_KEY], User.last.id
+    assert_redirected_to root_path
+  end
+
+  test "#callback when signed in add an authorization" do
+    sign_in users(:henry)
+    mock_auth_request_for(
+      :google,
+      user: users(:henry),
+      authorization: Authorization.new(
+        provider: "google",
+        uid: "987654321",
+        secret: "90980784187ec4f28447539e10ea80c3",
+        token: "3f1a00866f78690b758bb2ad28bb73fa",
+      ),
+    )
+    assert_no_difference("User.count") do
+      assert_difference("Authorization.count") do
+        post :callback, provider: :google
+      end
+    end
+    assert_equal session[Remets::AUTH_SESSION_KEY], users(:henry).id
     assert_redirected_to root_path
   end
 
