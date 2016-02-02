@@ -32,7 +32,7 @@ class DocumentsControllerTest < ActionController::TestCase
     sign_out
 
     get :index
-    assert_redirected_to auth_authorize_path(:google, origin: documents_url)
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
   end
 
   test "#download is not authorized when signed out" do
@@ -40,7 +40,7 @@ class DocumentsControllerTest < ActionController::TestCase
 
     params = { id: @document.id, extension: @document.file.extension }
     get :download, params
-    assert_redirected_to auth_authorize_path(:google, origin: download_document_url(params))
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
   end
 
   test "#show is not authorized when signed out" do
@@ -48,7 +48,7 @@ class DocumentsControllerTest < ActionController::TestCase
 
     params = { id: @document.id }
     get :show, params
-    assert_redirected_to auth_authorize_path(:google, origin: document_url(params))
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
   end
 
   test "#index is not authorized when you are not an admin" do
