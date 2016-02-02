@@ -12,6 +12,14 @@ class AuthenticationsControllerTest < ActionController::TestCase
     assert_redirected_to root_path
   end
 
+  test "#callback with the login page as origin redirects to the root page" do
+    mock_auth_request_for(:google, user: users(:gaston))
+    request.env["omniauth.origin"] = auth_new_url
+    post :callback, provider: :google
+    assert_equal session[Remets::AUTH_SESSION_KEY], users(:gaston).id
+    assert_redirected_to root_path
+  end
+
   test "#callback with a new user using oauth" do
     mock_auth_request_for(
       :google,
@@ -51,6 +59,18 @@ class AuthenticationsControllerTest < ActionController::TestCase
       end
     end
     assert_equal session[Remets::AUTH_SESSION_KEY], users(:henry).id
+    assert_redirected_to root_path
+  end
+
+  test "#new" do
+    get :new
+    assert_response :success
+  end
+
+  test "#new when signed in redirects to the root page" do
+    sign_in users(:gaston)
+
+    get :new
     assert_redirected_to root_path
   end
 

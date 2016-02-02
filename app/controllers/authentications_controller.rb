@@ -1,5 +1,6 @@
 class AuthenticationsController < ApplicationController
   def new
+    redirect_when_signed_in
   end
 
   def create
@@ -30,7 +31,13 @@ class AuthenticationsController < ApplicationController
   private
 
   def after_authenticated_path
-    request.env["omniauth.origin"] || session["omniauth.origin"] || root_path
+    path = request.env["omniauth.origin"] || session["omniauth.origin"] || root_path
+    path = root_path if path =~ /#{auth_new_url}*/
+    path
+  end
+
+  def redirect_when_signed_in(path = root_path)
+    redirect_to(path) if signed_in?
   end
 
   def sign_in_and_redirect(path = after_authenticated_path)
