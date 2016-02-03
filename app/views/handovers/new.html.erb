@@ -1,63 +1,88 @@
 <div class="container">
-  <%= form_for @handover, html: { multipart: true, class: "dropzone" } do |f| %>
+  <%= form_for @handover, html: { multipart: true } do |f| %>
     <div class="row">
       <div class="col-lg-12">
         <h1>New Handover Box</h1>
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-6">
         <div class="form-group">
           <label for="handoverName">Handover Title</label>
-          <input type="text" class="form-control" id="handoverName" placeholder="Handover Title">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: "form-control", placeholder: "Name" %>
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-6">
         <div class="form-group">
-          <label for="handoverDescription">
-            Description
-          </label>
-          <textarea class="form-control" id="handoverDescription"
-            placeholder="This textbox supports #markdown!" rows="5"></textarea>
+          <%= f.label :description %>
+          <%= f.text_area :description, class: "form-control", html: { rows: 5 } %>
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-12">
-        <label>
-          Related files for the Handovers
-          <a href="#" data-toggle="modal" data-target="#infoModal">
-            <i class="fa fa-info-circle"></i>
-          </a>
-        </label>
-        <%= render partial: "shared/dropzone",
-          locals: {
-            record: @handover,
-            form: f,
-            method: :reference_documents
-          }
-        %>
-
-        <%= render partial: "shared/dropzone",
-          locals: {
-            record: @handover,
-            form: f,
-            method: :boilerplate_documents
-          }
-        %>
-        <div class="dz-controls">
-          <%= f.submit 'Create Submission', class: 'btn btn-success' %>
+        <div class="form-group">
+          <%= f.label :reference_documents do %>
+            Reference documents for the handover
+            <a href="#" data-toggle="modal" data-target="#info-reference-documents">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          <% end %>
+          <%= f.file_field :reference_documents,
+            multiple: true,
+            name: "handover[reference_documents_attributes][][file_ptr]" %>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <%= f.label :boilerplate_documents do %>
+            Boilerplate documents for the handover
+            <a href="#" data-toggle="modal" data-target="#info-boilerplate-documents">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          <% end %>
+          <%= f.file_field :boilerplate_documents,
+            multiple: true,
+            name: "handover[boilerplate_documents_attributes][][file_ptr]" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <%= f.submit 'Create Submission', class: 'btn btn-success' %>
       </div>
     </div>
   <% end %>
 </div>
-<%= render(layout: "shared/info_modal",
-  locals: { title: "Related Files?", label: "filesLabel", id: "infoModal" }) do %>
+
+<%= render(
+      layout: "shared/info_modal",
+      locals: { title: "Reference documents?", label: "reference-label", id: "info-reference-documents" }
+    ) do %>
   <p>
     Is there any documents you wish to attach to this handover that will help students? Maybe a template file, an interesting PDF or a picture that's worth a thousand words?
+  </p>
+  <p>
+    Go a ahead and include it!
+  </p>
+<% end %>
+
+<%= render(
+      layout: "shared/info_modal",
+      locals: { title: "Boilerplate documents?", label: "boilerplate-label", id: "info-boilerplate-documents" }
+    ) do %>
+  <p>
+    Is there any documents that you wish to give to the students to start their work? Theses documents will be exluded will performing document comparaison.
   </p>
   <p>
     Go a ahead and include it!
