@@ -15,5 +15,6 @@ module Remets
       #{config.root}/app/policies/concerns
       #{config.root}/app/uploaders/concerns
     )
+    config.responders.flash_keys = %i(success danger)
   end
 end

@@ -6,7 +6,6 @@ class Authorization < ActiveRecord::Base
     :provider,
     :uid,
     :token,
-    :secret,
     presence: true,
   )
 end

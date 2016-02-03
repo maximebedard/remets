@@ -55,7 +55,7 @@ class DocumentsControllerTest < ActionController::TestCase
     get :index
 
     assert_redirected_to root_path
-    assert_equal "You are not authorized to perform this action.", flash[:alert]
+    assert_equal "You are not authorized to perform this action.", flash[:danger]
   end
 
   test "#download is not authorized when you are not the owner nor the creator of the handover" do
@@ -63,7 +63,7 @@ class DocumentsControllerTest < ActionController::TestCase
 
     get :download, id: @document.id, extension: @document.file.extension
     assert_redirected_to root_path
-    assert_equal "You are not authorized to perform this action.", flash[:alert]
+    assert_equal "You are not authorized to perform this action.", flash[:danger]
   end
 
   test "#show is not authorized when you are not the owner nor the creator of the handover" do
@@ -71,6 +71,6 @@ class DocumentsControllerTest < ActionController::TestCase
 
     get :show, id: @document.id
     assert_redirected_to root_path
-    assert_equal "You are not authorized to perform this action.", flash[:alert]
+    assert_equal "You are not authorized to perform this action.", flash[:danger]
   end
 end

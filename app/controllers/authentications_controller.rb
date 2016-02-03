@@ -8,7 +8,7 @@ class AuthenticationsController < ApplicationController
     if @user = User.from_auth(email: @email, password: auth_params[:password])
       sign_in_and_redirect(dashboards_path)
     else
-      flash.now[:alert] = "Email/Password combination does not match"
+      flash.now[:danger] = "Email/Password combination does not match"
       render "new"
     end
   end
@@ -24,7 +24,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def failure
-    flash[:alert] = "An error occured when authenticating with Google."
+    flash[:danger] = "An error occured when authenticating with Google."
     redirect_to(root_path)
   end
 

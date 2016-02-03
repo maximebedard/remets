@@ -35,6 +35,6 @@ class DocumentMatchesControllerTest < ActionController::TestCase
 
     get :show, params
     assert_redirected_to root_path
-    assert_equal "You are not authorized to perform this action.", flash[:alert]
+    assert_equal "You are not authorized to perform this action.", flash[:danger]
   end
 end

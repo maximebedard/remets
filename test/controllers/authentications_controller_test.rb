@@ -30,7 +30,6 @@ class AuthenticationsControllerTest < ActionController::TestCase
       authorization: Authorization.new(
         provider: "google",
         uid: "987654321",
-        secret: "90980784187ec4f28447539e10ea80c3",
         token: "3f1a00866f78690b758bb2ad28bb73fa",
       ),
     )
@@ -83,14 +82,14 @@ class AuthenticationsControllerTest < ActionController::TestCase
   test "#create with an existing user but invalid password" do
     post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "potato" }
     assert_nil session[Remets::AUTH_SESSION_KEY]
-    assert_equal "Email/Password combination does not match", flash[:alert]
+    assert_equal "Email/Password combination does not match", flash[:danger]
     assert_response :ok
   end
 
   test "#failure" do
     get :failure
     assert_redirected_to root_path
-    assert_equal "An error occured when authenticating with Google.", flash[:alert]
+    assert_equal "An error occured when authenticating with Google.", flash[:danger]
   end
 
   test "#destroy" do
