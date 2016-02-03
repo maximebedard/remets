@@ -1,0 +1,22 @@
+$remets-navbar-color:                 #4c4c4c !default;
+$remets-navbar-bg:                    #F2F2F2 !default;
+$remets-navbar-border:                transparent !default;
+
+$remets-navbar-link-color:            lighten($gray-light, 15%) !default;
+$remets-navbar-link-hover-color:      #fff !default;
+$remets-navbar-link-hover-bg:         darken($remets-navbar-bg, 10%) !default;
+$remets-navbar-link-active-color:     $remets-navbar-link-hover-color !default;
+$remets-navbar-link-active-bg:        darken($remets-navbar-bg, 10%) !default;
+$remets-navbar-link-disabled-color:   #444 !default;
+$remets-navbar-link-disabled-bg:      transparent !default;
+
+$remets-navbar-brand-color:           $remets-navbar-link-color !default;
+$remets-navbar-brand-hover-color:     #fff !default;
+$remets-navbar-brand-hover-bg:        transparent !default;
+
+$remets-navbar-toggle-hover-bg:       #333 !default;
+$remets-navbar-toggle-icon-bar-bg:    #fff !default;
+$remets-navbar-toggle-border-color:   #333 !default;
+
+$remets-navbar-active-underline-size: -3px; //Negative values since we are using insets
+$remets-navbar-active-underline-color: darken($remets-navbar-link-hover-bg, 5%);
