@@ -1,4 +1,4 @@
-.line-behind-text {
+.stroked {
   position: relative;
   margin-bottom: 5px;
   text-align: center;
@@ -14,11 +14,11 @@
   }
 }
 
-.line-behind-section {
-    margin: 30px 0;
-  }
+.stroked__section {
+  margin: 30px 0;
+}
 
-.line-behind-text__text {
+.stroked__text {
   display: inline-block;
   position: relative;
   padding: 0 12px;
