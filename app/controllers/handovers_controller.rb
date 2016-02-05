@@ -24,6 +24,9 @@ class HandoversController < ApplicationController
     respond_with(@handover)
   end
 
+  def show
+  end
+
   def create
     @handover = Fingerprinter.new(
       Handover.new,
