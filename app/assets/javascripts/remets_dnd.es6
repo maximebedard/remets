@@ -1,14 +1,100 @@
 //Droplit v 0.0.1
 //The most ghetto of drag and drop plugins.
 
+
 function dragAndDropify(queryElement) {
   //The global fileList. Contains a mapping between input[type="files"] and the files.
   //Maybe convert this to a prototypical object?
-  var fileListObject = {};
+  var fileListObject = (function () {
+    var o = {}
+
+    function addNameKey(namekey) {
+      o[namekey] = [];
+    };
+
+    function pushFilesInto(files, nameKey){
+      for(let i = 0; i < files.length ; i++) {
+        o[nameKey].push(files[i]);
+      }
+    };
+
+    function removeFileFrom(index, nameKey) {
+      o[nameKey].splice(o[nameKey][index], 1);
+    };
+
+    function lenghtFrom(nameKey) {
+      return o[nameKey].length;
+    };
+
+    function getFileListObject() {
+      return o;
+    }
+
+    return {
+      addNameKey: addNameKey,
+      pushFilesInto: pushFilesInto,
+      removeFileFrom: removeFileFrom,
+      lenghtFrom: lenghtFrom,
+      getFileListObject: getFileListObject
+    };
+  })();
+
+  var fileUlObject = (function(fileListObject) {
+    var o = {}
+
+    function addNameKey(namekey) {
+      o[namekey] = null;
+    };
+
+    function createUlElementInto(nameKey) {
+      let ul = document.createElement('ul');
+      ul.className = 'remets-dnd__file-list';
+      o[nameKey] = ul;
+      return ul;
+    };
+
+    function appendLiElementInto(li, nameKey) {
+      o[nameKey].appendChild(li);
+    };
+
+    function createListItem(text) {
+      const li = document.createElement('li');
+      const content = document.createTextNode(text);
+      li.appendChild(content);
+      return li;
+    };
+
+    function createRemoveElement(nameKey, li, index) {
+       const a  = document.createElement('a');
+       a.dataset.index = index
+       a.innerText = 'X';
+       a.addEventListener('click', function(e) {
+          const index = Number.parseInt(this.dataset.index);
+          fileListObject.removeFileFrom(index, nameKey);
+          li.remove();
+        });
+       return a;
+    }
+
+    function createLiFromFiles(files, nameKey) {
+      var index = fileListObject.lenghtFrom(nameKey);
+      for(let i = 0; i < files.length ; i++){
+        const li = createListItem(files[i].name);
+        appendLiElementInto(li, nameKey);
+        const a = createRemoveElement(nameKey, li, (index + i));
+        li.appendChild(a);
+      }
+    }
+
+    return {
+      addNameKey: addNameKey,
+      createUlElementInto: createUlElementInto,
+      createLiFromFiles: createLiFromFiles,
+    };
+  })(fileListObject);
 
   //Contains the mapping between input[type="files"] and <ul> element to list the files
   //Maybe convert this to a prototypical object?
-  var fileUlObject = {};
 
   var form =  document.querySelector(queryElement);
   if (!form || form.nodeName != "FORM") {
@@ -20,6 +106,12 @@ function dragAndDropify(queryElement) {
     throw new Error('Woah there cowboy! Can\'t make a drag and drop file upload if there are no file inputs!');
   }
 
+  //Prevent the window from intercepting our drag events.
+  window.addEventListener('dragover', preventDefault, false);
+  window.addEventListener('drop', preventDefault, false);
+
+
+
   const preventDefault = (e) => {
     e.preventDefault();
   };
@@ -27,29 +119,27 @@ function dragAndDropify(queryElement) {
   const submitForm = (e) => {
     e.stopPropagation();
     e.preventDefault();
+
     const formData = new FormData(form);
 
     //move the files into the form data.
-    for (let fileList in fileListObject) {
-      fileListObject[fileList].forEach((file) => {
+    for (let fileList in fileListObject.getFileListObject()) {
+      fileListObject.getFileListObject()[fileList].forEach((file) => {
         formData.append(fileList, file);
       });
     }
 
     var request = new XMLHttpRequest();
     request.open(form.method, form.action);
-    request.onload = function (msg) {
-      console.log("SERVER IS DONE DOING OUR SHIT");
+    request.onload = function() {
       window.location.href = this.responseURL;
+      debugger
     };
     request.send(formData);
   };
 
   form.addEventListener('submit', submitForm, false);
 
-  //Prevent the window from intercepting our drag events.
-  window.addEventListener('dragover', preventDefault, false);
-  window.addEventListener('drop', preventDefault, false);
 
   //Start mutating the DOM so we can have our cake
   for (let i = 0; i < inputFiles.length; i++) {
@@ -64,12 +154,9 @@ function dragAndDropify(queryElement) {
     input.remove();
     d.appendChild(input);
 
-    let ul = document.createElement('ul');
-    ul.className = 'remets-dnd__file-list';
+    let ul = fileUlObject.createUlElementInto(input.name);
     parentNode.appendChild(ul);
-
-    fileUlObject[input.name] = ul;
-    fileListObject[input.name] = [];
+    fileListObject.addNameKey(input.name);
     dropMagic(d, input);
   }
 
@@ -77,23 +164,8 @@ function dragAndDropify(queryElement) {
   function dropMagic(wrapper, input) {
 
     function pushFiles(files) {
-      for(let i = 0; i < files.length ; i++){
-        let li = document.createElement('li');
-        let content = document.createTextNode(files[i].name);
-        li.appendChild(content);
-        fileListObject[input.name].push(files[i]);
-        fileUlObject[input.name].appendChild(li);
-
-        let a  = document.createElement('a');
-        a.href = '#';
-        a.innerText = 'X';
-        a.addEventListener('click', (e) => {
-          let index = fileListObject[input.name].length;
-          fileListObject[input.name].splice(fileListObject[input.name][index], 1);
-          li.remove();
-        });
-        li.appendChild(a);
-      }
+      fileListObject.pushFilesInto(files, input.name);
+      fileUlObject.createLiFromFiles(files, input.name);
     };
 
     function dragEnterAndOver(e) {
@@ -113,7 +185,7 @@ function dragAndDropify(queryElement) {
       let dt = e.dataTransfer;
       let files = dt.files;
       pushFiles(files);
-      console.log(`Currently, we have ${fileListObject[input.name].length} files`);
+      console.log(`Currently, we have ${fileListObject.lenghtFrom(input.name)} files`);
     };
 
     //Bind a ton of listeners...
