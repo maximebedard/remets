@@ -5,7 +5,7 @@
 function dragAndDropify(queryElement) {
   //The global fileList. Contains a mapping between input[type="files"] and the files.
   //Maybe convert this to a prototypical object?
-  var fileListObject = (function () {
+  const fileListObject = (function () {
     var o = {}
 
     function addNameKey(namekey) {
@@ -39,7 +39,7 @@ function dragAndDropify(queryElement) {
     };
   })();
 
-  var fileUlObject = (function(fileListObject) {
+  const fileUlObject = (function(fileListObject) {
     var o = {}
 
     function addNameKey(namekey) {
@@ -96,7 +96,7 @@ function dragAndDropify(queryElement) {
   //Contains the mapping between input[type="files"] and <ul> element to list the files
   //Maybe convert this to a prototypical object?
 
-  var form =  document.querySelector(queryElement);
+  const form =  document.querySelector(queryElement);
   if (!form || form.nodeName != "FORM") {
     throw new Error('This is not a form! Make sure you entered the right selector!');
   }
@@ -109,8 +109,6 @@ function dragAndDropify(queryElement) {
   //Prevent the window from intercepting our drag events.
   window.addEventListener('dragover', preventDefault, false);
   window.addEventListener('drop', preventDefault, false);
-
-
 
   const preventDefault = (e) => {
     e.preventDefault();
@@ -133,7 +131,6 @@ function dragAndDropify(queryElement) {
     request.open(form.method, form.action);
     request.onload = function() {
       window.location.href = this.responseURL;
-      debugger
     };
     request.send(formData);
   };
@@ -143,10 +140,10 @@ function dragAndDropify(queryElement) {
 
   //Start mutating the DOM so we can have our cake
   for (let i = 0; i < inputFiles.length; i++) {
-    let input = inputFiles[i];
-    let parentNode = input.parentNode;
+    const input = inputFiles[i];
+    const parentNode = input.parentNode;
 
-    let d = document.createElement('div');
+    const d = document.createElement('div');
     d.className = 'remets-dnd';
     d.innerHTML = 'DRAG YO STUFF HERE'; //might want to remove this?
     parentNode.appendChild(d);
@@ -154,7 +151,7 @@ function dragAndDropify(queryElement) {
     input.remove();
     d.appendChild(input);
 
-    let ul = fileUlObject.createUlElementInto(input.name);
+    const ul = fileUlObject.createUlElementInto(input.name);
     parentNode.appendChild(ul);
     fileListObject.addNameKey(input.name);
     dropMagic(d, input);
@@ -182,8 +179,8 @@ function dragAndDropify(queryElement) {
       e.stopPropagation();
       e.preventDefault();
       this.classList.remove('remets-dnd-wrapper__enter');
-      let dt = e.dataTransfer;
-      let files = dt.files;
+      const dt = e.dataTransfer;
+      const files = dt.files;
       pushFiles(files);
       console.log(`Currently, we have ${fileListObject.lenghtFrom(input.name)} files`);
     };
@@ -198,4 +195,4 @@ function dragAndDropify(queryElement) {
 
   };
 
-}
+};
