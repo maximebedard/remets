@@ -11,12 +11,13 @@
 
   <%= yield :head %>
 </head>
-<body>
+<body class="<%= white_bg? %>">
   <%= render partial: "shared/navbar" %>
   <%= render partial: "shared/flash" %>
   <%= yield %>
 
   <%= yield :scripts %>
+  <%= render partial: "shared/footer" %>
 </body>
 </html>
 

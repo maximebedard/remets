@@ -1,0 +1,3 @@
+.btn-transparent {
+  @include button-variant($btn-danger-color, transparent, #FFF);
+}

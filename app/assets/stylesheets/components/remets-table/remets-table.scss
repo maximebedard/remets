@@ -5,4 +5,13 @@
 .remets-table > tbody > tr > td {
   padding: 22px 8px;
   vertical-align: middle;
+  div.button-row {
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    & > * {
+      margin: 0 2px;
+    }
+  }
 }
