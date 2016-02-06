@@ -1,3 +1,7 @@
+platypus_boilerplate:
+  handover: log121_lab1
+  <%= boilerplate_document_upload_yaml("platypus.txt") %>
+
 makefile_boilerplate:
   handover: log121_lab1
   <%= boilerplate_document_upload_yaml("makefile") %>

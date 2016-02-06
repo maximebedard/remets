@@ -4,8 +4,8 @@ log121_lab1:
 
 log240_lab1:
   title: "LOG240 - Laboratoire 1"
-  user_id: gaston
+  user: gaston
 
 log550_lab1:
   title: "LOG550 - Laboratoire 1"
-  user_id: gaston
+  user: gaston
