@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="dropbox">
       <div class="col-lg-12">
         <div class="form-group">
           <%= f.label :boilerplate_documents do %>
@@ -64,6 +64,12 @@
     </div>
   <% end %>
 </div>
+
+<%= content_for :scripts do %>
+  <%= javascript_tag do %>
+  dragAndDropify('#new_handover');
+  <% end %>
+<% end %>
 
 <%= render(
       layout: "shared/info_modal",
