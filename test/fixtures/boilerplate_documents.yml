@@ -1,11 +1,11 @@
 makefile_boilerplate:
   handover: log121_lab1
-  <%= document_upload_yaml("makefile") %>
+  <%= boilerplate_document_upload_yaml("makefile") %>
 
 empty_boilerplate:
   handover: log121_lab1
-  <%= document_upload_yaml("empty.txt") %>
+  <%= boilerplate_document_upload_yaml("empty.txt") %>
 
 unsanitizable_boilerplate:
   handover: log121_lab1
-  <%= document_upload_yaml("platypus.jpg") %>
+  <%= boilerplate_document_upload_yaml("platypus.jpg") %>
