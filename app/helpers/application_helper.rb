@@ -3,7 +3,7 @@ module ApplicationHelper
     "active" if controller.controller_name == input
   end
 
-  def white_bg?
-    "white-bg" if controller.controller_name == "home"
+  def white_background
+    "white-bg" if %w(home authentications).include?(controller.controller_name)
   end
 end
