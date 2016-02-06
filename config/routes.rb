@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :dashboards, only: [:index]
 
   resource :registration, only: [:new, :create]
-  resource :account, only: [:edit, :update]
+  resource :account, only: [:show, :edit, :update]
 
   root "home#index"
 

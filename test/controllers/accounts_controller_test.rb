@@ -5,6 +5,19 @@ class AccountsControllerTest < ActionController::TestCase
     sign_in users(:henry)
   end
 
+  test "#show" do
+    get :show
+
+    assert_response :success
+  end
+
+  test "#show is not authorized when signed out" do
+    sign_out
+
+    get :show
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+  end
+
   test "#edit" do
     get :edit
     assert_response :success

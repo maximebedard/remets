@@ -1,6 +1,10 @@
 class AccountsController < ApplicationController
   respond_to :html, :json
 
+  def show
+    authorize(:account, :show?)
+  end
+
   def edit
     authorize(:account, :edit?)
   end

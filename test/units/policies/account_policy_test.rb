@@ -9,12 +9,20 @@ class AccountPolicyTest < ActiveSupport::TestCase
     end
   end
 
+  test "#show? raises when not authenticated" do
+    assert_permit_raises(nil, :account, :show, ApplicationPolicy::NotAuthenticatedError)
+  end
+
   test "#edit? raises when not authenticated" do
     assert_permit_raises(nil, :account, :edit, ApplicationPolicy::NotAuthenticatedError)
   end
 
   test "#update? raises when not authenticated" do
     assert_permit_raises(nil, :account, :update, ApplicationPolicy::NotAuthenticatedError)
+  end
+
+  test "#show?" do
+    assert_permit(users(:henry), :account, :show)
   end
 
   test "#edit?" do
