@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160202021721) do
   end
 
   create_table "boilerplate_documents", force: :cascade do |t|
-    t.uuid     "handover_id"
+    t.integer  "handover_id"
     t.string   "file_ptr"
     t.string   "file_secure_token"
     t.string   "file_original_name"
@@ -62,12 +62,13 @@ ActiveRecord::Schema.define(version: 20160202021721) do
 
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
 
-  create_table "handovers", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "handovers", force: :cascade do |t|
+    t.uuid     "uuid",            default: "uuid_generate_v4()"
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.boolean  "invite_only",     default: true
     t.string   "password_digest"
   end
@@ -84,7 +85,7 @@ ActiveRecord::Schema.define(version: 20160202021721) do
   end
 
   create_table "reference_documents", force: :cascade do |t|
-    t.uuid     "handover_id"
+    t.integer  "handover_id"
     t.string   "file_ptr"
     t.string   "file_secure_token"
     t.string   "file_original_name"
@@ -94,7 +95,7 @@ ActiveRecord::Schema.define(version: 20160202021721) do
 
   create_table "submissions", force: :cascade do |t|
     t.integer "user_id"
-    t.uuid    "handover_id"
+    t.integer "handover_id"
   end
 
   create_table "user_organizations", force: :cascade do |t|
