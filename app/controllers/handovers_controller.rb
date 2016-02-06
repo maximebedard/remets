@@ -7,13 +7,13 @@ class HandoversController < ApplicationController
   end
 
   def edit
-    @handover = Handover.find(params[:id])
+    @handover = Handover.find_by!(uuid: params[:uuid])
     respond_with(@handover)
   end
 
   def update
     @handover = Fingerprinter.new(
-      Handover.find(params[:id]),
+      Handover.find_by!(uuid: params[:uuid]),
       handover_params,
     ).call
     respond_with(@handover)

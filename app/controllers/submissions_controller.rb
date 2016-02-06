@@ -1,8 +1,13 @@
 class SubmissionsController < ApplicationController
   respond_to :html, :json
 
-  def index
+  def all
     @submissions = Submission.all
+    respond_with(@submissions)
+  end
+
+  def index
+    @submissions = Handover.find_by(uuid: params[:handover_uuid]).submissions
     respond_with(@submissions)
   end
 

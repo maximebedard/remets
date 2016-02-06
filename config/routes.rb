@@ -1,8 +1,10 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-  resources :submissions, only: [:index, :show, :new, :create]
-  resources :handovers, only: [:index, :show, :new, :create, :edit, :update]
+  resources :handovers, only: [:index, :show, :new, :create, :edit, :update], param: :uuid do
+    resources :submissions, only: [:index, :show, :new, :create], shallow: true
+  end
+  get "/submissions", as: :submissions, to: "submissions#all"
   resources :documents, only: [:index, :show] do
     member do
       get :download

@@ -15,7 +15,7 @@ class HandoversControllerTest < ActionController::TestCase
   end
 
   test "#edit" do
-    get :edit, id: @handover.id
+    get :edit, uuid: @handover.uuid
 
     assert assigns(:handover)
     assert_response :ok
@@ -25,7 +25,7 @@ class HandoversControllerTest < ActionController::TestCase
     file = sanitizable_file_upload
     patch(
       :update,
-      id: @handover.id,
+      uuid: @handover.uuid,
       handover: {
         title: "pants",
         reference_documents_attributes: [{ file_ptr: file }],
