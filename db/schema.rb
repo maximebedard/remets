@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(version: 20160202021721) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "invite_only", default: true
-    t.string   "password"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "invite_only",     default: true
+    t.string   "password_digest"
   end
 
   create_table "matches", force: :cascade do |t|
