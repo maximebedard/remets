@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160202021721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "authorizations", force: :cascade do |t|
     t.integer "user_id"
@@ -25,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160202021721) do
   end
 
   create_table "boilerplate_documents", force: :cascade do |t|
-    t.integer  "handover_id"
+    t.uuid     "handover_id"
     t.string   "file_ptr"
     t.string   "file_secure_token"
     t.string   "file_original_name"
@@ -61,12 +62,14 @@ ActiveRecord::Schema.define(version: 20160202021721) do
 
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
 
-  create_table "handovers", force: :cascade do |t|
+  create_table "handovers", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "invite_only", default: true
+    t.string   "password"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 20160202021721) do
   end
 
   create_table "reference_documents", force: :cascade do |t|
-    t.integer  "handover_id"
+    t.uuid     "handover_id"
     t.string   "file_ptr"
     t.string   "file_secure_token"
     t.string   "file_original_name"
@@ -91,7 +94,7 @@ ActiveRecord::Schema.define(version: 20160202021721) do
 
   create_table "submissions", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "handover_id"
+    t.uuid    "handover_id"
   end
 
   create_table "user_organizations", force: :cascade do |t|

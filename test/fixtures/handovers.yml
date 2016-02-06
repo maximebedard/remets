@@ -1,11 +1,17 @@
 log121_lab1:
   title: "LOG121 - Laboratoire 1"
   user: gaston
+  invite_only: true
+  password: ""
 
 log240_lab1:
   title: "LOG240 - Laboratoire 1"
   user: gaston
+  invite_only: true
+  password: "password"
 
 log550_lab1:
   title: "LOG550 - Laboratoire 1"
   user: gaston
+  invite_only: true
+  password: "yass"
