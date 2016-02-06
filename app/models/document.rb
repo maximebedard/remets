@@ -11,6 +11,6 @@ class Document < ActiveRecord::Base
 
   def add_to_index
     return unless fingerprints_changed? || indexes_changed?
-    DocumentIndexingJob.perform_later(id)
+    DocumentIndexingJob.perform_later(self)
   end
 end

@@ -28,7 +28,7 @@ class Fingerprinter
     return unless @submission_or_handover.valid?
 
     @submission_or_handover.fingerprintable_documents.each do |document|
-      DocumentFingerprintingJob.perform_later(document.id)
+      DocumentFingerprintingJob.perform_later(document)
     end
   end
 end

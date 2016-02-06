@@ -6,7 +6,12 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   test "create a submission with a sanitizable document" do
     @file = sanitizable_file_upload
 
-    submit(files: [@file])
+    submit(
+      documents_attributes: [
+        { file_ptr: @file },
+      ],
+    )
+
     @document = @submission.documents.first
 
     assert_equal 1, @submission.documents.size
@@ -21,7 +26,12 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   test "create a submission with an unsanitizable document" do
     @file = unsanitizable_file_upload
 
-    submit(files: [@file])
+    submit(
+      documents_attributes: [
+        { file_ptr: @file },
+      ],
+    )
+
     @document = @submission.documents.first
 
     assert_equal 1, @submission.documents.size
@@ -37,7 +47,13 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
     @file1 = unsanitizable_file_upload
     @file2 = sanitizable_file_upload
 
-    submit(files: [@file1, @file2])
+    submit(
+      documents_attributes: [
+        { file_ptr: @file1 },
+        { file_ptr: @file2 },
+      ],
+    )
+
     @document1 = @submission.documents.first
     @document2 = @submission.documents.second
 
@@ -56,11 +72,9 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
 
   private
 
-  def submit(files: [])
+  def submit(submission_params = {})
     perform_enqueued_jobs do
-      post "/submissions", submission: {
-        documents_attributes: files.map { |f| { file_ptr: f } },
-      }
+      post "/submissions", submission: submission_params
       @submission = Submission.last
     end
   end

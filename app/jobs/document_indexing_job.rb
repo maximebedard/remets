@@ -32,8 +32,7 @@ class DocumentIndexingJob < ActiveJob::Base
   # Notes: This is pretty bad because it's in O((n-1)!). A way to improve it would be to add matches using and
   # querying using the following query: SELECT * FROM document_matches where reference_document_id = ?
   # OR compared_document_id = ? ORDER BY array_length(fingerprints, 1) DESC
-  def perform(document_id)
-    reference = Document.find(document_id)
+  def perform(reference)
     reference.document_matches.destroy_all
 
     Document.all_fingerprinted_except(reference).find_each do |compared|

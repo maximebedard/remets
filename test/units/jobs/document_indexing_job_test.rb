@@ -7,7 +7,7 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
 
   test "#perform does nothing when no documents are fingerprinted" do
     assert_no_difference("DocumentMatch.count", "Match.count") do
-      DocumentIndexingJob.perform_now(documents(:platypus).id)
+      DocumentIndexingJob.perform_now(documents(:platypus))
     end
   end
 
@@ -25,7 +25,7 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
 
     assert_difference("DocumentMatch.count", 2) do
       assert_difference("Match.count", 1) do
-        DocumentIndexingJob.perform_now(reference.id)
+        DocumentIndexingJob.perform_now(reference)
       end
     end
 
@@ -57,7 +57,7 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
     )
 
     assert_no_difference("DocumentMatch.count", "Match.count") do
-      DocumentIndexingJob.perform_now(reference.id)
+      DocumentIndexingJob.perform_now(reference)
     end
   end
 
@@ -72,13 +72,7 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
     Document.stubs(:all_fingerprinted_except).returns(Document.none)
 
     assert_difference("DocumentMatch.count", -1) do
-      DocumentIndexingJob.perform_now(documents(:platypus).id)
-    end
-  end
-
-  test "#perform raises when the document no longer exists" do
-    assert_raises ActiveRecord::RecordNotFound do
-      DocumentIndexingJob.perform_now(1337)
+      DocumentIndexingJob.perform_now(documents(:platypus))
     end
   end
 end

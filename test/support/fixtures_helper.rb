@@ -3,11 +3,13 @@ module Remets
     def document_upload_yaml(basename)
       uploader = upload(Document, basename)
 
-      <<-YAML.strip_heredoc
-        file_ptr: #{uploader.filename}
-          file_original_name: #{uploader.model.file_original_name}
-          file_secure_token: #{uploader.model.file_secure_token}
-      YAML
+      generate_yaml(uploader)
+    end
+
+    def boilerplate_document_upload_yaml(basename)
+      uploader = upload(BoilerplateDocument, basename)
+
+      generate_yaml(uploader)
     end
 
     def password(value = "password")
@@ -15,6 +17,14 @@ module Remets
     end
 
     private
+
+    def generate_yaml(uploader)
+      <<-YAML.strip_heredoc
+        file_ptr: #{uploader.filename}
+          file_original_name: #{uploader.model.file_original_name}
+          file_secure_token: #{uploader.model.file_secure_token}
+      YAML
+    end
 
     def upload(model_klass, basename, mounted_as: nil)
       uploader = uploader_for(model_klass, mounted_as: mounted_as)
