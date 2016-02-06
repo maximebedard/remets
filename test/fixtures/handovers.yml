@@ -1,20 +1,17 @@
 log121_lab1:
   title: "LOG121 - Laboratoire 1"
   user: gaston
-  uuid: "f8c9ffd6-a234-4729-bd2a-68379df315fb"
   invite_only: true
   password: ""
 
 log240_lab1:
   title: "LOG240 - Laboratoire 1"
   user: gaston
-  uuid: "adf5efad-7c72-4e3f-9b1a-922fdbf6ebdf"
   invite_only: true
   password: "password"
 
 log550_lab1:
   title: "LOG550 - Laboratoire 1"
   user: gaston
-  uuid: "e15b0c03-3ff0-46c2-99b2-76406da80b3a"
   invite_only: true
   password: "yass"
