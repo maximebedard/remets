@@ -4,9 +4,40 @@
       <div class="col-lg-12">
         <h1>New Submission</h1>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <%= f.label :documents do %>
+            Documents to submit
+            <a href="#" data-toggle="modal" data-target="#info-documents">
+              <i class="fa fa-info-circle"></i>
+            </a>
+          <% end %>
+          <%= f.file_field :documents,
+            multiple: true,
+            name: "submission[documents_attributes][][file_ptr]" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-lg-12">
         <%= f.submit 'Create Submission', class: 'btn btn-success' %>
       </div>
     </div>
   <% end %>
 </div>
+
+<%= render(
+      layout: "shared/info_modal",
+      locals: { title: "Documents", label: "document-label", id: "info-documents" }
+    ) do %>
+  <p>
+    Is there any documents that you wish to give to the students to start their work? Theses documents will be exluded will performing document comparaison.
+  </p>
+  <p>
+    Go a ahead and include it!
+  </p>
+<% end %>
