@@ -9,7 +9,7 @@ class CreateHandover < ActiveRecord::Migration
       t.text :description
       t.timestamps null: false
       t.boolean :invite_only, default: true
-      t.string :password, null: true
+      t.string :password_digest, null: true
     end
   end
 end
