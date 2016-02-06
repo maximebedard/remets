@@ -39,7 +39,7 @@ class MatcherTest < ActiveSupport::TestCase
       file_ptr: empty_file_upload,
       windows: [[0, 1234], [1, 4567], [4, 6666]],
     )
-    boilerplate_documents(:makefile_boilerplate).update!(
+    boilerplate_documents(:platypus_boilerplate).update!(
       file_ptr: empty_file_upload,
       windows: [[0, 1234]],
     )

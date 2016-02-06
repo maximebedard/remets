@@ -52,6 +52,6 @@ class BoilerplateDocumentFingerprintingJobTest < ActiveSupport::TestCase
   include FingerprintingJobTests
 
   setup do
-    @document = boilerplate_documents(:makefile_boilerplate)
+    @document = boilerplate_documents(:platypus_boilerplate)
   end
 end
