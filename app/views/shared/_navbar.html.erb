@@ -27,7 +27,8 @@
               <%= current_user.name %><span class="caret"></span>
             <% end %>
             <ul class="dropdown-menu">
-              <li><%= link_to "Account", edit_account_path %></li>
+              <li><%= link_to "Account", account_path %></li>
+              <li><%= link_to "Settings", edit_account_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Sign out", auth_destroy_path %></li>
             </ul>
