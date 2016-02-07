@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Remets
   AUTH_SESSION_KEY = :_remets_user_id
+  AUTH_REMEMBER_KEY = "_remets_remember_id".freeze
+  AUTH_REMEMBER_TOKEN = "_remets_remember_token".freeze
 
   class Application < Rails::Application
     config.active_job.queue_adapter = :sidekiq

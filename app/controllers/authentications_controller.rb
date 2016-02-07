@@ -6,7 +6,8 @@ class AuthenticationsController < ApplicationController
   def create
     @email = auth_params[:email]
     if @user = User.from_auth(email: @email, password: auth_params[:password])
-      sign_in_and_redirect(dashboards_path)
+      auth_params[:remember_me] ? remember : forget
+      sign_in_and_redirect(account_path)
     else
       flash.now[:danger] = "Email/Password combination does not match"
       render "new"
@@ -19,6 +20,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def destroy
+    forget
     self.current_user = nil
     redirect_to(root_path)
   end
@@ -45,7 +47,18 @@ class AuthenticationsController < ApplicationController
     redirect_to(path)
   end
 
+  def remember
+    cookies.permanent.signed[Remets::AUTH_REMEMBER_KEY] = @user.id
+    cookies.permanent[Remets::AUTH_REMEMBER_TOKEN] = @user.remember
+  end
+
+  def forget
+    current_user.forget if signed_in?
+    cookies.delete(Remets::AUTH_REMEMBER_KEY)
+    cookies.delete(Remets::AUTH_REMEMBER_TOKEN)
+  end
+
   def auth_params
-    params.require(:authentication).permit(:email, :password)
+    params.require(:authentication).permit(:email, :password, :remember_me)
   end
 end

@@ -5,6 +5,12 @@
   <div class="form-group">
     <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
   </div>
+  <div class="checkbox">
+    <%= f.label :remember_me do %>
+      <%= f.check_box :remember_me %>
+      <span>Remember me!</span>
+    <% end %>
+  </div>
   <%= f.submit "Sign in!", class: "btn btn-large btn-primary form-control" %>
 <% end %>
 <div class="stroked"><span class="stroked__text">or</span></div>

@@ -15,11 +15,8 @@ class UserTest < ActiveSupport::TestCase
     assert users(:pierre).admin?
   end
 
-  test "#remember sets the remember token" do
-    token = @user.remember
-
-    assert_not_nil token
-    assert_equal token, @user.remember_token
+  test "#remember returns the remember token" do
+    assert_not_nil @user.remember
   end
 
   test "#remember persist the remember_digest" do
@@ -29,13 +26,13 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "#remembered? is true when the token is a password from the remembered digest" do
-    SecureRandom.stubs(:urlsafe_base64).returns("pants")
+    SecureRandom.stubs(:hex).returns("pants")
 
     assert @user.remembered?(@user.remember)
   end
 
   test "#remembered? is false when the token is not a password from the remembered digest" do
-    SecureRandom.stubs(:urlsafe_base64).returns("pants")
+    SecureRandom.stubs(:hex).returns("pants")
     @user.remember
 
     refute @user.remembered?("potato")

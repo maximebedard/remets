@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   end
   resources :document_matches, only: [:show]
   resources :users, only: [:create]
-  resources :dashboards, only: [:index]
 
   resource :registration, only: [:new, :create]
   resource :account, only: [:show, :edit, :update]
@@ -24,7 +23,7 @@ Rails.application.routes.draw do
     get "/new", action: "new"
     get "/", to: redirect("/auth/new"), as: :index
     post "/", action: "create"
-    match "/destroy", action: "destroy", via: [:get, :post]
+    match "/destroy", action: "destroy", via: [:get, :delete]
     get "/:provider", action: "passthru", as: :authorize, **oauth_constraints
     get "/:provider/callback", action: "callback", as: :callback, **oauth_constraints
     get "/failure", action: "failure"

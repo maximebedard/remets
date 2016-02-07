@@ -13,6 +13,15 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_nil @controller.current_user
   end
 
+  test "#current_user return the user from the cookies" do
+    user = users(:gaston)
+
+    cookies.permanent.signed[Remets::AUTH_REMEMBER_KEY] = user.id
+    cookies.permanent[Remets::AUTH_REMEMBER_TOKEN] = user.remember
+
+    assert_equal "rinfrette.gaston@gmail.com", @controller.current_user.email
+  end
+
   test "#current_user= sets the user in the session" do
     @controller.current_user = users(:gaston)
 
