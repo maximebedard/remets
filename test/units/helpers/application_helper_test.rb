@@ -11,11 +11,11 @@ class ApplicationHelperTest < ActionView::TestCase
 
   test "#white_background returns white-bg when controller name equals home" do
     @controller.stubs(controller_name: "home")
-    assert_equal "white-bg", white_bg?
+    assert_equal "white-bg", white_background
   end
 
   test "#white_background returns nil when controller name does not equal home" do
     @controller.stubs(controller_name: "yolo")
-    assert_equal nil, white_bg?
+    assert_equal nil, white_background
   end
 end

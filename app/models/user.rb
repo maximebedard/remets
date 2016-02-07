@@ -34,8 +34,6 @@ class User < ActiveRecord::Base
   before_save :format_email
   before_save :format_name
 
-  attr_reader :remember_token
-
   class << self
     def from_omniauth(params, current_user)
       authorization =
@@ -101,9 +99,13 @@ class User < ActiveRecord::Base
   end
 
   def remember
-    @remember_token = SecureRandom.urlsafe_base64.tap do |token|
+    SecureRandom.hex.tap do |token|
       update_attribute(:remember_digest, self.class.digest(token))
     end
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
   end
 
   def remembered?(token)

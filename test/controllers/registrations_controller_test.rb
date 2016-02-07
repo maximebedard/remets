@@ -16,6 +16,6 @@ class RegistrationsControllerTest < ActionController::TestCase
         password: "pants...",
       }
     end
-    assert_redirected_to dashboards_path
+    assert_redirected_to account_path
   end
 end
