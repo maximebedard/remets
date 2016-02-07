@@ -18,4 +18,15 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
     assert_redirected_to account_path
   end
+
+  test "#create signs in the user" do
+    post :create, user: {
+      email: "henry@test.com",
+      name: "Henry Lemieux",
+      password: "pants...",
+    }
+
+    assert_redirected_to account_path
+    assert_equal User.last.id, session[Remets::AUTH_SESSION_KEY]
+  end
 end
