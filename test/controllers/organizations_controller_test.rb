@@ -44,7 +44,7 @@ class OrganizationsControllerTest < ActionController::TestCase
 
   test "#update" do
     patch :update, id: @organization.id, organization: { name: "Henry Corp." }
-    assert_response :success
+    assert_redirected_to account_organizations_path
   end
 
   test "#update is not authorized when signed out" do
