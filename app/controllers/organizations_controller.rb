@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @organizations = policy_scope(Organization)
+    @organizations = policy_scope(Organization.all)
     respond_with(@organizations)
   end
 
@@ -25,12 +25,14 @@ class OrganizationsController < ApplicationController
   def new
     @organization = Organization.new
     authorize(@organization)
+
     respond_with(@organization)
   end
 
   def create
     @organization = Organization.create(organization_params)
     authorize(@organization)
+
     respond_with(@organization)
   end
 

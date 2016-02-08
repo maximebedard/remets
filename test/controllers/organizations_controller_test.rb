@@ -2,7 +2,7 @@ require "test_helper"
 
 class OrganizationsControllerTest < ActionController::TestCase
   setup do
-    sign_in users(:henry)
+    sign_in users(:gaston)
     @organization = organizations(:ets)
   end
 

@@ -1,11 +1,7 @@
 class OrganizationPolicy < ApplicationPolicy
   include MustBeAuthenticated
 
-  class Scope < Scope
-    def resolve
-      scope.where(user: user)
-    end
-  end
+  Scope = Class.new(Scopes::AuthenticatedScope)
 
   def index?
     true
