@@ -1,4 +1,6 @@
 class AuthenticationsController < ApplicationController
+  layout "brochure"
+
   def new
     redirect_when_signed_in
   end
