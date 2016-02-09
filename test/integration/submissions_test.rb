@@ -3,6 +3,10 @@ require "test_helper"
 class SubmissionsTest < ActionDispatch::IntegrationTest
   include Remets::SanitizedDocumentFileUploadHelper
 
+  setup do
+    sign_in
+  end
+
   test "create a submission with a sanitizable document" do
     @file = sanitizable_file_upload
 

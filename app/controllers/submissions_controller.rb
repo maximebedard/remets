@@ -2,28 +2,41 @@ class SubmissionsController < ApplicationController
   respond_to :html, :json
 
   def all
-    @submissions = Submission.all
+    @submissions = policy_scope(Submission.all)
+    authorize(@submissions)
+
     respond_with(@submissions)
   end
 
   def index
-    @submissions = Handover.find_by(uuid: params[:handover_uuid]).submissions
+    @submissions = policy_scope(
+      Handover.find_by(uuid: params[:handover_uuid]).submissions,
+    )
+    authorize(@submissions)
+
     respond_with(@submissions)
   end
 
   def show
-    @submission = Submission.find(params[:id])
+    @submission = policy_scope(Submission.where(id: params[:id])).first!
+    authorize(@submission)
+
     respond_with(@submission)
   end
 
   def new
     @submission = Submission.new
+    authorize(@submission)
+
     respond_with(@submission)
   end
 
   def create
+    @submission = Submission.new
+    authorize(@submission)
+
     @submission = Fingerprinter.new(
-      Submission.new,
+      @submission,
       submission_params,
     ).call
     respond_with(@submission)
