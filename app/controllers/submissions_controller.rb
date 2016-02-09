@@ -10,7 +10,8 @@ class SubmissionsController < ApplicationController
 
   def index
     @submissions = policy_scope(
-      Handover.find_by(uuid: params[:handover_uuid]).submissions,
+      Submission.joins(:handover)
+        .where(handover: { uuid: params[:handover_uuid] }),
     )
     authorize(@submissions)
 

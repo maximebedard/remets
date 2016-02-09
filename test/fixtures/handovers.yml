@@ -15,3 +15,9 @@ log550_lab1:
   user: gaston
   invite_only: true
   password_digest: <%= password %>
+
+gti772_final:
+  title: "GTI772 - Rapport final"
+  user: gaston
+  invite_only: true
+  password_digest: <%= password %>

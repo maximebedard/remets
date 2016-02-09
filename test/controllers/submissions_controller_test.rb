@@ -30,6 +30,20 @@ class SubmissionsControllerTest < ActionController::TestCase
     assert_response :ok
   end
 
+  test "#index for a handover with no submissions" do
+    get :index, handover_uuid: handovers(:gti772_final).uuid
+
+    assert assigns(:submissions)
+    assert_response :ok
+  end
+
+  test "#index for a non-existing handover" do
+    get :index, handover_uuid: 1337
+
+    assert assigns(:submissions)
+    assert_response :ok
+  end
+
   test "#index is not authorized when signed out" do
     sign_out
 
