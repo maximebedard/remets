@@ -4,7 +4,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   include Remets::SanitizedDocumentFileUploadHelper
 
   setup do
-    sign_in
+    sign_in(users(:gaston))
   end
 
   test "create a submission with a sanitizable document" do

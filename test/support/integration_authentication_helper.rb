@@ -3,13 +3,13 @@ module Remets
     extend ActiveSupport::Concern
 
     def sign_in(
-      email: "rinfrette.gaston@gmail.com",
+      user,
       password: "password",
       remember_me: false
     )
       get "/auth/new"
       post_via_redirect "/auth", authentication: {
-        email: email,
+        email: user.email,
         password: password,
         remember_me: remember_me,
       }

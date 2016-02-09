@@ -5,6 +5,7 @@ class HandoversControllerTest < ActionController::TestCase
 
   setup do
     @handover = handovers(:log121_lab1)
+    sign_in users(:gaston)
   end
 
   test "#index" do
@@ -14,6 +15,27 @@ class HandoversControllerTest < ActionController::TestCase
     assert_response :ok
   end
 
+  test "#index is not authorized when signed out" do
+    sign_out
+
+    get :index
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+  end
+
+  test "#show" do
+    get :show, uuid: @handover.uuid
+
+    assert assigns(:handover)
+    assert_response :ok
+  end
+
+  test "#show is not authorized when signed out" do
+    sign_out
+
+    get :show, uuid: @handover.uuid
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+  end
+
   test "#edit" do
     get :edit, uuid: @handover.uuid
 
@@ -21,18 +43,39 @@ class HandoversControllerTest < ActionController::TestCase
     assert_response :ok
   end
 
+  test "#edit is not authorized when signed out" do
+    sign_out
+
+    get :edit, uuid: @handover.uuid
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+  end
+
   test "#update" do
-    file = sanitizable_file_upload
     patch(
       :update,
       uuid: @handover.uuid,
       handover: {
         title: "pants",
-        reference_documents_attributes: [{ file_ptr: file }],
-        documents_attributes: [{ file_ptr: file }],
+        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
     )
     assert_redirected_to assigns(:handover)
+  end
+
+  test "#update is not authorized when signed out" do
+    sign_out
+
+    patch(
+      :update,
+      uuid: @handover.uuid,
+      handover: {
+        title: "pants",
+        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+      },
+    )
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
   end
 
   test "#new" do
@@ -42,16 +85,36 @@ class HandoversControllerTest < ActionController::TestCase
     assert_response :ok
   end
 
+  test "#new is not authorized when signed out" do
+    sign_out
+
+    get :new
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+  end
+
   test "#create" do
-    file = sanitizable_file_upload
     post(
       :create,
       handover: {
         title: "pants",
-        reference_documents_attributes: [{ file_ptr: file }],
-        documents_attributes: [{ file_ptr: file }],
+        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
     )
     assert_redirected_to assigns(:handover)
+  end
+
+  test "#create is not authorized when signed out" do
+    sign_out
+
+    post(
+      :create,
+      handover: {
+        title: "pants",
+        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+      },
+    )
+    assert_redirected_to auth_authorize_path(:google, origin: request.url)
   end
 end
