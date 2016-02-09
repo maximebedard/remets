@@ -36,7 +36,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new
     authorize(@submission)
 
-    @submission = Fingerprinter.new(
+    Fingerprinter.new(
       @submission,
       submission_params,
     ).call

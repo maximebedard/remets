@@ -7,7 +7,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
 
   test "user signs in" do
     open_session do |sess|
-      sess.sign_in
+      sess.sign_in(users(:gaston))
 
       assert_equal "/account", sess.path
       assert_equal @user, sess.controller.current_user
@@ -23,7 +23,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
 
   test "user signs in, signs out" do
     open_session do |sess|
-      sess.sign_in
+      sess.sign_in(users(:gaston))
 
       assert_equal "/account", sess.path
       assert_equal @user, sess.controller.current_user
@@ -45,7 +45,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
 
   test "user signs in, asks to be remembered" do
     open_session do |sess|
-      sess.sign_in(remember_me: true)
+      sess.sign_in(users(:gaston), remember_me: true)
 
       assert_equal "/account", sess.path
       assert_equal @user, sess.controller.current_user
@@ -57,7 +57,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
 
   test "user signs in, asks to be remembered, log out" do
     open_session do |sess|
-      sess.sign_in(remember_me: true)
+      sess.sign_in(users(:gaston), remember_me: true)
 
       assert_equal "/account", sess.path
       assert_equal @user, sess.controller.current_user

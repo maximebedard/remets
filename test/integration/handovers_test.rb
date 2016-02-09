@@ -3,6 +3,10 @@ require "test_helper"
 class HandoversTest < ActionDispatch::IntegrationTest
   include Remets::SanitizedDocumentFileUploadHelper
 
+  setup do
+    sign_in(users(:gaston))
+  end
+
   test "create a handover" do
     @file1 = unsanitizable_file_upload
     @file2 = sanitizable_file_upload
