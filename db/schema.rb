@@ -63,12 +63,12 @@ ActiveRecord::Schema.define(version: 20160202021721) do
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
 
   create_table "handovers", force: :cascade do |t|
-    t.uuid     "uuid",            default: "uuid_generate_v4()"
+    t.uuid     "uuid",                           null: false
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.boolean  "invite_only",     default: true
     t.string   "password_digest"
   end

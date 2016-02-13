@@ -2,7 +2,7 @@ class HandoversController < ApplicationController
   respond_to :html, :json
 
   def index
-    @handovers = policy_scope(Handover.all)
+    @handovers = policy_scope(Handover)
     authorize(@handovers)
 
     respond_with(@handovers)
@@ -30,25 +30,25 @@ class HandoversController < ApplicationController
       @handover,
       handover_params,
     ).call
-    respond_with(@handover)
+    respond_with(@handover, location: handover_path(uuid: @handover.uuid))
   end
 
   def new
-    @handover = Handover.new
+    @handover = policy_scope(Handover).build
     authorize(@handover)
 
     respond_with(@handover)
   end
 
   def create
-    @handover = Handover.new
+    @handover = policy_scope(Handover).build
     authorize(@handover)
 
     Fingerprinter.new(
       @handover,
       handover_params,
     ).call
-    respond_with(@handover)
+    respond_with(@handover, location: handover_path(uuid: @handover.uuid))
   end
 
   private
