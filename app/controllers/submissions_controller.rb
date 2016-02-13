@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   respond_to :html, :json
 
   def all
-    @submissions = policy_scope(Submission.all)
+    @submissions = policy_scope(Submission)
     authorize(@submissions)
 
     respond_with(@submissions)
@@ -26,14 +26,14 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = Submission.new
+    @submission = policy_scope(Submission).build
     authorize(@submission)
 
     respond_with(@submission)
   end
 
   def create
-    @submission = Submission.new
+    @submission = policy_scope(Submission).build
     authorize(@submission)
 
     Fingerprinter.new(

@@ -1,23 +1,27 @@
 log121_lab1:
   title: "LOG121 - Laboratoire 1"
   user: gaston
+  uuid: "a96f0cb6-3e2e-4768-805c-dd0c8644def9"
   invite_only: true
   password_digest: <%= password %>
 
 log240_lab1:
   title: "LOG240 - Laboratoire 1"
   user: gaston
+  uuid: "2b21f7a0-f44e-4c8a-8970-892e97a54e58"
   invite_only: true
   password_digest: <%= password %>
 
 log550_lab1:
   title: "LOG550 - Laboratoire 1"
   user: gaston
+  uuid: "5a4b93db-28ba-4006-a0f7-b7c3f7280ed6"
   invite_only: true
   password_digest: <%= password %>
 
 gti772_final:
   title: "GTI772 - Rapport final"
   user: gaston
+  uuid: "942e3dfe-b621-49e4-9c70-d8df1331b2cf"
   invite_only: true
   password_digest: <%= password %>

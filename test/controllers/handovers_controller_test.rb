@@ -60,7 +60,7 @@ class HandoversControllerTest < ActionController::TestCase
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
     )
-    assert_redirected_to assigns(:handover)
+    assert_redirected_to handover_path(uuid: assigns(:handover).uuid)
   end
 
   test "#update is not authorized when signed out" do
@@ -101,7 +101,7 @@ class HandoversControllerTest < ActionController::TestCase
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
     )
-    assert_redirected_to assigns(:handover)
+    assert_redirected_to handover_path(uuid: assigns(:handover).uuid)
   end
 
   test "#create is not authorized when signed out" do
