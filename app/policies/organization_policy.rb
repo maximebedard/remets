@@ -24,4 +24,8 @@ class OrganizationPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def leave?
+    true
+  end
 end

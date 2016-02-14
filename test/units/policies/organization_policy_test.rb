@@ -26,4 +26,8 @@ class OrganizationPolicyTest < ActiveSupport::TestCase
   test "#create?" do
     assert_permit(users(:henry), organizations(:ets), :create)
   end
+
+  test "#leave?" do
+    assert_permit(users(:henry), organizations(:ets), :leave)
+  end
 end

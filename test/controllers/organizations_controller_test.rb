@@ -77,4 +77,29 @@ class OrganizationsControllerTest < ActionController::TestCase
     post :create, organization: { name: "Henry Corp." }
     assert_redirected_to_auth_new
   end
+
+  test "#leave" do
+    assert_difference("UserOrganization.count", -1) do
+      delete :leave, id: @organization.id
+    end
+
+    assert_redirected_to account_organizations_path
+  end
+
+  test "#leave destroy the organization when there is not other member" do
+    @organization.leave(users(:henry))
+
+    assert_difference(["UserOrganization.count", "Organization.count"], -1) do
+      delete :leave, id: @organization.id
+    end
+
+    assert_redirected_to account_organizations_path
+  end
+
+  test "#leave is not authorized when signed out" do
+    sign_out
+
+    delete :leave, id: @organization.id
+    assert_redirected_to_auth_new
+  end
 end
