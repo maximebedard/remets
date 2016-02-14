@@ -40,10 +40,21 @@ class OrganizationsController < ApplicationController
 
   def create
     @organization = policy_scope(Organization).build(organization_params)
+    @organization.user = current_user
+    @organization.user_organizations.build(user: current_user)
+
     authorize(@organization)
 
     @organization.save
     respond_with(@organization, location: account_organization_path(@organization))
+  end
+
+  def leave
+    @organization = policy_scope(Organization.where(id: params[:id])).first!
+    authorize(@organization)
+
+    @organization.leave(current_user)
+    respond_with(@organization, location: account_organizations_path)
   end
 
   private

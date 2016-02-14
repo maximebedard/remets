@@ -1,5 +1,10 @@
 class OrganizationPolicy < ApplicationPolicy
-  Scope = Class.new(Scopes::AuthenticatedScope)
+  class Scope < ApplicationPolicy::Scope
+    def resolve
+      scope.joins(:user_organizations)
+        .where(user_organizations: { user: user })
+    end
+  end
 
   def index?
     true
@@ -22,6 +27,10 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def create?
+    true
+  end
+
+  def leave?
     true
   end
 end
