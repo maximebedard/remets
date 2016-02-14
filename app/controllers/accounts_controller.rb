@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   respond_to :html, :json
+  must_be_authenticated
 
   def show
     authorize(:account, :show?)

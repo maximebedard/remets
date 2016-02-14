@@ -1,4 +1,6 @@
 class DocumentsController < ApplicationController
+  must_be_authenticated
+
   def index
     @documents = Document.all
     authorize(@documents)

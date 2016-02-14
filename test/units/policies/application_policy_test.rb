@@ -65,7 +65,7 @@ class ApplicationPolicyTest < ActiveSupport::TestCase
       documents(:platypus),
     )
 
-    assert_raises(ApplicationPolicy::NotAuthenticatedError) do
+    assert_raises(Remets::NotAuthenticatedError) do
       @policy.authenticate!
     end
   end

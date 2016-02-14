@@ -1,9 +1,6 @@
 class ApplicationPolicy
   attr_reader :user, :record
 
-  class NotAuthenticatedError < StandardError
-  end
-
   def initialize(user, record)
     @user = user
     @record = record
@@ -38,7 +35,7 @@ class ApplicationPolicy
   end
 
   def authenticate!
-    raise NotAuthenticatedError unless authenticated?
+    raise Remets::NotAuthenticatedError unless authenticated?
   end
 
   def authenticated?

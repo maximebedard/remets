@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   respond_to :html, :json
+  must_be_authenticated
 
   def index
     @organizations = policy_scope(Organization)

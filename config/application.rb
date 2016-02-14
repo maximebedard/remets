@@ -11,10 +11,11 @@ module Remets
   AUTH_REMEMBER_KEY = "_remets_remember_id".freeze
   AUTH_REMEMBER_TOKEN = "_remets_remember_token".freeze
 
+  NotAuthenticatedError = Class.new(StandardError)
+
   class Application < Rails::Application
     config.active_job.queue_adapter = :sidekiq
     config.autoload_paths += %W(
-      #{config.root}/app/policies/concerns
       #{config.root}/app/uploaders/concerns
     )
     config.responders.flash_keys = %i(success danger)
