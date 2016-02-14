@@ -19,7 +19,7 @@ class HandoversControllerTest < ActionController::TestCase
     sign_out
 
     get :index
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#show" do
@@ -33,7 +33,7 @@ class HandoversControllerTest < ActionController::TestCase
     sign_out
 
     get :show, uuid: @handover.uuid
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#edit" do
@@ -47,7 +47,7 @@ class HandoversControllerTest < ActionController::TestCase
     sign_out
 
     get :edit, uuid: @handover.uuid
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#update" do
@@ -75,7 +75,7 @@ class HandoversControllerTest < ActionController::TestCase
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
     )
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#new" do
@@ -89,7 +89,7 @@ class HandoversControllerTest < ActionController::TestCase
     sign_out
 
     get :new
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#create" do
@@ -115,6 +115,6 @@ class HandoversControllerTest < ActionController::TestCase
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
     )
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 end

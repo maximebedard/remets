@@ -15,7 +15,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     sign_out
 
     get :index
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#show" do
@@ -27,7 +27,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     sign_out
 
     get :show, id: @organization.id
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#edit" do
@@ -39,7 +39,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     sign_out
 
     get :edit, id: @organization.id
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#update" do
@@ -51,7 +51,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     sign_out
 
     patch :update, id: @organization.id, organization: { name: "Henry Corp." }
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#new" do
@@ -63,7 +63,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     sign_out
 
     get :new
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#create" do
@@ -75,6 +75,6 @@ class OrganizationsControllerTest < ActionController::TestCase
     sign_out
 
     post :create, organization: { name: "Henry Corp." }
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 end

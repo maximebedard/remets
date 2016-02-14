@@ -24,6 +24,7 @@ end
 
 class ActionController::TestCase
   include Remets::SessionHelper
+  include Remets::AuthenticationHelper
 end
 
 class ActionDispatch::IntegrationTest

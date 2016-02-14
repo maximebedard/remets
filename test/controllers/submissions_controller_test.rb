@@ -20,7 +20,7 @@ class SubmissionsControllerTest < ActionController::TestCase
     sign_out
 
     get :all
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#index" do
@@ -41,7 +41,7 @@ class SubmissionsControllerTest < ActionController::TestCase
     sign_out
 
     get :index, handover_uuid: @handover.uuid
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#show" do
@@ -55,7 +55,7 @@ class SubmissionsControllerTest < ActionController::TestCase
     sign_out
 
     get :show, id: @submission.id
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#create" do
@@ -73,7 +73,7 @@ class SubmissionsControllerTest < ActionController::TestCase
       handover_uuid: @handover.uuid,
       submission: { documents_attributes: [{ file_ptr: sanitizable_file_upload }] }
 
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#new" do
@@ -87,6 +87,6 @@ class SubmissionsControllerTest < ActionController::TestCase
     sign_out
 
     get :new, handover_uuid: @handover.uuid
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 end

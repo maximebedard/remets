@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
   private
 
   def user_must_be_authenticated
-    redirect_to auth_authorize_path(:google, origin: request.original_url)
+    session[Remets::ORIGIN_KEY] = request.original_url
+    redirect_to auth_new_path
   end
 
   def user_not_authorized
