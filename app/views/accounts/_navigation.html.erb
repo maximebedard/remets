@@ -1,0 +1,16 @@
+<div class="col-lg-2">
+  <div class="remets-panel remets-panel--red">
+    <div class="remets-panel__heading">
+      <h3 class="remets-panel__title">Settings</h3>
+    </div>
+    <div class="remets-panel__item <%= active_on_controller("accounts") %>">
+      <%= link_to "Account", account_path %>
+    </div>
+    <div class="remets-panel__item">
+      <%= link_to "Notification", "#" %>
+    </div>
+    <div class="remets-panel__item <%= active_on_controller("organizations") %>">
+      <%= link_to "Organizations", account_organizations_path %>
+    </div>
+  </div>
+</div>

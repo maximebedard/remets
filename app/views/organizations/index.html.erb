@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="remets-panel remets-panel--default">
+        <div class="remets-panel__heading">
+          <h3 class="remets-panel__title">Organizations</h3>
+          <%= link_to(new_account_organization_path, class: "btn btn-transparent btn-sm") do %>
+            <i class="fa fa-plus"></i> New organization
+          <% end %>
+        </div>
+        <% @organizations.each do |organization| %>
+          <div class="remets-panel__item">
+            <div>
+              <%= organization.name %>
+            </div>
+            <div class="remets-panel__item__actions">
+              <button class="btn btn-default btn-sm">
+                <i class="fa fa-pencil"></i> Manage
+              </button>
+              <button class="btn btn-danger btn-sm">
+                <i class="fa fa-eraser"></i> Leave
+              </button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render partial: "accounts/navigation" %>
+  </div>
+</div>
