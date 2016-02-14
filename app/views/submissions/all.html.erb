@@ -6,13 +6,13 @@
         <div class="remets-panel__heading">
           <h3 class="remets-panel__title">Submissions</h3>
         </div>
-        <% @submissions.group_by { |s| s.handover }.each do |handover, submissions| %>
+        <% @submissions.group_by(&:handover).each do |handover, submissions| %>
           <div class="remets-panel__item">
             <div class="remets-panel__item__title">
               <h1><%= handover.title %></h1>
               <h2>Organization Name</h2>
               <div>
-                Versions submitted: <%= submissions.size %>
+                Versions : <%= submissions.size %>
               </div>
             </div>
             <div class="remets-panel__item__description">
@@ -23,35 +23,7 @@
               </ul>
             </div>
           </div>
-
         <% end %>
-<!--         <div class="remets-panel__item">
-          <div class="remets-panel__item__title">
-            <h1>Project Title</h1>
-            <h2>Organization Name</h2>
-            <div>
-              Subscribers : 20 <i class="fa fa-user" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div class="remets-panel__item__description">
-            <p class="light-text">
-              Due date : 16 Feb 2016 @ 3:12pm
-            </p>
-            <p>
-              Cupcake ipsum dolor. Sit amet jelly beans cookie tootsie roll gingerbread chupa chups gummi bears pudding. Chocolate cotton candy pastry jelly beans cake croissant...
-            </p>
-          </div>
-          <div class="remets-panel__item__actions">
-            <button class="btn btn-default btn-sm">
-              <i class="fa fa-pencil"></i> Edit
-            </button>
-            <button class="btn btn-danger btn-sm">
-              <i class="fa fa-eraser"></i> Remove
-            </button>
-          </div>
-        </div>
- -->
-
       </div>
     </div>
 
