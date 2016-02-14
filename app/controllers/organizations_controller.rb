@@ -28,22 +28,22 @@ class OrganizationsController < ApplicationController
     authorize(@organization)
 
     @organization.update(organization_params)
-    respond_with(@organization, location: account_organizations_path)
+    respond_with(@organization, location: account_organization_path(@organization))
   end
 
   def new
-    @organization = Organization.new
+    @organization = policy_scope(Organization).build
     authorize(@organization)
 
     respond_with(@organization)
   end
 
   def create
-    @organization = Organization.new(organization_params)
+    @organization = policy_scope(Organization).build(organization_params)
     authorize(@organization)
 
     @organization.save
-    respond_with(@organization)
+    respond_with(@organization, location: account_organization_path(@organization))
   end
 
   private

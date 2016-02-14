@@ -5,7 +5,7 @@
 
 .remets-panel__heading {
   border: none;
-  padding: 20px 15px;
+  padding: 10px 15px;
   @include flex();
   justify-content: space-between;
   align-items: center;
@@ -49,6 +49,7 @@
     margin: 0 5px;
   }
 }
+
 
 .remets-panel.remets-panel--default {
   .remets-panel__heading {
