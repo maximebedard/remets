@@ -1,6 +1,4 @@
 class HandoverPolicy < ApplicationPolicy
-  include MustBeAuthenticated
-
   Scope = Class.new(Scopes::AuthenticatedScope)
 
   def index?

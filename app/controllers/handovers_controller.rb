@@ -1,5 +1,6 @@
 class HandoversController < ApplicationController
   respond_to :html, :json
+  must_be_authenticated
 
   def index
     @handovers = policy_scope(Handover)

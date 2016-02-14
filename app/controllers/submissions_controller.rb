@@ -1,5 +1,6 @@
 class SubmissionsController < ApplicationController
   respond_to :html, :json
+  must_be_authenticated
 
   def all
     @submissions = policy_scope(Submission)
@@ -9,10 +10,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = policy_scope(
-      Submission.joins(:handover)
-        .where(handover: { uuid: params[:handover_uuid] }),
-    )
+    @submissions = policy_scope(handover.submissions)
     authorize(@submissions)
 
     respond_with(@submissions)
@@ -26,14 +24,14 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = policy_scope(Submission).build
+    @submission = policy_scope(handover.submissions).build
     authorize(@submission)
 
     respond_with(@submission)
   end
 
   def create
-    @submission = policy_scope(Submission).build
+    @submission = policy_scope(handover.submissions).build
     authorize(@submission)
 
     Fingerprinter.new(
@@ -48,5 +46,9 @@ class SubmissionsController < ApplicationController
   def submission_params
     params.require(:submission)
       .permit(documents_attributes: [:file_ptr])
+  end
+
+  def handover
+    @handover ||= Handover.find_by!(uuid: params[:handover_uuid])
   end
 end

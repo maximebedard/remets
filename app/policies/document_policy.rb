@@ -1,6 +1,4 @@
 class DocumentPolicy < ApplicationPolicy
-  include MustBeAuthenticated
-
   def index?
     admin?
   end

@@ -1,6 +1,4 @@
 class SubmissionPolicy < ApplicationPolicy
-  include MustBeAuthenticated
-
   Scope = Class.new(Scopes::AuthenticatedScope)
 
   def all?

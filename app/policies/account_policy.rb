@@ -1,6 +1,4 @@
 class AccountPolicy < ApplicationPolicy
-  include MustBeAuthenticated
-
   def show?
     true
   end

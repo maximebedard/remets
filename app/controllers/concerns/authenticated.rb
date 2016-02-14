@@ -25,6 +25,12 @@ module Authenticated
     !signed_in?
   end
 
+  module ClassMethods
+    def must_be_authenticated(options = {})
+      before_action :__must_be_authenticated!, options
+    end
+  end
+
   private
 
   def user_from_session
@@ -37,5 +43,9 @@ module Authenticated
 
     self.current_user = user
     user
+  end
+
+  def __must_be_authenticated!
+    raise Remets::NotAuthenticatedError if signed_out?
   end
 end
