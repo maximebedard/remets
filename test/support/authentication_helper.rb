@@ -46,8 +46,9 @@ module Remets
       )
     end
 
-    def self.auth_providers
-      [:google]
+    def assert_redirected_to_auth_new(origin: request.url)
+      assert_equal origin, session[Remets::ORIGIN_KEY]
+      assert_redirected_to auth_new_path
     end
   end
 end

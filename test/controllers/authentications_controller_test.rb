@@ -1,23 +1,36 @@
 require "test_helper"
 
 class AuthenticationsControllerTest < ActionController::TestCase
-  include Remets::AuthenticationHelper
-
   test "#callback with an existing user using oauth" do
     mock_auth_request_for(:google, user: users(:gaston))
+
     assert_no_difference("User.count", "Authorization.count") do
       post :callback, provider: :google
     end
+
     assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to root_path
+    assert_redirected_to account_path
   end
 
-  test "#callback with the login page as origin redirects to the root page" do
+  test "#callback with the omniauth origin redirects to the origin" do
     mock_auth_request_for(:google, user: users(:gaston))
     request.env["omniauth.origin"] = auth_new_url
+
     post :callback, provider: :google
-    assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to root_path
+
+    assert_not_nil session[Remets::AUTH_SESSION_KEY]
+    assert_redirected_to account_path
+  end
+
+  test "#callback with the origin redirects to the origin" do
+    mock_auth_request_for(:google, user: users(:gaston))
+    session[Remets::ORIGIN_KEY] = "https://google.ca"
+
+    post :callback, provider: :google
+
+    assert_not_nil session[Remets::AUTH_SESSION_KEY]
+    assert_redirected_to "https://google.ca"
+    assert_nil session[Remets::ORIGIN_KEY]
   end
 
   test "#callback with a new user using oauth" do
@@ -33,11 +46,13 @@ class AuthenticationsControllerTest < ActionController::TestCase
         token: "3f1a00866f78690b758bb2ad28bb73fa",
       ),
     )
+
     assert_difference(["User.count", "Authorization.count"]) do
       post :callback, provider: :google
     end
+
     assert_equal User.last.id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to root_path
+    assert_redirected_to account_path
   end
 
   test "#callback when signed in add an authorization" do
@@ -52,13 +67,15 @@ class AuthenticationsControllerTest < ActionController::TestCase
         token: "3f1a00866f78690b758bb2ad28bb73fa",
       ),
     )
+
     assert_no_difference("User.count") do
       assert_difference("Authorization.count") do
         post :callback, provider: :google
       end
     end
+
     assert_equal users(:henry).id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to root_path
+    assert_redirected_to account_path
   end
 
   test "#new" do
@@ -77,6 +94,16 @@ class AuthenticationsControllerTest < ActionController::TestCase
     post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "password" }
     assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
     assert_redirected_to account_path
+  end
+
+  test "#create with the origin redirects to the origin" do
+    session[Remets::ORIGIN_KEY] = "https://google.ca"
+
+    post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "password" }
+
+    assert_not_nil session[Remets::AUTH_SESSION_KEY]
+    assert_redirected_to "https://google.ca"
+    assert_nil session[Remets::ORIGIN_KEY]
   end
 
   test "#create with an existing user but invalid password" do

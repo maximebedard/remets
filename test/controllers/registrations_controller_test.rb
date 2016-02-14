@@ -1,8 +1,6 @@
 require "test_helper"
 
 class RegistrationsControllerTest < ActionController::TestCase
-  include Remets::AuthenticationHelper
-
   test "#new" do
     get :new
     assert_response :ok

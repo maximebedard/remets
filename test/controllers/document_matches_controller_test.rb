@@ -26,7 +26,7 @@ class DocumentMatchesControllerTest < ActionController::TestCase
     params = { id: @document_match.id }
 
     get :show, params
-    assert_redirected_to auth_authorize_path(:google, origin: document_match_url(params))
+    assert_redirected_to_auth_new
   end
 
   test "#show is not authorized when not an admin" do

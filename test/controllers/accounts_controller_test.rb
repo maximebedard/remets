@@ -15,7 +15,7 @@ class AccountsControllerTest < ActionController::TestCase
     sign_out
 
     get :show
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#edit" do
@@ -32,13 +32,13 @@ class AccountsControllerTest < ActionController::TestCase
     sign_out
 
     get :edit
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 
   test "#update is not authorized when signed out" do
     sign_out
 
     patch :update, user: { name: "Henry II" }
-    assert_redirected_to auth_authorize_path(:google, origin: request.url)
+    assert_redirected_to_auth_new
   end
 end
