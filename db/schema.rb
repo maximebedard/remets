@@ -18,11 +18,13 @@ ActiveRecord::Schema.define(version: 20160202021721) do
   enable_extension "uuid-ossp"
 
   create_table "authorizations", force: :cascade do |t|
-    t.integer "user_id"
-    t.string  "provider"
-    t.string  "uid"
-    t.string  "token"
-    t.string  "secret"
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.string   "refresh_token"
+    t.string   "secret"
+    t.datetime "expires_at"
   end
 
   create_table "boilerplate_documents", force: :cascade do |t|

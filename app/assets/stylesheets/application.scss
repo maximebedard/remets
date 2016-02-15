@@ -11,7 +11,9 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// Vendored
+@import "selectize";
+
 //Import our custom components
 @import "components/module";
 @import "bootstrap-remets-buttons";
-

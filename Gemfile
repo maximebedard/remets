@@ -38,6 +38,7 @@ end
 group :test do
   gem "mocha", require: false
   gem "codeclimate-test-reporter", require: false
+  gem "webmock"
 end
 
 group :production do

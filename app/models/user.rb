@@ -68,13 +68,13 @@ class User < ActiveRecord::Base
       Authorization.where(
         provider: params["provider"],
         uid: params["uid"],
-        token: params["credentials"]["token"],
-        secret: params["credentials"]["secret"],
       ).first_or_create do |auth|
         auth.provider = params["provider"]
         auth.uid = params["uid"]
         auth.token = params["credentials"]["token"]
         auth.secret = params["credentials"]["secret"]
+        auth.refresh_token = params["credentials"]["refresh_token"]
+        auth.expires_at = Time.zone.at(params["credentials"]["expires_at"]).to_datetime
 
         yield(auth) if block_given?
       end
