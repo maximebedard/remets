@@ -21,6 +21,10 @@ class AccountsControllerTest < ActionController::TestCase
   test "#edit" do
     get :edit
     assert_response :success
+
+    Authorization.available_providers.each do |p|
+      assert_select "a[href=?]", auth_authorize_path(p)
+    end
   end
 
   test "#update" do
