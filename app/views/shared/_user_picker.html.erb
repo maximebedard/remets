@@ -1,15 +1,15 @@
 
-<%= select_tag name, "",
+<%= select_tag(name, "",
   class: "remets-pp selectized",
   multiple: "multiple",
-  placeholder: "Pick some people" %>
+  placeholder: "Pick some people") %>
 
 <%= content_for :scripts do %>
   <script type="text/javascript">
     var REGEX_EMAIL = "([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@" +
                       "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)";
 
-    $("<%= "##{name}" %>").selectize({
+    $("<%= "##{name.parameterize('_')}" %>").selectize({
       maxItems: null,
       valueField: "email",
       labelField: "name",

@@ -4,6 +4,7 @@ class Handover < ActiveRecord::Base
   has_many :submissions
 
   belongs_to :user
+  belongs_to :organization
 
   before_create :generate_uuid
 

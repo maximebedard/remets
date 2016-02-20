@@ -73,6 +73,7 @@ class HandoverFingerprinterTest < ActiveSupport::TestCase
     Fingerprinter.new(
       @subject,
       boilerplate_documents_attributes: files.map { |f| { file_ptr: f } },
+      due_date: 5.days.from_now,
     ).call
   end
 

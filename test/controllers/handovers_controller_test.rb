@@ -113,6 +113,7 @@ class HandoversControllerTest < ActionController::TestCase
         title: "pants",
         reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        due_date: 5.days.from_now,
       },
     )
     assert_redirected_to_auth_new

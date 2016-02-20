@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20160202021721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
   create_table "authorizations", force: :cascade do |t|
     t.integer  "user_id"
@@ -71,7 +70,8 @@ ActiveRecord::Schema.define(version: 20160202021721) do
     t.text     "description"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.boolean  "invite_only",     default: true
+    t.datetime "due_date",                       null: false
+    t.boolean  "invite_only",     default: true, null: false
     t.string   "password_digest"
   end
 
