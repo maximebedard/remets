@@ -9,7 +9,14 @@
             <i class="fa fa-plus"></i> New Handover
           <% end %>
         </div>
-        <%= render @handovers %>
+         <% if @handovers.empty? %>
+          <div class="remets-panel__item">
+            No handovers found! Why not create one?
+          </div>
+        <% end %>
+        <% @handovers.each do |handover| %>
+          <%= render partial: "handover", locals: {handover: handover} %>
+        <% end %>
         <div class="remets-panel__item">
           <div class="remets-panel__item__title">
             <h1>Project Title</h1>
