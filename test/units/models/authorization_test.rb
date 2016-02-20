@@ -17,9 +17,11 @@ class AuthorizationTest < ActiveSupport::TestCase
       secret: "05f4344cc973b60725deb2dabf3779ad",
     )
 
-    Authorization.stubs(available_providers: %i(google github bitbucket))
+    Authorization.stubs(available_providers: %w(google github bitbucket))
 
-    assert_equal [[:google, auth1], [:github, auth2], [:bitbucket, nil]],
-      Authorization.authorizations_by_provider(user)
+    assert_equal(
+      { "google" => [auth1], "github" => [auth2], "bitbucket" => [] },
+      Authorization.authorizations_by_provider(user),
+    )
   end
 end

@@ -12,12 +12,12 @@ class Authorization < ActiveRecord::Base
   class << self
     def available_providers
       # TODO: Add github and bitbucket providers
-      %i(google)
+      %w(google)
     end
 
     def authorizations_by_provider(user)
-      # TODO: Optimize this as it's making a shit ton of queries
-      available_providers.map { |p| [p, find_by(provider: p, user: user)] }
+      Hash[available_providers.map { |p| [p, []] }]
+        .merge(where(user: user).group_by(&:provider))
     end
   end
 
