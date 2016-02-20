@@ -6,7 +6,15 @@ class Handover < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
 
-  before_create :generate_uuid
+  before_validation :generate_uuid, on: :create
+
+  validates(
+    :uuid,
+    :title,
+    :description,
+    :due_date,
+    presence: true,
+  )
 
   accepts_nested_attributes_for :boilerplate_documents,
     :reference_documents

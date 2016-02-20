@@ -21,6 +21,7 @@ class HandoversTest < ActionDispatch::IntegrationTest
     submit(
       title: "Pants",
       description: description,
+      due_date: 5.days.from_now,
       reference_documents_attributes: [{ file_ptr: @file1 }],
       boilerplate_documents_attributes: [{ file_ptr: @file2 }],
     )

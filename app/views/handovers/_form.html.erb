@@ -1,6 +1,5 @@
 <%= form_for @handover, html: { multipart: true, class: "full-width" } do |f| %>
   <div class="form-group">
-    <label for="handoverName">Handover Title</label>
     <%= f.label :title %>
     <%= f.text_field :title, class: "form-control", placeholder: "Name" %>
   </div>
@@ -12,7 +11,7 @@
 
   <div class="form-group">
     <%= f.label :due_date %>
-    <%= f.datetime_field :due_date, class: "form-control", placeholder: "Due date" %>
+    <%= f.datetime_local_field :due_date, class: "form-control", placeholder: "Due date" %>
   </div>
 
   <div class="form-group">
@@ -48,9 +47,9 @@
 <% end %>
 
 <%= content_for :scripts do %>
-  <%= javascript_tag do %>
+  <script type="text/javascript">
     dragAndDropify('#new_handover');
-  <% end %>
+  </script>
 <% end %>
 
 <%= modal(title: "Reference documents?", label: "reference-label", id: "info-reference-documents") do %>

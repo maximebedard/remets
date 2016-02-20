@@ -74,6 +74,8 @@ class HandoverFingerprinterTest < ActiveSupport::TestCase
       @subject,
       boilerplate_documents_attributes: files.map { |f| { file_ptr: f } },
       due_date: 5.days.from_now,
+      title: "Pants.",
+      description: "Pants Pants Pants.",
     ).call
   end
 

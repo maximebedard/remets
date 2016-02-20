@@ -59,6 +59,7 @@ class HandoversController < ApplicationController
       .permit(
         :title,
         :description,
+        :due_date,
         reference_documents_attributes: [:file_ptr],
         boilerplate_documents_attributes: [:file_ptr],
       )

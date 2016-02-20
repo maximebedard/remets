@@ -56,6 +56,8 @@ class HandoversControllerTest < ActionController::TestCase
       uuid: @handover.uuid,
       handover: {
         title: "pants",
+        description: "pants pants pants",
+        due_date: 5.days.from_now,
         reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
@@ -71,6 +73,8 @@ class HandoversControllerTest < ActionController::TestCase
       uuid: @handover.uuid,
       handover: {
         title: "pants",
+        description: "pants pants pants",
+        due_date: 5.days.from_now,
         reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
@@ -97,6 +101,8 @@ class HandoversControllerTest < ActionController::TestCase
       :create,
       handover: {
         title: "pants",
+        description: "pants pants pants",
+        due_date: 5.days.from_now,
         reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
       },
@@ -111,9 +117,10 @@ class HandoversControllerTest < ActionController::TestCase
       :create,
       handover: {
         title: "pants",
+        description: "pants pants pants",
+        due_date: 5.days.from_now,
         reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
         documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-        due_date: 5.days.from_now,
       },
     )
     assert_redirected_to_auth_new
