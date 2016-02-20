@@ -11,6 +11,7 @@
       <%= link_to "Remets", root_path, class: "navbar-brand" %>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
+      <% if signed_in? %>
       <ul class="nav navbar-nav navbar-left">
         <li class="<%= active_on_controller("handovers") %>">
           <%= link_to "Handovers", handovers_path %>
@@ -20,6 +21,7 @@
           <%= link_to "Submissions", submissions_path %>
         </li>
       </ul>
+      <% end %>
       <ul class="nav navbar-nav navbar-right">
         <% if signed_in? %>
           <li class="dropdown">
