@@ -2,9 +2,15 @@
   display: flex;
   -webkit-display: flex;
 }
+
 .white-bg {
   background-color: #FFF;
 }
+
 .light-text {
   color: lighten($remets-primary-text, 50%);
+}
+
+.full-width {
+  width: 100%;
 }
