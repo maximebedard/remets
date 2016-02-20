@@ -41,7 +41,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = policy_scope(Organization).build(organization_params)
     @organization.user = current_user
-    @organization.user_organizations.build(user: current_user)
+    @organization.memberships.build(user: current_user)
 
     authorize(@organization)
 

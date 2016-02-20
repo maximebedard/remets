@@ -3,8 +3,12 @@ class User < ActiveRecord::Base
   USER_ROLE = "user".freeze
   ROLES = [USER_ROLE, ADMIN_ROLE].freeze
 
-  has_many :user_organizations
-  has_many :organizations, through: :user_organizations
+  has_many :memberships
+  has_many :organizations, through: :memberships
+
+  has_many :subscriptions
+  has_many :subscribed_handovers, through: :subscriptions, class_name: Handover
+
   has_many :submissions
   has_many :handovers
   has_many :authorizations

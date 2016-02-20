@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202021721) do
+ActiveRecord::Schema.define(version: 20160220213516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,13 @@ ActiveRecord::Schema.define(version: 20160202021721) do
     t.datetime "updated_at",                null: false
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.integer "user_id",         null: false
+    t.integer "organization_id", null: false
+  end
+
+  add_index "memberships", ["user_id", "organization_id"], name: "index_memberships_on_user_id_and_organization_id", unique: true, using: :btree
+
   create_table "organizations", force: :cascade do |t|
     t.string  "name",    null: false
     t.integer "user_id", null: false
@@ -100,10 +107,12 @@ ActiveRecord::Schema.define(version: 20160202021721) do
     t.integer "handover_id"
   end
 
-  create_table "user_organizations", force: :cascade do |t|
-    t.integer "user_id",         null: false
-    t.integer "organization_id", null: false
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id",     null: false
+    t.integer "handover_id", null: false
   end
+
+  add_index "subscriptions", ["user_id", "handover_id"], name: "index_subscriptions_on_user_id_and_handover_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string "name"

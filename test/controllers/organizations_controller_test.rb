@@ -79,7 +79,7 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "#leave" do
-    assert_difference("UserOrganization.count", -1) do
+    assert_difference("Membership.count", -1) do
       delete :leave, id: @organization.id
     end
 
@@ -89,7 +89,7 @@ class OrganizationsControllerTest < ActionController::TestCase
   test "#leave destroy the organization when there is not other member" do
     @organization.leave(users(:henry))
 
-    assert_difference(["UserOrganization.count", "Organization.count"], -1) do
+    assert_difference(["Membership.count", "Organization.count"], -1) do
       delete :leave, id: @organization.id
     end
 

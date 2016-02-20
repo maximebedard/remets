@@ -2,6 +2,8 @@ class Handover < ActiveRecord::Base
   has_many :reference_documents
   has_many :boilerplate_documents
   has_many :submissions
+  has_many :subscribers
+  has_many :users, through: :subscribers
 
   belongs_to :user
   belongs_to :organization

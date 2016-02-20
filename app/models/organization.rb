@@ -1,18 +1,18 @@
 class Organization < ActiveRecord::Base
-  has_many :user_organizations
-  has_many :users, through: :user_organizations
+  has_many :memberships
+  has_many :users, through: :memberships
 
   belongs_to :user
 
   validates(
     :name,
     :user,
-    :user_organizations,
+    :memberships,
     presence: true,
   )
 
   def leave(user)
-    user_organizations.where(user: user).destroy_all
-    destroy if user_organizations.blank?
+    memberships.where(user: user).destroy_all
+    destroy if memberships.blank?
   end
 end
