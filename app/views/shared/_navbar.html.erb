@@ -8,7 +8,12 @@
         <span class="icon-bar"></span>
       </button>
       <!--todo : add logo here -->
-      <%= link_to "Remets", root_path, class: "navbar-brand" %>
+      <% if signed_in? %>
+        <%= link_to "Remets", account_path, class: "navbar-brand" %>
+      <% else %>
+        <%= link_to "Remets", root_path, class: "navbar-brand" %>
+      <% end %>
+
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <% if signed_in? %>
