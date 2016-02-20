@@ -8,6 +8,11 @@
             <i class="fa fa-plus"></i> New organization
           <% end %>
         </div>
+        <% if @organizations.empty? %>
+          <div class="remets-panel__item">
+            No organizations available! <br> Go ahead, create one!
+          </div>
+        <% end %>
         <% @organizations.each do |organization| %>
           <div class="remets-panel__item">
             <div>
