@@ -6,6 +6,11 @@
         <div class="remets-panel__heading">
           <h3 class="remets-panel__title">Submissions</h3>
         </div>
+        <% if @submissions.empty? %>
+          <div class="remets-panel__item">
+            No Submissions found!
+          </div>
+        <% end %>
         <% @submissions.group_by(&:handover).each do |handover, submissions| %>
           <div class="remets-panel__item">
             <div class="remets-panel__item__title">
