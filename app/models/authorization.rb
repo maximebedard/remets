@@ -20,4 +20,8 @@ class Authorization < ActiveRecord::Base
       available_providers.map { |p| [p, find_by(provider: p, user: user)] }
     end
   end
+
+  def expired?
+    expires_at < Time.zone.now
+  end
 end

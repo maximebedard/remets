@@ -44,6 +44,8 @@ class AuthenticationsControllerTest < ActionController::TestCase
         provider: "google",
         uid: "987654321",
         token: "3f1a00866f78690b758bb2ad28bb73fa",
+        refresh_token: "56e1cd5ef068ef9e58b6be39af878802",
+        expires_at: Time.zone.now + 3600.seconds,
       ),
     )
 
@@ -65,6 +67,8 @@ class AuthenticationsControllerTest < ActionController::TestCase
         uid: "987654321",
         secret: "90980784187ec4f28447539e10ea80c3",
         token: "3f1a00866f78690b758bb2ad28bb73fa",
+        refresh_token: "50d0335e538546a23c4fc80e31a604aa",
+        expires_at: Time.zone.now + 3600.seconds,
       ),
     )
 

@@ -34,7 +34,7 @@ module Remets
         provider,
         uid: credentials[:uid],
         info: info.slice(:name, :email),
-        credentials: credentials.slice(:token, :secret),
+        credentials: credentials.slice(:token, :secret, :refresh_token, :expires_at),
       )
     end
 

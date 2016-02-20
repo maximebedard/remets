@@ -1,0 +1,24 @@
+.selectize-control.remets-pp .selectize-input [data-value] .email {
+  opacity: 0.5;
+}
+.selectize-control.remets-pp .selectize-input [data-value] .name + .email {
+  margin-left: 5px;
+}
+.selectize-control.remets-pp .selectize-input [data-value] .email:before {
+  content: '<';
+}
+.selectize-control.remets-pp .selectize-input [data-value] .email:after {
+  content: '>';
+}
+.selectize-control.remets-pp .selectize-dropdown .remets-pp--caption {
+  font-size: 12px;
+  display: block;
+  opacity: 0.5;
+}
+
+.selectize-control.remets-pp .selectize-dropdown .remets-pp--label {
+  display: block;
+  font-weight: normal;
+  margin-bottom: 2px;
+  color: #404040;
+}

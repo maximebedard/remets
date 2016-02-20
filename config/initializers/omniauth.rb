@@ -3,7 +3,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     ENV["GOOGLE_CLIENT_ID"],
     ENV["GOOGLE_CLIENT_SECRET"],
     name: "google",
-    scope: "email",
+    scope: "email, profile, contacts.readonly",
     prompt: "select_account"
 
   OmniAuth.config.logger = Rails.logger
