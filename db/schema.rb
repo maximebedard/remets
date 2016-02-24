@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160220213516) do
   create_table "authorizations", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
+    t.string   "email"
     t.string   "uid"
     t.string   "token"
     t.string   "refresh_token"
@@ -115,11 +116,13 @@ ActiveRecord::Schema.define(version: 20160220213516) do
   add_index "subscriptions", ["user_id", "handover_id"], name: "index_subscriptions_on_user_id_and_handover_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest",                  null: false
-    t.string "remember_digest"
-    t.string "email",                            null: false
-    t.string "role",            default: "user", null: false
+    t.string   "name"
+    t.string   "password_digest",                         null: false
+    t.string   "remember_digest"
+    t.string   "email",                                   null: false
+    t.string   "role",                   default: "user", null: false
+    t.datetime "reset_password_sent_at"
+    t.string   "reset_password_digest"
   end
 
 end

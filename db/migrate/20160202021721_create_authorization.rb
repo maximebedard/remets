@@ -3,6 +3,7 @@ class CreateAuthorization < ActiveRecord::Migration
     create_table :authorizations do |t|
       t.integer :user_id
       t.string :provider
+      t.string :email
       t.string :uid
       t.string :token
       t.string :refresh_token

@@ -6,6 +6,8 @@ class CreateUser < ActiveRecord::Migration
       t.string :remember_digest
       t.string :email, unique: true, null: false
       t.string :role, default: "user", null: false
+      t.datetime :reset_password_sent_at
+      t.string :reset_password_digest
     end
   end
 end

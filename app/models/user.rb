@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   USER_ROLE = "user".freeze
   ROLES = [USER_ROLE, ADMIN_ROLE].freeze
 
+  RESET_PASSWORD_WITHIN = 3.days.freeze
+
   has_many :memberships
   has_many :organizations, through: :memberships
 
@@ -30,14 +32,11 @@ class User < ActiveRecord::Base
     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
     uniqueness: { case_sensitive: false },
   )
-  validates(
-    :password,
-    presence: true,
-    length: { minimum: 6 },
-  )
+  validate :validate_reset_password_token
 
   before_save :format_email
   before_save :format_name
+  before_save :clear_reset_password_digest
 
   class << self
     def from_omniauth(params, current_user)
@@ -55,7 +54,7 @@ class User < ActiveRecord::Base
         user.authenticate(password)
     end
 
-    def digest(value)
+    def digest(secret)
       cost =
         if ActiveModel::SecurePassword.min_cost
           BCrypt::Engine::MIN_COST
@@ -63,7 +62,7 @@ class User < ActiveRecord::Base
           BCrypt::Engine.cost
         end
 
-      BCrypt::Password.create(value, cost: cost)
+      [secret, BCrypt::Password.create(secret, cost: cost)]
     end
 
     private
@@ -75,6 +74,7 @@ class User < ActiveRecord::Base
       ).first_or_create do |auth|
         auth.provider = params["provider"]
         auth.uid = params["uid"]
+        auth.email = params["email"]
         auth.token = params["credentials"]["token"]
         auth.secret = params["credentials"]["secret"]
         auth.refresh_token = params["credentials"]["refresh_token"]
@@ -104,8 +104,9 @@ class User < ActiveRecord::Base
   end
 
   def remember
-    SecureRandom.hex.tap do |token|
-      update_attribute(:remember_digest, self.class.digest(token))
+    SecureRandom.hex.tap do |secret|
+      _, digest = self.class.digest(secret)
+      update_attribute(:remember_digest, digest)
     end
   end
 
@@ -113,17 +114,38 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
-  def remembered?(token)
-    BCrypt::Password.new(remember_digest).is_password?(token)
+  def remembered?(secret)
+    remember_digest &&
+      BCrypt::Password.new(remember_digest).is_password?(secret)
+  end
+
+  def reseted?(secret)
+    reset_password_digest &&
+      BCrypt::Password.new(reset_password_digest).is_password?(secret)
   end
 
   private
 
   def format_email
-    email.downcase!
+    self.email = email && email.downcase
   end
 
   def format_name
-    self.name = name.titleize
+    self.name = name && name.titleize
+  end
+
+  def clear_reset_password_digest
+    return if new_record?
+    return unless [email_changed?, password_digest_changed?].any?
+
+    self.reset_password_digest = nil
+    self.reset_password_sent_at = nil
+  end
+
+  def validate_reset_password_token
+    return if reset_password_sent_at.blank?
+    return if reset_password_sent_at >= RESET_PASSWORD_WITHIN.ago
+
+    errors.add(:reset_password_sent_at, :expired)
   end
 end
