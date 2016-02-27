@@ -21,3 +21,17 @@ pierre:
   email: "pierre.paul@gmail.com"
   password_digest: <%= password %>
   role: "admin"
+
+hermenegilde:
+  name: "Herménégilde Lebrun"
+  email: "ermenegilde.lebrun@gmail.com"
+  password_digest: <%= password %>
+  role: "user"
+
+clement:
+  name: "Clément Bisson"
+  email: "clement.bisson@gmail.com"
+  password_digest: <%= password %>
+  reset_password_digest: <%= password %>
+  reset_password_sent_at: <%= 1.day.ago %>
+  role: "user"

@@ -29,7 +29,7 @@ class AccountsControllerTest < ActionController::TestCase
 
   test "#update" do
     patch :update, user: { name: "Henry II" }
-    assert_response :success
+    assert_redirected_to edit_account_path
   end
 
   test "#edit is not authorized when signed out" do
