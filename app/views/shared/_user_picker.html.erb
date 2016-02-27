@@ -1,10 +1,10 @@
-<%= select_tag(name, "",
+<%= select_tag(name, [],
   class: "remets-pp selectized",
   multiple: "multiple",
   placeholder: "Pick some people") %>
 
 <%= content_for :scripts do %>
   <script type="text/javascript">
-    remetsSelectize("<%= "##{name.parameterize('_')}" %>");
+    remetsSelectize("<%= "##{name.parameterize('_')}_" %>");
   </script>
 <% end %>

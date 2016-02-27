@@ -43,8 +43,13 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "#update" do
-    patch :update, id: @organization.id, organization: { name: "Henry Corp." }
-    assert_redirected_to account_organization_path(assigns(:organization))
+    patch :update, id: @organization.id, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] }
+
+    organization = assigns(:organization)
+    assert_equal "Henry Corp.", organization.name
+    assert_equal users(:gaston), organization.user
+    assert_equal 2, organization.memberships.size
+    assert_redirected_to account_organization_path(organization)
   end
 
   test "#update is not authorized when signed out" do
@@ -67,8 +72,13 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "#create" do
-    post :create, organization: { name: "Henry Corp." }
-    assert_redirected_to account_organization_path(assigns(:organization))
+    post :create, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] }
+
+    organization = assigns(:organization)
+    assert_equal "Henry Corp.", organization.name
+    assert_equal users(:gaston), organization.user
+    assert_equal 2, organization.memberships.size
+    assert_redirected_to account_organization_path(organization)
   end
 
   test "#create is not authorized when signed out" do
