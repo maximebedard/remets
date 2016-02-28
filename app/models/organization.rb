@@ -1,5 +1,5 @@
 class Organization < ActiveRecord::Base
-  has_many :memberships
+  has_many :memberships, inverse_of: :organization, dependent: :destroy
   has_many :users, through: :memberships
 
   belongs_to :user
