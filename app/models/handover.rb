@@ -2,8 +2,8 @@ class Handover < ActiveRecord::Base
   has_many :reference_documents
   has_many :boilerplate_documents
   has_many :submissions
-  has_many :subscribers
-  has_many :users, through: :subscribers
+  has_many :subscriptions, inverse_of: :handover, dependent: :destroy
+  has_many :users, through: :subscriptions
 
   belongs_to :user
   belongs_to :organization

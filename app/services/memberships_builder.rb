@@ -1,4 +1,4 @@
-class MembershipBuilder
+class MembershipsBuilder
   def initialize(organization, params)
     @organization = organization
     @params = params
