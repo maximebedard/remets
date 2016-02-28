@@ -20,7 +20,7 @@ class OrganizationsController < ApplicationController
     @organization = policy_scope(Organization.where(id: params[:id])).first!
     authorize(@organization)
 
-    MembershipBuilder.new(
+    MembershipsBuilder.new(
       @organization,
       params[:organization][:memberships],
     ).call
@@ -42,7 +42,7 @@ class OrganizationsController < ApplicationController
 
     authorize(@organization)
 
-    MembershipBuilder.new(
+    MembershipsBuilder.new(
       @organization,
       params[:organization][:memberships],
     ).call

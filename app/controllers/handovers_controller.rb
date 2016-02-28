@@ -27,10 +27,16 @@ class HandoversController < ApplicationController
     @handover = policy_scope(Handover.where(uuid: params[:uuid])).first!
     authorize(@handover)
 
+    SubscriptionsBuilder.new(
+      @handover,
+      params[:handover][:subscriptions],
+    ).call
+
     Fingerprinter.new(
       @handover,
       handover_params,
     ).call
+
     respond_with(@handover, location: handover_path(uuid: @handover.uuid))
   end
 
@@ -45,10 +51,16 @@ class HandoversController < ApplicationController
     @handover = policy_scope(Handover).build
     authorize(@handover)
 
+    SubscriptionsBuilder.new(
+      @handover,
+      params[:handover][:subscriptions],
+    ).call
+
     Fingerprinter.new(
       @handover,
       handover_params,
     ).call
+
     respond_with(@handover, location: handover_path(uuid: @handover.uuid))
   end
 
