@@ -18,18 +18,6 @@ class OrganizationsControllerTest < ActionController::TestCase
     assert_redirected_to_auth_new
   end
 
-  test "#show" do
-    get :show, id: @organization.id
-    assert_response :success
-  end
-
-  test "#show is not authorized when signed out" do
-    sign_out
-
-    get :show, id: @organization.id
-    assert_redirected_to_auth_new
-  end
-
   test "#edit" do
     get :edit, id: @organization.id
     assert_response :success
@@ -49,7 +37,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     assert_equal "Henry Corp.", organization.name
     assert_equal users(:gaston), organization.user
     assert_equal 2, organization.memberships.size
-    assert_redirected_to account_organization_path(organization)
+    assert_redirected_to edit_account_organization_path(organization)
   end
 
   test "#update is not authorized when signed out" do
@@ -78,7 +66,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     assert_equal "Henry Corp.", organization.name
     assert_equal users(:gaston), organization.user
     assert_equal 2, organization.memberships.size
-    assert_redirected_to account_organization_path(organization)
+    assert_redirected_to edit_account_organization_path(organization)
   end
 
   test "#create is not authorized when signed out" do

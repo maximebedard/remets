@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resource :registration, only: [:new, :create]
   resource :account, only: [:show, :edit, :update] do
-    resources :organizations, only: [:index, :show, :edit, :update, :new, :create] do
+    resources :organizations, only: [:index, :edit, :update, :new, :create] do
       delete :leave, on: :member
     end
   end

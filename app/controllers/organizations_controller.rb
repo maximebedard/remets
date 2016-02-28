@@ -9,13 +9,6 @@ class OrganizationsController < ApplicationController
     respond_with(@organizations)
   end
 
-  def show
-    @organization = policy_scope(Organization.where(id: params[:id])).first!
-    authorize(@organization)
-
-    respond_with(@organization)
-  end
-
   def edit
     @organization = policy_scope(Organization.where(id: params[:id])).first!
     authorize(@organization)
@@ -33,7 +26,7 @@ class OrganizationsController < ApplicationController
     ).call
 
     @organization.update(organization_params)
-    respond_with(@organization, location: account_organization_path(@organization))
+    respond_with(@organization, location: edit_account_organization_path(@organization))
   end
 
   def new
@@ -55,7 +48,7 @@ class OrganizationsController < ApplicationController
     ).call
 
     @organization.save
-    respond_with(@organization, location: account_organization_path(@organization))
+    respond_with(@organization, location: edit_account_organization_path(@organization))
   end
 
   def leave

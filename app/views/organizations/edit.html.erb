@@ -1,8 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
-      <h1>Edit Organization</h1>
+    <div class="col-lg-9">
+      <div class="remets-panel remets-panel--default">
+        <div class="remets-panel__heading">
+          <h3 class="remets-panel__title">Edit Organization</h3>
+        </div>
+        <div class="remets-panel__item">
+          <%= render partial: "form" %>
+        </div>
+      </div>
     </div>
+    <%= render partial: "accounts/navigation" %>
   </div>
-  <%= render partial: "form" %>
 </div>
