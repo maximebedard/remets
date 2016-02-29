@@ -4,6 +4,13 @@ module AcquaintancesProviders
   module GoogleRequestStubs
     private
 
+    def stub_revoke(access_token)
+      stub_request(
+        :get,
+        "https://accounts.google.com/o/oauth2/revoke?token=#{access_token}",
+      ).to_return(status: 200, body: "", headers: {})
+    end
+
     def stub_fetch(access_token, **options)
       stub_request(
         :get,
@@ -89,6 +96,13 @@ module AcquaintancesProviders
         status: 200,
         body: { "feed" => { "entry" => [] } }.to_json,
       )
+      assert_equal [], @provider.fetch
+    end
+
+    test "#fetch without a refresh_token revokes the permission" do
+      @auth.refresh_token = nil
+      stub_revoke(@auth.token)
+
       assert_equal [], @provider.fetch
     end
   end

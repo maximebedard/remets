@@ -1,6 +1,7 @@
 module AcquaintancesProviders
   class Google < Base
     def fetch
+      return [] if revoked?
       refresh_token_when_expired
 
       fetch_acquaintances.map { |data| Acquaintance.new(data) }
@@ -10,6 +11,9 @@ module AcquaintancesProviders
 
     AUTH_HOST_URL = "https://www.googleapis.com".freeze
     AUTH_ENDPOINT_URL = "/oauth2/v3/token".freeze
+
+    REVOKE_HOST_URL = "https://accounts.google.com".freeze
+    REVOKE_ENDPOINT_URL = "/o/oauth2/revoke".freeze
 
     HOST_URL = "https://www.google.com".freeze
     ENDPOINT_PATTERN = "/m8/feeds/contacts/%s/thin".freeze
@@ -33,6 +37,15 @@ module AcquaintancesProviders
         token: data["access_token"],
         expires_at: Time.zone.now + data["expires_in"].seconds,
       )
+    end
+
+    def revoked?
+      return false if auth.refresh_token.present?
+
+      revoke_connection.get REVOKE_ENDPOINT_URL, token: auth.token
+      auth.destroy
+
+      true
     end
 
     def fetch_access_token
@@ -68,6 +81,15 @@ module AcquaintancesProviders
     def auth_connection
       @auth_connection ||=
         Faraday.new(AUTH_HOST_URL) do |f|
+          f.request :url_encoded
+          f.response :logger, Rails.logger
+          f.adapter Faraday.default_adapter
+        end
+    end
+
+    def revoke_connection
+      @revoke_connection ||=
+        Faraday.new(REVOKE_HOST_URL) do |f|
           f.request :url_encoded
           f.response :logger, Rails.logger
           f.adapter Faraday.default_adapter
