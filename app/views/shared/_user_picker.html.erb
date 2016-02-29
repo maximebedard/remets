@@ -3,10 +3,11 @@
     class: "remets-pp selectized",
     multiple: "multiple",
     placeholder: "Pick some people",
+    id: name.parameterize("_"),
   )) %>
 
 <%= content_for :scripts do %>
   <script type="text/javascript">
-    remetsSelectize("<%= "##{name.parameterize('_')}_" %>");
+    remetsSelectize("<%= "##{name.parameterize('_')}" %>");
   </script>
 <% end %>
