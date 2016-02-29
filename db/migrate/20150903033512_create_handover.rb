@@ -3,6 +3,7 @@ class CreateHandover < ActiveRecord::Migration
     create_table :handovers do |t|
       t.uuid :uuid, null: false
       t.integer :user_id
+      t.integer :organization_id
       t.string :title
       t.text :description
       t.timestamps null: false

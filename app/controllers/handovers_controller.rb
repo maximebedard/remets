@@ -72,6 +72,7 @@ class HandoversController < ApplicationController
         :title,
         :description,
         :due_date,
+        :organization_id,
         reference_documents_attributes: [:file_ptr],
         boilerplate_documents_attributes: [:file_ptr],
       )

@@ -51,18 +51,28 @@ class HandoversControllerTest < ActionController::TestCase
   end
 
   test "#update" do
-    patch(
-      :update,
-      uuid: @handover.uuid,
-      handover: {
-        title: "pants",
-        description: "pants pants pants",
-        due_date: 5.days.from_now,
-        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-      },
-    )
-    assert_redirected_to handover_path(uuid: assigns(:handover).uuid)
+    travel_to(Time.zone.now) do
+      patch(
+        :update,
+        uuid: @handover.uuid,
+        handover: {
+          title: "pants",
+          description: "pants pants pants",
+          due_date: 5.days.from_now,
+          organization_id: organizations(:ets).id,
+          reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+          boilerplate_documents_attriubtes: [{ file_ptr: sanitizable_file_upload }],
+        },
+      )
+      handover = assigns(:handover)
+      assert_equal "pants", handover.title
+      assert_equal "pants pants pants", handover.description
+      assert_equal 5.days.from_now, handover.due_date
+      assert_equal "École de technologie supérieure", handover.organization.name
+      assert_equal 1, handover.reference_documents.size
+      assert_equal 4, handover.boilerplate_documents.size
+      assert_redirected_to handover_path(uuid: handover.uuid)
+    end
   end
 
   test "#update is not authorized when signed out" do
@@ -75,8 +85,9 @@ class HandoversControllerTest < ActionController::TestCase
         title: "pants",
         description: "pants pants pants",
         due_date: 5.days.from_now,
+        organization_id: organizations(:ets).id,
         reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        boilerplate_documents_attriubtes: [{ file_ptr: sanitizable_file_upload }],
       },
     )
     assert_redirected_to_auth_new
@@ -97,17 +108,28 @@ class HandoversControllerTest < ActionController::TestCase
   end
 
   test "#create" do
-    post(
-      :create,
-      handover: {
-        title: "pants",
-        description: "pants pants pants",
-        due_date: 5.days.from_now,
-        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-      },
-    )
-    assert_redirected_to handover_path(uuid: assigns(:handover).uuid)
+    travel_to(Time.zone.now) do
+      post(
+        :create,
+        handover: {
+          title: "pants",
+          description: "pants pants pants",
+          due_date: 5.days.from_now,
+          organization_id: organizations(:ets).id,
+          reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+          boilerplate_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        },
+      )
+
+      handover = assigns(:handover)
+      assert_equal "pants", handover.title
+      assert_equal "pants pants pants", handover.description
+      assert_equal 5.days.from_now, handover.due_date
+      assert_equal "École de technologie supérieure", handover.organization.name
+      assert_equal 1, handover.reference_documents.size
+      assert_equal 1, handover.boilerplate_documents.size
+      assert_redirected_to handover_path(uuid: handover.uuid)
+    end
   end
 
   test "#create is not authorized when signed out" do

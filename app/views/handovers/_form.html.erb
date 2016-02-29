@@ -20,6 +20,16 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :organization %>
+    <%= select_tag "handover[organization]",
+          options_from_collection_for_select(
+            current_user.organizations, "id", "name"
+          ),
+          class: "form-control",
+          include_blank: "Private" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :reference_documents do %>
       Reference documents for the handover
       <a href="#" data-toggle="modal" data-target="#info-reference-documents">

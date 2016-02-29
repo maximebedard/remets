@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160220213516) do
   create_table "handovers", force: :cascade do |t|
     t.uuid     "uuid",                           null: false
     t.integer  "user_id"
+    t.integer  "organization_id"
     t.string   "title"
     t.text     "description"
     t.datetime "created_at",                     null: false
