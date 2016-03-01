@@ -1,11 +1,12 @@
 <%= form_for [:account, @organization], html: {class: "full-width"} do |f| %>
+  <%= errors_summary(@organization) %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
   </div>
 
   <div class="form-group">
-    <label>Pick some people</label>
+    <%= f.label :memberships %>
     <%= user_picker_field "organization[memberships][]" %>
   </div>
 

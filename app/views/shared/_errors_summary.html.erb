@@ -1,0 +1,11 @@
+<% if record.errors.any? %>
+  <div class="alert alert-danger alert-dismissible form-group" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong><%= pluralize(record.errors.count, "error") %> prohibited this <%= record.class.to_s.downcase %> from being saved:</strong>
+    <ul>
+    <% record.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

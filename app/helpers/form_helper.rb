@@ -13,4 +13,11 @@ module FormHelper
       locals: { name: name, option_tags: option_tags, options: options },
     )
   end
+
+  def errors_summary(record)
+    render(
+      partial: "shared/errors_summary",
+      locals: { record: record },
+    )
+  end
 end
