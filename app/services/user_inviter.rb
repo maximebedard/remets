@@ -8,28 +8,20 @@ class UserInviter
     return user if user.present?
 
     secret, digest = User.digest(SecureRandom.hex)
-    user = create_user_aot(digest)
-    send_invite_notification(user, secret)
-
-    user
+    invite_user(secret, digest)
   end
 
   private
 
   attr_reader :email
 
-  def create_user_aot(digest)
-    user = User.new(
+  def invite_user(secret, digest)
+    User.new(
       email: email,
       password: SecureRandom.hex,
       reset_password_digest: digest,
       reset_password_sent_at: Time.zone.now,
+      invited_secret: secret,
     )
-    user.save(validate: false)
-    user
-  end
-
-  def send_invite_notification(user, secret)
-    UserMailer.invite_email(user, secret).deliver_later
   end
 end

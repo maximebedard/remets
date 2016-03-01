@@ -47,8 +47,11 @@ class OrganizationsController < ApplicationController
       params[:organization][:memberships],
     ).call
 
-    @organization.save
-    respond_with(@organization, location: edit_account_organization_path(@organization))
+    respond_with(
+      @organization,
+      location: @organization.save &&
+        edit_account_organization_path(@organization),
+    )
   end
 
   def leave
