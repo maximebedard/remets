@@ -19,6 +19,8 @@ Metrics/AbcSize:
 
 Metrics/ClassLength:
   Max: 150
+  Exclude:
+    - "test/**/*.rb"
 
 Metrics/CyclomaticComplexity:
   Max: 4
