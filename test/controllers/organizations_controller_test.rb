@@ -69,6 +69,20 @@ class OrganizationsControllerTest < ActionController::TestCase
     assert_redirected_to edit_account_organization_path(organization)
   end
 
+  test "#create invite new members" do
+    assert_difference("User.count") do
+      post :create, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] }
+      assert_redirected_to edit_account_organization_path(assigns(:organization))
+    end
+  end
+
+  test "#create does not invite new members when invalid" do
+    assert_no_difference("User.count") do
+      post :create, organization: { memberships: ["idont@exists.com"] }
+      assert_template "new"
+    end
+  end
+
   test "#create is not authorized when signed out" do
     sign_out
 

@@ -1,24 +1,26 @@
 require "test_helper"
 
 class UserInviterTest < ActiveSupport::TestCase
-  test "#call creates a new invalid user with a reset digest and expiration" do
-    assert_difference("User.count") do
-      user = UserInviter.new(
-        "idont@exists.com",
-      ).call
+  test "#call invite a user" do
+    user = UserInviter.new(
+      "idont@exists.com",
+    ).call
 
-      assert_equal "idont@exists.com", user.email
-      assert_not_nil user.reset_password_digest
-      assert_not_nil user.reset_password_sent_at
-    end
+    assert_equal "idont@exists.com", user.email
+    assert_nil user.name
+    assert_not_nil user.invited_secret
+    assert_not_nil user.reset_password_digest
+    assert_not_nil user.reset_password_sent_at
   end
 
   test "#call sends a notification email with the secret" do
     assert_difference("ActionMailer::Base.deliveries.size") do
       perform_enqueued_jobs do
-        UserInviter.new(
+        invited_user = UserInviter.new(
           "idont@exists.com",
         ).call
+
+        invited_user.save!
       end
     end
 
@@ -31,10 +33,12 @@ class UserInviterTest < ActiveSupport::TestCase
     assert_no_difference(["User.count", "ActionMailer::Base.deliveries.size"]) do
       perform_enqueued_jobs do
         user = users(:henry)
-
-        assert_equal user, UserInviter.new(
+        invited_user = UserInviter.new(
           user.email,
         ).call
+
+        assert_equal user, invited_user
+        refute invited_user.new_record?
       end
     end
   end

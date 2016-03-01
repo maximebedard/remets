@@ -15,11 +15,14 @@ class User < ActiveRecord::Base
   has_many :handovers
   has_many :authorizations
 
+  attr_accessor :invited_secret
+
   has_secure_password
 
   validates(
     :name,
     presence: true,
+    unless: :invited?,
   )
   validates(
     :role,
@@ -37,6 +40,8 @@ class User < ActiveRecord::Base
   before_save :format_email
   before_save :format_name
   before_save :clear_reset_password_digest
+
+  after_save :send_invite_email
 
   class << self
     def from_omniauth(params, current_user)
@@ -124,6 +129,10 @@ class User < ActiveRecord::Base
       BCrypt::Password.new(reset_password_digest).is_password?(secret)
   end
 
+  def invited?
+    invited_secret.present?
+  end
+
   private
 
   def format_email
@@ -147,5 +156,12 @@ class User < ActiveRecord::Base
     return if reset_password_sent_at >= RESET_PASSWORD_WITHIN.ago
 
     errors.add(:reset_password_sent_at, :expired)
+  end
+
+  def send_invite_email
+    return if invited_secret.blank?
+
+    UserMailer.invite_email(self, invited_secret).deliver_later
+    self.invited_secret = nil
   end
 end
