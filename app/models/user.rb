@@ -159,7 +159,7 @@ class User < ActiveRecord::Base
   end
 
   def send_invite_email
-    return if invited_secret.blank?
+    return unless invited?
 
     UserMailer.invite_email(self, invited_secret).deliver_later
     self.invited_secret = nil

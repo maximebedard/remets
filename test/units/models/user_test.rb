@@ -104,4 +104,11 @@ class UserTest < ActiveSupport::TestCase
     assert_nil user.reset_password_digest
     assert_nil user.reset_password_sent_at
   end
+
+  test "#invited?" do
+    user = users(:clement)
+    user.invited_secret = "pants"
+
+    assert user.invited?
+  end
 end

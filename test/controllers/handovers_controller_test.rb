@@ -116,6 +116,7 @@ class HandoversControllerTest < ActionController::TestCase
           description: "pants pants pants",
           due_date: 5.days.from_now,
           organization_id: organizations(:ets).id,
+          subscriptions: ["idont@exists.com"],
           reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
           boilerplate_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
         },
@@ -128,7 +129,39 @@ class HandoversControllerTest < ActionController::TestCase
       assert_equal "École de technologie supérieure", handover.organization.name
       assert_equal 1, handover.reference_documents.size
       assert_equal 1, handover.boilerplate_documents.size
+      assert_equal 1, handover.subscriptions.size
+      assert_equal "idont@exists.com", handover.users.first.email
       assert_redirected_to handover_path(uuid: handover.uuid)
+    end
+  end
+
+  test "#create invite new subscribers" do
+    assert_difference("User.count") do
+      post(
+        :create,
+        handover: {
+          title: "pants",
+          description: "pants pants pants",
+          due_date: 5.days.from_now,
+          organization_id: organizations(:ets).id,
+          subscriptions: ["idont@exists.com"],
+          reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+          boilerplate_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        },
+      )
+      assert_redirected_to handover_path(uuid: assigns(:handover).uuid)
+    end
+  end
+
+  test "#create does not invite new subscribers when invalid" do
+    assert_no_difference("User.count") do
+      post(
+        :create,
+        handover: {
+          subscriptions: ["idont@exists.com"],
+        },
+      )
+      assert_template "new"
     end
   end
 
