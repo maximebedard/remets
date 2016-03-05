@@ -32,6 +32,7 @@ end
 group :development do
   gem "pry-byebug"
   gem "better_errors"
+  gem "railroady"
   gem "binding_of_caller"
 end
 
