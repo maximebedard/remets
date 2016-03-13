@@ -6,6 +6,11 @@ class Submission < ActiveRecord::Base
 
   accepts_nested_attributes_for :documents
 
+  validates(
+    :documents,
+    presence: true,
+  )
+
   def fingerprintable_documents
     documents
   end
