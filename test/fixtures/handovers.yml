@@ -4,6 +4,7 @@ log121_lab1:
   uuid: "a96f0cb6-3e2e-4768-805c-dd0c8644def9"
   invite_only: true
   password_digest: <%= password %>
+  mark_as_completed: ~
   due_date: <%= 5.days.from_now %>
 
 log240_lab1:
@@ -12,6 +13,7 @@ log240_lab1:
   uuid: "2b21f7a0-f44e-4c8a-8970-892e97a54e58"
   invite_only: true
   password_digest: <%= password %>
+  mark_as_completed: ~
   due_date: <%= 2.days.from_now %>
 
 log550_lab1:
@@ -20,6 +22,7 @@ log550_lab1:
   uuid: "5a4b93db-28ba-4006-a0f7-b7c3f7280ed6"
   invite_only: true
   password_digest: <%= password %>
+  mark_as_completed: ~
   due_date: <%= 5.days.ago %>
 
 gti772_final:
@@ -28,4 +31,5 @@ gti772_final:
   uuid: "942e3dfe-b621-49e4-9c70-d8df1331b2cf"
   invite_only: true
   password_digest: <%= password %>
+  mark_as_completed: ~
   due_date: <%= 15.days.from_now %>

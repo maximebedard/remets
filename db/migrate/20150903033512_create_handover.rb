@@ -6,6 +6,7 @@ class CreateHandover < ActiveRecord::Migration
       t.integer :organization_id
       t.string :title
       t.text :description
+      t.datetime :mark_as_completed
       t.timestamps null: false
       t.datetime :due_date, null: false
       t.boolean :invite_only, null: false, default: true

@@ -28,6 +28,10 @@ class Handover < ActiveRecord::Base
     boilerplate_documents
   end
 
+  def completed?
+    due_date < Time.zone.now || mark_as_completed.present?
+  end
+
   private
 
   def generate_uuid
