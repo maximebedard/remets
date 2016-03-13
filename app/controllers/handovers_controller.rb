@@ -42,7 +42,7 @@ class HandoversController < ApplicationController
 
   def new
     @handover = policy_scope(Handover).build
-    @handover.due_date ||= 3.days.from_now
+    @handover.due_date ||= 3.days.from_now.midnight
     authorize(@handover)
 
     respond_with(@handover)
