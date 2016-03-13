@@ -4,10 +4,16 @@
       <h3 class="remets-panel__title">Settings</h3>
     </div>
     <div class="remets-panel__item <%= active_on_controller("accounts") %>">
-      <%= link_to "Account", edit_account_path %>
+      <%= link_to "Profile", edit_account_profile_path %>
+    </div>
+    <div class="remets-panel__item <%= active_on_controller("security") %>">
+      <%= link_to "Security", edit_account_security_path %>
+    </div>
+    <div class="remets-panel__item <%= active_on_controller("security") %>">
+      <%= link_to "Integrations", edit_account_integration_path %>
     </div>
     <div class="remets-panel__item">
-      <%= link_to "Notification", "#" %>
+      <%= link_to "Notification", edit_account_notification_path %>
     </div>
     <div class="remets-panel__item <%= active_on_controller("organizations") %>">
       <%= link_to "Organizations", account_organizations_path %>

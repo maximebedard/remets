@@ -1,4 +1,4 @@
-class AccountsController < ApplicationController
+class Account::ProfilesController < ApplicationController
   respond_to :html, :json
   must_be_authenticated
 

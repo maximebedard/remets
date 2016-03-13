@@ -15,10 +15,15 @@ Rails.application.routes.draw do
   resources :acquaintances, only: [:index], defaults: { format: :json }
 
   resource :registration, only: [:new, :create]
-  resource :account, only: [:show, :edit, :update] do
+
+  namespace :account do
+    resource :profile, only: [:show, :edit, :update]
     resources :organizations, only: [:index, :edit, :update, :new, :create] do
       delete :leave, on: :member
     end
+    resource :integration, only: [:edit, :update]
+    resource :notification, only: [:edit, :update]
+    resource :security, only: [:edit, :update]
   end
 
   root "home#index"

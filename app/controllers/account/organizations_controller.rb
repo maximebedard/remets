@@ -1,4 +1,4 @@
-class OrganizationsController < ApplicationController
+class Account::OrganizationsController < ApplicationController
   respond_to :html, :json
   must_be_authenticated
 

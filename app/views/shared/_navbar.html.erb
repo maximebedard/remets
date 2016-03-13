@@ -9,7 +9,7 @@
       </button>
       <!--todo : add logo here -->
       <% if signed_in? %>
-        <%= link_to "Remets", account_path, class: "navbar-brand" %>
+        <%= link_to "Remets", account_profile_path, class: "navbar-brand" %>
       <% else %>
         <%= link_to "Remets", root_path, class: "navbar-brand" %>
       <% end %>
@@ -34,8 +34,8 @@
               <%= current_user.name %><span class="caret"></span>
             <% end %>
             <ul class="dropdown-menu">
-              <li><%= link_to "Account", account_path %></li>
-              <li><%= link_to "Settings", edit_account_path %></li>
+              <li><%= link_to "Account", account_profile_path %></li>
+              <li><%= link_to "Settings", edit_account_profile_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Sign out", auth_destroy_path %></li>
             </ul>
