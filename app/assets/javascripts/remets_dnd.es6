@@ -1,7 +1,6 @@
 //Droplit v 0.0.1
 //The most ghetto of drag and drop plugins.
 
-
 function dragAndDropify(queryElement) {
   //The global fileList. Contains a mapping between input[type="files"] and the files.
   //Maybe convert this to a prototypical object?

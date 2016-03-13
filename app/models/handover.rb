@@ -18,6 +18,9 @@ class Handover < ActiveRecord::Base
     presence: true,
   )
 
+  scope :upcoming, -> { where("due_date > ?", Time.zone.now) }
+  scope :past, -> { where("due_date < ?", Time.zone.now) }
+
   accepts_nested_attributes_for :boilerplate_documents,
     :reference_documents
 

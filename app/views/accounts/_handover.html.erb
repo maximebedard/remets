@@ -4,9 +4,6 @@
     <% if handover.organization %>
       <h2><%= handover.organization.name %></h2>
     <% end %>
-    <div>
-      Subscribers : <%= handover.subscriptions.size %> <i class="fa fa-user" aria-hidden="true"></i>
-    </div>
   </div>
   <div class="remets-panel__item__description">
     <p class="light-text">
@@ -17,8 +14,13 @@
     </p>
   </div>
   <div class="remets-panel__item__actions">
-    <%= link_to edit_handover_path(uuid: handover.uuid), class: "btn btn-default btn-sm" do %>
-      <i class="fa fa-pencil"></i> Edit
+    <%= link_to new_handover_submission_path(handover_uuid: handover.uuid),
+      class: "btn btn-primary btn-sm" do %>
+      <% if handover.submissions.size > 0 %>
+        <i class="fa fa-paper-plane-o"></i> Submit a new version
+      <% else %>
+        <i class="fa fa-paper-plane"></i> Submit
+      <% end %>
     <% end %>
   </div>
 </div>

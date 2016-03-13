@@ -10,7 +10,6 @@
   @include flex();
   justify-content: space-between;
   align-items: center;
-
 }
 
 .remets-panel__title {
@@ -21,7 +20,7 @@
 .remets-panel__item {
   border: 1px solid #E8E8E8;
   border-top: 0;
-  padding: 15px;
+  padding: 16px 14px;
   @include flex();
 }
 .remets-panel__item__title {
@@ -44,7 +43,7 @@
 }
 .remets-panel__item__actions {
   width: 25%;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   @include flex();
   & > button {

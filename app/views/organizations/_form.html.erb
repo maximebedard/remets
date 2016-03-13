@@ -1,5 +1,6 @@
 <%= form_for [:account, @organization], html: {class: "full-width"} do |f| %>
   <%= errors_summary(@organization) %>
+
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: "form-control", placeholder: "Name" %>

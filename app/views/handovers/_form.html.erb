@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= f.label :due_date %>
-    <%= f.datetime_local_field :due_date, min: Date.today, class: "form-control", placeholder: "Due date" %>
+    <%= f.datetime_local_field :due_date, class: "form-control", placeholder: "Due date" %>
   </div>
 
   <div class="form-group">
@@ -60,7 +60,7 @@
 
 <%= content_for :scripts do %>
   <script type="text/javascript">
-    dragAndDropify('#new_handover');
+    //dragAndDropify('#new_handover');
   </script>
 <% end %>
 

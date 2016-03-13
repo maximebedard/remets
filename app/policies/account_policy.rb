@@ -1,13 +1,13 @@
 class AccountPolicy < ApplicationPolicy
   def show?
-    true
+    user.present?
   end
 
   def edit?
-    true
+    user.present?
   end
 
   def update?
-    true
+    user.present?
   end
 end

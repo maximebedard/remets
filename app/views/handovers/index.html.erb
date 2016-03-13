@@ -14,9 +14,7 @@
             No handovers found! Why not create one?
           </div>
         <% end %>
-        <% @handovers.each do |handover| %>
-          <%= render partial: "handover", locals: {handover: handover} %>
-        <% end %>
+        <%= render @handovers %>
       </div>
     </div>
 
