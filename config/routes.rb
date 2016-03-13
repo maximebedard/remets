@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :organizations, only: [:index, :edit, :update, :new, :create] do
       delete :leave, on: :member
     end
-    resource :integration, only: [:edit, :update]
+    resources :integrations, only: [:index, :new]
     resource :notification, only: [:edit, :update]
     resource :security, only: [:edit, :update]
   end

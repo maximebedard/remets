@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
   def create
     @user = User.create(user_params)
     self.current_user = @user
-    respond_with(@user, location: account_path)
+    respond_with(@user, location: account_profile_path)
   end
 
   private

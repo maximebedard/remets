@@ -1,0 +1,15 @@
+<div class="remets-panel__item">
+  <div>
+    <%= organization.name %>
+  </div>
+  <div class="remets-panel__item__actions">
+    <%= link_to edit_account_organization_path(organization), class: "btn btn-default btn-sm" do %>
+      <i class="fa fa-pencil"></i> Manage
+    <% end %>
+    <%= form_for organization, url: leave_account_organization_path(organization), method: :delete do |f| %>
+      <%= f.button type: "submit", class: "btn btn-danger btn-sm" do %>
+        <i class="fa fa-eraser"></i> Leave
+      <% end %>
+    <% end %>
+  </div>
+</div>

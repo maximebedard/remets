@@ -2,9 +2,9 @@ class Account::IntegrationsController < ApplicationController
   respond_to :html, :json
   must_be_authenticated
 
-  def edit
+  def index
   end
 
-  def update
+  def new
   end
 end

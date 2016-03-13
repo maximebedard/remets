@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AccountsControllerTest < ActionController::TestCase
+class Account::ProfilesControllerTest < ActionController::TestCase
   setup do
     sign_in users(:henry)
   end
@@ -29,7 +29,7 @@ class AccountsControllerTest < ActionController::TestCase
 
   test "#update" do
     patch :update, user: { name: "Henry II" }
-    assert_redirected_to edit_account_path
+    assert_redirected_to edit_account_profile_path
   end
 
   test "#edit is not authorized when signed out" do

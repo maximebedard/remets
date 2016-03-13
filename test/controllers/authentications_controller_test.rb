@@ -9,7 +9,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     end
 
     assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
   end
 
   test "#callback with the omniauth origin redirects to the origin" do
@@ -19,7 +19,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     post :callback, provider: :google
 
     assert_not_nil session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
   end
 
   test "#callback with the origin redirects to the origin" do
@@ -54,7 +54,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     end
 
     assert_equal User.last.id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
   end
 
   test "#callback when signed in add an authorization" do
@@ -79,7 +79,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     end
 
     assert_equal users(:henry).id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
   end
 
   test "#new" do
@@ -97,7 +97,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
   test "#create with an existing user" do
     post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "password" }
     assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
   end
 
   test "#create with the origin redirects to the origin" do
@@ -138,7 +138,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     assert_equal user.id, session[Remets::AUTH_SESSION_KEY]
     assert_equal user.id, cookies.permanent.signed[Remets::AUTH_REMEMBER_KEY]
     assert user.remembered?(cookies.permanent[Remets::AUTH_REMEMBER_TOKEN])
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
   end
 
   test "#failure" do

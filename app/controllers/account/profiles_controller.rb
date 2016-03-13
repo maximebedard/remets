@@ -3,22 +3,19 @@ class Account::ProfilesController < ApplicationController
   must_be_authenticated
 
   def show
-    authorize(:account, :show?)
   end
 
   def edit
-    authorize(:account, :edit?)
   end
 
   def update
-    authorize(:account, :update?)
     current_user.update(user_params)
-    respond_with(current_user, location: edit_account_path)
+    respond_with(current_user, location: edit_account_profile_path)
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email)
   end
 end

@@ -1,0 +1,20 @@
+<%= form_for(current_user,
+  url: edit_account_profile_path,
+  html: { class: "full-width" }) do |f| %>
+
+  <%= errors_summary(current_user) %>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password confirmation" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

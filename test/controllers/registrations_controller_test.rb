@@ -14,7 +14,7 @@ class RegistrationsControllerTest < ActionController::TestCase
         password: "pants...",
       }
     end
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
   end
 
   test "#create signs in the user" do
@@ -24,7 +24,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       password: "pants...",
     }
 
-    assert_redirected_to account_path
+    assert_redirected_to account_profile_path
     assert_equal User.last.id, session[Remets::AUTH_SESSION_KEY]
   end
 end
