@@ -180,4 +180,20 @@ class HandoversControllerTest < ActionController::TestCase
     )
     assert_redirected_to_auth_new
   end
+
+  test "#complete" do
+    travel_to(Time.zone.now) do
+      patch :complete, uuid: @handover.uuid
+      handover = assigns(:handover)
+      assert_equal Time.zone.now, handover.mark_as_completed
+      assert_redirected_to handover_path(uuid: handover.uuid)
+    end
+  end
+
+  test "#complete is not authorized when signed out" do
+    sign_out
+
+    patch :complete, uuid: @handover.uuid
+    assert_redirected_to_auth_new
+  end
 end

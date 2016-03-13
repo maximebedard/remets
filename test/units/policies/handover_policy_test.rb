@@ -26,4 +26,8 @@ class HandoverPolicyTest < ActiveSupport::TestCase
   test "#create?" do
     assert_permit(users(:henry), handovers(:log121_lab1), :create)
   end
+
+  test "#complete?" do
+    assert_permit(users(:henry), handovers(:log121_lab1), :complete)
+  end
 end

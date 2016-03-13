@@ -24,4 +24,8 @@ class HandoverPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def complete?
+    true
+  end
 end

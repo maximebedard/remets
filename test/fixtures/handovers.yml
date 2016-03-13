@@ -1,5 +1,6 @@
 log121_lab1:
   title: "LOG121 - Laboratoire 1"
+  description: "This is a description that was missing."
   user: gaston
   uuid: "a96f0cb6-3e2e-4768-805c-dd0c8644def9"
   invite_only: true
@@ -9,6 +10,7 @@ log121_lab1:
 
 log240_lab1:
   title: "LOG240 - Laboratoire 1"
+  description: "This is a description that was missing."
   user: gaston
   uuid: "2b21f7a0-f44e-4c8a-8970-892e97a54e58"
   invite_only: true
@@ -18,6 +20,7 @@ log240_lab1:
 
 log550_lab1:
   title: "LOG550 - Laboratoire 1"
+  description: "This is a description that was missing."
   user: gaston
   uuid: "5a4b93db-28ba-4006-a0f7-b7c3f7280ed6"
   invite_only: true
@@ -27,6 +30,7 @@ log550_lab1:
 
 gti772_final:
   title: "GTI772 - Rapport final"
+  description: "This is a description that was missing."
   user: gaston
   uuid: "942e3dfe-b621-49e4-9c70-d8df1331b2cf"
   invite_only: true

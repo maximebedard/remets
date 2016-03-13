@@ -65,6 +65,14 @@ class HandoversController < ApplicationController
     respond_with(@handover, location: handover_path(uuid: @handover.uuid))
   end
 
+  def complete
+    @handover = policy_scope(Handover.where(uuid: params[:uuid])).first!
+    authorize(@handover)
+
+    @handover.update(mark_as_completed: Time.zone.now)
+    respond_with(@handover, location: handover_path(uuid: @handover.uuid))
+  end
+
   private
 
   def handover_params
