@@ -36,7 +36,7 @@ class AuthenticationsController < ApplicationController
 
   def after_authenticated_path
     path = origin_path
-    path = account_path if path =~ /#{auth_new_url}*/
+    path = account_profile_path if path =~ /#{auth_new_url}*/
     path
   end
 
@@ -65,7 +65,7 @@ class AuthenticationsController < ApplicationController
     [
       session[Remets::ORIGIN_KEY],
       request.env["omniauth.origin"],
-      account_path,
+      account_profile_path,
     ].compact.first
   end
 

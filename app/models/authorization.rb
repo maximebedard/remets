@@ -14,11 +14,6 @@ class Authorization < ActiveRecord::Base
       # TODO: Add github and bitbucket providers
       %w(google)
     end
-
-    def authorizations_by_provider(user)
-      Hash[available_providers.map { |p| [p, []] }]
-        .merge(where(user: user).group_by(&:provider))
-    end
   end
 
   def expired?

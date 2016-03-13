@@ -1,6 +1,6 @@
 require "test_helper"
 
-class OrganizationsControllerTest < ActionController::TestCase
+class Account::OrganizationsControllerTest < ActionController::TestCase
   setup do
     sign_in users(:gaston)
     @organization = organizations(:ets)

@@ -1,27 +1,17 @@
 require "test_helper"
 
 class AuthorizationTest < ActiveSupport::TestCase
-  test ".authorization_by_provider" do
-    user = users(:henry)
-    user.authorizations.destroy_all
-    auth1 = user.authorizations.create!(
-      provider: "google",
-      uid: "12345679",
-      token: "5aef9828b569c5492213264062d13f36",
-      secret: "05f4344cc973b60725deb2dabf3779ad",
-    )
-    auth2 = user.authorizations.create!(
-      provider: "github",
-      uid: "987654321",
-      token: "5aef9828b569c5492213264062d13f36",
-      secret: "05f4344cc973b60725deb2dabf3779ad",
-    )
+  test ".available_providers" do
+    assert_equal ["google"], Authorization.available_providers
+  end
 
-    Authorization.stubs(available_providers: %w(google github bitbucket))
+  test "#expired?" do
+    refute authorizations(:google_gaston).expired?
+  end
 
-    assert_equal(
-      { "google" => [auth1], "github" => [auth2], "bitbucket" => [] },
-      Authorization.authorizations_by_provider(user),
-    )
+  test "#expired? is true when due_date < current time" do
+    travel_to(2.hours.from_now) do
+      assert authorizations(:google_gaston).expired?
+    end
   end
 end

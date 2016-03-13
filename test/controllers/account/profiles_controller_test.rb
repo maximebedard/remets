@@ -1,8 +1,9 @@
 require "test_helper"
 
-class AccountsControllerTest < ActionController::TestCase
+class Account::ProfilesControllerTest < ActionController::TestCase
   setup do
-    sign_in users(:henry)
+    @user = users(:henry)
+    sign_in @user
   end
 
   test "#show" do
@@ -21,15 +22,6 @@ class AccountsControllerTest < ActionController::TestCase
   test "#edit" do
     get :edit
     assert_response :success
-
-    Authorization.available_providers.each do |p|
-      assert_select "a[href=?]", auth_authorize_path(p)
-    end
-  end
-
-  test "#update" do
-    patch :update, user: { name: "Henry II" }
-    assert_redirected_to edit_account_path
   end
 
   test "#edit is not authorized when signed out" do
@@ -39,10 +31,20 @@ class AccountsControllerTest < ActionController::TestCase
     assert_redirected_to_auth_new
   end
 
+  test "#update" do
+    patch :update, user: { name: "Henry Bonmatin", email: "henry.test@henry.com" }
+
+    @user.reload
+
+    assert_redirected_to edit_account_profile_path
+    assert_equal "Henry Bonmatin", @user.name
+    assert_equal "henry.test@henry.com", @user.email
+  end
+
   test "#update is not authorized when signed out" do
     sign_out
 
-    patch :update, user: { name: "Henry II" }
+    patch :update, user: { name: "Henry Bonmatin" }
     assert_redirected_to_auth_new
   end
 end

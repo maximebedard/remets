@@ -4,6 +4,8 @@ class Organization < ActiveRecord::Base
 
   belongs_to :user
 
+  accepts_nested_attributes_for :memberships
+
   validates(
     :name,
     :user,

@@ -1,15 +1,8 @@
 <%= form_for(current_user,
-  url: account_path,
-  html: {class: "full-width"}) do |f| %>
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, class: "form-control", placeholder: "Email" %>
-  </div>
+  url: edit_account_profile_path,
+  html: { class: "full-width" }) do |f| %>
 
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
-  </div>
+  <%= errors_summary(current_user) %>
 
   <div class="form-group">
     <%= f.label :password %>

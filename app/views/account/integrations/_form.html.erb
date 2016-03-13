@@ -1,0 +1,11 @@
+<ul class="list-unstyled list-spaced">
+  <% Authorization.available_providers.each do |provider| %>
+    <li>
+      <%= provider.capitalize %>
+
+      <%= link_to auth_authorize_path(provider), class: "btn btn-default" do %>
+        <i class="fa fa-times"></i> Authorize
+      <% end %>
+    </li>
+  <% end %>
+</ul>

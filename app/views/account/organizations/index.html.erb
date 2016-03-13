@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="remets-panel remets-panel--default">
+        <div class="remets-panel__heading">
+          <h3 class="remets-panel__title">Organizations</h3>
+          <%= link_to(new_account_organization_path, class: "btn btn-transparent btn-sm") do %>
+            <i class="fa fa-plus"></i> New organization
+          <% end %>
+        </div>
+        <% if @organizations.empty? %>
+          <div class="remets-panel__item">
+            No organizations available! <br> Go ahead, create one!
+          </div>
+        <% end %>
+        <%= render @organizations %>
+      </div>
+    </div>
+
+    <%= render partial: "account/navigation" %>
+  </div>
+</div>

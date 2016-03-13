@@ -9,7 +9,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
     open_session do |sess|
       sess.sign_in(users(:gaston))
 
-      assert_equal "/account", sess.path
+      assert_equal "/account/profile", sess.path
       assert_equal @user, sess.controller.current_user
       assert_equal @user.id, sess.session[Remets::AUTH_SESSION_KEY]
     end
@@ -25,7 +25,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
     open_session do |sess|
       sess.sign_in(users(:gaston))
 
-      assert_equal "/account", sess.path
+      assert_equal "/account/profile", sess.path
       assert_equal @user, sess.controller.current_user
       assert_equal @user.id, sess.session[Remets::AUTH_SESSION_KEY]
 
@@ -47,7 +47,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
     open_session do |sess|
       sess.sign_in(users(:gaston), remember_me: true)
 
-      assert_equal "/account", sess.path
+      assert_equal "/account/profile", sess.path
       assert_equal @user, sess.controller.current_user
       assert_equal @user.id, sess.session[Remets::AUTH_SESSION_KEY]
       assert_not_nil sess.cookies[Remets::AUTH_REMEMBER_KEY]
@@ -59,7 +59,7 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
     open_session do |sess|
       sess.sign_in(users(:gaston), remember_me: true)
 
-      assert_equal "/account", sess.path
+      assert_equal "/account/profile", sess.path
       assert_equal @user, sess.controller.current_user
       assert_equal @user.id, sess.session[Remets::AUTH_SESSION_KEY]
       assert_not_nil sess.cookies[Remets::AUTH_REMEMBER_KEY]
