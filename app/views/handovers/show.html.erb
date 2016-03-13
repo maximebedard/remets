@@ -1,8 +1,48 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
-      <%= image_tag("yay.jpg", class: "img-responsive img-rounded",
-        style: "margin:0 auto; max-width: 500px", alt: "Replace me please") %>
+    <div class="col-lg-offset-2 col-lg-8">
+      <div class="remets-panel remets-panel--default">
+        <div class="remets-panel__heading">
+          <h3 class="remets-panel__title"><%= @handover.title %></h3>
+          <%= link_to(edit_handover_path(uuid: @handover.uuid), class: "btn btn-transparent btn-sm") do %>
+          <i class="fa fa-pencil"></i> Edit
+          <% end %>
+        </div>
+        <div class="remets-panel__item">
+          <div>
+            <div>
+              <strong>Due Date : </strong>
+              <%= l @handover.due_date %>
+            </div>
+            <div>
+              <strong>Description : </strong>
+              <%= @handover.description %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+     <div class="col-lg-offset-2 col-lg-8">
+      <div class="remets-panel remets-panel--default">
+        <div class="remets-panel__heading">
+          <h3 class="remets-panel__title">Related Submissions</h3>
+        </div>
+        <div class="remets-panel__item">
+          <div>
+            <% if @handover.submissions.empty? %>
+                No Submissions found!
+            <% end %>
+
+            <% @handover.submissions.each do |submission| %>
+              <li>a</li>
+            <% end %>
+            <%= image_tag("yay.jpg", class: "img-responsive img-rounded",
+            style: "margin:0 auto; max-width: 500px", alt: "Replace me please") %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
