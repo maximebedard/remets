@@ -40,6 +40,7 @@ module AcquaintancesProviders
     end
 
     def revoked?
+      # TODO: Revisit how we handle revoked tokens
       return false if auth.refresh_token.present?
 
       revoke_connection.get REVOKE_ENDPOINT_URL, token: auth.token
@@ -68,32 +69,30 @@ module AcquaintancesProviders
 
     def connection
       @connection ||=
-        Faraday.new(HOST_URL) do |f|
-          f.request :url_encoded
-          f.response :logger, Rails.logger
-          f.headers["Content-Type"] = "application/json"
-          f.headers["GData-Version"] = "3.0"
-          f.headers["Authorization"] = "Bearer #{auth.token}"
-          f.adapter Faraday.default_adapter
-        end
+        build_connection(url: HOST_URL, headers: {
+          "Content-Type" => "application/json",
+          "GData-Version" => "3.0",
+          "Authorization" => "Bearer #{auth.token}",
+        })
     end
 
     def auth_connection
       @auth_connection ||=
-        Faraday.new(AUTH_HOST_URL) do |f|
-          f.request :url_encoded
-          f.response :logger, Rails.logger
-          f.adapter Faraday.default_adapter
-        end
+        build_connection(url: AUTH_HOST_URL)
     end
 
     def revoke_connection
       @revoke_connection ||=
-        Faraday.new(REVOKE_HOST_URL) do |f|
-          f.request :url_encoded
-          f.response :logger, Rails.logger
-          f.adapter Faraday.default_adapter
-        end
+        build_connection(url: REVOKE_HOST_URL)
+    end
+
+    def build_connection(url:, headers: {})
+      Faraday.new(url) do |f|
+        f.request :url_encoded
+        f.headers.update(headers)
+        f.response :logger, Rails.logger
+        f.adapter Faraday.default_adapter
+      end
     end
   end
 end
