@@ -10,6 +10,7 @@
 
   .navbar-brand {
     color: $remets-navbar-brand-color;
+    padding-top: 5px;
     &:hover,
     &:focus {
       color: $remets-navbar-brand-hover-color;
