@@ -4,11 +4,13 @@ class CreateAuthorization < ActiveRecord::Migration
       t.integer :user_id
       t.string :provider
       t.string :email
+      t.string :name
       t.string :uid
       t.string :token
       t.string :refresh_token
       t.string :secret
       t.datetime :expires_at
+      t.timestamps
     end
   end
 end

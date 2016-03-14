@@ -20,11 +20,14 @@ ActiveRecord::Schema.define(version: 20160220213516) do
     t.integer  "user_id"
     t.string   "provider"
     t.string   "email"
+    t.string   "name"
     t.string   "uid"
     t.string   "token"
     t.string   "refresh_token"
     t.string   "secret"
     t.datetime "expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "boilerplate_documents", force: :cascade do |t|

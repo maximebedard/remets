@@ -79,7 +79,8 @@ class User < ActiveRecord::Base
       ).first_or_create do |auth|
         auth.provider = params["provider"]
         auth.uid = params["uid"]
-        auth.email = params["email"]
+        auth.name = params["info"]["name"]
+        auth.email = params["info"]["email"]
         auth.token = params["credentials"]["token"]
         auth.secret = params["credentials"]["secret"]
         auth.refresh_token = params["credentials"]["refresh_token"]

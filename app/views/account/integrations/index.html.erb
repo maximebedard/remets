@@ -8,7 +8,12 @@
             <i class="fa fa-plus"></i> New integration
           <% end %>
         </div>
-        <%= render partial: "authorization", collection: current_user.authorizations %>
+        <% current_user.authorizations.group_by(&:provider).each do |provider, authorizations| %>
+          <div class="remets-panel__item--group">
+            <i class="fa fa-<%= provider %>"></i>&nbsp;<%= provider.capitalize %>
+          </div>
+          <%= render partial: "authorization", collection: authorizations  %>
+        <% end %>
       </div>
     </div>
     <%= render partial: "account/navigation" %>

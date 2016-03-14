@@ -6,7 +6,7 @@
 
 .remets-panel__heading {
   border: none;
-  padding: 10px 15px;
+  padding: 10px 14px;
   @include flex();
   justify-content: space-between;
   align-items: center;
@@ -23,6 +23,20 @@
   padding: 16px 14px;
   @include flex();
 }
+
+.remets-panel__item--group {
+  border: 1px solid #E8E8E8;
+  border-top: 0;
+  padding: 16px 14px;
+  @include flex();
+  align-items: center;
+
+  i.fa {
+    font-size: 2em;
+  }
+}
+
+
 .remets-panel__item__title {
   width: 25%;
   h1, h2 {
