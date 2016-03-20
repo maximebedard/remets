@@ -6,24 +6,9 @@
           <h3 class="remets-panel__title">Registration</h3>
         </div>
         <div class="remets-panel__item">
-        <%= form_for(@user, url: registration_path, html: {class: "full-width"}) do |f| %>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <%= f.email_field :email, class: "form-control", placeholder: "Email" %>
-          </div>
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <%= f.text_field :name, class: "form-control", placeholder: "Full Name" %>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
-          </div>
-          <%= f.submit "Register for free!", class: "btn btn-large btn-primary form-control" %>
-        <% end %>
+          <%= render partial: "form" %>
         </div>
       </div>
     </div>
   </div>
-
 </div>
