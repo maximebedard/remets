@@ -21,11 +21,11 @@
     <div id="navbar" class="collapse navbar-collapse">
       <% if signed_in? %>
       <ul class="nav navbar-nav navbar-left">
-        <li class="<%= active_on_controller("handovers") %>">
+        <li class="<%= active_for("handovers") %>">
           <%= link_to "Handovers", handovers_path %>
         </li>
 
-        <li class="<%= active_on_controller("submissions") %>">
+        <li class="<%= active_for("submissions") %>">
           <%= link_to "Submissions", submissions_path %>
         </li>
       </ul>
@@ -44,7 +44,7 @@
             </ul>
           </li>
         <% else %>
-          <li class="<%= active_on_controller("authentications") %>">
+          <li class="<%= active_for("authentications") %>">
             <%= link_to "Sign in", auth_new_path %>
           </li>
         <% end %>
