@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row">
-    <!-- main panel -->
     <div class="col-lg-9">
       <div class="remets-panel remets-panel--default">
         <div class="remets-panel__heading">
@@ -9,7 +8,7 @@
             <i class="fa fa-plus"></i> New Handover
           <% end %>
         </div>
-         <% if @handovers.empty? %>
+        <% if @handovers.empty? %>
           <div class="remets-panel__item">
             No handovers found! Why not create one?
           </div>
@@ -18,41 +17,6 @@
       </div>
     </div>
 
-    <!-- actions -->
-    <div class="col-lg-3">
-      <div class="remets-panel remets-panel--red">
-        <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Actions</h3>
-        </div>
-        <div class="remets-panel__item">
-          <div class="dropdown">
-            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-filter"></i>
-              Filter By
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Action</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="remets-panel__item">
-          <div class="dropdown">
-            <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-sort"></i>
-              Sort By
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Action</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render partial: "shared/filters" %>
   </div>
 </div>
