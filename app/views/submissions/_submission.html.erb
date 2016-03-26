@@ -1,0 +1,10 @@
+<div class="remets-panel__item">
+  <div class="remets-panel__item__content">
+    <%= render submission.documents %>
+  </div>
+  <div class="remets-panel__item__actions">
+    <%= link_to submission_path(submission), class: "btn btn-primary btn-sm" do %>
+      <i class="fa fa-eyes"></i> View
+    <% end %>
+  </div>
+</div>

@@ -20,11 +20,7 @@
         <div class="remets-panel__heading">
           <h3 class="remets-panel__title">Submissions</h3>
         </div>
-        <div class="remets-panel__item">
-          <div>
-            <%= render partial: "submission", collection: @handover.submissions %>
-          </div>
-        </div>
+        <%= render partial: "submission", collection: @handover.submissions %>
       </div>
     </div>
   </div>

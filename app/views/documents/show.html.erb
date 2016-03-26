@@ -1,19 +1,6 @@
 <h1>Document</h1>
 
-<b>File name:</b> <%= @document.file_ptr %><br />
-<b>File original name sanitized:</b> <%= @document.file_original_name %><br />
-<b>File secure token:</b> <%= @document.file_secure_token %><br />
-<b>File current path:</b> <%= @document.file_ptr.current_path %><br />
-<b>Download link:</b> <%= link_to "✓", download_document_url(@document) %><br />
-
-<b>Fingerprints</b><br />
-<textarea><%= @document.fingerprints %></textarea><br />
-
-<b>Indexes</b><br />
-<textarea><%= @document.indexes %></textarea><br />
-
-<b>Windows</b><br />
-<textarea><%= @document.windows %></textarea><br />
+<%= render @document %>
 
 <h2>Relevant documents</h2>
 

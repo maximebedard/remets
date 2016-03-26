@@ -1,7 +1,8 @@
-<%= form_for @submission,
-    url: handover_submissions_path(handover_uuid: @handover.uuid),
-    html: { multipart: true, class: "full-width" } do |f| %>
-
+<%= form_for(
+  @submission,
+  url: handover_submissions_path(handover_uuid: @handover.uuid),
+  html: { multipart: true, class: "full-width" }
+) do |f| %>
   <%= errors_summary(@submission) %>
 
   <div class="form-group">

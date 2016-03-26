@@ -1,0 +1,15 @@
+<div class="remets-panel__item">
+  <div class="remets-panel__item__title">
+    <h1><%= handover.title %></h1>
+  </div>
+  <div class="remets-panel__item__description">
+    <% if handover.organization %>
+      <small><%= handover.organization.name %></small>
+    <% end %>
+  </div>
+  <div class="remets-panel__item__actions">
+    <%= link_to "#", class: "btn btn-danger btn-sm" do %>
+      <i class="fa fa-times"></i> Collapse
+    <% end %>
+  </div>
+</div>
