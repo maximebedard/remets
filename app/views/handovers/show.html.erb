@@ -9,16 +9,7 @@
           <% end %>
         </div>
         <div class="remets-panel__item">
-          <div>
-            <div>
-              <strong>Due Date : </strong>
-              <%= l @handover.due_date %>
-            </div>
-            <div>
-              <strong>Description : </strong>
-              <%= @handover.description %>
-            </div>
-          </div>
+          <%= render partial: "detail", object: @handover %>
         </div>
       </div>
     </div>
@@ -27,19 +18,11 @@
      <div class="col-lg-offset-2 col-lg-8">
       <div class="remets-panel remets-panel--default">
         <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Related Submissions</h3>
+          <h3 class="remets-panel__title">Submissions</h3>
         </div>
         <div class="remets-panel__item">
           <div>
-            <% if @handover.submissions.empty? %>
-                No Submissions found!
-            <% end %>
-
-            <% @handover.submissions.each do |submission| %>
-              <li>a</li>
-            <% end %>
-            <%= image_tag("yay.jpg", class: "img-responsive img-rounded",
-            style: "margin:0 auto; max-width: 500px", alt: "Replace me please") %>
+            <%= render partial: "submission", collection: @handover.submissions %>
           </div>
         </div>
       </div>
