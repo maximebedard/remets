@@ -10,7 +10,7 @@ class CreateAuthorization < ActiveRecord::Migration
       t.string :refresh_token
       t.string :secret
       t.datetime :expires_at
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

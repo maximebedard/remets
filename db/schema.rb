@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20160220213516) do
     t.string   "refresh_token"
     t.string   "secret"
     t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "boilerplate_documents", force: :cascade do |t|
@@ -109,9 +109,14 @@ ActiveRecord::Schema.define(version: 20160220213516) do
   end
 
   create_table "submissions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "handover_id"
+    t.integer  "user_id"
+    t.integer  "handover_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
+
+  add_index "submissions", ["handover_id"], name: "index_submissions_on_handover_id", using: :btree
+  add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id",     null: false
