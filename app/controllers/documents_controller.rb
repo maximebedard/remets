@@ -1,22 +1,4 @@
 class DocumentsController < ApplicationController
+  include Downloadable
   must_be_authenticated
-
-  def index
-    @documents = Document.all
-    authorize(@documents)
-  end
-
-  def show
-    @document = Document.find(params[:id])
-    @relevant_matches = DocumentMatch.relevant_matches(@document)
-
-    authorize(@document)
-  end
-
-  def download
-    @document = Document.find(params[:id])
-    authorize(@document)
-
-    send_file @document.file_ptr.current_path, disposition: :inline
-  end
 end

@@ -69,7 +69,7 @@ class HandoversControllerTest < ActionController::TestCase
       assert_equal "pants pants pants", handover.description
       assert_equal 5.days.from_now, handover.due_date
       assert_equal "École de technologie supérieure", handover.organization.name
-      assert_equal 1, handover.reference_documents.size
+      assert_equal 2, handover.reference_documents.size
       assert_equal 4, handover.boilerplate_documents.size
       assert_redirected_to handover_path(uuid: handover.uuid)
     end

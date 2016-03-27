@@ -1,8 +1,8 @@
 require "test_helper"
 
-class DocumentsControllerTest < ActionController::TestCase
+class ReferenceDocumentsControllerTest < ActionController::TestCase
   setup do
-    @document = documents(:platypus)
+    @document = reference_documents(:platypus_reference)
     sign_in(users(:henry))
   end
 
@@ -20,13 +20,5 @@ class DocumentsControllerTest < ActionController::TestCase
     params = { id: @document.id, extension: @document.file.extension }
     get :download, params
     assert_redirected_to_auth_new
-  end
-
-  test "#download is not authorized when you are not the owner nor the creator of the handover" do
-    sign_in(users(:marcel))
-
-    get :download, id: @document.id, extension: @document.file.extension
-    assert_redirected_to root_path
-    assert_equal "You are not authorized to perform this action.", flash[:danger]
   end
 end
