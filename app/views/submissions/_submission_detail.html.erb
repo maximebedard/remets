@@ -1,0 +1,12 @@
+<div>
+  <% unless @submission.user == current_user %>
+    <div>
+      <strong>Author : </strong>
+      <%= @submission.user.name %>
+    </div>
+  <% end %>
+  <div>
+    <strong>Date submitted : </strong>
+    <%= l @submission.created_at %>
+  </div>
+</div>

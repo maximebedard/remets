@@ -6,9 +6,7 @@
     <small><%= l submission.created_at %></small>
   </div>
   <div class="remets-panel__item__actions">
-    <%= link_to submission_document_matches_path(submission_id: submission.id), class: "btn btn-default btn-sm" do %>
-      <i class="fa fa-eye"></i> Compare
-    <% end %>
+    <!-- TODO: Display warning when similar submission found -->
     <%= link_to submission_path(id: submission.id), class: "btn btn-default btn-sm" do %>
       <i class="fa fa-eye"></i> View
     <% end %>
