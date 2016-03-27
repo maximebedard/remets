@@ -1,10 +1,6 @@
 module Downloadable
   extend ActiveSupport::Concern
 
-  included do
-    class_attribute :downloadable_class
-  end
-
   def download
     authorize(downloadable)
 
@@ -12,6 +8,12 @@ module Downloadable
       downloadable.file_ptr.current_path,
       disposition: :inline,
     )
+  end
+
+  module ClassMethods
+    def downloadable_class
+      to_s.gsub(/sController/, "").constantize
+    end
   end
 
   private
