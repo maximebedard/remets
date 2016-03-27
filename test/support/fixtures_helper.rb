@@ -1,15 +1,10 @@
 module Remets
   module FixturesHelper
-    def document_upload_yaml(basename)
-      uploader = upload(Document, basename)
-
-      generate_yaml(uploader)
-    end
-
-    def boilerplate_document_upload_yaml(basename)
-      uploader = upload(BoilerplateDocument, basename)
-
-      generate_yaml(uploader)
+    %w(document boilerplate_document reference_document).each do |type|
+      define_method("#{type}_upload_yaml") do |basename|
+        uploader = upload(type.classify.constantize, basename)
+        generate_yaml(uploader)
+      end
     end
 
     def password(value = "password")

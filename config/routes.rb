@@ -6,18 +6,24 @@ Rails.application.routes.draw do
       patch :complete
     end
 
-    resources :submissions, only: [:index, :show, :new, :create], shallow: true
+    resources :submissions, only: [:index, :show, :new, :create], shallow: true do
+      resources :document_matches, only: [:index, :show], shallow: true
+    end
   end
+
   get "/submissions", as: :submissions, to: "submissions#all"
-  resources :documents, only: [:index, :show] do
+
+  concern :downloadable do
     member do
       get :download
     end
   end
-  resources :document_matches, only: [:show]
-  resources :users, only: [:create]
-  resources :acquaintances, only: [:index], defaults: { format: :json }
 
+  resources :documents, only: [], concerns: :downloadable
+  resources :reference_documents, only: [], concerns: :downloadable
+  resources :boilerplate_documents, only: [], concerns: :downloadable
+
+  resources :acquaintances, only: [:index], defaults: { format: :json }
   resource :registration, only: [:new, :create]
 
   namespace :account do
