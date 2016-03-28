@@ -22,6 +22,7 @@ class SubmissionPolicy < ApplicationPolicy
   end
 
   def diff?
+    # TODO
     true
   end
 end

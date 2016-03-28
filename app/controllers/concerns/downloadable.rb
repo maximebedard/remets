@@ -19,7 +19,7 @@ module Downloadable
   private
 
   def downloadable
-    @document ||= policy_scope(
+    @downloadable ||= policy_scope(
       self.class.downloadable_class.where(id: params[:id]),
     ).first!
   end

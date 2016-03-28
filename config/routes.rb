@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   concern :comparable do
     member do
-      get "/diff/:compared_id", action: :diff
+      get "/diff/:compared_id", action: :diff, as: :diff
     end
   end
 

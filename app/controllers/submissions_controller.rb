@@ -42,7 +42,7 @@ class SubmissionsController < ApplicationController
   end
 
   def diff
-    @reference, @compared = policy_scope(Submission.where(id: [params[:id], params[:compared_id]]))
+    @reference, @compared = Submission.find([params[:id], params[:compared_id]])
 
     authorize(@reference)
     authorize(@compared)

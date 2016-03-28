@@ -5,13 +5,14 @@ class DocumentsController < ApplicationController
   respond_to :html, :json
 
   def show
-    authorize(downloadable)
+    @document = policy_scope(Document.where(id: params[:id])).first!
+    authorize(@document)
 
-    respond_with(downloadable)
+    respond_with(@document)
   end
 
-  def compare
-    @reference, @compared = policy_scope(Document.where(id: [params[:id], params[:compared_id]]))
+  def diff
+    @reference, @compared = Document.find([params[:id], params[:compared_id]])
 
     authorize(@reference)
     authorize(@compared)

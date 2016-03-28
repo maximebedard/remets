@@ -6,6 +6,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   setup do
     @handover = handovers(:log121_lab1)
     @submission = submissions(:log121_lab1_1)
+    @compared_submission = submissions(:log121_lab1_2)
     sign_in users(:henry)
   end
 
@@ -87,6 +88,22 @@ class SubmissionsControllerTest < ActionController::TestCase
     sign_out
 
     get :new, handover_uuid: @handover.uuid
+    assert_redirected_to_auth_new
+  end
+
+  test "#diff" do
+    get :diff, id: @submission.id, compared_id: @compared_submission.id
+
+    assert assigns(:reference)
+    assert assigns(:compared)
+
+    assert_response :ok
+  end
+
+  test "#diff is not authorized when signed out" do
+    sign_out
+
+    get :diff, id: @submission.id, compared_id: @compared_submission.id
     assert_redirected_to_auth_new
   end
 end

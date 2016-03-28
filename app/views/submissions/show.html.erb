@@ -12,9 +12,7 @@
         <div class="remets-panel__heading">
           <h3 class="remets-panel__title">Similar submissions</h3>
         </div>
-        <div class="remets-panel__item">
-          Display similar submissions here.
-        </div>
+        <%= render partial: "submission", collection: Submission.similar_to(@submission), locals: { current_submission: @submission } %>
       </div>
     </div>
   </div>
