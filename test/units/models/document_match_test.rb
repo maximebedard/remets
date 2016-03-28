@@ -27,30 +27,6 @@ class DocumentMatchTest < ActiveSupport::TestCase
     end
   end
 
-  test "#relevant_matches return the matches for the compared document" do
-    DocumentMatch.destroy_all
-
-    reference = documents(:platypus)
-    reference.update!(fingerprints: [1234, 5678, 0000])
-
-    compared1 = documents(:fraudulent_platypus)
-    compared1.update!(fingerprints: [1234, 5678])
-
-    compared2 = documents(:fraudulent_bragging)
-    compared2.update!(fingerprints: [0000])
-
-    DocumentMatch.create_from!(reference, compared1)
-    DocumentMatch.create_from!(reference, compared2)
-
-    relevant_matches = DocumentMatch.relevant_matches(reference)
-    assert_equal 2, relevant_matches.size
-    assert_equal compared1.id,
-      relevant_matches.first.compared_document_id
-    assert_equal compared2.id,
-      relevant_matches.second.compared_document_id
-    assert relevant_matches.all? { |m| m.reference_document_id == reference.id }
-  end
-
   test "#similarity" do
     document1 = documents(:platypus)
     document2 = documents(:fraudulent_platypus)

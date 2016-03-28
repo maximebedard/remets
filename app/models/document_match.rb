@@ -16,11 +16,6 @@ class DocumentMatch < ActiveRecord::Base
     numericality: { greater_than: 0.0 },
   )
 
-  scope :relevant_matches, lambda { |document|
-    where(reference_document_id: document.id)
-      .order(:similarity)
-  }
-
   def self.create_from!(reference, compared)
     return unless match = Matcher.new(reference, compared).call
 
