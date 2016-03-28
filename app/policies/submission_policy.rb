@@ -20,4 +20,8 @@ class SubmissionPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def diff?
+    true
+  end
 end
