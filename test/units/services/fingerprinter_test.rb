@@ -5,7 +5,7 @@ module FingerprinterTests
 
   included do
     test "#call creates a #{@subject.class} with a single document" do
-      assert_difference(["#{@subject.class}.count", "#{fingerprintable_klass}.count"]) do
+      assert_difference(["#{@subject.class}.count", "#{@fingerprintable}.count"]) do
         call(files: [sanitizable_file_upload])
       end
     end
@@ -18,7 +18,7 @@ module FingerprinterTests
 
     test "#call creates a #{@subject.class} with multiple documents" do
       assert_difference("#{@subject.class}.count") do
-        assert_difference("#{fingerprintable_klass}.count", 2) do
+        assert_difference("#{@fingerprintable}.count", 2) do
           call(files: [sanitizable_file_upload] * 2)
         end
       end
@@ -45,6 +45,7 @@ class SubmissionFingerprinterTest < ActiveSupport::TestCase
 
   setup do
     @subject = Submission.new
+    @fingerprintable = Document
   end
 
   private
@@ -53,11 +54,9 @@ class SubmissionFingerprinterTest < ActiveSupport::TestCase
     Fingerprinter.new(
       @subject,
       documents_attributes: files.map { |f| { file_ptr: f } },
+      user: users(:henry),
+      handover: handovers(:log121_lab1),
     ).call
-  end
-
-  def fingerprintable_klass
-    Document
   end
 end
 
@@ -67,6 +66,7 @@ class HandoverFingerprinterTest < ActiveSupport::TestCase
 
   setup do
     @subject = Handover.new
+    @fingerprintable = BoilerplateDocument
   end
 
   def call(files: [])
@@ -77,9 +77,5 @@ class HandoverFingerprinterTest < ActiveSupport::TestCase
       title: "Pants.",
       description: "Pants Pants Pants.",
     ).call
-  end
-
-  def fingerprintable_klass
-    BoilerplateDocument
   end
 end
