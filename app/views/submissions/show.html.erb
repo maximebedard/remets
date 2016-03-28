@@ -1,24 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-offset-2 col-lg-8">
-      <div class="remets-panel remets-panel--default">
-        <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Submission</h3>
-          <div>
-            <%= link_to(handover_path(uuid: @submission.handover.uuid), class: "btn btn-transparent btn-sm") do %>
-              <i class="fa fa-chevron-left"></i> View handover
-            <% end %>
-            <%= link_to("#", class: "btn btn-transparent btn-sm") do %>
-              <i class="fa fa-download"></i> Download
-            <% end %>
-          </div>
-        </div>
-        <div class="remets-panel__item">
-          <%= render partial: "submission_detail", object: @submission %>
-
-          Display documents here with a link to view the documents details and the similar documents.
-        </div>
-      </div>
+      <%= render partial: "submission_panel", object: @submission, as: :submission,
+        locals: { title: "Submission" } %>
     </div>
   </div>
 
@@ -28,9 +12,7 @@
         <div class="remets-panel__heading">
           <h3 class="remets-panel__title">Similar submissions</h3>
         </div>
-        <div class="remets-panel__item">
-          Display similar submissions here.
-        </div>
+        <%= render partial: "submission", collection: Submission.similar_to(@submission), locals: { current_submission: @submission } %>
       </div>
     </div>
   </div>

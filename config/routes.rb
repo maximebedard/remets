@@ -1,25 +1,29 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-  resources :handovers, only: [:index, :show, :new, :create, :edit, :update], param: :uuid do
-    member do
-      patch :complete
-    end
-
-    resources :submissions, only: [:index, :show, :new, :create], shallow: true do
-      resources :document_matches, only: [:index, :show], shallow: true
-    end
-  end
-
-  get "/submissions", as: :submissions, to: "submissions#all"
-
   concern :downloadable do
     member do
       get :download
     end
   end
 
-  resources :documents, only: [], concerns: :downloadable
+  concern :comparable do
+    member do
+      get "/diff/:compared_id", action: :diff, as: :diff
+    end
+  end
+
+  resources :handovers, only: [:index, :show, :new, :create, :edit, :update], param: :uuid do
+    member do
+      patch :complete
+    end
+
+    resources :submissions, only: [:index, :show, :new, :create], concerns: :comparable, shallow: true
+  end
+
+  get "/submissions", as: :submissions, to: "submissions#all"
+
+  resources :documents, only: [:show], concerns: [:downloadable, :comparable]
   resources :reference_documents, only: [], concerns: :downloadable
   resources :boilerplate_documents, only: [], concerns: :downloadable
 

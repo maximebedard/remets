@@ -2,10 +2,4 @@
 
 <%= render @document %>
 
-<h2>Relevant documents</h2>
-
-<ul>
-  <% @relevant_matches.each do |match| %>
-    <li><%= link_to "#{match.compared_document.file_original_name} (#{match.similarity})", download_document_path(match.compared_document) %></li>
-  <% end %>
-</ul>
+Display relevant documents here.

@@ -41,6 +41,15 @@ class SubmissionsController < ApplicationController
     respond_with(@submission)
   end
 
+  def diff
+    @reference, @compared = Submission.find([params[:id], params[:compared_id]])
+
+    authorize(@reference)
+    authorize(@compared)
+
+    respond_with(@reference, @compared)
+  end
+
   private
 
   def submission_params

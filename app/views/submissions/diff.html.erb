@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="col-lg-6">
+    <%= render partial: "submission_panel", object: @reference, as: :submission,
+      locals: { title: "Reference submission" } %>
+  </div>
+
+  <div class="col-lg-6">
+    <%= render partial: "submission_panel", object: @compared, as: :submission,
+      locals: { title: "Compared submission" } %>
+  </div>
+</div>

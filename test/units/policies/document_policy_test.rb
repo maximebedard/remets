@@ -3,14 +3,6 @@ require "test_helper"
 class DocumentPolicyTest < ActiveSupport::TestCase
   include Remets::PolicyAssertions
 
-  test "#index? is true when an admin" do
-    assert_permit(users(:pierre), Document.all, :index)
-  end
-
-  test "#index? is false when a user" do
-    refute_permit(users(:gaston), Document.all, :index)
-  end
-
   test "#show? is true when an admin" do
     assert_permit(users(:pierre), documents(:platypus), :show)
   end
