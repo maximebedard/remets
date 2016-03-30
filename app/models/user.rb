@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :memberships
 
   has_many :subscriptions
-  has_many :subscribed_handovers, through: :subscriptions, class_name: Handover
+  has_many :subscribed_handovers, through: :subscriptions, source: :handover
 
   has_many :submissions
   has_many :handovers
