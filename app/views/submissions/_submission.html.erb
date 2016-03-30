@@ -1,10 +1,17 @@
-<div class="remets-panel__item">
+<div class="remets-panel__item item-<%= submission_counter %>">
   <div class="remets-panel__item__content">
-    <%= render submission.documents %>
+    <div>Handed in on: <%= l submission.created_at %></div>
+    <br>
+    <div>
+      <ul>
+        <%= render submission.documents %>
+      </ul>
+    </div>
+
   </div>
   <div class="remets-panel__item__actions">
     <%= link_to submission_path(submission), class: "btn btn-primary btn-sm" do %>
-      <i class="fa fa-eyes"></i> View
+      <i class="fa fa-eye"></i> View
     <% end %>
     <% if local_assigns[:current_submission].present? %>
       <%= link_to diff_submission_path(submission, compared_id: current_submission.id), class: "btn btn-default btn-sm" do %>

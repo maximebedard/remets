@@ -8,6 +8,11 @@
             <i class="fa fa-plus"></i> New integration
           <% end %>
         </div>
+        <% if current_user.authorizations.empty? %>
+          <div class="remets-panel__item">
+            No other services are linked to this account.
+          </div>
+        <% end %>
         <% current_user.authorizations.group_by(&:provider).each do |provider, authorizations| %>
           <div class="remets-panel__item--group">
             <i class="fa fa-<%= provider %>"></i>&nbsp;<%= provider.capitalize %>

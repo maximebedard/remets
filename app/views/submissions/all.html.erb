@@ -1,21 +1,28 @@
 <div class="container">
   <div class="row">
+     <% if @submissions.empty? %>
     <div class="col-lg-9">
       <div class="remets-panel remets-panel--default">
         <div class="remets-panel__heading">
           <h3 class="remets-panel__title">Submissions</h3>
         </div>
-        <% if @submissions.empty? %>
           <div class="remets-panel__item">
             No Submissions found!
           </div>
-        <% end %>
-        <% @submissions.group_by(&:handover).each do |handover, submissions| %>
-          <%= render partial: "handover", object: handover %>
-          <%= render submissions %>
-        <% end %>
       </div>
     </div>
+    <% end %>
+    <% @submissions.group_by(&:handover).each do |handover, submissions| %>
+       <div class="col-lg-9">
+          <div id="handover-<%= handover.id %>" class="remets-panel remets-panel--default">
+            <div class="remets-panel__heading">
+              <h3 class="remets-panel__title"><%= handover.title %> - <%= l handover.due_date %></h3>
+            </div>
+              <%= render partial: "handover", object: handover %>
+              <%= render submissions.reverse %>
+          </div>
+        </div>
+    <% end %>
     <%= render partial: "shared/filters" %>
   </div>
 </div>

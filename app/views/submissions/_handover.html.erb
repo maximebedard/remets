@@ -1,15 +1,36 @@
-<div class="remets-panel__item">
-  <div class="remets-panel__item__title">
-    <h1><%= handover.title %></h1>
+<div class="remets-panel__item remets-panel__item--no-border">
+  <div class="remets-panel__item__2-col-info">
+    <div>
+      <h5>Deadline in about:<h5>
+      <h1><%=  distance_of_time_in_words(handover.due_date, Time.zone.now) %></h1>
+    </div>
   </div>
-  <div class="remets-panel__item__description">
+  <div class="remets-panel__item__2-col-info">
+    <div>
+      <h5>Evaluated by :<h5>
+      <h1><%= handover.user.name %></h1>
+    </div>
     <% if handover.organization %>
       <small><%= handover.organization.name %></small>
     <% end %>
   </div>
+</div>
+<div class="remets-panel__item">
+  <div class="remets-panel__item__long-description">
+    Description : <%= handover.description%>
+  </div>
   <div class="remets-panel__item__actions">
-    <%= link_to "#", class: "btn btn-danger btn-sm" do %>
-      <i class="fa fa-times"></i> Collapse
+    <%= link_to(handover_path(uuid: handover.uuid),
+        class: "btn btn-default btn-sm") do %>
+        <i class="fa fa-newspaper-o"></i> Details
+      <% end %>
+    <%= link_to new_handover_submission_path(handover_uuid: handover.uuid),
+      class: "btn btn-primary btn-sm" do %>
+      <% if handover.submissions.size > 0 %>
+        <i class="fa fa-paper-plane-o"></i> Submit a new version
+      <% else %>
+        <i class="fa fa-paper-plane"></i> Submit
+      <% end %>
     <% end %>
   </div>
 </div>

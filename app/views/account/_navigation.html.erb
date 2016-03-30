@@ -1,5 +1,5 @@
 <div class="col-lg-3">
-  <div class="remets-panel remets-panel--red">
+  <div class="remets-panel remets-panel--orange">
     <div class="remets-panel__heading">
       <h3 class="remets-panel__title">Settings</h3>
     </div>
@@ -11,9 +11,6 @@
     </div>
     <div class="remets-panel__item <%= active_for("security") %>">
       <%= link_to "Integrations", account_integrations_path %>
-    </div>
-    <div class="remets-panel__item">
-      <%= link_to "Notification", edit_account_notification_path %>
     </div>
     <div class="remets-panel__item <%= active_for("organizations") %>">
       <%= link_to "Organizations", account_organizations_path %>

@@ -20,6 +20,7 @@ class Handover < ActiveRecord::Base
 
   scope :upcoming, -> { where("due_date > ?", Time.zone.now) }
   scope :past, -> { where("due_date < ?", Time.zone.now) }
+  scope :latest_deadlines_first, -> { order("due_date asc") }
 
   accepts_nested_attributes_for :boilerplate_documents,
     :reference_documents

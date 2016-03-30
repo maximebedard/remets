@@ -6,7 +6,7 @@
           <h3 class="remets-panel__title">Upcoming handovers</h3>
         </div>
         <%= render partial: "handover",
-          collection: current_user.subscribed_handovers.upcoming %>
+          collection: current_user.subscribed_handovers.upcoming.latest_deadlines_first %>
       </div>
     </div>
   </div>

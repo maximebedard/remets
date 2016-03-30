@@ -20,10 +20,7 @@
     <%= link_to handover_path(uuid: handover.uuid), class: "btn btn-default btn-sm" do %>
       <i class="fa fa-eye"></i> View
     <% end %>
-    <%= link_to complete_handover_path(uuid: handover.uuid), class: "btn btn-default btn-sm", method: :patch  do %>
-      <i class="fa fa-pencil"></i> Complete now
-    <% end %>
-    <%= link_to edit_handover_path(uuid: handover.uuid), class: "btn btn-default btn-sm" do %>
+    <%= link_to edit_handover_path(uuid: handover.uuid), class: "btn btn-primary btn-sm" do %>
       <i class="fa fa-pencil"></i> Edit
     <% end %>
   </div>
