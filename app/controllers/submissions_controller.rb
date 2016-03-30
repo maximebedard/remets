@@ -10,7 +10,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = policy_scope(handover.submissions)
+    @submissions = policy_scope(handover.submissions.where(user: current_user))
     authorize(@submissions)
 
     respond_with(@submissions)
