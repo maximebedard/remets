@@ -66,13 +66,13 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
     assert_equal "Henry Corp.", organization.name
     assert_equal users(:gaston), organization.user
     assert_equal 2, organization.memberships.size
-    assert_redirected_to edit_account_organization_path(organization)
+    assert_redirected_to account_organizations_path
   end
 
   test "#create invite new members" do
     assert_difference("User.count") do
       post :create, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] }
-      assert_redirected_to edit_account_organization_path(assigns(:organization))
+      assert_redirected_to account_organizations_path
     end
   end
 

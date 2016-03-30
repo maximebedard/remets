@@ -49,8 +49,7 @@ class Account::OrganizationsController < ApplicationController
 
     respond_with(
       @organization,
-      location: @organization.save &&
-        edit_account_organization_path(@organization),
+      location: @organization.save && account_organizations_path,
     )
   end
 
