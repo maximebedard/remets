@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
   must_be_authenticated
 
   def all
-    @submissions = policy_scope(Submission)
+    @submissions = policy_scope(Submission.where(user: current_user))
     authorize(@submissions)
 
     respond_with(@submissions)
@@ -24,14 +24,14 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = policy_scope(handover.submissions).build
+    @submission = policy_scope(handover.submissions.where(user: current_user)).build
     authorize(@submission)
 
     respond_with(@submission)
   end
 
   def create
-    @submission = policy_scope(handover.submissions).build
+    @submission = policy_scope(handover.submissions.where(user: current_user)).build
     authorize(@submission)
 
     Fingerprinter.new(

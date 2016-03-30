@@ -8,12 +8,17 @@ class HandoverUpdater
   end
 
   def call
+    assign_owner
     build_subscriptions
     build_organization_association
     fingerprint
   end
 
   private
+
+  def assign_owner
+    handover.user = user
+  end
 
   def build_subscriptions
     SubscriptionsBuilder.new(

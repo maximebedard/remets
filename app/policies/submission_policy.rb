@@ -1,6 +1,4 @@
 class SubmissionPolicy < ApplicationPolicy
-  Scope = Class.new(Scopes::AuthenticatedScope)
-
   def all?
     true
   end
@@ -22,7 +20,6 @@ class SubmissionPolicy < ApplicationPolicy
   end
 
   def diff?
-    # TODO
     true
   end
 end

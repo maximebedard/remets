@@ -1,6 +1,4 @@
 class HandoverPolicy < ApplicationPolicy
-  Scope = Class.new(Scopes::AuthenticatedScope)
-
   def index?
     true
   end
