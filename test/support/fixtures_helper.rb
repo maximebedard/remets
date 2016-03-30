@@ -1,6 +1,6 @@
 module Remets
   module FixturesHelper
-    %w(document boilerplate_document reference_document).each do |type|
+    %w(document boilerplate_document reference_document graded_document).each do |type|
       define_method("#{type}_upload_yaml") do |basename|
         uploader = upload(type.classify.constantize, basename)
         generate_yaml(uploader)

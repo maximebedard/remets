@@ -1,0 +1,9 @@
+success:
+  submission: log121_lab1_1
+  result: 88
+  comments: "This is a triumph."
+
+failure:
+  submission: log121_lab1_2
+  result: 44
+  comments: "YOU BAD BRO."
