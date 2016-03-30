@@ -49,3 +49,11 @@ ternary_fibonacci:
 ternary_fibonacci_readme:
   submission: log550_lab1_3
   <%= document_upload_yaml("ternary/README.txt") %>
+
+litterature:
+  submission: log550_lab1_2
+  <%= document_upload_yaml("litterature1.txt") %>
+
+litterature_with_one_match:
+  submission: log550_lab1_3
+  <%= document_upload_yaml("litterature2.txt") %>

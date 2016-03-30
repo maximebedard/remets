@@ -1,5 +1,23 @@
-<h1>Document</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <%= render partial: "document_panel", object: @document, as: :document,
+        locals: { title: "Document" } %>
+    </div>
 
-<%= render @document %>
+    <div class="col-lg-6">
+      <div class="remets-panel remets-panel--default">
+        <div class="remets-panel__heading">
+          <h3 class="remets-panel__title">Similar documents</h3>
+        </div>
+        <div class="remets-panel__item">Display similar documents here.</div>
+      </div>
+    </div>
+  </div>
 
-Display relevant documents here.
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render @document.document_matches %>
+    </div>
+  </div>
+</div>

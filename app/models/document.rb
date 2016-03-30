@@ -7,6 +7,10 @@ class Document < ActiveRecord::Base
 
   after_save :add_to_index
 
+  def compare_with(other)
+    document_matches.where(compared_document_id: other.id)
+  end
+
   private
 
   def add_to_index

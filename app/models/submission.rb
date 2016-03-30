@@ -32,6 +32,10 @@ class Submission < ActiveRecord::Base
     @accuracy ||= 0.0
   end
 
+  def compare_with(other)
+    document_matches.where(compared_document_id: other.documents.ids)
+  end
+
   def fingerprintable_documents
     documents
   end
