@@ -60,4 +60,12 @@ class SubmissionsController < ApplicationController
   def handover
     @handover ||= Handover.find_by!(uuid: params[:handover_uuid])
   end
+
+  # TODO: this is ugly, find a better way when there is more time.
+  # it's not tested either because yolo
+  # def apply_filters(scope)
+  #   scope
+  #     .where("due_date #{params[:completed] ? '<=' : '>'} ?", Time.zone.now)
+  #     .order(due_date: params[:due_date] ? :desc : :asc)
+  # end
 end

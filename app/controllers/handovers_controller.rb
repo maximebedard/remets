@@ -3,7 +3,7 @@ class HandoversController < ApplicationController
   must_be_authenticated
 
   def index
-    @handovers = policy_scope(Handover.where(user: current_user))
+    @handovers = policy_scope(apply_filters(Handover.where(user: current_user)))
     authorize(@handovers)
 
     respond_with(@handovers)
@@ -70,5 +70,13 @@ class HandoversController < ApplicationController
         reference_documents_attributes: [:file_ptr],
         boilerplate_documents_attributes: [:file_ptr],
       )
+  end
+
+  # TODO: this is ugly, find a better way when there is more time.
+  # it's not tested either because yolo
+  def apply_filters(scope)
+    scope
+      .where("due_date #{params[:completed] ? '<=' : '>'} ?", Time.zone.now)
+      .order(due_date: params[:due_date] ? :desc : :asc)
   end
 end
