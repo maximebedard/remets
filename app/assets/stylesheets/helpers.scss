@@ -14,3 +14,10 @@
 .full-width {
   width: 100%;
 }
+
+.flex-horizontal-center {
+  @media (min-width: 992px) {
+    display: flex;
+    align-items: center;
+  }
+}
