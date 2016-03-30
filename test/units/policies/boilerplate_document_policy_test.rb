@@ -4,6 +4,6 @@ class BoilerplateDocumentPolicyTest < ActiveSupport::TestCase
   include Remets::PolicyAssertions
 
   test "#download?" do
-    assert_permit(users(:pierre), documents(:platypus), :download)
+    assert_permit(users(:pierre), boilerplate_documents(:platypus_boilerplate), :download)
   end
 end

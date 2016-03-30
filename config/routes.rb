@@ -18,7 +18,9 @@ Rails.application.routes.draw do
       patch :complete
     end
 
-    resources :submissions, only: [:index, :show, :new, :create], concerns: :comparable, shallow: true
+    resources :submissions, only: [:index, :show, :new, :create], concerns: :comparable, shallow: true do
+      resource :grades, only: [:create, :new, :show]
+    end
   end
 
   get "/submissions", as: :submissions, to: "submissions#all"
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   resources :documents, only: [:show], concerns: [:downloadable, :comparable]
   resources :reference_documents, only: [], concerns: :downloadable
   resources :boilerplate_documents, only: [], concerns: :downloadable
+  resources :graded_documents, only: [], concerns: :downloadable
 
   resources :acquaintances, only: [:index], defaults: { format: :json }
   resource :registration, only: [:new, :create]
