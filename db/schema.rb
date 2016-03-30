@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220213516) do
+ActiveRecord::Schema.define(version: 20160330212926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,23 @@ ActiveRecord::Schema.define(version: 20160220213516) do
   end
 
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
+
+  create_table "graded_documents", force: :cascade do |t|
+    t.integer  "grade_id"
+    t.string   "file_ptr"
+    t.string   "file_secure_token"
+    t.string   "file_original_name"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "grades", force: :cascade do |t|
+    t.integer  "submission_id"
+    t.integer  "result"
+    t.text     "comments"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "handovers", force: :cascade do |t|
     t.uuid     "uuid",                             null: false

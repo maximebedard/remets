@@ -28,7 +28,7 @@ class Submission < ActiveRecord::Base
   )
 
   def accuracy
-    @accuracy = read_attribute(:accuracy).to_f if has_attribute?(:accuracy)
+    @accuracy = self[:accuracy].to_f if has_attribute?(:accuracy)
     @accuracy ||= 0.0
   end
 
