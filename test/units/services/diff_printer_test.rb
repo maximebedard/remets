@@ -78,80 +78,80 @@ class DiffPrinterTest < ActiveSupport::TestCase
   end
 end
 
-# class DiffDupPrinterTest < ActiveSupport::TestCase
-#   setup do
-#     @document1 = documents(:stripped_platypus)
-#     @document2 = documents(:stripped_platypus_dupe)
+class DiffDupPrinterTest < ActiveSupport::TestCase
+  setup do
+    @document1 = documents(:stripped_platypus)
+    @document2 = documents(:stripped_platypus_dupe)
 
-#     DocumentFingerprintingJob.perform_now(@document1) #
-#     DocumentFingerprintingJob.perform_now(@document2) # # TODO: yolo
-#     DocumentIndexingJob.perform_now(@document1)       #
-#     DocumentIndexingJob.perform_now(@document2)       #
+    DocumentFingerprintingJob.perform_now(@document1) #
+    DocumentFingerprintingJob.perform_now(@document2) # # TODO: yolo
+    DocumentIndexingJob.perform_now(@document1)       #
+    DocumentIndexingJob.perform_now(@document2)       #
 
-#     @document_match = @document1.compare_with(@document2).first
+    @document_match = @document1.compare_with(@document2).first
 
-#     @service = DiffPrinter.new(@document_match)
-#   end
+    @service = DiffPrinter.new(@document_match)
+  end
 
-#   test "#call" do
-#     # TODO: yolo
-#     @service.call
-#   end
+  test "#call" do
+    # TODO: yolo
+    @service.call
+  end
 
-#   test "#build_context_diff" do
-#     # TODO: yolo
-#   end
+  test "#build_context_diff" do
+    # TODO: yolo
+  end
 
-#   test "#build_context" do
-#     # TODO: yolo
-#   end
+  test "#build_context" do
+    # TODO: yolo
+  end
 
-#   test "#highlight" do
-#     assert_match(
-#       %r{<mark>Ete par arrivera souvenir<\/mark>},
-#       @service.highlight(@document1.sanitized_content, [285, 25]),
-#     )
-#   end
+  test "#highlight" do
+    assert_match(
+      %r{<mark>platypus also known as the duck-billed platypus<\/mark>},
+      @service.highlight(@document1.sanitized_content, [4, 47]),
+    )
+  end
 
-#   test "#section_from backward clip" do
-#     assert_equal [0, 10], @service.section_from(
-#       @document1.sanitized_content,
-#       [3, 10],
-#     )
-#   end
+  test "#section_from backward clip" do
+    assert_equal [0, 12], @service.section_from(
+      @document1.sanitized_content,
+      [2, 10],
+    )
+  end
 
-#   test "#section_from forward clip" do
-#     assert_equal [11, 10], @service.section_from(
-#       @document1.sanitized_content,
-#       [11, 19],
-#     )
-#   end
+  test "#section_from forward clip" do
+    assert_equal [4, 8], @service.section_from(
+      @document1.sanitized_content,
+      [4, 10],
+    )
+  end
 
-#   test "#section_from foward and backward clip" do
-#     assert_equal [285, 25], @service.section_from(
-#       @document1.sanitized_content,
-#       [286, 304],
-#     )
-#   end
+  test "#section_from foward and backward clip" do
+    assert_equal [281, 24], @service.section_from(
+      @document1.sanitized_content,
+      [286, 304],
+    )
+  end
 
-#   test "#section_from clip to end" do
-#     assert_equal [392, 15], @service.section_from(
-#       @document1.sanitized_content,
-#       [395, 405],
-#     )
-#   end
+  test "#section_from clip to end" do
+    assert_equal [393, 36], @service.section_from(
+      @document1.sanitized_content,
+      [393, 429],
+    )
+  end
 
-#   test "#section_from clip to beginning" do
-#     assert_equal [0, 21], @service.section_from(
-#       @document1.sanitized_content,
-#       [2, 13],
-#     )
-#   end
+  test "#section_from clip to beginning" do
+    assert_equal [0, 3], @service.section_from(
+      @document1.sanitized_content,
+      [2, 3],
+    )
+  end
 
-#   test "#ranges_from2" do
-#     assert_equal [[286, 304]], @service.ranges_from(
-#       @document1.windows,
-#       @document_match.match.fingerprints,
-#     )
-#   end
-# end
+  test "#ranges_from" do
+    assert_equal [[4, 421]], @service.ranges_from(
+      @document1.windows,
+      @document_match.match.fingerprints,
+    )
+  end
+end
