@@ -67,6 +67,20 @@ ActiveRecord::Schema.define(version: 20160330212926) do
 
   add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
 
+  create_table "evaluations", force: :cascade do |t|
+    t.uuid     "uuid",                             null: false
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "mark_as_completed"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.datetime "due_date",                         null: false
+    t.boolean  "invite_only",       default: true, null: false
+    t.string   "password_digest"
+  end
+
   create_table "graded_documents", force: :cascade do |t|
     t.integer  "grade_id"
     t.string   "file_ptr"
@@ -82,20 +96,6 @@ ActiveRecord::Schema.define(version: 20160330212926) do
     t.text     "comments"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-  end
-
-  create_table "evaluations", force: :cascade do |t|
-    t.uuid     "uuid",                             null: false
-    t.integer  "user_id"
-    t.integer  "organization_id"
-    t.string   "title"
-    t.text     "description"
-    t.datetime "mark_as_completed"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.datetime "due_date",                         null: false
-    t.boolean  "invite_only",       default: true, null: false
-    t.string   "password_digest"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -128,15 +128,15 @@ ActiveRecord::Schema.define(version: 20160330212926) do
   create_table "submissions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "evaluation_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "submissions", ["evaluation_id"], name: "index_submissions_on_evaluation_id", using: :btree
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "user_id",     null: false
+    t.integer "user_id",       null: false
     t.integer "evaluation_id", null: false
   end
 
