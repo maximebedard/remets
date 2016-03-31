@@ -57,3 +57,12 @@ litterature:
 litterature_with_one_match:
   submission: log550_lab1_3
   <%= document_upload_yaml("litterature2.txt") %>
+
+stripped_platypus:
+  submission: log550_lab1_2
+  <%= document_upload_yaml("stripped.txt") %>
+
+stripped_platypus_dupe:
+  submission: log550_lab1_3
+  <%= document_upload_yaml("stripped.txt") %>
+

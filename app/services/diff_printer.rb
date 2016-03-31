@@ -61,7 +61,7 @@ class DiffPrinter
     windows
       .select { |_, f| fingerprints.include?(f) }
       .map(&:first)
-      .chunk_while { |i, j| i + kgram_size >= j }
+      .chunk_while { |i, j| i + kgram_size >= j - 1 }
       .map(&:minmax)
   end
 end
