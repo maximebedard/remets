@@ -37,7 +37,9 @@
       &,
       &:hover,
       &:focus {
-        box-shadow: 0px $remets-navbar-active-underline-size 0px $remets-navbar-active-underline-color inset;
+        @media (min-width: 767px) {
+          box-shadow: 0px $remets-navbar-active-underline-size 0px $remets-navbar-active-underline-color inset;
+        }
       }
     }
     > .disabled > a {
