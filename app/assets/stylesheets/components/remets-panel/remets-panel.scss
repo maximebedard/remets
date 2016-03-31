@@ -157,12 +157,12 @@
   .remets-panel__heading {
     color: #FFF;
     background-color: #e74c3c;
-  }
-  a {
+    a {
     color: #FFF;
     text-decoration: underline;
-  }
-  a:hover {
-    color: darken(#FFF, 10%);
+    }
+    a:hover {
+      color: darken(#FFF, 10%);
+    }
   }
 }
