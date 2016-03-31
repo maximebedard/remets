@@ -11,7 +11,7 @@ class DocumentPolicyTest < ActiveSupport::TestCase
     assert_permit(users(:henry), documents(:platypus), :show)
   end
 
-  test "#show? is true when the owner of the handover" do
+  test "#show? is true when the owner of the evaluation" do
     assert_permit(users(:gaston), documents(:platypus), :show)
   end
 
@@ -27,7 +27,7 @@ class DocumentPolicyTest < ActiveSupport::TestCase
     assert_permit(users(:henry), documents(:platypus), :download)
   end
 
-  test "#download? is true when the owner of the handover" do
+  test "#download? is true when the owner of the evaluation" do
     assert_permit(users(:gaston), documents(:platypus), :download)
   end
 

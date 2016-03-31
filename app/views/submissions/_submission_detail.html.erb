@@ -3,13 +3,13 @@
     <div>
       <h3 class="no-margin">
         <strong>Project Title : </strong>
-        <%= submission.handover.title %>
+        <%= submission.evaluation.title %>
       </h3>
     </div>
     <div>
       <h4 class="no-margin">
         <strong>Evaluated by: </strong>
-        <%= submission.handover.user.name %>
+        <%= submission.evaluation.user.name %>
       </h4>
     </div>
     <% unless submission.user == current_user %>

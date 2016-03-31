@@ -1,8 +1,8 @@
 class Fingerprinter
-  attr_accessor :submission_or_handover
+  attr_accessor :submission_or_evaluation
 
-  def initialize(submission_or_handover, params = {})
-    @submission_or_handover = submission_or_handover
+  def initialize(submission_or_evaluation, params = {})
+    @submission_or_evaluation = submission_or_evaluation
     @params = params
   end
 
@@ -11,7 +11,7 @@ class Fingerprinter
     update
     fingerprint_documents
 
-    submission_or_handover
+    submission_or_evaluation
   end
 
   private
@@ -21,13 +21,13 @@ class Fingerprinter
   end
 
   def update
-    @submission_or_handover.update(@params)
+    @submission_or_evaluation.update(@params)
   end
 
   def fingerprint_documents
-    return unless @submission_or_handover.valid?
+    return unless @submission_or_evaluation.valid?
 
-    @submission_or_handover.fingerprintable_documents.each do |document|
+    @submission_or_evaluation.fingerprintable_documents.each do |document|
       DocumentFingerprintingJob.perform_later(document)
     end
   end

@@ -21,8 +21,8 @@
     <div id="navbar" class="collapse navbar-collapse">
       <% if signed_in? %>
       <ul class="nav navbar-nav navbar-left">
-        <li class="<%= active_for("handovers") %>">
-          <%= link_to "Handovers", handovers_path %>
+        <li class="<%= active_for("evaluations") %>">
+          <%= link_to "Evaluations", evaluations_path %>
         </li>
 
         <li class="<%= active_for("submissions") %>">
@@ -30,7 +30,7 @@
         </li>
 
         <li class="<%= active_for("profiles") %>">
-          <%= link_to "Upcoming handovers", account_profile_path %>
+          <%= link_to "Upcoming evaluations", account_profile_path %>
         </li>
       </ul>
       <% end %>

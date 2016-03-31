@@ -1,4 +1,4 @@
-class HandoverPolicy < ApplicationPolicy
+class EvaluationPolicy < ApplicationPolicy
   def index?
     true
   end

@@ -78,7 +78,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
 
   def submit(submission_params = {})
     perform_enqueued_jobs do
-      post "/handovers/#{handovers(:log121_lab1).uuid}/submissions",
+      post "/evaluations/#{evaluations(:log121_lab1).uuid}/submissions",
         submission: submission_params
 
       @submission = Submission.last

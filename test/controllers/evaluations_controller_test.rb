@@ -1,17 +1,17 @@
 require "test_helper"
 
-class HandoversControllerTest < ActionController::TestCase
+class EvaluationsControllerTest < ActionController::TestCase
   include Remets::SanitizedDocumentFileUploadHelper
 
   setup do
-    @handover = handovers(:log121_lab1)
+    @evaluation = evaluations(:log121_lab1)
     sign_in users(:gaston)
   end
 
   test "#index" do
     get :index
 
-    assert assigns(:handovers)
+    assert assigns(:evaluations)
     assert_response :ok
   end
 
@@ -23,30 +23,30 @@ class HandoversControllerTest < ActionController::TestCase
   end
 
   test "#show" do
-    get :show, uuid: @handover.uuid
+    get :show, uuid: @evaluation.uuid
 
-    assert assigns(:handover)
+    assert assigns(:evaluation)
     assert_response :ok
   end
 
   test "#show is not authorized when signed out" do
     sign_out
 
-    get :show, uuid: @handover.uuid
+    get :show, uuid: @evaluation.uuid
     assert_redirected_to_auth_new
   end
 
   test "#edit" do
-    get :edit, uuid: @handover.uuid
+    get :edit, uuid: @evaluation.uuid
 
-    assert assigns(:handover)
+    assert assigns(:evaluation)
     assert_response :ok
   end
 
   test "#edit is not authorized when signed out" do
     sign_out
 
-    get :edit, uuid: @handover.uuid
+    get :edit, uuid: @evaluation.uuid
     assert_redirected_to_auth_new
   end
 
@@ -54,8 +54,8 @@ class HandoversControllerTest < ActionController::TestCase
     travel_to(Time.zone.now) do
       patch(
         :update,
-        uuid: @handover.uuid,
-        handover: {
+        uuid: @evaluation.uuid,
+        evaluation: {
           title: "pants",
           description: "pants pants pants",
           due_date: 5.days.from_now,
@@ -64,14 +64,14 @@ class HandoversControllerTest < ActionController::TestCase
           boilerplate_documents_attriubtes: [{ file_ptr: sanitizable_file_upload }],
         },
       )
-      handover = assigns(:handover)
-      assert_equal "pants", handover.title
-      assert_equal "pants pants pants", handover.description
-      assert_equal 5.days.from_now, handover.due_date
-      assert_equal "École de technologie supérieure", handover.organization.name
-      assert_equal 2, handover.reference_documents.size
-      assert_equal 4, handover.boilerplate_documents.size
-      assert_redirected_to handover_path(uuid: handover.uuid)
+      evaluation = assigns(:evaluation)
+      assert_equal "pants", evaluation.title
+      assert_equal "pants pants pants", evaluation.description
+      assert_equal 5.days.from_now, evaluation.due_date
+      assert_equal "École de technologie supérieure", evaluation.organization.name
+      assert_equal 2, evaluation.reference_documents.size
+      assert_equal 4, evaluation.boilerplate_documents.size
+      assert_redirected_to evaluation_path(uuid: evaluation.uuid)
     end
   end
 
@@ -80,8 +80,8 @@ class HandoversControllerTest < ActionController::TestCase
 
     patch(
       :update,
-      uuid: @handover.uuid,
-      handover: {
+      uuid: @evaluation.uuid,
+      evaluation: {
         title: "pants",
         description: "pants pants pants",
         due_date: 5.days.from_now,
@@ -96,7 +96,7 @@ class HandoversControllerTest < ActionController::TestCase
   test "#new" do
     get :new
 
-    assert assigns(:handover)
+    assert assigns(:evaluation)
     assert_response :ok
   end
 
@@ -111,7 +111,7 @@ class HandoversControllerTest < ActionController::TestCase
     travel_to(Time.zone.now) do
       post(
         :create,
-        handover: {
+        evaluation: {
           title: "pants",
           description: "pants pants pants",
           due_date: 5.days.from_now,
@@ -122,16 +122,16 @@ class HandoversControllerTest < ActionController::TestCase
         },
       )
 
-      handover = assigns(:handover)
-      assert_equal "pants", handover.title
-      assert_equal "pants pants pants", handover.description
-      assert_equal 5.days.from_now, handover.due_date
-      assert_equal "École de technologie supérieure", handover.organization.name
-      assert_equal 1, handover.reference_documents.size
-      assert_equal 1, handover.boilerplate_documents.size
-      assert_equal 1, handover.subscriptions.size
-      assert_equal "idont@exists.com", handover.users.first.email
-      assert_redirected_to handover_path(uuid: handover.uuid)
+      evaluation = assigns(:evaluation)
+      assert_equal "pants", evaluation.title
+      assert_equal "pants pants pants", evaluation.description
+      assert_equal 5.days.from_now, evaluation.due_date
+      assert_equal "École de technologie supérieure", evaluation.organization.name
+      assert_equal 1, evaluation.reference_documents.size
+      assert_equal 1, evaluation.boilerplate_documents.size
+      assert_equal 1, evaluation.subscriptions.size
+      assert_equal "idont@exists.com", evaluation.users.first.email
+      assert_redirected_to evaluation_path(uuid: evaluation.uuid)
     end
   end
 
@@ -139,7 +139,7 @@ class HandoversControllerTest < ActionController::TestCase
     assert_difference("User.count") do
       post(
         :create,
-        handover: {
+        evaluation: {
           title: "pants",
           description: "pants pants pants",
           due_date: 5.days.from_now,
@@ -149,7 +149,7 @@ class HandoversControllerTest < ActionController::TestCase
           boilerplate_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
         },
       )
-      assert_redirected_to handover_path(uuid: assigns(:handover).uuid)
+      assert_redirected_to evaluation_path(uuid: assigns(:evaluation).uuid)
     end
   end
 
@@ -157,7 +157,7 @@ class HandoversControllerTest < ActionController::TestCase
     assert_no_difference("User.count") do
       post(
         :create,
-        handover: {
+        evaluation: {
           subscriptions: ["idont@exists.com"],
         },
       )
@@ -170,7 +170,7 @@ class HandoversControllerTest < ActionController::TestCase
 
     post(
       :create,
-      handover: {
+      evaluation: {
         title: "pants",
         description: "pants pants pants",
         due_date: 5.days.from_now,
@@ -183,17 +183,17 @@ class HandoversControllerTest < ActionController::TestCase
 
   test "#complete" do
     travel_to(Time.zone.now) do
-      patch :complete, uuid: @handover.uuid
-      handover = assigns(:handover)
-      assert_equal Time.zone.now, handover.mark_as_completed
-      assert_redirected_to handover_path(uuid: handover.uuid)
+      patch :complete, uuid: @evaluation.uuid
+      evaluation = assigns(:evaluation)
+      assert_equal Time.zone.now, evaluation.mark_as_completed
+      assert_redirected_to evaluation_path(uuid: evaluation.uuid)
     end
   end
 
   test "#complete is not authorized when signed out" do
     sign_out
 
-    patch :complete, uuid: @handover.uuid
+    patch :complete, uuid: @evaluation.uuid
     assert_redirected_to_auth_new
   end
 end

@@ -1,8 +1,8 @@
-class Handover < ActiveRecord::Base
+class Evaluation < ActiveRecord::Base
   has_many :reference_documents
   has_many :boilerplate_documents
   has_many :submissions
-  has_many :subscriptions, inverse_of: :handover, dependent: :destroy
+  has_many :subscriptions, inverse_of: :evaluation, dependent: :destroy
   has_many :users, through: :subscriptions
 
   belongs_to :user

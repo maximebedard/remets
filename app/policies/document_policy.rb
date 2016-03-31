@@ -1,10 +1,10 @@
 class DocumentPolicy < ApplicationPolicy
   def show?
-    admin? || owner? || handover_creator?
+    admin? || owner? || evaluation_creator?
   end
 
   def download?
-    admin? || owner? || handover_creator?
+    admin? || owner? || evaluation_creator?
   end
 
   def diff?
@@ -20,7 +20,7 @@ class DocumentPolicy < ApplicationPolicy
     record.submission.user == user
   end
 
-  def handover_creator?
-    record.submission.handover.user == user
+  def evaluation_creator?
+    record.submission.evaluation.user == user
   end
 end

@@ -23,7 +23,7 @@ class DocumentsControllerTest < ActionController::TestCase
     assert_redirected_to_auth_new
   end
 
-  test "#download is not authorized when you are not the owner nor the creator of the handover" do
+  test "#download is not authorized when you are not the owner nor the creator of the evaluation" do
     sign_in(users(:marcel))
 
     get :download, id: @document.id, extension: @document.file.extension
@@ -45,7 +45,7 @@ class DocumentsControllerTest < ActionController::TestCase
     assert_redirected_to_auth_new
   end
 
-  test "#show is not authorized when you are not the owner nor the creator of the handover" do
+  test "#show is not authorized when you are not the owner nor the creator of the evaluation" do
     sign_in(users(:marcel))
 
     get :show, id: @document.id

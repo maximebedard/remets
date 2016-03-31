@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :memberships
 
   has_many :subscriptions
-  has_many :subscribed_handovers, through: :subscriptions, source: :handover
+  has_many :subscribed_evaluations, through: :subscriptions, source: :evaluation
 
   has_many :submissions
-  has_many :handovers
+  has_many :evaluations
   has_many :authorizations
 
   attr_accessor :invited_secret
@@ -43,8 +43,8 @@ class User < ActiveRecord::Base
 
   after_save :send_invite_email
 
-  def submission_for_handover(id)
-    submissions.order("created_at DESC").find_by(handover_id: id, user_id: self.id)
+  def submission_for_evaluation(id)
+    submissions.order("created_at DESC").find_by(evaluation_id: id, user_id: self.id)
   end
 
   class << self

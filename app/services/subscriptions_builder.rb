@@ -1,6 +1,6 @@
 class SubscriptionsBuilder
-  def initialize(handover, params)
-    @handover = handover
+  def initialize(evaluation, params)
+    @evaluation = evaluation
     @params = params
   end
 
@@ -8,17 +8,17 @@ class SubscriptionsBuilder
     subscriptions = []
     subscriptions += build_subscriptions
 
-    handover.subscriptions = subscriptions
+    evaluation.subscriptions = subscriptions
   end
 
   private
 
-  attr_reader :handover, :params
+  attr_reader :evaluation, :params
 
   def build_subscriptions
     Array.wrap(params).map do |email|
       Subscription.new(
-        handover: handover,
+        evaluation: evaluation,
         user: UserInviter.new(email).call,
       )
     end

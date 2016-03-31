@@ -1,4 +1,4 @@
 module AcquaintancesProviders
-  class Handovers < Base
+  class Evaluations < Base
   end
 end

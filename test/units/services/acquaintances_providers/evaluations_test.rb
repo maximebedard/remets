@@ -1,9 +1,9 @@
 require "test_helper"
 
 module AcquaintancesProviders
-  class HandoversTest < ActiveSupport::TestCase
+  class EvaluationsTest < ActiveSupport::TestCase
     setup do
-      @provider = AcquaintancesProviders::Handovers.new(
+      @provider = AcquaintancesProviders::Evaluations.new(
         users(:gaston),
       )
     end

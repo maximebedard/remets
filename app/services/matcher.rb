@@ -18,7 +18,7 @@ class Matcher
   attr_reader :reference, :compared
 
   def boilerplate_fingerprints
-    reference.submission.handover.boilerplate_documents
+    reference.submission.evaluation.boilerplate_documents
       .pluck(:fingerprints).flatten
   end
 

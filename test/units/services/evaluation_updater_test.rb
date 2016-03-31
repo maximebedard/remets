@@ -1,12 +1,12 @@
 require "test_helper"
 
-class HandoverUpdaterTest < ActiveSupport::TestCase
+class EvaluationUpdaterTest < ActiveSupport::TestCase
   include Remets::SanitizedDocumentFileUploadHelper
 
   setup do
-    @handover = Handover.new
-    @service = HandoverUpdater.new(
-      @handover,
+    @evaluation = Evaluation.new
+    @service = EvaluationUpdater.new(
+      @evaluation,
       users(:henry),
       title: "pants",
       description: "pants pants pants",
@@ -24,12 +24,12 @@ class HandoverUpdaterTest < ActiveSupport::TestCase
     end
 
     assert_equal "idont@exists.com",
-      @handover.subscriptions.first.user.email
+      @evaluation.subscriptions.first.user.email
   end
 
   test "#call build the organization association" do
     @service.call
-    assert_equal organizations(:ets), @handover.organization
+    assert_equal organizations(:ets), @evaluation.organization
   end
 
   test "#call queues the fingerprinting job" do

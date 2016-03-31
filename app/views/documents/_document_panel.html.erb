@@ -6,9 +6,9 @@
         class: "btn btn-transparent btn-sm") do %>
         <i class="fa fa-chevron-left"></i> View submission
       <% end %>
-      <%= link_to(handover_path(uuid: document.submission.handover.uuid),
+      <%= link_to(evaluation_path(uuid: document.submission.evaluation.uuid),
         class: "btn btn-transparent btn-sm") do %>
-        <i class="fa fa-chevron-left"></i> View handover
+        <i class="fa fa-chevron-left"></i> View evaluation
       <% end %>
       <%= link_to("#",
         class: "btn btn-transparent btn-sm") do %>

@@ -12,13 +12,13 @@
       </div>
     </div>
     <% end %>
-    <% @submissions.group_by(&:handover).each do |handover, submissions| %>
+    <% @submissions.group_by(&:evaluation).each do |evaluation, submissions| %>
        <div class="col-lg-9">
-          <div id="handover-<%= handover.id %>" class="remets-panel remets-panel--default">
+          <div id="evaluation-<%= evaluation.id %>" class="remets-panel remets-panel--default">
             <div class="remets-panel__heading">
-              <h3 class="remets-panel__title"><%= handover.title %> - <%= l handover.due_date %></h3>
+              <h3 class="remets-panel__title"><%= evaluation.title %> - <%= l evaluation.due_date %></h3>
             </div>
-              <%= render partial: "handover", object: handover %>
+              <%= render partial: "evaluation", object: evaluation %>
               <%= render submissions.reverse %>
           </div>
         </div>

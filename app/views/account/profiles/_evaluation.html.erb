@@ -1,6 +1,6 @@
 <div class="remets-panel__item remets-panel__item--no-border">
   <h3 class="remets-panel__title remets-panel__title--underline">
-    <%= handover.title %> - <%= l handover.due_date %>
+    <%= evaluation.title %> - <%= l evaluation.due_date %>
   </h3>
 </div>
 <div class="remets-panel__item remets-panel__item--no-border">
@@ -8,7 +8,7 @@
     <div>
       <h5>Handed in?<h5>
       <h1>
-        <% if handover.submissions.mine(current_user).any? %>
+        <% if evaluation.submissions.mine(current_user).any? %>
           <i class="fa fa-thumbs-up"></i>
         <% else %>
           <i class="fa fa-thumbs-down"></i>
@@ -19,31 +19,31 @@
   <div class="remets-panel__item__2-col-info">
     <div>
       <h5>Deadline in about:<h5>
-      <h1><%= distance_of_time_in_words(handover.due_date, Time.zone.now) %></h1>
+      <h1><%= distance_of_time_in_words(evaluation.due_date, Time.zone.now) %></h1>
     </div>
   </div>
   <div class="remets-panel__item__2-col-info">
     <div>
       <h5>Evaluated by :<h5>
-      <h1><%= handover.user.name %></h1>
+      <h1><%= evaluation.user.name %></h1>
     </div>
-    <% if handover.organization %>
-      <small><%= handover.organization.name %></small>
+    <% if evaluation.organization %>
+      <small><%= evaluation.organization.name %></small>
     <% end %>
   </div>
 </div>
 <div class="remets-panel__item">
   <div class="remets-panel__item__long-description">
-    Description : <%= handover.description%>
+    Description : <%= evaluation.description%>
   </div>
   <div class="remets-panel__item__actions">
-    <%= link_to(handover_path(uuid: handover.uuid),
+    <%= link_to(evaluation_path(uuid: evaluation.uuid),
         class: "btn btn-default btn-sm") do %>
         <i class="fa fa-newspaper-o"></i> Details
       <% end %>
-    <%= link_to new_handover_submission_path(handover_uuid: handover.uuid),
+    <%= link_to new_evaluation_submission_path(evaluation_uuid: evaluation.uuid),
       class: "btn btn-primary btn-sm" do %>
-      <% if handover.submissions.size > 0 %>
+      <% if evaluation.submissions.size > 0 %>
         <i class="fa fa-paper-plane-o"></i> Submit a new version
       <% else %>
         <i class="fa fa-paper-plane"></i> Submit

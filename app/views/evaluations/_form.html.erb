@@ -1,9 +1,9 @@
 <%= form_for(
-  @handover,
-  url: create_or_update_handover_path(@handover),
+  @evaluation,
+  url: create_or_update_evaluation_path(@evaluation),
   html: { multipart: true, class: "full-width" }
 ) do |f| %>
-  <%= errors_summary(@handover) %>
+  <%= errors_summary(@evaluation) %>
 
   <div class="form-group">
     <%= f.label :title %>
@@ -22,12 +22,12 @@
 
   <div class="form-group">
     <%= f.label :subscriptions %>
-    <%= user_picker_field "handover[subscriptions][]" %>
+    <%= user_picker_field "evaluation[subscriptions][]" %>
   </div>
 
   <div class="form-group">
     <%= f.label :organization %>
-    <%= select_tag "handover[organization]",
+    <%= select_tag "evaluation[organization]",
           options_from_collection_for_select(
             current_user.organizations, "id", "name"
           ),
@@ -37,26 +37,26 @@
 
   <div class="form-group">
     <%= f.label :reference_documents do %>
-      Reference documents for the handover
+      Reference documents for the evaluation
       <a href="#" data-toggle="modal" data-target="#info-reference-documents">
         <i class="fa fa-info-circle"></i>
       </a>
     <% end %>
     <%= f.file_field :reference_documents,
       multiple: true,
-      name: "handover[reference_documents_attributes][][file_ptr]" %>
+      name: "evaluation[reference_documents_attributes][][file_ptr]" %>
   </div>
 
   <div class="form-group">
     <%= f.label :boilerplate_documents do %>
-      Boilerplate documents for the handover
+      Boilerplate documents for the evaluation
       <a href="#" data-toggle="modal" data-target="#info-boilerplate-documents">
         <i class="fa fa-info-circle"></i>
       </a>
     <% end %>
     <%= f.file_field :boilerplate_documents,
       multiple: true,
-      name: "handover[boilerplate_documents_attributes][][file_ptr]" %>
+      name: "evaluation[boilerplate_documents_attributes][][file_ptr]" %>
   </div>
 
   <%= f.submit class: 'btn btn-success' %>
@@ -64,13 +64,13 @@
 
 <%= content_for :scripts do %>
   <script type="text/javascript">
-    //dragAndDropify('#new_handover');
+    //dragAndDropify('#new_evaluation');
   </script>
 <% end %>
 
 <%= modal(title: "Reference documents?", label: "reference-label", id: "info-reference-documents") do %>
   <p>
-    Is there any documents you wish to attach to this handover that will help students? Maybe a template file, an interesting PDF or a picture that's worth a thousand words?
+    Is there any documents you wish to attach to this evaluation that will help students? Maybe a template file, an interesting PDF or a picture that's worth a thousand words?
   </p>
   <p>
     Go a ahead and include it!
