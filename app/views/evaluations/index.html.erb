@@ -3,17 +3,17 @@
     <div class="col-lg-9">
       <div class="remets-panel remets-panel--default">
         <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Handovers</h3>
-          <%= link_to(new_handover_path, class: "btn btn-transparent btn-sm") do %>
-            <i class="fa fa-plus"></i> New Handover
+          <h3 class="remets-panel__title">Evaluations</h3>
+          <%= link_to(new_evaluation_path, class: "btn btn-transparent btn-sm") do %>
+            <i class="fa fa-plus"></i> New Evaluation
           <% end %>
         </div>
-        <% if @handovers.empty? %>
+        <% if @evaluations.empty? %>
           <div class="remets-panel__item">
-            No handovers found! Why not create one?
+            No evaluations found! Why not create one?
           </div>
         <% end %>
-        <%= render @handovers %>
+        <%= render @evaluations %>
       </div>
     </div>
     <%= render partial: "shared/filters" %>

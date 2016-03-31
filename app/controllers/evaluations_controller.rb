@@ -1,66 +1,66 @@
-class HandoversController < ApplicationController
+class EvaluationsController < ApplicationController
   respond_to :html, :json
   must_be_authenticated
 
   def index
-    @handovers = policy_scope(apply_filters(Handover.where(user: current_user)))
-    authorize(@handovers)
+    @evaluations = policy_scope(apply_filters(Evaluation.where(user: current_user)))
+    authorize(@evaluations)
 
-    respond_with(@handovers)
+    respond_with(@evaluations)
   end
 
   def show
-    @handover = policy_scope(Handover.where(uuid: params[:uuid])).first!
-    authorize(@handover)
+    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid])).first!
+    authorize(@evaluation)
 
-    respond_with(@handover)
+    respond_with(@evaluation)
   end
 
   def edit
-    @handover = policy_scope(Handover.where(uuid: params[:uuid], user: current_user)).first!
-    authorize(@handover)
+    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid], user: current_user)).first!
+    authorize(@evaluation)
 
-    respond_with(@handover)
+    respond_with(@evaluation)
   end
 
   def update
-    @handover = policy_scope(Handover.where(uuid: params[:uuid], user: current_user)).first!
-    authorize(@handover)
+    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid], user: current_user)).first!
+    authorize(@evaluation)
 
-    HandoverUpdater.new(@handover, current_user, handover_params).call
+    EvaluationUpdater.new(@evaluation, current_user, evaluation_params).call
 
-    respond_with(@handover, location: handover_path(uuid: @handover.uuid))
+    respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))
   end
 
   def new
-    @handover = policy_scope(Handover.where(user: current_user)).build
-    @handover.due_date ||= 3.days.from_now.midnight
-    authorize(@handover)
+    @evaluation = policy_scope(Evaluation.where(user: current_user)).build
+    @evaluation.due_date ||= 3.days.from_now.midnight
+    authorize(@evaluation)
 
-    respond_with(@handover)
+    respond_with(@evaluation)
   end
 
   def create
-    @handover = policy_scope(Handover.where(user: current_user)).build
-    authorize(@handover)
+    @evaluation = policy_scope(Evaluation.where(user: current_user)).build
+    authorize(@evaluation)
 
-    HandoverUpdater.new(@handover, current_user, handover_params).call
+    EvaluationUpdater.new(@evaluation, current_user, evaluation_params).call
 
-    respond_with(@handover, location: handover_path(uuid: @handover.uuid))
+    respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))
   end
 
   def complete
-    @handover = policy_scope(Handover.where(uuid: params[:uuid], user: current_user)).first!
-    authorize(@handover)
+    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid], user: current_user)).first!
+    authorize(@evaluation)
 
-    @handover.update(mark_as_completed: Time.zone.now)
-    respond_with(@handover, location: handover_path(uuid: @handover.uuid))
+    @evaluation.update(mark_as_completed: Time.zone.now)
+    respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))
   end
 
   private
 
-  def handover_params
-    params.require(:handover)
+  def evaluation_params
+    params.require(:evaluation)
       .permit(
         :title,
         :description,

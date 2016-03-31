@@ -55,17 +55,17 @@ class SubmissionFingerprinterTest < ActiveSupport::TestCase
       @subject,
       documents_attributes: files.map { |f| { file_ptr: f } },
       user: users(:henry),
-      handover: handovers(:log121_lab1),
+      evaluation: evaluations(:log121_lab1),
     ).call
   end
 end
 
-class HandoverFingerprinterTest < ActiveSupport::TestCase
+class EvaluationFingerprinterTest < ActiveSupport::TestCase
   include Remets::SanitizedDocumentFileUploadHelper
   include FingerprinterTests
 
   setup do
-    @subject = Handover.new
+    @subject = Evaluation.new
     @fingerprintable = BoilerplateDocument
   end
 

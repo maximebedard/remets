@@ -1,8 +1,8 @@
-class HandoverUpdater
-  attr_reader :handover, :user, :params
+class EvaluationUpdater
+  attr_reader :evaluation, :user, :params
 
-  def initialize(handover, user, params = {})
-    @handover = handover
+  def initialize(evaluation, user, params = {})
+    @evaluation = evaluation
     @user = user
     @params = params
   end
@@ -17,12 +17,12 @@ class HandoverUpdater
   private
 
   def assign_owner
-    handover.user = user
+    evaluation.user = user
   end
 
   def build_subscriptions
     SubscriptionsBuilder.new(
-      handover,
+      evaluation,
       params[:subscriptions],
     ).call
   end
@@ -36,7 +36,7 @@ class HandoverUpdater
 
   def fingerprint
     Fingerprinter.new(
-      handover,
+      evaluation,
       params_to_update,
     ).call
   end

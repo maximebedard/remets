@@ -3,13 +3,13 @@
     <div class="col-lg-offset-2 col-lg-8">
       <div class="remets-panel remets-panel--default">
         <div class="remets-panel__heading">
-          <h3 class="remets-panel__title"><%= @handover.title %></h3>
-          <%= link_to(edit_handover_path(uuid: @handover.uuid), class: "btn btn-transparent btn-sm") do %>
+          <h3 class="remets-panel__title"><%= @evaluation.title %></h3>
+          <%= link_to(edit_evaluation_path(uuid: @evaluation.uuid), class: "btn btn-transparent btn-sm") do %>
             <i class="fa fa-pencil"></i> Edit
           <% end %>
         </div>
         <div class="remets-panel__item">
-          <%= render partial: "handover_detail", object: @handover %>
+          <%= render partial: "evaluation_detail", object: @evaluation %>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
           <h3 class="remets-panel__title">Students Participating</h3>
         </div>
         <div class="remets-panel__item">
-          <%= render partial: "students_panel", object: @handover %>
+          <%= render partial: "students_panel", object: @evaluation %>
         </div>
       </div>
     </div>

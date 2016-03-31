@@ -5,16 +5,16 @@
         locals: { title: "Submission Details" } %>
     </div>
   </div>
-  <% if @submission.handover.user_id == current_user.id %>
-  <div class="row">
-    <div class="col-lg-offset-2 col-lg-8">
-      <div class="remets-panel remets-panel--red">
-        <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Possible Match Detected</h3>
+  <% if @submission.evaluation.user_id == current_user.id %>
+    <div class="row">
+      <div class="col-lg-offset-2 col-lg-8">
+        <div class="remets-panel remets-panel--red">
+          <div class="remets-panel__heading">
+            <h3 class="remets-panel__title">Possible Match Detected</h3>
+          </div>
+          <%= render partial: "submission", collection: Submission.similar_to(@submission), locals: { current_submission: @submission } %>
         </div>
-        <%= render partial: "submission", collection: Submission.similar_to(@submission), locals: { current_submission: @submission } %>
       </div>
     </div>
-  </div>
   <% end %>
 </div>

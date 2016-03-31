@@ -1,23 +1,23 @@
 log121_lab1_1:
-  handover: log121_lab1
+  evaluation: log121_lab1
   user: henry
 
 log121_lab1_2:
-  handover: log121_lab1
+  evaluation: log121_lab1
   user: marcel
 
 log240_lab1_1:
-  handover: log240_lab1
+  evaluation: log240_lab1
   user: henry
 
 log550_lab1_1:
-  handover: log550_lab1
+  evaluation: log550_lab1
   user: henry
 
 log550_lab1_2:
-  handover: log550_lab1
+  evaluation: log550_lab1
   user: marcel
 
 log550_lab1_3:
-  handover: log550_lab1
+  evaluation: log550_lab1
   user: pierre

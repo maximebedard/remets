@@ -18,7 +18,7 @@ class AcquaintancesFinder
 
   def build_default_providers
     [
-      AcquaintancesProviders::Handovers.new(user),
+      AcquaintancesProviders::Evaluations.new(user),
     ]
   end
 

@@ -7,7 +7,7 @@ namespace :cache do
   end
 
   task build: :environment do
-    (Submission.all + Handover.all).each do |i|
+    (Submission.all + Evaluation.all).each do |i|
       Fingerprinter.new(i).call
     end
   end

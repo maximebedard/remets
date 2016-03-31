@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :handovers, only: [:index, :show, :new, :create, :edit, :update], param: :uuid do
+  resources :evaluations, only: [:index, :show, :new, :create, :edit, :update], param: :uuid do
     member do
       patch :complete
     end

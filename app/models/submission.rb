@@ -4,7 +4,7 @@ class Submission < ActiveRecord::Base
 
   has_one :grade
 
-  belongs_to :handover
+  belongs_to :evaluation
   belongs_to :user
 
   accepts_nested_attributes_for :documents
@@ -26,7 +26,7 @@ class Submission < ActiveRecord::Base
 
   validates(
     :documents,
-    :handover,
+    :evaluation,
     :user,
     presence: true,
   )

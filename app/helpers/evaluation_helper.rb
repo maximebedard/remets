@@ -1,6 +1,6 @@
-module HandoverHelper
-  def create_or_update_handover_path(handover)
-    return handover_path(uuid: handover.uuid) if handover.uuid.present?
-    handovers_path
+module EvaluationHelper
+  def create_or_update_evaluation_path(evaluation)
+    return evaluation_path(uuid: evaluation.uuid) if evaluation.uuid.present?
+    evaluations_path
   end
 end

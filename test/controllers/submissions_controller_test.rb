@@ -4,7 +4,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   include Remets::SanitizedDocumentFileUploadHelper
 
   setup do
-    @handover = handovers(:log121_lab1)
+    @evaluation = evaluations(:log121_lab1)
     @submission = submissions(:log121_lab1_1)
     @compared_submission = submissions(:log121_lab1_2)
     sign_in users(:henry)
@@ -25,14 +25,14 @@ class SubmissionsControllerTest < ActionController::TestCase
   end
 
   test "#index" do
-    get :index, handover_uuid: @handover.uuid
+    get :index, evaluation_uuid: @evaluation.uuid
 
     assert assigns(:submissions)
     assert_response :ok
   end
 
-  test "#index for a handover with no submissions" do
-    get :index, handover_uuid: handovers(:gti772_final).uuid
+  test "#index for a evaluation with no submissions" do
+    get :index, evaluation_uuid: evaluations(:gti772_final).uuid
 
     assert assigns(:submissions)
     assert_response :ok
@@ -41,7 +41,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#index is not authorized when signed out" do
     sign_out
 
-    get :index, handover_uuid: @handover.uuid
+    get :index, evaluation_uuid: @evaluation.uuid
     assert_redirected_to_auth_new
   end
 
@@ -61,7 +61,7 @@ class SubmissionsControllerTest < ActionController::TestCase
 
   test "#create" do
     post :create,
-      handover_uuid: @handover.uuid,
+      evaluation_uuid: @evaluation.uuid,
       submission: { documents_attributes: [{ file_ptr: sanitizable_file_upload }] }
 
     assert_redirected_to assigns(:submission)
@@ -71,14 +71,14 @@ class SubmissionsControllerTest < ActionController::TestCase
     sign_out
 
     post :create,
-      handover_uuid: @handover.uuid,
+      evaluation_uuid: @evaluation.uuid,
       submission: { documents_attributes: [{ file_ptr: sanitizable_file_upload }] }
 
     assert_redirected_to_auth_new
   end
 
   test "#new" do
-    get :new, handover_uuid: @handover.uuid
+    get :new, evaluation_uuid: @evaluation.uuid
 
     assert assigns(:submission)
     assert_response :ok
@@ -87,7 +87,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#new is not authorized when signed out" do
     sign_out
 
-    get :new, handover_uuid: @handover.uuid
+    get :new, evaluation_uuid: @evaluation.uuid
     assert_redirected_to_auth_new
   end
 

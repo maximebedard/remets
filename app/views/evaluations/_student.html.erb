@@ -5,10 +5,10 @@
   <td>
     <a href="mailto:<%= student.email %>"><%= student.email %></a>
   </td>
-  <% if student.submission_for_handover(handover_id) %>
-  <td><%= l student.submission_for_handover(handover_id).created_at %></td>
+  <% if student.submission_for_evaluation(evaluation_id) %>
+  <td><%= l student.submission_for_evaluation(evaluation_id).created_at %></td>
   <td>
-    <%= link_to submission_path(id: student.submission_for_handover(handover_id).id),
+    <%= link_to submission_path(id: student.submission_for_evaluation(evaluation_id).id),
       class: "btn btn-default btn-sm" do %>
       <i class="fa fa-eye"></i> View
     <% end %>

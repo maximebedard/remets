@@ -1,26 +1,26 @@
 <div class="remets-panel__item">
   <div class="remets-panel__item__title">
-    <h1><%= handover.title %></h1>
-    <% if handover.organization %>
-      <h2><%= handover.organization.name %></h2>
+    <h1><%= evaluation.title %></h1>
+    <% if evaluation.organization %>
+      <h2><%= evaluation.organization.name %></h2>
     <% end %>
     <div>
-      Subscribers : <%= handover.subscriptions.size %> <i class="fa fa-user" aria-hidden="true"></i>
+      Subscribers : <%= evaluation.subscriptions.size %> <i class="fa fa-user" aria-hidden="true"></i>
     </div>
   </div>
   <div class="remets-panel__item__description">
     <p class="light-text">
-      Due date : <%= l handover.due_date %>
+      Due date : <%= l evaluation.due_date %>
     </p>
     <p>
-      <%= handover.description %>
+      <%= evaluation.description %>
     </p>
   </div>
   <div class="remets-panel__item__actions">
-    <%= link_to handover_path(uuid: handover.uuid), class: "btn btn-default btn-sm" do %>
+    <%= link_to evaluation_path(uuid: evaluation.uuid), class: "btn btn-default btn-sm" do %>
       <i class="fa fa-eye"></i> View
     <% end %>
-    <%= link_to edit_handover_path(uuid: handover.uuid), class: "btn btn-primary btn-sm" do %>
+    <%= link_to edit_evaluation_path(uuid: evaluation.uuid), class: "btn btn-primary btn-sm" do %>
       <i class="fa fa-pencil"></i> Edit
     <% end %>
   </div>

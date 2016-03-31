@@ -3,13 +3,13 @@
     <div class="col-lg-12">
       <div class="remets-panel remets-panel--default">
         <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Upcoming handovers</h3>
+          <h3 class="remets-panel__title">Upcoming evaluations</h3>
         </div>
         <% if @collection.any? %>
-          <%= render partial: "handover", collection: @collection %>
+          <%= render partial: "evaluation", collection: @collection %>
         <% else %>
           <div class="remets-panel__item">
-            <p>No upcoming handovers, tasks, projects or stress! You're all clear! </p>
+            <p>No upcoming evaluations, tasks, projects or stress! You're all clear! </p>
           </div>
         <% end %>
       </div>

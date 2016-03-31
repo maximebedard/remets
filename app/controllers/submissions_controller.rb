@@ -10,7 +10,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = policy_scope(handover.submissions.where(user: current_user))
+    @submissions = policy_scope(evaluation.submissions.where(user: current_user))
     authorize(@submissions)
 
     respond_with(@submissions)
@@ -24,14 +24,14 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = policy_scope(handover.submissions.where(user: current_user)).build
+    @submission = policy_scope(evaluation.submissions.where(user: current_user)).build
     authorize(@submission)
 
     respond_with(@submission)
   end
 
   def create
-    @submission = policy_scope(handover.submissions.where(user: current_user)).build
+    @submission = policy_scope(evaluation.submissions.where(user: current_user)).build
     authorize(@submission)
 
     Fingerprinter.new(
@@ -57,8 +57,8 @@ class SubmissionsController < ApplicationController
       .permit(documents_attributes: [:file_ptr])
   end
 
-  def handover
-    @handover ||= Handover.find_by!(uuid: params[:handover_uuid])
+  def evaluation
+    @evaluation ||= Evaluation.find_by!(uuid: params[:evaluation_uuid])
   end
 
   # TODO: this is ugly, find a better way when there is more time.

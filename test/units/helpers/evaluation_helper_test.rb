@@ -1,14 +1,14 @@
 require "test_helper"
 
-class HandoverHelperTest < ActionView::TestCase
-  test "#create_or_update_handover_path returns the create path" do
-    assert_equal "/handovers",
-      create_or_update_handover_path(Handover.new)
+class EvaluationHelperTest < ActionView::TestCase
+  test "#create_or_update_evaluation_path returns the create path" do
+    assert_equal "/evaluations",
+      create_or_update_evaluation_path(Evaluation.new)
   end
 
-  test "#create_or_update_handover_path returns the update path" do
-    handover = handovers(:log121_lab1)
-    assert_equal "/handovers/#{handover.uuid}",
-      create_or_update_handover_path(handover)
+  test "#create_or_update_evaluation_path returns the update path" do
+    evaluation = evaluations(:log121_lab1)
+    assert_equal "/evaluations/#{evaluation.uuid}",
+      create_or_update_evaluation_path(evaluation)
   end
 end

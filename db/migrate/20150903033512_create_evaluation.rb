@@ -1,6 +1,6 @@
-class CreateHandover < ActiveRecord::Migration
+class CreateEvaluation < ActiveRecord::Migration
   def change
-    create_table :handovers do |t|
+    create_table :evaluations do |t|
       t.uuid :uuid, null: false
       t.integer :user_id
       t.integer :organization_id

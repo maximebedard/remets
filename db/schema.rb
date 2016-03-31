@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20160330212926) do
   end
 
   create_table "boilerplate_documents", force: :cascade do |t|
-    t.integer  "handover_id"
+    t.integer  "evaluation_id"
     t.string   "file_ptr"
     t.string   "file_secure_token"
     t.string   "file_original_name"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20160330212926) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "handovers", force: :cascade do |t|
+  create_table "evaluations", force: :cascade do |t|
     t.uuid     "uuid",                             null: false
     t.integer  "user_id"
     t.integer  "organization_id"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20160330212926) do
   end
 
   create_table "reference_documents", force: :cascade do |t|
-    t.integer  "handover_id"
+    t.integer  "evaluation_id"
     t.string   "file_ptr"
     t.string   "file_secure_token"
     t.string   "file_original_name"
@@ -127,20 +127,20 @@ ActiveRecord::Schema.define(version: 20160330212926) do
 
   create_table "submissions", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "handover_id"
+    t.integer  "evaluation_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "submissions", ["handover_id"], name: "index_submissions_on_handover_id", using: :btree
+  add_index "submissions", ["evaluation_id"], name: "index_submissions_on_evaluation_id", using: :btree
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id",     null: false
-    t.integer "handover_id", null: false
+    t.integer "evaluation_id", null: false
   end
 
-  add_index "subscriptions", ["user_id", "handover_id"], name: "index_subscriptions_on_user_id_and_handover_id", unique: true, using: :btree
+  add_index "subscriptions", ["user_id", "evaluation_id"], name: "index_subscriptions_on_user_id_and_evaluation_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
