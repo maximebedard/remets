@@ -2,6 +2,8 @@ class Submission < ActiveRecord::Base
   has_many :documents
   has_many :document_matches, through: :documents
 
+  has_one :grade
+
   belongs_to :handover
   belongs_to :user
 
