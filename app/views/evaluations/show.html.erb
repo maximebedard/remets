@@ -15,21 +15,21 @@
     </div>
   </div>
   <% if @evaluation.user_id == current_user.id %>
-  <div class="row">
-     <div class="col-lg-offset-2 col-lg-8">
-      <div class="remets-panel remets-panel--blue">
-        <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Students Participating</h3>
-        </div>
-        <div class="remets-panel__item">
-          <% if @evaluation.submissions.any? %>
-          <%= render partial: "students_panel", object: @evaluation %>
-          <% else %>
-          No students are currently participating. You should probably add some!
-          <% end %>
+    <div class="row">
+       <div class="col-lg-offset-2 col-lg-8">
+        <div class="remets-panel remets-panel--blue">
+          <div class="remets-panel__heading">
+            <h3 class="remets-panel__title">Students Participating</h3>
+          </div>
+          <div class="remets-panel__item">
+            <% if @evaluation.subscriptions.any? %>
+              <%= render partial: "subscriptions_detail", object: @evaluation %>
+            <% else %>
+              No students are currently participating. You should probably add some!
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <% end %>
 </div>

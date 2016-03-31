@@ -33,6 +33,10 @@ class Evaluation < ActiveRecord::Base
     due_date < Time.zone.now || mark_as_completed.present?
   end
 
+  def latest_submissions_for(user)
+    submissions.where(user: user).order(created_at: :desc).first
+  end
+
   private
 
   def generate_uuid

@@ -1,0 +1,26 @@
+<tr>
+  <td>
+    <%= subscription.user.name || "N/A" %>
+  </td>
+  <td>
+    <a href="mailto:<%= subscription.user.email %>"><%= subscription.user.email %></a>
+  </td>
+  <% if latest_submission = subscription.evaluation.latest_submissions_for(subscription.user) %>
+    <td>
+      <%= l latest_submission.created_at %>
+    </td>
+    <td>
+      <%= link_to submission_path(latest_submission),
+        class: "btn btn-default btn-sm" do %>
+        <i class="fa fa-eye"></i> View
+      <% end %>
+    </td>
+  <% else %>
+    <td>
+      N/A
+    </td>
+    <td>
+      &nbsp;
+    </td>
+  <% end %>
+</tr>

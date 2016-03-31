@@ -9,12 +9,7 @@ class Submission < ActiveRecord::Base
 
   accepts_nested_attributes_for :documents
 
-  scope :latests, lambda {
-    select("distinct on(user_id) *")
-      .order(:user_id, created_at: :desc)
-  }
-
-  scope :mine, -> (user) { where(user: user) }
+  scope :mines, -> (user) { where(user: user) }
 
   scope :similar_to, lambda { |reference|
     joins(:document_matches)

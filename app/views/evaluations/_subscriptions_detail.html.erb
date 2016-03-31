@@ -8,6 +8,6 @@
     </tr>
   </thead>
   <tbody>
-    <%= render partial: "student", collection: @evaluation.users,locals: {evaluation_id: @evaluation.id} %>
+    <%= render partial: "subscription", collection: @evaluation.subscriptions %>
   </tbody>
 </table>
