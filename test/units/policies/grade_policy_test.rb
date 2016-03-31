@@ -3,15 +3,11 @@ require "test_helper"
 class GradePolicyTest < ActiveSupport::TestCase
   include Remets::PolicyAssertions
 
-  test "#show?" do
-    assert_permit(users(:henry), grades(:success), :show)
+  test "#edit?" do
+    assert_permit(users(:henry), grades(:success), :edit)
   end
 
-  test "#new?" do
-    assert_permit(users(:henry), grades(:success), :new)
-  end
-
-  test "#create?" do
-    assert_permit(users(:henry), grades(:success), :create)
+  test "#update?" do
+    assert_permit(users(:henry), grades(:success), :update)
   end
 end

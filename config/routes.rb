@@ -17,9 +17,10 @@ Rails.application.routes.draw do
     member do
       patch :complete
     end
-
-    resources :submissions, only: [:index, :show, :new, :create], concerns: :comparable, shallow: true do
-      resource :grades, only: [:create, :new, :show]
+    shallow do
+      resources :submissions, only: [:index, :show, :new, :create], concerns: :comparable do
+        resource :grade, only: [:edit, :update]
+      end
     end
   end
 

@@ -1,13 +1,9 @@
 class GradePolicy < ApplicationPolicy
-  def show?
+  def edit?
     true
   end
 
-  def new?
-    true
-  end
-
-  def create?
+  def update?
     true
   end
 end
