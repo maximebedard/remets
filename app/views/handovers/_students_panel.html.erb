@@ -1,0 +1,13 @@
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th class="text-center">Student Name</th>
+      <th class="text-center">Email</th>
+      <th class="text-center">Handed on</th>
+      <th class="text-center">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "student", collection: @handover.users,locals: {handover_id: @handover.id} %>
+  </tbody>
+</table>

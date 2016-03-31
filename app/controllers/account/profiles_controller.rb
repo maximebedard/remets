@@ -3,6 +3,7 @@ class Account::ProfilesController < ApplicationController
   must_be_authenticated
 
   def show
+    @collection = current_user.subscribed_handovers.upcoming.latest_deadlines_first
   end
 
   def edit

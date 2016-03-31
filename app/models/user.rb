@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
 
   after_save :send_invite_email
 
+  def submission_for_handover(id)
+    submissions.order("created_at DESC").find_by(handover_id: id, user_id: self.id)
+  end
+
   class << self
     def from_omniauth(params, current_user)
       authorization =

@@ -2,8 +2,11 @@
   <div>
     <% unless submission.user == current_user %>
       <div>
-        <strong>Author : </strong>
-        <%= submission.user.name %>
+        <h3 class="no-margin">
+          <strong>Author : </strong>
+          <%= submission.user.name %>
+        </h3>
+
       </div>
     <% end %>
     <div>

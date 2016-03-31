@@ -2,17 +2,20 @@
   <div class="remets-panel__heading">
     <h3 class="remets-panel__title"><%= title %></h3>
     <div>
-      <%= link_to(handover_path(uuid: submission.handover.uuid),
+      <% hide_menu ||= hide_menu %>
+      <% if !hide_menu %>
+        <%= link_to(handover_path(uuid: submission.handover.uuid),
         class: "btn btn-transparent btn-sm") do %>
         <i class="fa fa-chevron-left"></i> View handover
-      <% end %>
-      <%= link_to(edit_submission_grade_path(submission),
-        class: "btn btn-transparent btn-sm") do %>
-        <i class="fa fa-comment"></i> Grade
-      <% end %>
-      <%= link_to("#",
-        class: "btn btn-transparent btn-sm") do %>
-        <i class="fa fa-download"></i> Download all
+        <% end %>
+        <%= link_to(edit_submission_grade_path(submission),
+          class: "btn btn-transparent btn-sm") do %>
+          <i class="fa fa-comment"></i> Grade
+        <% end %>
+        <%= link_to("#",
+          class: "btn btn-transparent btn-sm") do %>
+          <i class="fa fa-download"></i> Download all
+        <% end %>
       <% end %>
     </div>
   </div>

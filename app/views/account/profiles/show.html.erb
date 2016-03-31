@@ -5,8 +5,13 @@
         <div class="remets-panel__heading">
           <h3 class="remets-panel__title">Upcoming handovers</h3>
         </div>
-        <%= render partial: "handover",
-          collection: current_user.subscribed_handovers.upcoming.latest_deadlines_first %>
+        <% if @collection.any? %>
+          <%= render partial: "handover", collection: @collection %>
+        <% else %>
+          <div class="remets-panel__item">
+            <p>No upcoming handovers, tasks, projects or stress! You're all clear! </p>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

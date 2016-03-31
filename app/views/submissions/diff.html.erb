@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-lg-6">
       <%= render partial: "submission_panel", object: @reference, as: :submission,
-        locals: { title: "Reference submission" } %>
+        locals: { title: "Reference submission", hide_menu: true } %>
     </div>
 
     <div class="col-lg-6">
       <%= render partial: "submission_panel", object: @compared, as: :submission,
-        locals: { title: "Compared submission" } %>
+        locals: { title: "Compared submission", hide_menu: true } %>
     </div>
   </div>
 

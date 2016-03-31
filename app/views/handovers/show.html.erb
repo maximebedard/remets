@@ -18,17 +18,11 @@
      <div class="col-lg-offset-2 col-lg-8">
       <div class="remets-panel remets-panel--blue">
         <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Latests submissions</h3>
-          <div>
-            <%= link_to(handover_submissions_path(handover_uuid: @handover.uuid), class: "btn btn-transparent btn-sm") do %>
-              <i class="fa fa-eye"></i> View all
-            <% end %>
-            <%= link_to("#", class: "btn btn-transparent btn-sm") do %>
-              <i class="fa fa-download"></i> Download
-            <% end %>
-          </div>
+          <h3 class="remets-panel__title">Students Participating</h3>
         </div>
-        <%= render partial: "submission", collection: @handover.submissions.latests %>
+        <div class="remets-panel__item">
+          <%= render partial: "students_panel", object: @handover %>
+        </div>
       </div>
     </div>
   </div>

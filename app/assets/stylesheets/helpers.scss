@@ -6,6 +6,9 @@
 .white-bg {
   background-color: #FFF;
 }
+.no-margin {
+  margin: 0;
+}
 
 .light-text {
   color: lighten($remets-primary-text, 50%);
