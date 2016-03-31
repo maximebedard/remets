@@ -3,6 +3,11 @@ success:
   result: 88
   comments: "This is a triumph."
 
+okay:
+  submission: log121_lab1_3
+  result: 65
+  comments: "Not to shabby mate."
+
 failure:
   submission: log121_lab1_2
   result: 44

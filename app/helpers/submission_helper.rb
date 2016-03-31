@@ -1,8 +1,8 @@
 module SubmissionHelper
   GRADE_MESSAGES = {
-    "success" => "Well done! You da real OG with yo %d\%",
-    "info" => "Heads up mang! %d\% is pretty good, but you can do better.",
-    "danger" => "Oh snap! How do you want to be the best with a grade like %d\%?",
+    "success" => "Well done! You da real OG with yo %d%%.",
+    "info" => "Heads up mang! %d%% is pretty good, but you can do better.",
+    "danger" => "Oh snap! How do you want to be the best with a grade like %d%%?",
   }.freeze
 
   def grade_type(grade)
