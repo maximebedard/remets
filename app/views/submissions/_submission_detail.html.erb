@@ -11,6 +11,10 @@
       <%= l submission.created_at %>
     </div>
   </div>
+
+  <% if submission.grade.present? %>
+    <%= render submission.grade %>
+  <% end %>
 </div>
 
 <%= render partial: "document", collection: submission.documents %>
