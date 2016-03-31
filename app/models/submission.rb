@@ -12,6 +12,8 @@ class Submission < ActiveRecord::Base
       .order(:user_id, created_at: :desc)
   }
 
+  scope :mine, -> (user) { where(user: user) }
+
   scope :similar_to, lambda { |reference|
     joins(:document_matches)
       .where.not(id: reference.id)
