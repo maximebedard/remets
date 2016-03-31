@@ -4,6 +4,7 @@
     multiple: "multiple",
     placeholder: "Pick some people",
     id: name.parameterize("_"),
+    data: { "initial-items" => values.map { |v| Acquaintance.from_user(v.user) }.to_json },
   )) %>
 
 <%= content_for :scripts do %>

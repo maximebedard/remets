@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <%= f.label :memberships %>
-    <%= user_picker_field "organization[memberships][]" %>
+    <%= user_picker_field "organization[memberships][]", @organization.memberships %>
   </div>
 
   <%= f.submit class: 'btn btn-success' %>

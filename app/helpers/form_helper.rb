@@ -7,10 +7,10 @@ module FormHelper
     )
   end
 
-  def user_picker_field(name, option_tags = nil, options = {})
+  def user_picker_field(name, values, option_tags = nil, options = {})
     render(
       partial: "shared/user_picker",
-      locals: { name: name, option_tags: option_tags, options: options },
+      locals: { name: name, values: values, option_tags: option_tags, options: options },
     )
   end
 

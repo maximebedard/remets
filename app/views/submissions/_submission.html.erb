@@ -1,10 +1,5 @@
 <div class="remets-panel__item">
   <div class="remets-panel__item__content">
-    <% if submission_counter == 0 %>
-      <span class="label label-primary">To be evaluated</span>
-    <% else %>
-      <span class="label label-warning">Archived</span>
-    <% end %>
     <% if submission.user.id != current_user.id %>
     <div>
       <h4>Submitted by: <%= submission.user.name %></h4>

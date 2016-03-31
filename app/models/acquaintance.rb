@@ -18,5 +18,12 @@ class Acquaintance
         expires_in: 1.day,
       )
     end
+
+    def from_user(user)
+      new(
+        name: user.name,
+        email: user.email,
+      )
+    end
   end
 end

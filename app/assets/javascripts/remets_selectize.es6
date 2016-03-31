@@ -21,6 +21,12 @@ function remetsSelectize(queryElement) {
         "</div>";
       }
     },
+    onInitialize: function() {
+      $.each(this.$input.data("initial-items"), (i, v) => {
+        this.addOption(v);
+        this.addItem(v.email);
+      })
+    },
     createFilter: function(input) {
       var match, regex;
 
