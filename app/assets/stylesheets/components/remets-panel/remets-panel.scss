@@ -40,6 +40,19 @@
     flex-direction: row;
   }
   @include flex();
+  .compare-wrapper {
+    flex-flow: row wrap;
+    display: flex;
+    code {
+      width: 49%;
+      margin: 0 auto;
+      color: #2E3E4F;
+      background-color: #F3F3F3;
+      mark {
+        background-color: #F5D324
+      }
+    }
+  }
 }
 
 .remets-panel__item--group {

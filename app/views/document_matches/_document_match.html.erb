@@ -7,6 +7,8 @@
     <small>~<%= number_to_percentage(document_match.similarity * 100) %></small>
   </div>
   <div class="remets-panel__item">
-    <%= formatted_diff(document_match) %>
+    <div class="compare-wrapper">
+      <%= formatted_diff(document_match) %>
+    </div>
   </div>
 </div>
