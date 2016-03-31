@@ -54,6 +54,12 @@
     }
   }
 }
+.remets-panel__item--columns {
+  flex-direction: column;
+  @media (min-width: 992px) {
+    flex-direction: column;
+  }
+}
 
 .remets-panel__item--group {
   border: 1px solid #E8E8E8;

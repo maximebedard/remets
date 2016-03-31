@@ -18,6 +18,11 @@
   width: 100%;
 }
 
+.no-top-bot-padding {
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
+
 .flex-horizontal-center {
   @media (min-width: 992px) {
     display: flex;

@@ -1,12 +1,23 @@
-<div class="remets-panel__item">
+<div class="remets-panel__item remets-panel__item--no-border">
   <div>
+    <div>
+      <h3 class="no-margin">
+        <strong>Project Title : </strong>
+        <%= submission.handover.title %>
+      </h3>
+    </div>
+    <div>
+      <h4 class="no-margin">
+        <strong>Evaluated by: </strong>
+        <%= submission.handover.user.name %>
+      </h4>
+    </div>
     <% unless submission.user == current_user %>
       <div>
         <h3 class="no-margin">
           <strong>Author : </strong>
           <%= submission.user.name %>
         </h3>
-
       </div>
     <% end %>
     <div>
@@ -14,10 +25,11 @@
       <%= l submission.created_at %>
     </div>
   </div>
-
-  <% if submission.grade.present? %>
-    <%= render submission.grade %>
-  <% end %>
 </div>
-
+<div class="remets-panel__item remets-panel__item--no-border">
+  <div><h2 class="no-margin">Submitted Files</h2></div>
+</div>
 <%= render partial: "document", collection: submission.documents %>
+<% if submission.grade.present? %>
+<%= render submission.grade %>
+<% end %>

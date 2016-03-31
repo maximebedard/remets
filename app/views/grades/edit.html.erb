@@ -3,8 +3,9 @@
     <div class="col-lg-offset-2 col-lg-8">
       <div class="remets-panel remets-panel--default">
         <div class="remets-panel__heading">
-          <h3 class="remets-panel__title">Edit grade</h3>
+          <h3 class="remets-panel__title">Grade project</h3>
         </div>
+          <%= render partial: "submissions/submission", locals: {submission: @submission} %>
         <div class="remets-panel__item">
           <%= render partial: "form" %>
         </div>

@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <%= f.label :result %>
-    <%= f.number_field :result, class: "form-control", placeholder: "Result", within: 0..100 %>
+    <%= f.number_field :result, class: "form-control", placeholder: "%", within: 0..100 %>
   </div>
 
   <div class="form-group">
@@ -28,7 +28,7 @@
       name: "grade[graded_documents_attributes][][file_ptr]" %>
   </div>
 
-  <%= f.submit class: 'btn btn-success' %>
+  <%= f.submit value: 'Grade project' ,class: 'btn btn-success' %>
 <% end %>
 
 <%= modal(title: "Documents", label: "document-label", id: "info-documents") do %>

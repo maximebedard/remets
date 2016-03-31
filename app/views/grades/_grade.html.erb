@@ -1,5 +1,13 @@
-<div class="alert alert-<%= grade_type(grade) %>" role="alert">
-  <b><%= formatted_grade_result(grade) %></b>
-  <small><%= grade.comments %></small>
+<div class="remets-panel__item remets-panel__item--no-border remets-panel__item--bg-blue">
+    <h6 class="no-margin">Grade & Feedback</h6>
+</div>
+<div class="remets-panel__item remets-panel__item--no-border">
+  <div>
+    <h3 class="no-margin">Final Grade : <%= (grade.result) %>%</h3>
+  </div>
+</div>
+<div class="remets-panel__item remets-panel__item--columns no-top-bot-padding">
+  <h6>Comments : </h6> <br>
+  <blockquote> <%= grade.comments %></blockquote>
   <!-- TODO: display attached documents -->
 </div>
