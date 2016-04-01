@@ -24,6 +24,7 @@ class Sanitizer
     Sanitizers::HtmlSanitizer,
     Sanitizers::PdfSanitizer,
     Sanitizers::TextSanitizer,
+    Sanitizers::CodeSanitizer,
   ]
 
   attr_reader :content,
@@ -34,13 +35,19 @@ class Sanitizer
     @options = options
   end
 
-  def sanitized_content
-    sanitize.downcase
+  def safe_sanitize
+    SafeSanitizer.new(self).call
   end
 
-  private
+  class SafeSanitizer
+    include ActionView::Helpers::SanitizeHelper
 
-  def sanitize
-    raise NotImplementedError
+    def initialize(sanitizer)
+      @sanitizer = sanitizer
+    end
+
+    def call
+      sanitize(@sanitizer.sanitize)
+    end
   end
 end

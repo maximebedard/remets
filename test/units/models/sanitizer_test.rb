@@ -8,11 +8,15 @@ class SanitizerTest < ActiveSupport::TestCase
   end
 
   setup do
-    @sanitizer = TestSanitizer.new("I AM A PIRATE!")
+    @sanitizer = TestSanitizer.new("i am a pirate!<script>alert('ohai');</script>")
   end
 
-  test "#sanitized_content returns the sanitized content" do
-    assert_equal "i am a pirate!", @sanitizer.sanitized_content
+  test "#sanitize returns the sanitized content" do
+    assert_equal "i am a pirate!<script>alert('ohai');</script>", @sanitizer.sanitize
+  end
+
+  test "#safe_sanitize returns the safe sanitized content" do
+    assert_equal "i am a pirate!alert('ohai');", @sanitizer.safe_sanitize
   end
 
   test "#can_be_sanitized? returns true if there is supported Sanitizer" do

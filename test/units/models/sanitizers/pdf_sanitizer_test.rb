@@ -5,9 +5,9 @@ class PdfSanitizerTest < ActiveSupport::TestCase
     assert_equal %w(pdf), Sanitizers::PdfSanitizer.supported_extensions
   end
 
-  test "#sanitized_content" do
-    assert_raises NotImplementedError do
-      Sanitizers::PdfSanitizer.new("").sanitized_content
+  test "#sanitize" do
+    assert_raises NoMethodError do
+      Sanitizers::PdfSanitizer.new("").sanitize
     end
   end
 end

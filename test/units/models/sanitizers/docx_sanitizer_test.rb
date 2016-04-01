@@ -5,9 +5,9 @@ class DocxSanitizerTest < ActiveSupport::TestCase
     assert_equal %w(docx), Sanitizers::DocxSanitizer.supported_extensions
   end
 
-  test "#sanitized_content" do
-    assert_raises NotImplementedError do
-      Sanitizers::DocxSanitizer.new("").sanitized_content
+  test "#sanitize" do
+    assert_raises NoMethodError do
+      Sanitizers::DocxSanitizer.new("").sanitize
     end
   end
 end

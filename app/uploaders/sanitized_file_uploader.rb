@@ -17,7 +17,7 @@ class SanitizedFileUploader < CarrierWave::Uploader::Base
       sanitizer = sanitizer.new(file.read)
 
       file.seek(0)
-      file.write(sanitizer.sanitize)
+      file.write(sanitizer.safe_sanitize)
     end
   end
 
