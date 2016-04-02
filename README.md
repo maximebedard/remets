@@ -18,6 +18,25 @@ source ./some-folder-not-in-the-repo/secrets.sh
 bundle exec rake
 ```
 
+## Roadmap
+
+- [ ] Fix the differ
+  - [ ] Remove very small diffs as they are irrelevant
+  - [ ] Contextualize every diffs
+  - [ ] Provide a link on the diff to see in the whole context
+- [ ] Provide an inline viewer for a document
+- [ ] Add teams
+- [ ] Add notifications
+- [ ] Add Google Calendar integration
+- [ ] Add snapshot from 3rd party
+- [ ] Add acceptance tests
+- [ ] Refactor documents to provide and intermediary model
+- [ ] Add Webhooks
+- [ ] Add API docs (https://github.com/tripit/slate is good enough)
+- [ ] Add permissions (per submission, per organization)
+- [ ] Fix the html5 drag and drop
+- [ ] Add graphql api (cauz this is cool)
+
 ## Contributing
 
 - Fork it ( https://github.com/maximebedard/remets/fork )
