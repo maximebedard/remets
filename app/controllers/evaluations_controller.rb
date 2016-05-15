@@ -28,7 +28,7 @@ class EvaluationsController < ApplicationController
     authorize(@evaluation)
 
     EvaluationUpdater.new(@evaluation, current_user, evaluation_params).call
-
+    @evaluation.save
     respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))
   end
 
@@ -45,7 +45,7 @@ class EvaluationsController < ApplicationController
     authorize(@evaluation)
 
     EvaluationUpdater.new(@evaluation, current_user, evaluation_params).call
-
+    @evaluation.save
     respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))
   end
 

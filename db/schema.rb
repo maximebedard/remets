@@ -53,20 +53,6 @@ ActiveRecord::Schema.define(version: 20160330212926) do
     t.datetime "updated_at",            null: false
   end
 
-  create_table "documents", force: :cascade do |t|
-    t.integer  "submission_id"
-    t.string   "file_ptr"
-    t.string   "file_secure_token"
-    t.string   "file_original_name"
-    t.integer  "fingerprints",       default: [], null: false, array: true
-    t.integer  "indexes",            default: [], null: false, array: true
-    t.datetime "fingerprinted_at"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-  end
-
-  add_index "documents", ["fingerprints"], name: "index_documents_on_fingerprints", using: :gin
-
   create_table "evaluations", force: :cascade do |t|
     t.uuid     "uuid",                             null: false
     t.integer  "user_id"
@@ -134,6 +120,20 @@ ActiveRecord::Schema.define(version: 20160330212926) do
 
   add_index "submissions", ["evaluation_id"], name: "index_submissions_on_evaluation_id", using: :btree
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
+
+  create_table "submitted_documents", force: :cascade do |t|
+    t.integer  "submission_id"
+    t.string   "file_ptr"
+    t.string   "file_secure_token"
+    t.string   "file_original_name"
+    t.integer  "fingerprints",       default: [], null: false, array: true
+    t.integer  "indexes",            default: [], null: false, array: true
+    t.datetime "fingerprinted_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "submitted_documents", ["fingerprints"], name: "index_submitted_documents_on_fingerprints", using: :gin
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "user_id",       null: false

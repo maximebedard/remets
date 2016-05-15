@@ -1,15 +1,15 @@
 platypus_boilerplate:
   evaluation: log121_lab1
-  <%= boilerplate_document_upload_yaml("platypus.txt") %>
+  file_ptr: "boilerplate_documents/platypus.txt"
 
 makefile_boilerplate:
   evaluation: log121_lab1
-  <%= boilerplate_document_upload_yaml("makefile") %>
+  file_ptr: "boilerplate_documents/makefile"
 
 empty_boilerplate:
   evaluation: log121_lab1
-  <%= boilerplate_document_upload_yaml("empty.txt") %>
+  file_ptr: "boilerplate_documents/empty.txt"
 
 unsanitizable_boilerplate:
   evaluation: log121_lab1
-  <%= boilerplate_document_upload_yaml("platypus.jpg") %>
+  file_ptr: "boilerplate_documents/platypus.jpg"

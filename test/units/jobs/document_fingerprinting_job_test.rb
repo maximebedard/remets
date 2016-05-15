@@ -37,7 +37,7 @@ class DocumentFingerprintingJobTest < ActiveSupport::TestCase
   include FingerprintingJobTests
 
   setup do
-    @document = documents(:platypus)
+    @document = submitted_documents(:platypus)
   end
 
   test "#perform queue an indexing job" do

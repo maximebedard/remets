@@ -62,12 +62,6 @@
   <%= f.submit class: 'btn btn-success' %>
 <% end %>
 
-<%= content_for :scripts do %>
-  <script type="text/javascript">
-    //dragAndDropify('#new_evaluation');
-  </script>
-<% end %>
-
 <%= modal(title: "Reference documents?", label: "reference-label", id: "info-reference-documents") do %>
   <p>
     Is there any documents you wish to attach to this evaluation that will help students? Maybe a template file, an interesting PDF or a picture that's worth a thousand words?

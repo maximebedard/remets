@@ -1,15 +1,13 @@
 require "test_helper"
 
 class EvaluationsTest < ActionDispatch::IntegrationTest
-  include Remets::SanitizedDocumentFileUploadHelper
-
   setup do
     sign_in(users(:gaston))
   end
 
   test "create a evaluation" do
-    @file1 = unsanitizable_file_upload
-    @file2 = sanitizable_file_upload
+    @file1 = submitted_documents(:platypus_image).file_ptr
+    @file2 = submitted_documents(:bragging).file_ptr
 
     description = <<-MD.strip_heredoc
       # This is a markdown

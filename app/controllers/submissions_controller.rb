@@ -34,10 +34,7 @@ class SubmissionsController < ApplicationController
     @submission = policy_scope(evaluation.submissions.where(user: current_user)).build
     authorize(@submission)
 
-    Fingerprinter.new(
-      @submission,
-      submission_params,
-    ).call
+    @submission.update(submission_params)
     respond_with(@submission)
   end
 
@@ -54,18 +51,10 @@ class SubmissionsController < ApplicationController
 
   def submission_params
     params.fetch(:submission, {})
-      .permit(documents_attributes: [:file_ptr])
+      .permit(submitted_documents_attributes: [:file_ptr])
   end
 
   def evaluation
     @evaluation ||= Evaluation.find_by!(uuid: params[:evaluation_uuid])
   end
-
-  # TODO: this is ugly, find a better way when there is more time.
-  # it's not tested either because yolo
-  # def apply_filters(scope)
-  #   scope
-  #     .where("due_date #{params[:completed] ? '<=' : '>'} ?", Time.zone.now)
-  #     .order(due_date: params[:due_date] ? :desc : :asc)
-  # end
 end

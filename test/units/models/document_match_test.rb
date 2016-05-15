@@ -4,8 +4,8 @@ class DocumentMatchTest < ActiveSupport::TestCase
   self.use_transactional_fixtures = true
 
   test "#create_from! does not create a match when there is no matching fingerprints" do
-    document1 = documents(:platypus)
-    document2 = documents(:fraudulent_platypus)
+    document1 = submitted_documents(:platypus)
+    document2 = submitted_documents(:fraudulent_platypus)
 
     document1.windows = [[0, 1234], [1, 5678]]
     document2.windows = [[0, 4321], [1, 8765]]
@@ -16,8 +16,8 @@ class DocumentMatchTest < ActiveSupport::TestCase
   end
 
   test "#create_from! create a match when there is matching fingerprints" do
-    document1 = documents(:platypus)
-    document2 = documents(:fraudulent_platypus)
+    document1 = submitted_documents(:platypus)
+    document2 = submitted_documents(:fraudulent_platypus)
 
     document1.windows = [[0, 1234], [1, 5678]]
     document2.windows = [[9, 1234], [1, 8765]]
@@ -28,8 +28,8 @@ class DocumentMatchTest < ActiveSupport::TestCase
   end
 
   test "#similarity" do
-    document1 = documents(:platypus)
-    document2 = documents(:fraudulent_platypus)
+    document1 = submitted_documents(:platypus)
+    document2 = submitted_documents(:fraudulent_platypus)
 
     document1.windows = [[0, 1234], [1, 5678]]
     document2.windows = [[9, 1234], [1, 8765], [12, 4444]]

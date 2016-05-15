@@ -1,3 +1,3 @@
 successful_platypus:
   grade: success
-  <%= graded_document_upload_yaml("platypus1.txt") %>
+  file_ptr: "graded_documents/platypus1.txt"

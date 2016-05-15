@@ -1,0 +1,21 @@
+<div class="remets-panel remets-panel--default">
+  <div class="remets-panel__heading">
+    <h3 class="remets-panel__title"><%= title %></h3>
+    <div>
+      <%= link_to(submission_path(submitted_document.submission),
+        class: "btn btn-transparent btn-sm") do %>
+        <i class="fa fa-chevron-left"></i> View submission
+      <% end %>
+      <%= link_to(evaluation_path(uuid: submitted_document.submission.evaluation.uuid),
+        class: "btn btn-transparent btn-sm") do %>
+        <i class="fa fa-chevron-left"></i> View evaluation
+      <% end %>
+      <%= link_to("#",
+        class: "btn btn-transparent btn-sm") do %>
+        <i class="fa fa-download"></i> Download
+      <% end %>
+    </div>
+  </div>
+
+  <%= render partial: "document_detail", object: submitted_document, as: :document %>
+</div>

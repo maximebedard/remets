@@ -1,8 +1,6 @@
 require "test_helper"
 
 class EvaluationsControllerTest < ActionController::TestCase
-  include Remets::SanitizedDocumentFileUploadHelper
-
   setup do
     @evaluation = evaluations(:log121_lab1)
     sign_in users(:gaston)
@@ -60,8 +58,8 @@ class EvaluationsControllerTest < ActionController::TestCase
           description: "pants pants pants",
           due_date: 5.days.from_now,
           organization: organizations(:ets).id,
-          reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-          boilerplate_documents_attriubtes: [{ file_ptr: sanitizable_file_upload }],
+          reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+          boilerplate_documents_attriubtes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
         },
       )
       evaluation = assigns(:evaluation)
@@ -86,8 +84,8 @@ class EvaluationsControllerTest < ActionController::TestCase
         description: "pants pants pants",
         due_date: 5.days.from_now,
         organization: organizations(:ets).id,
-        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-        boilerplate_documents_attriubtes: [{ file_ptr: sanitizable_file_upload }],
+        reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+        boilerplate_documents_attriubtes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
       },
     )
     assert_redirected_to_auth_new
@@ -117,8 +115,8 @@ class EvaluationsControllerTest < ActionController::TestCase
           due_date: 5.days.from_now,
           organization: organizations(:ets).id,
           subscriptions: ["idont@exists.com"],
-          reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-          boilerplate_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+          reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+          boilerplate_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
         },
       )
 
@@ -145,8 +143,8 @@ class EvaluationsControllerTest < ActionController::TestCase
           due_date: 5.days.from_now,
           organization: organizations(:ets).id,
           subscriptions: ["idont@exists.com"],
-          reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-          boilerplate_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+          reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+          boilerplate_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
         },
       )
       assert_redirected_to evaluation_path(uuid: assigns(:evaluation).uuid)
@@ -174,8 +172,8 @@ class EvaluationsControllerTest < ActionController::TestCase
         title: "pants",
         description: "pants pants pants",
         due_date: 5.days.from_now,
-        reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-        documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+        reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+        documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
       },
     )
     assert_redirected_to_auth_new

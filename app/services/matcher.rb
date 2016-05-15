@@ -23,7 +23,7 @@ class Matcher
   end
 
   def same_submission_fingerprints
-    reference.submission.documents.all_fingerprinted_except(reference)
+    reference.submission.submitted_documents.all_fingerprinted_except(reference)
       .pluck(:fingerprints).flatten
   end
 end

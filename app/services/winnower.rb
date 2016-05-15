@@ -1,42 +1,23 @@
 class Winnower
   class << self
-    def windows_from_content(content, *options)
-      new(*options).perform(
-        ContentTokenizer.tokenize(content || ""),
-      )
+    def windows_from_content(content, **options)
+      content ||= ""
+
+      new(options).perform(ContentTokenizer.tokenize(content))
     end
 
-    def windows_from_tokens(tokens, *options)
-      new(*options).perform(tokens || [])
-    end
+    def windows_from_tokens(tokens, **options)
+      tokens ||= []
 
-    def enum_kgrams(indexed_tokens, k: 5)
-      n = indexed_tokens.size
-
-      Enumerator.new do |y|
-        if n < k
-          y << indexed_tokens
-        else
-          0.upto(n - k) do |i|
-            y << indexed_tokens[i, k]
-          end
-        end
-      end
+      new(options).perform(tokens)
     end
   end
 
   def perform(tokens)
     return Set.new unless tokens.present?
 
-    fingerprints =
-      self.class.enum_kgrams(tokens, k: @kgrams_size).map do |kgram|
-        fingerprint(kgram)
-      end
-
-    windows =
-      self.class.enum_kgrams(fingerprints, k: @window_size).map do |kgram|
-        kgram.min_by { |window| window[1] }
-      end
+    fingerprints = build_fingerprints(tokens)
+    windows = build_windows(fingerprints)
 
     Set.new(windows)
   end
@@ -48,12 +29,29 @@ class Winnower
     @kgrams_size = kgrams_size
   end
 
+  def build_fingerprints(tokens)
+    each_cons(tokens, @kgrams_size).map do |kgram|
+      fingerprint(kgram)
+    end
+  end
+
+  def build_windows(fingerprints)
+    each_cons(fingerprints, @window_size).map do |kgram|
+      kgram.min { |a, b| a[1] <=> b[1] }
+    end
+  end
+
   def fingerprint(indexed_tokens)
     indexes, tokens = indexed_tokens.transpose
 
     fingerprint = hash(tokens.join)
 
     [indexes.first, fingerprint]
+  end
+
+  def each_cons(enumerable, n)
+    return [enumerable] if enumerable.size < n
+    enumerable.each_cons(n)
   end
 
   def hash(value)

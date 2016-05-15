@@ -1,8 +1,6 @@
 require "test_helper"
 
 class EvaluationUpdaterTest < ActiveSupport::TestCase
-  include Remets::SanitizedDocumentFileUploadHelper
-
   setup do
     @evaluation = Evaluation.new
     @service = EvaluationUpdater.new(
@@ -13,8 +11,8 @@ class EvaluationUpdaterTest < ActiveSupport::TestCase
       due_date: 5.days.from_now,
       organization: organizations(:ets).id,
       subscriptions: ["idont@exists.com"],
-      reference_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
-      boilerplate_documents_attributes: [{ file_ptr: sanitizable_file_upload }],
+      reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      boilerplate_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
     )
   end
 

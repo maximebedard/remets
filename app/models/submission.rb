@@ -1,15 +1,15 @@
 class Submission < ActiveRecord::Base
-  has_many :documents
-  has_many :document_matches, through: :documents
+  has_many :submitted_documents
+  has_many :document_matches, through: :submitted_documents
 
   has_one :grade
 
   belongs_to :evaluation
   belongs_to :user
 
-  accepts_nested_attributes_for :documents
+  accepts_nested_attributes_for :submitted_documents
 
-  scope :mines, -> (user) { where(user: user) }
+  scope :for, -> (user) { where(user: user) }
 
   scope :similar_to, lambda { |reference|
     joins(:document_matches)
@@ -20,7 +20,7 @@ class Submission < ActiveRecord::Base
   }
 
   validates(
-    :documents,
+    :submitted_documents,
     :evaluation,
     :user,
     presence: true,

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render partial: "submitted_document_panel", object: @submitted_document, as: :submitted_document,
+        locals: { title: "Document" } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <% if @submitted_document.document_matches.size > 0  %>
+        <%= render @submitted_document.document_matches %>
+      <% else %>
+        <div class="remets-panel remets-panel--default">
+          <div class="remets-panel__heading monospaced">
+            <h3 class="remets-panel__title">
+              No matches found
+            </h3>
+          </div>
+          <div class="remets-panel__item">
+            <p>No matches have been found with the selected file.</p>
+          </div>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

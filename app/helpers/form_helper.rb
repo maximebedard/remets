@@ -7,6 +7,9 @@ module FormHelper
     )
   end
 
+  def direct_file_uploader
+  end
+
   def user_picker_field(name, values, option_tags = nil, options = {})
     render(
       partial: "shared/user_picker",

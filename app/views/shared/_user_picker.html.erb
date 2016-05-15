@@ -4,11 +4,8 @@
     multiple: "multiple",
     placeholder: "Pick some people",
     id: name.parameterize("_"),
-    data: { "initial-items" => values.map { |v| Acquaintance.from_user(v.user) }.to_json },
+    data: {
+      "selectize" => true,
+      "initial-items" => values.map { |v| Acquaintance.from_user(v.user) }.to_json
+    },
   )) %>
-
-<%= content_for :scripts do %>
-  <script type="text/javascript">
-    remetsSelectize("<%= "##{name.parameterize('_')}" %>");
-  </script>
-<% end %>

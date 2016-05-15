@@ -1,8 +1,6 @@
 require "test_helper"
 
 class GradesControllerTest < ActionController::TestCase
-  include Remets::SanitizedDocumentFileUploadHelper
-
   setup do
     @grade = grades(:success)
     sign_in(users(:gaston))
@@ -47,7 +45,7 @@ class GradesControllerTest < ActionController::TestCase
     {
       result: 66,
       comments: "not bad mate.",
-      graded_document_attributes: [{ file_ptr: sanitizable_file_upload }],
+      graded_document_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
     }
   end
 end

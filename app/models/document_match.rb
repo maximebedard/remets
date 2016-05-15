@@ -1,6 +1,6 @@
 class DocumentMatch < ActiveRecord::Base
-  belongs_to :reference_document, class_name: Document
-  belongs_to :compared_document, class_name: Document
+  belongs_to :reference_document, class_name: SubmittedDocument, foreign_key: :reference_document_id
+  belongs_to :compared_document, class_name: SubmittedDocument, foreign_key: :compared_document_id
   belongs_to :match
 
   validates(

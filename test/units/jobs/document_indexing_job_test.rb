@@ -1,25 +1,23 @@
 require "test_helper"
 
 class DocumentIndexingJobTest < ActiveSupport::TestCase
-  include Remets::SanitizedDocumentFileUploadHelper
-
   self.use_transactional_fixtures = true
 
   test "#perform does nothing when no documents are fingerprinted" do
     assert_no_difference("DocumentMatch.count", "Match.count") do
-      DocumentIndexingJob.perform_now(documents(:platypus))
+      DocumentIndexingJob.perform_now(submitted_documents(:platypus))
     end
   end
 
   test "#perform add a match with the intersection of fingerprints" do
-    [Document, DocumentMatch, Match].each(&:destroy_all)
+    [SubmittedDocument, DocumentMatch, Match].each(&:destroy_all)
 
-    reference = submissions(:log121_lab1_1).documents.create!(
-      file_ptr: empty_file_upload,
+    reference = submissions(:log121_lab1_1).submitted_documents.create!(
+      file_ptr: submitted_documents(:empty).file_ptr,
       windows: [[0, 1234], [1, 9876], [4, 5678]],
     )
-    compared = submissions(:log121_lab1_2).documents.create!(
-      file_ptr: empty_file_upload,
+    compared = submissions(:log121_lab1_2).submitted_documents.create!(
+      file_ptr: submitted_documents(:empty).file_ptr,
       windows: [[0, 1234], [1, 3456], [4, 6666]],
     )
 
@@ -45,14 +43,14 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
   end
 
   test "#perform does not add a match when the intersection is empty" do
-    [Document, DocumentMatch, Match].each(&:destroy_all)
+    [SubmittedDocument, DocumentMatch, Match].each(&:destroy_all)
 
-    reference = submissions(:log121_lab1_1).documents.create!(
-      file_ptr: empty_file_upload,
+    reference = submissions(:log121_lab1_1).submitted_documents.create!(
+      file_ptr: submitted_documents(:empty).file_ptr,
       windows: [[0, 1234], [1, 9876], [4, 5678]],
     )
-    _compared = submissions(:log121_lab1_2).documents.create!(
-      file_ptr: empty_file_upload,
+    _compared = submissions(:log121_lab1_2).submitted_documents.create!(
+      file_ptr: submitted_documents(:empty).file_ptr,
       windows: [[0, 4321], [1, 3456], [4, 6666]],
     )
 
@@ -63,16 +61,16 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
 
   test "#perform delete previous matches" do
     DocumentMatch.create!(
-      reference_document: documents(:platypus),
-      compared_document: documents(:fraudulent_platypus),
+      reference_document: submitted_documents(:platypus),
+      compared_document: submitted_documents(:fraudulent_platypus),
       match: Match.create!(fingerprints: [1234, 4567]),
       similarity: 0.5,
     )
 
-    Document.stubs(:all_fingerprinted_except).returns(Document.none)
+    SubmittedDocument.stubs(:all_fingerprinted_except).returns(SubmittedDocument.none)
 
     assert_difference("DocumentMatch.count", -1) do
-      DocumentIndexingJob.perform_now(documents(:platypus))
+      DocumentIndexingJob.perform_now(submitted_documents(:platypus))
     end
   end
 end

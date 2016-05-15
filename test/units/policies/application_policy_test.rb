@@ -6,7 +6,7 @@ class ApplicationPolicyTest < ActiveSupport::TestCase
   setup do
     @policy = ApplicationPolicy.new(
       users(:henry),
-      documents(:platypus),
+      submitted_documents(:platypus),
     )
   end
 
@@ -39,7 +39,7 @@ class ApplicationPolicyTest < ActiveSupport::TestCase
   end
 
   test "#scope" do
-    assert_equal Document, @policy.scope
+    assert_equal SubmittedDocument, @policy.scope
   end
 
   test "#authenticated?" do
@@ -49,7 +49,7 @@ class ApplicationPolicyTest < ActiveSupport::TestCase
   test "#authenticated? is false when the current user is nil" do
     @policy = ApplicationPolicy.new(
       nil,
-      documents(:platypus),
+      submitted_documents(:platypus),
     )
 
     refute @policy.authenticated?
@@ -62,7 +62,7 @@ class ApplicationPolicyTest < ActiveSupport::TestCase
   test "#authenticate! raises when the current user is nil" do
     @policy = ApplicationPolicy.new(
       nil,
-      documents(:platypus),
+      submitted_documents(:platypus),
     )
 
     assert_raises(Remets::NotAuthenticatedError) do

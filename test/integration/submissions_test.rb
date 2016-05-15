@@ -1,14 +1,12 @@
 require "test_helper"
 
 class SubmissionsTest < ActionDispatch::IntegrationTest
-  include Remets::SanitizedDocumentFileUploadHelper
-
   setup do
     sign_in(users(:gaston))
   end
 
   test "create a submission with a sanitizable document" do
-    @file = sanitizable_file_upload
+    @file = submitted_documents(:bragging).file_ptr
 
     submit(
       documents_attributes: [
@@ -16,9 +14,9 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
       ],
     )
 
-    @document = @submission.documents.first
+    @document = @submission.submitted_documents.first
 
-    assert_equal 1, @submission.documents.size
+    assert_equal 1, @submission.submitted_documents.size
     assert_redirected_to @submission
 
     assert_not_empty @document.fingerprints
@@ -28,7 +26,7 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   end
 
   test "create a submission with an unsanitizable document" do
-    @file = unsanitizable_file_upload
+    @file = submitted_documents(:platypus_image).file_ptr
 
     submit(
       documents_attributes: [
@@ -36,9 +34,9 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
       ],
     )
 
-    @document = @submission.documents.first
+    @document = @submission.submitted_documents.first
 
-    assert_equal 1, @submission.documents.size
+    assert_equal 1, @submission.submitted_documents.size
     assert_redirected_to @submission
 
     assert_empty @document.fingerprints
@@ -48,8 +46,8 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
   end
 
   test "create a submission with a sanitizable and an unsanitizable documents" do
-    @file1 = unsanitizable_file_upload
-    @file2 = sanitizable_file_upload
+    @file1 = submitted_documents(:platypus_image).file_ptr
+    @file2 = submitted_documents(:bragging).file_ptr
 
     submit(
       documents_attributes: [
@@ -58,8 +56,8 @@ class SubmissionsTest < ActionDispatch::IntegrationTest
       ],
     )
 
-    @document1 = @submission.documents.first
-    @document2 = @submission.documents.second
+    @document1 = @submission.submitted_documents.first
+    @document2 = @submission.submitted_documents.second
 
     assert_redirected_to @submission
 

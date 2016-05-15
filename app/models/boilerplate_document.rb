@@ -1,5 +1,5 @@
 class BoilerplateDocument < ActiveRecord::Base
-  include Fingerprintable
+  include DirectUploadable
 
   belongs_to :evaluation
 end

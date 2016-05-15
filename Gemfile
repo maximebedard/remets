@@ -7,15 +7,11 @@ gem "puma"
 gem "sinatra", require: false
 gem "sidekiq"
 gem "bcrypt"
-
 gem "responders"
 gem "jbuilder"
-
 gem "omniauth-google-oauth2"
-
-gem "carrierwave"
+gem "aws-sdk"
 gem "pundit"
-
 gem "sass-rails"
 gem "bootstrap-sass", "~> 3.3.6"
 gem "uglifier"
@@ -44,5 +40,4 @@ end
 
 group :production do
   gem "rails_12factor"
-  gem "fog"
 end

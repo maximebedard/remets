@@ -3,10 +3,10 @@
     <i class="fa fa-file"></i> <%= document.file_original_name %>
   </div>
   <div class="remets-panel__item__actions">
-    <%= link_to(download_document_path(document), class: "btn btn-default btn-sm") do %>
+    <%= link_to(document_download_path(document.file_ptr), class: "btn btn-default btn-sm") do %>
       <i class="fa fa-download"></i> Download
     <% end %>
-    <%= link_to(document_path(document), class: "btn btn-default btn-sm") do %>
+    <%= link_to(submitted_document_path(document), class: "btn btn-default btn-sm") do %>
       <i class="fa fa-eye"></i> View
     <% end %>
   </div>

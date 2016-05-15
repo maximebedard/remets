@@ -11,7 +11,7 @@ class EvaluationUpdater
     assign_owner
     build_subscriptions
     build_organization_association
-    fingerprint
+    update_attributes
   end
 
   private
@@ -34,11 +34,8 @@ class EvaluationUpdater
     params.merge!(organization_id: memberships.organization_id)
   end
 
-  def fingerprint
-    Fingerprinter.new(
-      evaluation,
-      params_to_update,
-    ).call
+  def update_attributes
+    evaluation.update_attributes(params_to_update)
   end
 
   def params_to_update

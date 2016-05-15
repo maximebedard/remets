@@ -23,7 +23,11 @@ bundle exec rake
 - [ ] Fix the differ
   - [ ] Remove very small diffs as they are irrelevant
   - [ ] Contextualize every diffs
+  - [ ] Provide inverse view
   - [ ] Provide a link on the diff to see in the whole context
+  - [ ] Explore the possibility to explore AST diffing for code
+  - [ ] Expose the diffing as an API?
+  - [ ] Provide document do document comparaison?
 - [ ] Provide an inline viewer for a document
 - [ ] Add teams
 - [ ] Add notifications
@@ -34,8 +38,11 @@ bundle exec rake
 - [ ] Add Webhooks
 - [ ] Add API docs (https://github.com/tripit/slate is good enough)
 - [ ] Add permissions (per submission, per organization)
+- [ ] Add permissions to user??
 - [ ] Fix the html5 drag and drop
 - [ ] Add graphql api (cauz this is cool)
+- [ ] I18n
+- [ ] Add user impersonalisation
 
 ## Contributing
 
