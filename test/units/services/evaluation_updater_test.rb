@@ -2,10 +2,9 @@ require "test_helper"
 
 class EvaluationUpdaterTest < ActiveSupport::TestCase
   setup do
-    @evaluation = Evaluation.new
+    @evaluation = Evaluation.new(user: users(:henry))
     @service = EvaluationUpdater.new(
       @evaluation,
-      users(:henry),
       title: "pants",
       description: "pants pants pants",
       due_date: 5.days.from_now,
@@ -30,8 +29,8 @@ class EvaluationUpdaterTest < ActiveSupport::TestCase
     assert_equal organizations(:ets), @evaluation.organization
   end
 
-  test "#call queues the fingerprinting job" do
-    assert_enqueued_with(job: DocumentFingerprintingJob, queue: "default") do
+  test "#call queues the sanitization job" do
+    assert_enqueued_with(job: DocumentSanitizationJob, queue: "default") do
       @service.call
     end
   end
