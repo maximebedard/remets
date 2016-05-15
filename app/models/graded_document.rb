@@ -1,5 +1,5 @@
 class GradedDocument < ActiveRecord::Base
-  include DirectUploadable
+  include HasFile
 
   belongs_to :grade
 end

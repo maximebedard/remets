@@ -1,5 +1,6 @@
 class BoilerplateDocument < ActiveRecord::Base
-  include DirectUploadable
+  include HasFile
+  include HasSanitizedFile
 
   belongs_to :evaluation
 end

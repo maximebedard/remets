@@ -1,5 +1,5 @@
 class ReferenceDocument < ActiveRecord::Base
-  include DirectUploadable
+  include HasFile
 
   belongs_to :evaluation
 end

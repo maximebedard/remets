@@ -1,4 +1,4 @@
-module DirectUploadable
+module HasFile
   extend ActiveSupport::Concern
 
   module ClassMethods
