@@ -60,7 +60,9 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#create" do
     post :create,
       evaluation_uuid: @evaluation.uuid,
-      submission: { documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }] }
+      submission: {
+        submitted_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      }
 
     assert_redirected_to assigns(:submission)
   end
@@ -70,7 +72,9 @@ class SubmissionsControllerTest < ActionController::TestCase
 
     post :create,
       evaluation_uuid: @evaluation.uuid,
-      submission: { documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }] }
+      submission: {
+        submitted_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      }
 
     assert_redirected_to_auth_new
   end

@@ -20,12 +20,9 @@ class Account::OrganizationsController < ApplicationController
     @organization = policy_scope(Organization.where(id: params[:id])).first!
     authorize(@organization)
 
-    MembershipsBuilder.new(
-      @organization,
-      params[:organization][:memberships],
-    ).call
+    OrganizationUpdater.new(@organization, organization_params).call
 
-    @organization.update(organization_params)
+    @organization.save
     respond_with(@organization, location: edit_account_organization_path(@organization))
   end
 
@@ -37,15 +34,10 @@ class Account::OrganizationsController < ApplicationController
   end
 
   def create
-    @organization = policy_scope(Organization).build(organization_params)
-    @organization.user = current_user
-
+    @organization = policy_scope(Organization.where(user: current_user)).build
     authorize(@organization)
 
-    MembershipsBuilder.new(
-      @organization,
-      params[:organization][:memberships],
-    ).call
+    OrganizationUpdater.new(@organization, organization_params).call
 
     respond_with(
       @organization,
@@ -64,6 +56,6 @@ class Account::OrganizationsController < ApplicationController
   private
 
   def organization_params
-    params.require(:organization).permit(:name, :memberships)
+    params.require(:organization).permit(:name, memberships: [])
   end
 end

@@ -1,14 +1,16 @@
 require "test_helper"
 
-class MembershipsBuilderTest < ActiveSupport::TestCase
+class ConnectionsBuilderTest < ActiveSupport::TestCase
   setup do
     @organization = organizations(:ets)
+    @provider = ConnectionsProviders::MembershipProvider.new
   end
 
   test "#call replaces the members" do
-    MembershipsBuilder.new(
+    ConnectionsBuilder.new(
       @organization,
       [users(:henry).email, users(:clement).email],
+      provider: @provider,
     ).call
 
     assert_equal 3, @organization.memberships.size
@@ -17,7 +19,11 @@ class MembershipsBuilderTest < ActiveSupport::TestCase
   end
 
   test "#call append the organization owner" do
-    MembershipsBuilder.new(@organization, []).call
+    ConnectionsBuilder.new(
+      @organization,
+      [],
+      provider: @provider,
+    ).call(include_owner: true)
 
     assert_equal 1, @organization.memberships.size
     assert_equal "rinfrette.gaston@gmail.com",

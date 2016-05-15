@@ -6,6 +6,9 @@ module HasSanitizedFile
       where.not(id: document.id)
         .where("array_length(fingerprints, 1) > 0")
     }
+
+    after_save :enqueue_sanitization_job
+    after_save :enqueue_fingerprinting_job
   end
 
   def fingerprinted?
@@ -28,8 +31,13 @@ module HasSanitizedFile
     "sanitized/#{file_ptr}"
   end
 
-  def create_sanitized_file
-    # return unless file_ptr_changed?
+  def enqueue_sanitization_job
+    return unless file_ptr_changed?
     DocumentSanitizationJob.perform_later(self)
+  end
+
+  def enqueue_fingerprinting_job
+    # something something
+    # DocumentFingerprintingJob.perform_later(self)
   end
 end

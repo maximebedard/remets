@@ -32,10 +32,10 @@ class Submission < ActiveRecord::Base
   end
 
   def compare_with(other)
-    document_matches.where(compared_document_id: other.documents.ids)
+    document_matches.where(compared_document_id: other.submitted_documents.ids)
   end
 
-  def fingerprintable_documents
-    documents
+  def sanitizable_documents
+    submitted_documents
   end
 end

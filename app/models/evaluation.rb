@@ -25,7 +25,7 @@ class Evaluation < ActiveRecord::Base
   accepts_nested_attributes_for :boilerplate_documents,
     :reference_documents
 
-  def fingerprintable_documents
+  def sanitizable_documents
     boilerplate_documents
   end
 

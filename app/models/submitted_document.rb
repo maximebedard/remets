@@ -10,8 +10,8 @@ class SubmittedDocument < ActiveRecord::Base
     document_matches.where(compared_document_id: other.id)
   end
 
-  def add_to_index
-    # return unless fingerprints_changed? || indexes_changed?
+  def enqueue_indexing_job
+    return unless fingerprints_changed? || indexes_changed?
     DocumentIndexingJob.perform_later(self)
   end
 end
