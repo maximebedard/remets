@@ -1,6 +1,8 @@
 class SubmittedDocumentsController < ApplicationController
   must_be_authenticated
 
+  respond_to :html, :json
+
   def show
     @submitted_document = policy_scope(SubmittedDocument.where(id: params[:id])).first!
     authorize(@submitted_document)
