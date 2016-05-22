@@ -34,6 +34,7 @@ module FingerprintingJobTests
 end
 
 class DocumentFingerprintingJobTest < ActiveSupport::TestCase
+  include Remets::MockRemoteFile
   include FingerprintingJobTests
 
   setup do
@@ -49,6 +50,7 @@ class DocumentFingerprintingJobTest < ActiveSupport::TestCase
 end
 
 class BoilerplateDocumentFingerprintingJobTest < ActiveSupport::TestCase
+  include Remets::MockRemoteFile
   include FingerprintingJobTests
 
   setup do

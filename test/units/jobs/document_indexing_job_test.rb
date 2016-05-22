@@ -1,6 +1,8 @@
 require "test_helper"
 
 class DocumentIndexingJobTest < ActiveSupport::TestCase
+  include Remets::MockRemoteFile
+
   self.use_transactional_fixtures = true
 
   test "#perform does nothing when no documents are fingerprinted" do
@@ -13,11 +15,11 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
     [SubmittedDocument, DocumentMatch, Match].each(&:destroy_all)
 
     reference = submissions(:log121_lab1_1).submitted_documents.create!(
-      file_ptr: submitted_documents(:empty).file_ptr,
+      file_ptr: @empty_file,
       windows: [[0, 1234], [1, 9876], [4, 5678]],
     )
     compared = submissions(:log121_lab1_2).submitted_documents.create!(
-      file_ptr: submitted_documents(:empty).file_ptr,
+      file_ptr: @empty_file,
       windows: [[0, 1234], [1, 3456], [4, 6666]],
     )
 
@@ -46,11 +48,11 @@ class DocumentIndexingJobTest < ActiveSupport::TestCase
     [SubmittedDocument, DocumentMatch, Match].each(&:destroy_all)
 
     reference = submissions(:log121_lab1_1).submitted_documents.create!(
-      file_ptr: submitted_documents(:empty).file_ptr,
+      file_ptr: @empty_file,
       windows: [[0, 1234], [1, 9876], [4, 5678]],
     )
     _compared = submissions(:log121_lab1_2).submitted_documents.create!(
-      file_ptr: submitted_documents(:empty).file_ptr,
+      file_ptr: @empty_file,
       windows: [[0, 4321], [1, 3456], [4, 6666]],
     )
 

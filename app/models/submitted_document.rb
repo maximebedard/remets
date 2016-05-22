@@ -6,6 +6,8 @@ class SubmittedDocument < ActiveRecord::Base
 
   has_many :document_matches, foreign_key: :reference_document_id
 
+  after_save :enqueue_indexing_job
+
   def compare_with(other)
     document_matches.where(compared_document_id: other.id)
   end

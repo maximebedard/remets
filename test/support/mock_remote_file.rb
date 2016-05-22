@@ -48,7 +48,7 @@ module Remets
     end
 
     def content(*args)
-      @content ||= File.read(key, *args)
+      @content ||= File.read(path, *args)
     end
 
     private

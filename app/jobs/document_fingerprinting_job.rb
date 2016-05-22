@@ -2,7 +2,9 @@ class DocumentFingerprintingJob < ActiveJob::Base
   queue_as :default
 
   def perform(document)
-    windows = Winnower.windows_from_content(document.sanitized_content).to_a
+    windows = Winnower.windows_from_content(
+      document.sanitized_file.content,
+    ).to_a
 
     return unless windows.present?
 
