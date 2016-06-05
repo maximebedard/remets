@@ -1,7 +1,7 @@
 require "test_helper"
 
 class SubmittedDocumentTest < ActiveSupport::TestCase
-  include Remets::MockRemoteFile
+  include Remets::MockAmazonS3
 
   setup do
     @submitted_document = submitted_documents(:platypus)
@@ -16,10 +16,6 @@ class SubmittedDocumentTest < ActiveSupport::TestCase
     assert @submitted_document.file.exists?
   end
 
-  test "#file is mocked" do
-    assert_instance_of Remets::MockedRemoteFile, @submitted_document.file
-  end
-
   test "#sanitized_file" do
     assert_equal "sanitized/submitted_documents/platypus1.txt",
       @submitted_document.sanitized_file.key
@@ -27,10 +23,6 @@ class SubmittedDocumentTest < ActiveSupport::TestCase
 
   test "#sanitized_file exists" do
     assert @submitted_document.sanitized_file.exists?
-  end
-
-  test "#sanitized_file is mocked" do
-    assert_instance_of Remets::MockedRemoteFile, @submitted_document.sanitized_file
   end
 
   test "#fingerprinted? when fingerprinted_at is not present" do

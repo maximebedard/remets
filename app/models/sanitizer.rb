@@ -3,18 +3,18 @@ class Sanitizer
     attr_accessor :supported_extensions
     attr_reader :available_sanitizers
 
-    def can_be_sanitized?(ext)
-      available_sanitizers.flat_map(&:supported_extensions).include?(ext)
+    def can_be_sanitized?(file)
+      available_sanitizers.flat_map(&:supported_extensions).include?(file.extension)
     end
 
-    def for_extension(ext)
+    def for_extension(extension)
       available_sanitizers.detect do |sanitizer|
-        sanitizer.supported_extensions.include?(ext)
+        sanitizer.supported_extensions.include?(extension)
       end
     end
 
-    def for_document(document)
-      for_extension(document.extension)
+    def build_for(file, **options)
+      for_extension(file.extension).new(file.content, **options)
     end
   end
 

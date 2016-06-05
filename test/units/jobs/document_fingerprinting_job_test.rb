@@ -34,8 +34,8 @@ module FingerprintingJobTests
 end
 
 class DocumentFingerprintingJobTest < ActiveSupport::TestCase
-  include Remets::MockRemoteFile
   include FingerprintingJobTests
+  include Remets::MockAmazonS3
 
   setup do
     @document = submitted_documents(:platypus)
@@ -50,8 +50,8 @@ class DocumentFingerprintingJobTest < ActiveSupport::TestCase
 end
 
 class BoilerplateDocumentFingerprintingJobTest < ActiveSupport::TestCase
-  include Remets::MockRemoteFile
   include FingerprintingJobTests
+  include Remets::MockAmazonS3
 
   setup do
     @document = boilerplate_documents(:platypus_boilerplate)

@@ -7,6 +7,7 @@ log121_lab1_2:
   user: marcel
 
 log240_lab1_1:
+  invalid_fixture: true
   evaluation: log240_lab1
   user: henry
 

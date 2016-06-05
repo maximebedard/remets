@@ -10,7 +10,7 @@ class RemoteFile
   end
 
   def extension
-    File.extname(key)
+    File.extname(key)[1..-1]
   end
 
   delegate :exists?, to: :s3_object
@@ -18,7 +18,7 @@ class RemoteFile
   def content(*args)
     s3_object.get.body.read(*args)
   rescue Aws::S3::Errors::NotFound
-    nil
+    nil # should probably raise something else here.
   end
 
   private

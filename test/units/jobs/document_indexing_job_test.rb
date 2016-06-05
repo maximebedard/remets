@@ -1,8 +1,7 @@
 require "test_helper"
 
 class DocumentIndexingJobTest < ActiveSupport::TestCase
-  include Remets::MockRemoteFile
-
+  include Remets::MockAmazonS3
   self.use_transactional_fixtures = true
 
   test "#perform does nothing when no documents are fingerprinted" do

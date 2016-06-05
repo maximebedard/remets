@@ -3,5 +3,6 @@ ets:
   user: gaston
 
 ulaval:
+  invalid_fixture: true
   name: "Université Laval"
   user: henry

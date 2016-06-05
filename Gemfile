@@ -23,6 +23,7 @@ gem "font-awesome-sass"
 
 group :development, :test do
   gem "rubocop", require: false
+  gem "ruby-prof", require: false
 end
 
 group :development do

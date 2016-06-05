@@ -1,14 +1,20 @@
 bragging:
   submission: log121_lab1_1
   file_ptr: "submitted_documents/text_document1.txt"
+  indexes: [0, 4, 8, 10, 15, 19, 22, 23, 29, 35, 39, 45, 46, 47, 49, 54, 56]
+  fingerprints: [17229, 15700, 1876, 15195, 7380, 434, 78, 8648, 5530, 24965, 20511, 41463, 24499, 10784, 3272, 7421, 1906]
 
 fraudulent_bragging:
   submission: log121_lab1_2
   file_ptr: "submitted_documents/text_document2.txt"
+  indexes: [0, 4, 8, 10, 13, 16, 19, 21, 22, 26, 30, 34, 38, 43, 44, 48]
+  fingerprints: [17229, 15700, 1876, 15195, 49182, 46256, 19441, 16691, 6793, 11427, 14718, 5956, 7890, 24499, 10784, 5074]
 
 empty:
   submission: log121_lab1_1
   file_ptr: "submitted_documents/empty.txt"
+  indexes: []
+  fingerprints: []
 
 platypus:
   submission: log121_lab1_1
@@ -25,34 +31,50 @@ fraudulent_platypus:
 platypus_image:
   submission: log121_lab1_1
   file_ptr: "submitted_documents/platypus.jpg"
+  indexes: []
+  fingerprints: []
 
 platypus_with_no_extension:
   submission: log121_lab1_1
   file_ptr: "submitted_documents/platypus"
+  indexes: []
+  fingerprints: []
 
 recursive_fibonacci:
   submission: log550_lab1_1
   file_ptr: "submitted_documents/recursive/main.c"
+  indexes: []
+  fingerprints: []
 
 recursive_fibonacci_readme:
   submission: log550_lab1_1
   file_ptr: "submitted_documents/recursive/README.txt"
+  indexes: [1, 3, 8, 11, 12, 14, 15, 20, 24, 26, 31, 33, 37, 39, 40, 41, 43, 48]
+  fingerprints: [7923, 8015, 28165, 15330, 13155, 828, 17294, 3206, 16878, 23186, 14042, 15115, 31385, 20005, 4884, 13537, 29883, 2443]
 
 iterative_fibonacci:
   submission: log550_lab1_2
   file_ptr: "submitted_documents/iterative/main.c"
+  indexes: []
+  fingerprints: []
 
 iterative_fibonacci_readme:
   submission: log550_lab1_2
   file_ptr: "submitted_documents/iterative/README.txt"
+  indexes: [1, 5, 6, 12, 16, 20, 24, 26, 31, 33, 37, 39, 40, 41, 43, 48]
+  fingerprints: [7923, 15563, 24619, 22998, 20156, 3206, 16878, 23186, 14042, 15115, 31385, 20005, 4884, 13537, 29883, 2443]
 
 ternary_fibonacci:
   submission: log550_lab1_3
   file_ptr: "submitted_documents/ternary/main.c"
+  indexes: []
+  fingerprints: []
 
 ternary_fibonacci_readme:
   submission: log550_lab1_3
   file_ptr: "submitted_documents/ternary/README.txt"
+  indexes: [1, 5, 10, 13, 14, 18, 22, 24, 29, 31, 35, 37, 38, 39, 41, 46]
+  fingerprints: [7923, 29508, 19035, 17716, 8251, 3206, 16878, 23186, 14042, 15115, 31385, 20005, 4884, 13537, 29883, 2443]
 
 litterature:
   submission: log550_lab1_2
