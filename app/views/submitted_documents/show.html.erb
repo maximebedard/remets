@@ -11,13 +11,13 @@
       <% if @submitted_document.document_matches.size > 0  %>
         <%= render @submitted_document.document_matches %>
       <% else %>
-        <div class="remets-panel remets-panel--default">
-          <div class="remets-panel__heading monospaced">
-            <h3 class="remets-panel__title">
+        <div class="rs-panel rs-panel--default">
+          <div class="rs-panel__heading monospaced">
+            <h3 class="rs-panel__title">
               No matches found
             </h3>
           </div>
-          <div class="remets-panel__item">
+          <div class="rs-panel__item">
             <p>No matches have been found with the selected file.</p>
           </div>
         </div>

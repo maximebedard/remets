@@ -1,12 +1,12 @@
 <% Authorization.available_providers.each do |provider| %>
-  <div class="remets-panel__item">
-    <div class="remets-panel__item__title">
+  <div class="rs-panel__item">
+    <div class="rs-panel__item__title">
       <i class="fa fa-<%= provider %>"></i>&nbsp;<%= provider.capitalize %>
     </div>
-    <div class="remets-panel__item__description">
+    <div class="rs-panel__item__description">
 
     </div>
-    <div class="remets-panel__item__actions">
+    <div class="rs-panel__item__actions">
       <%= link_to auth_authorize_path(provider), class: "btn btn-success" do %>
         <i class="fa fa-sign-in"></i> Authorize
       <% end %>

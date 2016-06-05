@@ -1,12 +1,12 @@
-<div class="remets-panel remets-panel--red">
-  <div class="remets-panel__heading monospaced">
-    <h3 class="remets-panel__title">
+<div class="rs-panel rs-panel--red">
+  <div class="rs-panel__heading monospaced">
+    <h3 class="rs-panel__title">
       <%= formatted_title(document_match.reference_document) %> →
       <%= formatted_title(document_match.compared_document) %>
     </h3>
     <small>~<%= number_to_percentage(document_match.similarity * 100) %></small>
   </div>
-  <div class="remets-panel__item">
+  <div class="rs-panel__item">
     <div class="compare-wrapper">
       <%= formatted_diff(document_match) %>
     </div>

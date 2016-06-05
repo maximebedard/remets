@@ -11,7 +11,7 @@
 }
 
 .light-text {
-  color: lighten($remets-primary-text, 50%);
+  color: lighten($rs-primary-text, 50%);
 }
 
 .full-width {
@@ -31,7 +31,7 @@
 }
 
 .monospaced {
-  font-family: $remets-code-font-family;
+  font-family: $rs-code-font-family;
 }
 
 .highlight {

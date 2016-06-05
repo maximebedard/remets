@@ -1,0 +1,22 @@
+$rs-navbar-color:                 $rs-primary-text-light !default;
+$rs-navbar-bg:                    $rs-primary !default;
+$rs-navbar-border:                transparent !default;
+
+$rs-navbar-link-color:            lighten($rs-primary-text-light, 15%) !default;
+$rs-navbar-link-hover-color:      #fff !default;
+$rs-navbar-link-hover-bg:         darken($rs-navbar-bg, 10%) !default;
+$rs-navbar-link-active-color:     $rs-navbar-link-hover-color !default;
+$rs-navbar-link-active-bg:        darken($rs-navbar-bg, 10%) !default;
+$rs-navbar-link-disabled-color:   #444 !default;
+$rs-navbar-link-disabled-bg:      transparent !default;
+
+$rs-navbar-brand-color:           $rs-navbar-link-color !default;
+$rs-navbar-brand-hover-color:     #fff !default;
+$rs-navbar-brand-hover-bg:        transparent !default;
+
+$rs-navbar-toggle-hover-bg:       #333 !default;
+$rs-navbar-toggle-icon-bar-bg:    #fff !default;
+$rs-navbar-toggle-border-color:   #333 !default;
+
+$rs-navbar-active-underline-size: -3px; //Negative values since we are using insets
+$rs-navbar-active-underline-color: darken($rs-navbar-link-hover-bg, 10%);
