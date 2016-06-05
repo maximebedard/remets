@@ -53,8 +53,9 @@ class SanitizerTest < ActiveSupport::TestCase
   end
 
   test "#for_document returns the appropriate Sanitizer for the document" do
-    document = mock(extension: "html")
-    assert_equal Sanitizers::HtmlSanitizer,
-      Sanitizer.for_document(document)
+    document = mock(extension: "html", content: "yolo")
+    sanitizer = Sanitizer.build_for(document)
+
+    assert_instance_of Sanitizers::HtmlSanitizer, sanitizer
   end
 end
