@@ -1,7 +1,7 @@
-<div class="rs-panel--item">
-  <div class="rs-panel--item--title">
+<div class="rs-panel-item">
+  <div class="rs-panel-item-title">
   </div>
-  <div class="rs-panel--item--description">
+  <div class="rs-panel-item-description">
     <p class="light-text">
       <%= l authorization.created_at %>
     </p>
@@ -10,7 +10,7 @@
       <%= authorization.email %>
     </p>
   </div>
-  <div class="rs-panel--item--actions">
+  <div class="rs-panel-item-actions">
     <%= link_to auth_authorize_path(authorization.provider), class: "btn btn-danger btn-sm" do %>
       <i class="fa fa-times"></i> Revoke
     <% end %>

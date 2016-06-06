@@ -1,5 +1,5 @@
-<div class="rs-panel--item">
-  <div class="rs-panel--item--title">
+<div class="rs-panel-item">
+  <div class="rs-panel-item-title">
     <h1><%= evaluation.title %></h1>
     <% if evaluation.organization %>
       <h2><%= evaluation.organization.name %></h2>
@@ -8,7 +8,7 @@
       Subscribers : <%= evaluation.subscriptions.size %> <i class="fa fa-user" aria-hidden="true"></i>
     </div>
   </div>
-  <div class="rs-panel--item--description">
+  <div class="rs-panel-item-description">
     <p class="light-text">
       Due date : <%= l evaluation.due_date %>
     </p>
@@ -16,7 +16,7 @@
       <%= evaluation.description %>
     </p>
   </div>
-  <div class="rs-panel--item--actions">
+  <div class="rs-panel-item-actions">
     <%= link_to evaluation_path(uuid: evaluation.uuid), class: "btn btn-default btn-sm" do %>
       <i class="fa fa-eye"></i> View
     <% end %>

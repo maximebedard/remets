@@ -1,18 +1,18 @@
 <div class="col-lg-3">
   <div class="rs-panel rs-panel--orange">
-    <div class="rs-panel--heading">
-      <h3 class="rs-panel--title">Settings</h3>
+    <div class="rs-panel-heading">
+      <h3>Settings</h3>
     </div>
-    <div class="rs-panel--item <%= active_for("accounts") %>">
+    <div class="rs-panel-item <%= active_for("accounts") %>">
       <%= link_to "Profile", edit_account_profile_path %>
     </div>
-    <div class="rs-panel--item <%= active_for("security") %>">
+    <div class="rs-panel-item <%= active_for("security") %>">
       <%= link_to "Security", edit_account_security_path %>
     </div>
-    <div class="rs-panel--item <%= active_for("security") %>">
+    <div class="rs-panel-item <%= active_for("security") %>">
       <%= link_to "Integrations", account_integrations_path %>
     </div>
-    <div class="rs-panel--item <%= active_for("organizations") %>">
+    <div class="rs-panel-item <%= active_for("organizations") %>">
       <%= link_to "Organizations", account_organizations_path %>
     </div>
   </div>

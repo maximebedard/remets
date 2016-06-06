@@ -1,3 +1,9 @@
-.btn-transparent {
-  @include button-variant($btn-danger-color, transparent, #FFF);
+@mixin inverting-button-variant($color, $background) {
+  @include button-variant($color, $background, $color);
+
+  &:hover {
+    color: $background;
+    background-color: $color;
+    border-color: $background;
+  }
 }

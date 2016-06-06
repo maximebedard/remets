@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-lg-offset-2 col-lg-8">
       <div class="rs-panel rs-panel--default">
-        <div class="rs-panel--heading">
-          <h3 class="rs-panel--title"><%= @evaluation.title %></h3>
+        <div class="rs-panel-heading">
+          <h3><%= @evaluation.title %></h3>
           <%= link_to(edit_evaluation_path(uuid: @evaluation.uuid), class: "btn btn-transparent btn-sm") do %>
             <i class="fa fa-pencil"></i> Edit
           <% end %>
         </div>
-        <div class="rs-panel--item">
+        <div class="rs-panel-item">
           <%= render partial: "evaluation_detail", object: @evaluation %>
         </div>
       </div>
@@ -18,10 +18,10 @@
     <div class="row">
        <div class="col-lg-offset-2 col-lg-8">
         <div class="rs-panel rs-panel--blue">
-          <div class="rs-panel--heading">
-            <h3 class="rs-panel--title">Students Participating</h3>
+          <div class="rs-panel-heading">
+            <h3>Students Participating</h3>
           </div>
-          <div class="rs-panel--item">
+          <div class="rs-panel-item">
             <% if @evaluation.subscriptions.any? %>
               <%= render partial: "subscriptions_detail", object: @evaluation %>
             <% else %>

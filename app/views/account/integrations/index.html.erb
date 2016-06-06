@@ -2,19 +2,19 @@
   <div class="row">
     <div class="col-lg-9">
       <div class="rs-panel rs-panel--default">
-        <div class="rs-panel--heading">
-          <h3 class="rs-panel--title">Integrations</h3>
+        <div class="rs-panel-heading">
+          <h3>Integrations</h3>
           <%= link_to(new_account_integration_path, class: "btn btn-transparent btn-sm") do %>
             <i class="fa fa-plus"></i> New integration
           <% end %>
         </div>
         <% if current_user.authorizations.empty? %>
-          <div class="rs-panel--item">
+          <div class="rs-panel-item">
             No other services are linked to this account.
           </div>
         <% end %>
         <% current_user.authorizations.group_by(&:provider).each do |provider, authorizations| %>
-          <div class="rs-panel--item--group">
+          <div class="rs-panel-item-group">
             <i class="fa fa-<%= provider %>"></i>&nbsp;<%= provider.capitalize %>
           </div>
           <%= render partial: "authorization", collection: authorizations  %>

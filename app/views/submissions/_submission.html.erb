@@ -1,5 +1,5 @@
-<div class="rs-panel--item">
-  <div class="rs-panel--item--content">
+<div class="rs-panel-item">
+  <div class="rs-panel-item-content">
     <% if submission.user.id != current_user.id %>
     <div>
       <h4>Submitted by: <%= submission.user.name %></h4>
@@ -13,7 +13,7 @@
       </ul>
     </div>
   </div>
-    <div class="rs-panel--item--actions">
+    <div class="rs-panel-item-actions">
       <%= link_to submission_path(submission), class: "btn btn-primary btn-sm" do %>
         <i class="fa fa-eye"></i> View
       <% end %>
