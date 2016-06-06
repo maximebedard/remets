@@ -4,7 +4,7 @@
   margin: 10px 0;
 }
 
-.rs-panel__heading {
+.rs-panel--heading {
   border: none;
   padding: 10px 14px;
   @include flex();
@@ -12,26 +12,26 @@
   align-items: center;
 }
 
-.rs-panel__title {
+.rs-panel--title {
   margin: 0;
   padding: 7px 0px 7px 0px;
 }
 
-.rs-panel__title--underline {
+.rs-panel--title--underline {
   text-decoration: underline;
 }
-.rs-panel__item.rs-panel__item--no-border {
+.rs-panel--item.rs-panel--item--no-border {
   border: none;
 }
-.rs-panel__item.rs-panel__item--bg-blue {
+.rs-panel--item.rs-panel--item--bg-blue {
   background-color: #337ab7;
   color: white;
 }
-.rs-panel__item.rs-panel__item--bg-orange {
+.rs-panel--item.rs-panel--item--bg-orange {
   background-color: #EF6C00;
   color: white;
 }
-.rs-panel__item {
+.rs-panel--item {
   border-bottom: 1px solid #E8E8E8;
   border-top: 0;
   padding: 16px 14px;
@@ -55,14 +55,14 @@
     }
   }
 }
-.rs-panel__item--columns {
+.rs-panel--item--columns {
   flex-direction: column;
   @media (min-width: 992px) {
     flex-direction: column;
   }
 }
 
-.rs-panel__item--group {
+.rs-panel--item--group {
   border: 1px solid #E8E8E8;
   border-top: 0;
   padding: 16px 14px;
@@ -74,7 +74,7 @@
   }
 }
 
-.rs-panel__item__2-col-info {
+.rs-panel--item--2-col-info {
   text-align: center;
   width: 100%;
 
@@ -82,7 +82,7 @@
     margin: 5px 0;
   }
 }
-.rs-panel__item__title {
+.rs-panel--item--title {
   width: 100%;
   @media (min-width: 992px) {
     width: 25%;
@@ -100,30 +100,30 @@
     padding: 7px 0 ;
   }
 }
-.rs-panel__item__description {
+.rs-panel--item--description {
   width: 100%;
   @media (min-width: 992px) {
     width: 50%;
   }
 }
 
-.rs-panel__item__long-description {
+.rs-panel--item--long-description {
   width: 100%;
   @media (min-width: 992px) {
     width: 75%;
   }
 }
-.rs-panel__item__content {
+.rs-panel--item--content {
   width: 100%;
   @media (min-width: 992px) {
     width: 75%;
   }
 }
-.rs-panel__hidden {
+.rs-panel--hidden {
   display: none;
 }
 
-.rs-panel__item__actions {
+.rs-panel--item--actions {
   width: 100%;
   justify-content: center;
   @media (min-width: 992px) {
@@ -139,21 +139,21 @@
 
 
 .rs-panel.rs-panel--default {
-  .rs-panel__heading {
+  .rs-panel--heading {
     color: #FFF;
     background-color: #64BFA6;
   }
 }
 
 .rs-panel.rs-panel--blue {
-  .rs-panel__heading {
+  .rs-panel--heading {
     color: #FFF;
     background-color: #337ab7;
   }
 }
 
 .rs-panel.rs-panel--orange {
-  .rs-panel__heading {
+  .rs-panel--heading {
     color: #FFF;
     background-color: #EF6C00;
   }
@@ -161,7 +161,7 @@
 
 
 .rs-panel.rs-panel--red {
-  .rs-panel__heading {
+  .rs-panel--heading {
     color: #FFF;
     background-color: #e74c3c;
     a {

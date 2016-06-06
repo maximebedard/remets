@@ -2,32 +2,35 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   margin-bottom: 160px;
 }
+
 .footer {
   position: absolute;
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 0px;
-  color: #FFF;
+  color: rgba($rs-primary-text-light, 0.8);
+  font-weight: 300;
   bottom: 0;
   width: 100%;
   height: 160px;
   background-color: $rs-darkgrey;
+
   .container {
     background-color: $rs-darkgrey;
   }
-  a, a:focus {
-    color: #FFF;
+  h6 {
+    color: $rs-primary-text-light;
+    font-weight: 600;
+  }
+  a, a:focus, a:link {
+    color: rgba($rs-primary-text-light, 0.8);
+    font-weight: 300;
+  }
+  a:hover {
+    color: $rs-secondary;
+    text-decoration: none;
   }
 }
-
-a.footer__link {
-  display: flex;
-  display: -webkit-flex;
-  img {
-    height: 20px;
-    margin-right: 10px;
-  }
-}
-

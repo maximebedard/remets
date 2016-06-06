@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-lg-9">
       <div class="rs-panel rs-panel--default">
-        <div class="rs-panel__heading">
-          <h3 class="rs-panel__title">Organizations</h3>
+        <div class="rs-panel--heading">
+          <h3 class="rs-panel--title">Organizations</h3>
           <%= link_to(new_account_organization_path, class: "btn btn-transparent btn-sm") do %>
             <i class="fa fa-plus"></i> New organization
           <% end %>
         </div>
         <% if @organizations.empty? %>
-          <div class="rs-panel__item">
+          <div class="rs-panel--item">
             No organizations available! <br> Go ahead, create one!
           </div>
         <% end %>

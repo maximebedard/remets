@@ -2,13 +2,13 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="rs-panel rs-panel--default">
-        <div class="rs-panel__heading">
-          <h3 class="rs-panel__title">Upcoming evaluations</h3>
+        <div class="rs-panel--heading">
+          <h3 class="rs-panel--title">Upcoming evaluations</h3>
         </div>
         <% if @collection.any? %>
           <%= render partial: "evaluation", collection: @collection %>
         <% else %>
-          <div class="rs-panel__item">
+          <div class="rs-panel--item">
             <p>No upcoming evaluations, tasks, projects or stress! You're all clear! </p>
           </div>
         <% end %>

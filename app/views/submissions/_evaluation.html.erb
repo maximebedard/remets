@@ -1,11 +1,11 @@
-<div class="rs-panel__item rs-panel__item--no-border">
-  <div class="rs-panel__item__2-col-info">
+<div class="rs-panel--item rs-panel--item--no-border">
+  <div class="rs-panel--item--2-col-info">
     <div>
       <h5>Deadline in about:<h5>
       <h1><%=  distance_of_time_in_words(evaluation.due_date, Time.zone.now) %></h1>
     </div>
   </div>
-  <div class="rs-panel__item__2-col-info">
+  <div class="rs-panel--item--2-col-info">
     <div>
       <h5>Evaluated by :<h5>
       <h1><%= evaluation.user.name %></h1>
@@ -15,11 +15,11 @@
     <% end %>
   </div>
 </div>
-<div class="rs-panel__item">
-  <div class="rs-panel__item__long-description">
+<div class="rs-panel--item">
+  <div class="rs-panel--item--long-description">
     Description : <%= evaluation.description%>
   </div>
-  <div class="rs-panel__item__actions">
+  <div class="rs-panel--item--actions">
     <%= link_to(evaluation_path(uuid: evaluation.uuid),
         class: "btn btn-default btn-sm") do %>
         <i class="fa fa-newspaper-o"></i> Details

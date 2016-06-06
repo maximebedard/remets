@@ -1,6 +1,6 @@
 <div class="rs-panel rs-panel--default">
-  <div class="rs-panel__heading">
-    <h3 class="rs-panel__title"><%= title %></h3>
+  <div class="rs-panel--heading">
+    <h3 class="rs-panel--title"><%= title %></h3>
     <div>
       <% if local_assigns[:hide_menu].blank? %>
         <%= link_to(evaluation_path(uuid: submission.evaluation.uuid),

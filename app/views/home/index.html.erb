@@ -16,14 +16,14 @@
     <div class="col-lg-6">
       <div class="showcase-signup-zone">
         <%= render partial: "form" %>
-        <div class="stroked"><span class="stroked__text">or</span></div>
+        <div class="stroked"><span class="stroked--text">or</span></div>
         <%= link_to 'Sign-up with Google!', auth_authorize_path(:google),
           class: "btn btn-large btn-primary form-control" %>
       </div>
     </div>
   </section>
   <!-- Featurettes! -->
-  <div class="stroked stroked__section"><span class="stroked__text"><h2>Features</h2></span></div>
+  <div class="stroked stroked--section"><span class="stroked--text"><h2>Features</h2></span></div>
   <section class="row flex-horizontal-center">
     <div class="col-lg-6">
       <h1>Document matching and Plagiarism Detection</h1>
@@ -32,7 +32,7 @@
         </p>
     </div>
     <div class="col-lg-6">
-      <%= image_tag("search-compressor.png", class: "img-responsive img-rectangle showcase-image__small",
+      <%= image_tag("search-compressor.png", class: "img-responsive img-rectangle showcase-image--small",
         style: "margin:0 auto;", alt: "search glass") %>
     </div>
   </section>
@@ -44,7 +44,7 @@
         </p>
     </div>
     <div class="col-lg-6 col-lg-pull-6">
-      <%= image_tag("changing-hands-compressor.png", class: "img-responsive img-rectangle showcase-image__small",
+      <%= image_tag("changing-hands-compressor.png", class: "img-responsive img-rectangle showcase-image--small",
         style: "margin:0 auto;", alt: "two hands") %>
     </div>
   </section>
@@ -56,7 +56,7 @@
         </p>
     </div>
     <div class="col-lg-6">
-      <%= image_tag("storage-compressor.png", class: "img-responsive img-rectangle showcase-image__small",
+      <%= image_tag("storage-compressor.png", class: "img-responsive img-rectangle showcase-image--small",
         style: "margin:0 auto;", alt: "box") %>
     </div>
   </section>

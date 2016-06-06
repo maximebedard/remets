@@ -1,11 +1,11 @@
-<div class="rs-panel__item">
-  <div class="rs-panel__item__title">
+<div class="rs-panel--item">
+  <div class="rs-panel--item--title">
     <%= submission.user.name %>
   </div>
-  <div class="rs-panel__item__description">
+  <div class="rs-panel--item--description">
     <small><%= l submission.created_at %></small>
   </div>
-  <div class="rs-panel__item__actions">
+  <div class="rs-panel--item--actions">
     <!-- TODO: Display warning when similar submission found -->
     <%= link_to submission_path(id: submission.id), class: "btn btn-default btn-sm" do %>
       <i class="fa fa-eye"></i> View

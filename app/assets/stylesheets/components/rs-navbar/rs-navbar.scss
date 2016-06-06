@@ -10,6 +10,8 @@
 
   .navbar-brand {
     color: $rs-navbar-brand-color;
+    font-family: $headings-font-family;
+    font-weight: 700;
     &:hover,
     &:focus {
       color: $rs-navbar-brand-hover-color;
@@ -24,7 +26,7 @@
   .navbar-nav {
     > li > a {
       color: $rs-navbar-link-color;
-
+      font-weight: 300;
       &:hover,
       &:focus {
         color: $rs-navbar-link-hover-color;
