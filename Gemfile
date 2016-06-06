@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby "2.3.0"
 
-gem "rails", "4.2.5.2"
+gem "rails"
 gem "pg"
 gem "puma"
 gem "sinatra", require: false
@@ -13,7 +13,7 @@ gem "omniauth-google-oauth2"
 gem "aws-sdk"
 gem "pundit"
 gem "sass-rails"
-gem "bootstrap-sass", "~> 3.3.6"
+gem "bootstrap-sass"
 gem "uglifier"
 gem "jquery-rails"
 gem "turbolinks"
