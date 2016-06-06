@@ -1,28 +1,27 @@
 <div class="container">
   <div class="row">
-     <% if @submissions.empty? %>
-    <div class="col-lg-9">
-      <div class="rs-panel rs-panel--default">
-        <div class="rs-panel--heading">
-          <h3 class="rs-panel--title">Submissions</h3>
-        </div>
+    <% if @submissions.empty? %>
+      <div class="col-lg-12">
+        <div class="rs-panel rs-panel--default">
+          <div class="rs-panel--heading">
+            <h3 class="rs-panel--title">Submissions</h3>
+          </div>
           <div class="rs-panel--item">
             No Submissions found!
           </div>
+        </div>
       </div>
-    </div>
     <% end %>
     <% @submissions.group_by(&:evaluation).each do |evaluation, submissions| %>
-       <div class="col-lg-9">
-          <div id="evaluation-<%= evaluation.id %>" class="rs-panel rs-panel--default">
-            <div class="rs-panel--heading">
-              <h3 class="rs-panel--title"><%= evaluation.title %> - <%= l evaluation.due_date %></h3>
-            </div>
-              <%= render partial: "evaluation", object: evaluation %>
-              <%= render submissions.reverse %>
+      <div class="col-lg-12">
+        <div id="evaluation-<%= evaluation.id %>" class="rs-panel rs-panel--default">
+          <div class="rs-panel--heading">
+            <h3 class="rs-panel--title"><%= evaluation.title %> - <%= l evaluation.due_date %></h3>
           </div>
+          <%= render partial: "evaluation", object: evaluation %>
+          <%= render submissions.reverse %>
         </div>
+      </div>
     <% end %>
-    <%= render partial: "shared/filters" %>
   </div>
 </div>

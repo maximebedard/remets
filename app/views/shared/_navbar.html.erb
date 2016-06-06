@@ -7,10 +7,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <% logo_path = root_path %>
-      <% logo_path = account_profile_path if signed_in? %>
+      <% brand_path = root_path %>
+      <% brand_path = account_profile_path if signed_in? %>
 
-      <%= link_to(account_profile_path, class: "navbar-brand") do %>
+      <%= link_to(brand_path, class: "navbar-brand") do %>
         <i class="fa fa-paper-plane" aria-hidden="true"></i> Remets
       <% end %>
     </div>
