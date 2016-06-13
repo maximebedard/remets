@@ -16,9 +16,6 @@ module Remets
 
   class Application < Rails::Application
     config.active_job.queue_adapter = :sidekiq
-    config.autoload_paths += %W(
-      #{config.root}/app/uploaders/concerns
-    )
     config.responders.flash_keys = %i(success danger)
   end
 end

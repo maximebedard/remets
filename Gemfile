@@ -1,7 +1,10 @@
 source "https://rubygems.org"
 ruby "2.3.0"
 
-gem "rails"
+gem "rails", "~> 4.2.6"
+gem "sprockets", "~> 4.0.0.beta2"
+gem "sass-rails", "~> 6.0.0.beta1"
+gem "turbolinks"
 gem "pg"
 gem "puma"
 gem "sinatra", require: false
@@ -12,13 +15,10 @@ gem "jbuilder"
 gem "omniauth-google-oauth2"
 gem "aws-sdk"
 gem "pundit"
-gem "sass-rails"
 gem "bootstrap-sass"
 gem "uglifier"
 gem "jquery-rails"
-gem "turbolinks"
-gem "sprockets", ">=3.4.0"
-gem "sprockets-es6", require: "sprockets/es6"
+gem "babel-transpiler"
 gem "font-awesome-sass"
 
 group :development, :test do
