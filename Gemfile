@@ -10,6 +10,7 @@ gem "puma"
 gem "sinatra", require: false
 gem "sidekiq"
 gem "bcrypt"
+gem "redis-objects"
 gem "responders"
 gem "jbuilder"
 gem "omniauth-google-oauth2"

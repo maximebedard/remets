@@ -1,4 +1,6 @@
 class AcquaintanceFindingJob < ActiveJob::Base
+  include UniqueJob
+
   queue_as :default
 
   def perform(user)

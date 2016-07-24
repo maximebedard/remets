@@ -1,4 +1,6 @@
 class RemoteFile
+  NotFoundError = Class.new(StandardError)
+
   attr_reader :key
 
   def initialize(key)
@@ -13,12 +15,21 @@ class RemoteFile
     File.extname(key)[1..-1]
   end
 
-  delegate :exists?, to: :s3_object
+  delegate(
+    :exists?,
+    to: :s3_object,
+  )
 
-  def content(*args)
+  def read_content(*args)
+    read_content!(*args)
+  rescue NotFoundError
+    nil
+  end
+
+  def read_content!(*args)
     s3_object.get.body.read(*args)
   rescue Aws::S3::Errors::NotFound
-    nil # should probably raise something else here.
+    raise NotFoundError
   end
 
   private

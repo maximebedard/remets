@@ -13,7 +13,8 @@ class SubmittedDocument < ActiveRecord::Base
   end
 
   def enqueue_indexing_job
-    return unless fingerprints_changed? || indexes_changed?
-    DocumentIndexingJob.perform_later(self)
+    # remove this callback bullshit
+    # return unless fingerprints_changed? || indexes_changed?
+    # DocumentIndexingJob.perform_later(self)
   end
 end
