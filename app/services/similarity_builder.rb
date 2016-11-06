@@ -1,8 +1,10 @@
 class SimilarityBuilder
   attr_reader :document_match
 
-  def initialize(document_match)
-    @document_match = document_match
+  def initialize(reference, compared, provider: ComparaisonResultProviders::FingerprintedDocumentProvider.new)
+    @reference = reference
+    @compared = compared
+    @provider = provider
   end
 
   # If a1 in document 1 matches a2 in document 2, and b1
@@ -13,8 +15,7 @@ class SimilarityBuilder
   # is easy to implement, k-grams are naturally coarse and some of the
   # match is usually lost at the beginning and the end of the match.
   def call
-
-
+    comparaison_result = @provider.call(@reference, @compared)
   end
 
   def build_similarities

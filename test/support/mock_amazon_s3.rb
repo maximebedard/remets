@@ -3,7 +3,7 @@ require "sinatra/base"
 module Remets
   module MockAmazonS3
     def before_setup
-      stub_request(:any, /#{Bucket.url}/).to_rack(MockApp)
+      stub_request(:any, /#{Remets.aws_bucket.url}/).to_rack(MockApp)
       super
     end
 

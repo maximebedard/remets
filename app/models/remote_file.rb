@@ -8,7 +8,7 @@ class RemoteFile
   end
 
   def url
-    s3_object.public_url
+    remote_object.public_url
   end
 
   def extension
@@ -17,7 +17,7 @@ class RemoteFile
 
   delegate(
     :exists?,
-    to: :s3_object,
+    to: :remote_object,
   )
 
   def read_content(*args)
@@ -27,14 +27,14 @@ class RemoteFile
   end
 
   def read_content!(*args)
-    s3_object.get.body.read(*args)
+    remote_object.get.body.read(*args)
   rescue Aws::S3::Errors::NotFound
     raise NotFoundError
   end
 
   private
 
-  def s3_object
-    @s3_object ||= Bucket.object(key)
+  def remote_object
+    @remote_object ||= Remets.aws_bucket.object(key)
   end
 end

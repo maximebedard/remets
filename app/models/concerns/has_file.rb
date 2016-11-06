@@ -7,7 +7,7 @@ module HasFile
     end
 
     def presigned_post(success_action_status: "201", acl: "public-read", **options)
-      @presigned_post ||= Bucket.presigned_post(
+      @presigned_post ||= Remets.aws_bucket.presigned_post(
         key: store_key,
         success_action_status: success_action_status,
         acl: acl,

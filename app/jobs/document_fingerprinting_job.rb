@@ -3,11 +3,12 @@ class DocumentFingerprintingJob < ActiveJob::Base
 
   def perform(document)
     windows = document.generate_windows
-
-    return unless windows.present?
+    return if windows.empty?
 
     update(document, windows)
   end
+
+  private
 
   def update(document, windows)
     document.update!(

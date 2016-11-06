@@ -1,14 +1,12 @@
 module HasSanitizedFile
   extend ActiveSupport::Concern
 
-  included do
-    scope :all_fingerprinted_except, lambda { |document|
-      where.not(id: document.id)
+  module ClassMethods
+    def all_fingerprinted_except(other)
+      where
+        .not(id: other.id)
         .where("array_length(fingerprints, 1) > 0")
-    }
-
-    after_save :enqueue_sanitization_job
-    after_save :enqueue_fingerprinting_job
+    end
   end
 
   def fingerprinted?
@@ -45,7 +43,7 @@ module HasSanitizedFile
 
   def generate_windows
     Winnower.windows_from_content(
-      sanitized_file.content,
+      sanitized_file.read_content,
     ).to_a
   end
 

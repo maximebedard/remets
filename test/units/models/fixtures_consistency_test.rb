@@ -166,7 +166,7 @@ class FixturesConsistencyTest < ActiveSupport::TestCase
     return unless document.sanitized?
 
     expected = document.generate_sanitized_content.strip
-    actual = document.sanitized_file.content.strip
+    actual = document.sanitized_file.read_content.strip
 
     messages << format_message(
       document.class.table_name,
@@ -178,6 +178,6 @@ class FixturesConsistencyTest < ActiveSupport::TestCase
   end
 
   def fixture_file_path(file)
-    file.url.gsub(/#{Bucket.url}/, "test/fixtures/files")
+    file.url.gsub(/#{Remets.aws_bucket.url}/, "test/fixtures/files")
   end
 end

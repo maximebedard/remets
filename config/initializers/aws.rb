@@ -6,9 +6,19 @@ Aws.config.update(
   ),
 )
 
-AwsClient = Aws::S3::Client.new
+module Remets
+  extend self
 
-Bucket = Aws::S3::Bucket.new(
-  name: ENV["S3_BUCKET"],
-  client: AwsClient,
-)
+  def aws_bucket
+    @aws_bucket ||= Aws::S3::Bucket.new(
+      name: ENV["S3_BUCKET"],
+      client: aws_client,
+    )
+  end
+
+  private
+
+  def aws_client
+    @aws_client ||= Aws::S3::Client.new
+  end
+end
