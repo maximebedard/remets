@@ -1,4 +1,7 @@
 module AcquaintancesProviders
-  class Github < Base
+  class Github
+    def fetch
+      []
+    end
   end
 end

@@ -1,5 +1,12 @@
 module AcquaintancesProviders
-  class Google < Base
+  class Google
+    attr_reader :user, :auth
+
+    def initialize(user, auth = nil)
+      @user = user
+      @auth = auth
+    end
+
     def fetch
       return [] if revoked?
       refresh_token_when_expired

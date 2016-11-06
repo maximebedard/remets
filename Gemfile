@@ -20,6 +20,12 @@ gem "sprockets"
 gem "turbolinks"
 gem "uglifier"
 
+if ENV["LOCAL_FAST_WINNOWER"]
+  gem "fast_winnower", path: "../fast_winnower"
+else
+  gem "fast_winnower", github: "maximebedard/fast_winnower"
+end
+
 group :development, :test do
   gem "rubocop", require: false
   gem "ruby-prof", require: false

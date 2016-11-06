@@ -1,16 +1,14 @@
-module ComparaisonResultProviders
-  class SubmittedDocumentProvider
-    def call(reference, compared)
-      fingerprints = reference.fingerprints & compared.fingerprints
+module DocumentComparators
+  class SubmittedDocumentComparator
+    def intersect(a, b)
+      fingerprints = a.fingerprints & b.fingerprints
       fingerprints -= boilerplate_fingerprints
       fingerprints -= same_submission_fingerprints
-      return if fingerprints.empty?
+      fingerprints
+    end
 
-      ComparaisonResult.new(
-        reference: reference,
-        compared: compared,
-        fingerprints: fingerprints,
-      )
+    def all(a, b)
+      a.fingerprints & b.fingerprints
     end
 
     private

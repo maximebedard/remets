@@ -8,6 +8,12 @@ GIT
       sprockets (~> 4.x)
       sprockets-rails (< 4.0)
 
+PATH
+  remote: ../fast_winnower
+  specs:
+    fast_winnower (0.1.0)
+      mime-types
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -240,6 +246,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass
   codeclimate-test-reporter
+  fast_winnower!
   font-awesome-sass
   jbuilder
   jquery-rails

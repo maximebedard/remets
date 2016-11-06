@@ -17,7 +17,7 @@ class ConnectionsBuilder
   attr_reader :record, :emails, :provider
 
   def build_connections
-    Array.wrap(emails).map do |email|
+    Array(emails).map do |email|
       provider.build(record, email)
     end
   end

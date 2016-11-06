@@ -1,4 +1,7 @@
 module AcquaintancesProviders
-  class Evaluations < Base
+  class Evaluations
+    def fetch
+      []
+    end
   end
 end

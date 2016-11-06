@@ -1,4 +1,7 @@
 module AcquaintancesProviders
-  class Bitbucket < Base
+  class Bitbucket
+    def fetch
+      []
+    end
   end
 end
