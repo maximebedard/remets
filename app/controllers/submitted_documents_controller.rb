@@ -4,18 +4,12 @@ class SubmittedDocumentsController < ApplicationController
   respond_to :html, :json
 
   def show
-    @submitted_document = policy_scope(SubmittedDocument.where(id: params[:id])).first!
-    authorize(@submitted_document)
-
+    @submitted_document = SubmittedDocument.find(params[:id])
     respond_with(@submitted_document)
   end
 
   def diff
     @reference, @compared = SubmittedDocument.find([params[:id], params[:compared_id]])
-
-    authorize(@reference)
-    authorize(@compared)
-
     respond_with(@reference, @compared)
   end
 end

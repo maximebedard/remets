@@ -3,55 +3,47 @@ class EvaluationsController < ApplicationController
   must_be_authenticated
 
   def index
-    @evaluations = policy_scope(apply_filters(Evaluation.where(user: current_user)))
-    authorize(@evaluations)
-
+    @evaluations = apply_filters(current_user.evaluations)
     respond_with(@evaluations)
   end
 
   def show
-    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid])).first!
-    authorize(@evaluation)
-
+    @evaluation = current_user.evaluations.find_by!(uuid: params[:uuid])
     respond_with(@evaluation)
   end
 
   def edit
-    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid], user: current_user)).first!
-    authorize(@evaluation)
-
+    @evaluation = current_user.evaluations.find_by!(uuid: params[:uuid])
     respond_with(@evaluation)
   end
 
   def update
-    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid], user: current_user)).first!
-    authorize(@evaluation)
+    @evaluation = current_user.evaluations.find_by!(uuid: params[:uuid])
 
     EvaluationUpdater.new(@evaluation, evaluation_params).call
     @evaluation.save
+
     respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))
   end
 
   def new
-    @evaluation = policy_scope(Evaluation.where(user: current_user)).build
+    @evaluation = current_user.evaluations.new
     @evaluation.due_date ||= 3.days.from_now.midnight
-    authorize(@evaluation)
 
     respond_with(@evaluation)
   end
 
   def create
-    @evaluation = policy_scope(Evaluation.where(user: current_user)).build
-    authorize(@evaluation)
+    @evaluation = current_user.evaluations.new
 
     EvaluationUpdater.new(@evaluation, evaluation_params).call
     @evaluation.save
+
     respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))
   end
 
   def complete
-    @evaluation = policy_scope(Evaluation.where(uuid: params[:uuid], user: current_user)).first!
-    authorize(@evaluation)
+    @evaluation = current_user.evaluations.find_by!(uuid: params[:uuid])
 
     @evaluation.update(mark_as_completed: Time.zone.now)
     respond_with(@evaluation, location: evaluation_path(uuid: @evaluation.uuid))

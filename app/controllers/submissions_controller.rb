@@ -3,7 +3,7 @@ class SubmissionsController < ApplicationController
   must_be_authenticated
 
   def all
-    @submissions = policy_scope(Submission.where(user: current_user))
+    @submissions = current_user.submissions
     authorize(@submissions)
 
     respond_with(@submissions)
@@ -17,9 +17,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @submission = policy_scope(Submission.where(id: params[:id])).first!
-    authorize(@submission)
-
+    @submission = current_user.submissions.find(params[:id])
     respond_with(@submission)
   end
 
@@ -40,10 +38,6 @@ class SubmissionsController < ApplicationController
 
   def diff
     @reference, @compared = Submission.find([params[:id], params[:compared_id]])
-
-    authorize(@reference)
-    authorize(@compared)
-
     respond_with(@reference, @compared)
   end
 

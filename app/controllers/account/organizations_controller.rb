@@ -3,39 +3,31 @@ class Account::OrganizationsController < ApplicationController
   must_be_authenticated
 
   def index
-    @organizations = policy_scope(Organization)
-    authorize(@organizations)
-
+    @organizations = current_user.organizations
     respond_with(@organizations)
   end
 
   def edit
-    @organization = policy_scope(Organization.where(id: params[:id])).first!
-    authorize(@organization)
-
+    @organization = current_user.organizations.find(params[:id])
     respond_with(@organization)
   end
 
   def update
-    @organization = policy_scope(Organization.where(id: params[:id])).first!
-    authorize(@organization)
+    @organization = current_user.organizations.find(params[:id])
 
     OrganizationUpdater.new(@organization, organization_params).call
-
     @organization.save
+
     respond_with(@organization, location: edit_account_organization_path(@organization))
   end
 
   def new
-    @organization = policy_scope(Organization).build
-    authorize(@organization)
-
+    @organization = current_user.organizations.new
     respond_with(@organization)
   end
 
   def create
-    @organization = policy_scope(Organization.where(user: current_user)).build
-    authorize(@organization)
+    @organization = current_user.organizations.new
 
     OrganizationUpdater.new(@organization, organization_params).call
 
@@ -46,10 +38,9 @@ class Account::OrganizationsController < ApplicationController
   end
 
   def leave
-    @organization = policy_scope(Organization.where(id: params[:id])).first!
-    authorize(@organization)
-
+    @organization = current_user.organizations.find(params[:id])
     @organization.leave(current_user)
+
     respond_with(@organization, location: account_organizations_path)
   end
 
