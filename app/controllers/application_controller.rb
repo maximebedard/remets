@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Authentication
 
   rescue_from Remets::NotAuthenticationError, with: :user_must_be_authenticated
+  rescue_from Remets::NotAuthorizedError, with: :user_not_authorized
 
   protect_from_forgery with: :exception
 

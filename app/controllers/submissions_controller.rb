@@ -10,7 +10,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = policy_scope(evaluation.submissions.where(user: current_user))
+    @submissions = evaluation.submissions.where(user: current_user)
     authorize(@submissions)
 
     respond_with(@submissions)
@@ -22,14 +22,14 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @submission = policy_scope(evaluation.submissions.where(user: current_user)).build
+    @submission = evaluation.submissions.where(user: current_user).new
     authorize(@submission)
 
     respond_with(@submission)
   end
 
   def create
-    @submission = policy_scope(evaluation.submissions.where(user: current_user)).build
+    @submission = evaluation.submissions.where(user: current_user).new
     authorize(@submission)
 
     @submission.update(submission_params)

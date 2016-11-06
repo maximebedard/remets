@@ -3,18 +3,15 @@ class GradesController < ApplicationController
   must_be_authenticated
 
   def edit
-    policy_scope(grade)
-    authorize(grade)
-    respond_with(grade)
+    @grade = submission.grade
+    respond_with(@grade)
   end
 
   def update
-    policy_scope(grade)
-    authorize(grade)
-
+    @grade = submission.build_grade
     respond_with(
-      grade,
-      location: grade.update(grade_params) && submission_path(submission),
+      @grade,
+      location: @grade.update(grade_params) && submission_path(submission),
     )
   end
 
@@ -28,9 +25,5 @@ class GradesController < ApplicationController
 
   def submission
     @submission ||= Submission.find(params[:submission_id])
-  end
-
-  def grade
-    @grade ||= (submission.grade || submission.build_grade)
   end
 end

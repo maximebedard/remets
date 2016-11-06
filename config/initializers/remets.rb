@@ -5,4 +5,5 @@ module Remets
   ORIGIN_KEY = "_remets_origin".freeze
 
   NotAuthenticationError = Class.new(StandardError)
+  NotAuthorizedError = Class.new(StandardError)
 end
