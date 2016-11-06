@@ -9,7 +9,7 @@ class Submission < ApplicationRecord
 
   accepts_nested_attributes_for :submitted_documents
 
-  scope :for, -> (user) { where(user: user) }
+  scope :for, ->(user) { where(user: user) }
 
   scope :similar_to, lambda { |reference|
     joins(:document_matches)

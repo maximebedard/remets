@@ -27,7 +27,7 @@ module Remets
 
     def mock_auth_for(provider, user:, authorization: nil)
       authorization ||= user.authorizations.find_by(provider: provider)
-      credentials = authorization.try!(:attributes).try!(:symbolize_keys) || {}
+      credentials = authorization&.attributes&.symbolize_keys || {}
       info = user.attributes.symbolize_keys
 
       mock_auth(

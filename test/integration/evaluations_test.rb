@@ -42,7 +42,7 @@ class EvaluationsTest < ActionDispatch::IntegrationTest
 
   def submit(evaluation_params = {})
     perform_enqueued_jobs do
-      post "/evaluations", evaluation: evaluation_params
+      post "/evaluations", params: { evaluation: evaluation_params }
       @evaluation = Evaluation.last
     end
   end

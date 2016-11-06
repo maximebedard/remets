@@ -21,7 +21,7 @@ class EvaluationsControllerTest < ActionController::TestCase
   end
 
   test "#show" do
-    get :show, uuid: @evaluation.uuid
+    get :show, params: { uuid: @evaluation.uuid }
 
     assert assigns(:evaluation)
     assert_response :ok
@@ -30,12 +30,12 @@ class EvaluationsControllerTest < ActionController::TestCase
   test "#show is not authorized when signed out" do
     sign_out
 
-    get :show, uuid: @evaluation.uuid
+    get :show, params: { uuid: @evaluation.uuid }
     assert_redirected_to_auth_new
   end
 
   test "#edit" do
-    get :edit, uuid: @evaluation.uuid
+    get :edit, params: { uuid: @evaluation.uuid }
 
     assert assigns(:evaluation)
     assert_response :ok
@@ -44,24 +44,20 @@ class EvaluationsControllerTest < ActionController::TestCase
   test "#edit is not authorized when signed out" do
     sign_out
 
-    get :edit, uuid: @evaluation.uuid
+    get :edit, params: { uuid: @evaluation.uuid }
     assert_redirected_to_auth_new
   end
 
   test "#update" do
     travel_to(Time.zone.now) do
-      patch(
-        :update,
-        uuid: @evaluation.uuid,
-        evaluation: {
-          title: "pants",
-          description: "pants pants pants",
-          due_date: 5.days.from_now,
-          organization: organizations(:ets).id,
-          reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-          boilerplate_documents_attriubtes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-        },
-      )
+      patch :update, params: { uuid: @evaluation.uuid, evaluation: {
+        title: "pants",
+        description: "pants pants pants",
+        due_date: 5.days.from_now,
+        organization: organizations(:ets).id,
+        reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+        boilerplate_documents_attriubtes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      } }
       evaluation = assigns(:evaluation)
       assert_equal "pants", evaluation.title
       assert_equal "pants pants pants", evaluation.description
@@ -76,18 +72,14 @@ class EvaluationsControllerTest < ActionController::TestCase
   test "#update is not authorized when signed out" do
     sign_out
 
-    patch(
-      :update,
-      uuid: @evaluation.uuid,
-      evaluation: {
-        title: "pants",
-        description: "pants pants pants",
-        due_date: 5.days.from_now,
-        organization: organizations(:ets).id,
-        reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-        boilerplate_documents_attriubtes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-      },
-    )
+    patch :update, params: { uuid: @evaluation.uuid, evaluation: {
+      title: "pants",
+      description: "pants pants pants",
+      due_date: 5.days.from_now,
+      organization: organizations(:ets).id,
+      reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      boilerplate_documents_attriubtes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+    } }
     assert_redirected_to_auth_new
   end
 
@@ -107,18 +99,15 @@ class EvaluationsControllerTest < ActionController::TestCase
 
   test "#create" do
     travel_to(Time.zone.now) do
-      post(
-        :create,
-        evaluation: {
-          title: "pants",
-          description: "pants pants pants",
-          due_date: 5.days.from_now,
-          organization: organizations(:ets).id,
-          subscriptions: ["idont@exists.com"],
-          reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-          boilerplate_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-        },
-      )
+      post :create, params: { evaluation: {
+        title: "pants",
+        description: "pants pants pants",
+        due_date: 5.days.from_now,
+        organization: organizations(:ets).id,
+        subscriptions: ["idont@exists.com"],
+        reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+        boilerplate_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      } }
 
       evaluation = assigns(:evaluation)
       assert_equal "pants", evaluation.title
@@ -135,30 +124,24 @@ class EvaluationsControllerTest < ActionController::TestCase
 
   test "#create invite new subscribers" do
     assert_difference("User.count") do
-      post(
-        :create,
-        evaluation: {
-          title: "pants",
-          description: "pants pants pants",
-          due_date: 5.days.from_now,
-          organization: organizations(:ets).id,
-          subscriptions: ["idont@exists.com"],
-          reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-          boilerplate_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-        },
-      )
+      post :create, params: { evaluation: {
+        title: "pants",
+        description: "pants pants pants",
+        due_date: 5.days.from_now,
+        organization: organizations(:ets).id,
+        subscriptions: ["idont@exists.com"],
+        reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+        boilerplate_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      } }
       assert_redirected_to evaluation_path(uuid: assigns(:evaluation).uuid)
     end
   end
 
   test "#create does not invite new subscribers when invalid" do
     assert_no_difference("User.count") do
-      post(
-        :create,
-        evaluation: {
-          subscriptions: ["idont@exists.com"],
-        },
-      )
+      post :create, params: { evaluation: {
+        subscriptions: ["idont@exists.com"],
+      } }
       assert_template "new"
     end
   end
@@ -166,22 +149,19 @@ class EvaluationsControllerTest < ActionController::TestCase
   test "#create is not authorized when signed out" do
     sign_out
 
-    post(
-      :create,
-      evaluation: {
-        title: "pants",
-        description: "pants pants pants",
-        due_date: 5.days.from_now,
-        reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-        documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-      },
-    )
+    post :create, params: { evaluation: {
+      title: "pants",
+      description: "pants pants pants",
+      due_date: 5.days.from_now,
+      reference_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+      documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+    } }
     assert_redirected_to_auth_new
   end
 
   test "#complete" do
     travel_to(Time.zone.now) do
-      patch :complete, uuid: @evaluation.uuid
+      patch :complete, params: { uuid: @evaluation.uuid }
       evaluation = assigns(:evaluation)
       assert_equal Time.zone.now, evaluation.mark_as_completed
       assert_redirected_to evaluation_path(uuid: evaluation.uuid)
@@ -191,7 +171,7 @@ class EvaluationsControllerTest < ActionController::TestCase
   test "#complete is not authorized when signed out" do
     sign_out
 
-    patch :complete, uuid: @evaluation.uuid
+    patch :complete, params: { uuid: @evaluation.uuid }
     assert_redirected_to_auth_new
   end
 end

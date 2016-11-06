@@ -32,7 +32,7 @@ class Account::ProfilesControllerTest < ActionController::TestCase
   end
 
   test "#update" do
-    patch :update, user: { name: "Henry Bonmatin", email: "henry.test@henry.com" }
+    patch :update, params: { user: { name: "Henry Bonmatin", email: "henry.test@henry.com" } }
 
     @user.reload
 
@@ -44,7 +44,7 @@ class Account::ProfilesControllerTest < ActionController::TestCase
   test "#update is not authorized when signed out" do
     sign_out
 
-    patch :update, user: { name: "Henry Bonmatin" }
+    patch :update, params: { user: { name: "Henry Bonmatin" } }
     assert_redirected_to_auth_new
   end
 end

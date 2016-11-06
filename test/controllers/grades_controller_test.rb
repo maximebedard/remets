@@ -7,7 +7,7 @@ class GradesControllerTest < ActionController::TestCase
   end
 
   test "#edit" do
-    get :edit, submission_id: @grade.submission.id
+    get :edit, params: { submission_id: @grade.submission.id }
 
     assert_response :ok
     assert assigns(:grade)
@@ -16,12 +16,12 @@ class GradesControllerTest < ActionController::TestCase
   test "#edit is not authorized when signed out" do
     sign_out
 
-    get :edit, submission_id: @grade.submission.id
+    get :edit, params: { submission_id: @grade.submission.id }
     assert_redirected_to_auth_new
   end
 
   test "#update" do
-    post :update, submission_id: @grade.submission.id, grade: new_grade_params
+    post :update, params: { submission_id: @grade.submission.id, grade: new_grade_params }
 
     assert_redirected_to submission_path(@grade.submission)
 
@@ -35,7 +35,7 @@ class GradesControllerTest < ActionController::TestCase
   test "#update is not authorized when signed out" do
     sign_out
 
-    post :update, submission_id: @grade.submission.id, grade: new_grade_params
+    post :update, params: { submission_id: @grade.submission.id, grade: new_grade_params }
     assert_redirected_to_auth_new
   end
 

@@ -19,19 +19,19 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "#edit" do
-    get :edit, id: @organization.id
+    get :edit, params: { id: @organization.id }
     assert_response :success
   end
 
   test "#edit is not authorized when signed out" do
     sign_out
 
-    get :edit, id: @organization.id
+    get :edit, params: { id: @organization.id }
     assert_redirected_to_auth_new
   end
 
   test "#update" do
-    patch :update, id: @organization.id, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] }
+    patch :update, params: { id: @organization.id, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] } }
 
     organization = assigns(:organization)
     assert_equal "Henry Corp.", organization.name
@@ -43,7 +43,7 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
   test "#update is not authorized when signed out" do
     sign_out
 
-    patch :update, id: @organization.id, organization: { name: "Henry Corp." }
+    patch :update, params: { id: @organization.id, organization: { name: "Henry Corp." } }
     assert_redirected_to_auth_new
   end
 
@@ -60,7 +60,7 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "#create" do
-    post :create, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] }
+    post :create, params: { organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] } }
 
     organization = assigns(:organization)
     assert_equal "Henry Corp.", organization.name
@@ -71,14 +71,14 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
 
   test "#create invite new members" do
     assert_difference("User.count") do
-      post :create, organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] }
+      post :create, params: { organization: { name: "Henry Corp.", memberships: ["idont@exists.com"] } }
       assert_redirected_to account_organizations_path
     end
   end
 
   test "#create does not invite new members when invalid" do
     assert_no_difference("User.count") do
-      post :create, organization: { memberships: ["idont@exists.com"] }
+      post :create, params: { organization: { memberships: ["idont@exists.com"] } }
       assert_template "new"
     end
   end
@@ -86,13 +86,13 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
   test "#create is not authorized when signed out" do
     sign_out
 
-    post :create, organization: { name: "Henry Corp." }
+    post :create, params: { organization: { name: "Henry Corp." } }
     assert_redirected_to_auth_new
   end
 
   test "#leave" do
     assert_difference("Membership.count", -1) do
-      delete :leave, id: @organization.id
+      delete :leave, params: { id: @organization.id }
     end
 
     assert_redirected_to account_organizations_path
@@ -102,7 +102,7 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
     @organization.leave(users(:henry))
 
     assert_difference(["Membership.count", "Organization.count"], -1) do
-      delete :leave, id: @organization.id
+      delete :leave, params: { id: @organization.id }
     end
 
     assert_redirected_to account_organizations_path
@@ -111,7 +111,7 @@ class Account::OrganizationsControllerTest < ActionController::TestCase
   test "#leave is not authorized when signed out" do
     sign_out
 
-    delete :leave, id: @organization.id
+    delete :leave, params: { id: @organization.id }
     assert_redirected_to_auth_new
   end
 end

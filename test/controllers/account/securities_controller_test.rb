@@ -19,7 +19,7 @@ class Account::SecuritiesControllerTest < ActionController::TestCase
   end
 
   test "#update" do
-    patch :update, user: { password: "henry12345", password_confirmation: "henry12345" }
+    patch :update, params: { user: { password: "henry12345", password_confirmation: "henry12345" } }
 
     @user.reload
 
@@ -30,7 +30,7 @@ class Account::SecuritiesControllerTest < ActionController::TestCase
   test "#update is not authorized when signed out" do
     sign_out
 
-    patch :update, user: { password: "henry12345", password_confirmation: "henry12345" }
+    patch :update, params: { user: { password: "henry12345", password_confirmation: "henry12345" } }
     assert_redirected_to_auth_new
   end
 end

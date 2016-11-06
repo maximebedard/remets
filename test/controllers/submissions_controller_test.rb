@@ -23,14 +23,14 @@ class SubmissionsControllerTest < ActionController::TestCase
   end
 
   test "#index" do
-    get :index, evaluation_uuid: @evaluation.uuid
+    get :index, params: { evaluation_uuid: @evaluation.uuid }
 
     assert assigns(:submissions)
     assert_response :ok
   end
 
   test "#index for a evaluation with no submissions" do
-    get :index, evaluation_uuid: evaluations(:gti772_final).uuid
+    get :index, params: { evaluation_uuid: evaluations(:gti772_final).uuid }
 
     assert assigns(:submissions)
     assert_response :ok
@@ -39,12 +39,12 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#index is not authorized when signed out" do
     sign_out
 
-    get :index, evaluation_uuid: @evaluation.uuid
+    get :index, params: { evaluation_uuid: @evaluation.uuid }
     assert_redirected_to_auth_new
   end
 
   test "#show" do
-    get :show, id: @submission.id
+    get :show, params: { id: @submission.id }
 
     assert assigns(:submission)
     assert_response :ok
@@ -53,16 +53,14 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#show is not authorized when signed out" do
     sign_out
 
-    get :show, id: @submission.id
+    get :show, params: { id: @submission.id }
     assert_redirected_to_auth_new
   end
 
   test "#create" do
-    post :create,
-      evaluation_uuid: @evaluation.uuid,
-      submission: {
-        submitted_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-      }
+    post :create, params: { evaluation_uuid: @evaluation.uuid, submission: {
+      submitted_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+    } }
 
     assert_redirected_to assigns(:submission)
   end
@@ -70,17 +68,15 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#create is not authorized when signed out" do
     sign_out
 
-    post :create,
-      evaluation_uuid: @evaluation.uuid,
-      submission: {
-        submitted_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
-      }
+    post :create, params: { evaluation_uuid: @evaluation.uuid, submission: {
+      submitted_documents_attributes: [{ file_ptr: submitted_documents(:bragging).file_ptr }],
+    } }
 
     assert_redirected_to_auth_new
   end
 
   test "#new" do
-    get :new, evaluation_uuid: @evaluation.uuid
+    get :new, params: { evaluation_uuid: @evaluation.uuid }
 
     assert assigns(:submission)
     assert_response :ok
@@ -89,12 +85,12 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#new is not authorized when signed out" do
     sign_out
 
-    get :new, evaluation_uuid: @evaluation.uuid
+    get :new, params: { evaluation_uuid: @evaluation.uuid }
     assert_redirected_to_auth_new
   end
 
   test "#diff" do
-    get :diff, id: @submission.id, compared_id: @compared_submission.id
+    get :diff, params: { id: @submission.id, compared_id: @compared_submission.id }
 
     assert assigns(:reference)
     assert assigns(:compared)
@@ -105,7 +101,7 @@ class SubmissionsControllerTest < ActionController::TestCase
   test "#diff is not authorized when signed out" do
     sign_out
 
-    get :diff, id: @submission.id, compared_id: @compared_submission.id
+    get :diff, params: { id: @submission.id, compared_id: @compared_submission.id }
     assert_redirected_to_auth_new
   end
 end

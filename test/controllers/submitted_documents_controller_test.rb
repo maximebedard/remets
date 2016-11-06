@@ -8,7 +8,7 @@ class SubmittedDocumentsControllerTest < ActionController::TestCase
   end
 
   test "#show" do
-    get :show, id: @submitted_document.id
+    get :show, params: { id: @submitted_document.id }
 
     assert assigns(:submitted_document)
     assert_response :ok
@@ -17,20 +17,20 @@ class SubmittedDocumentsControllerTest < ActionController::TestCase
   test "#show is not authorized when signed out" do
     sign_out
 
-    get :show, id: @submitted_document.id
+    get :show, params: { id: @submitted_document.id }
     assert_redirected_to_auth_new
   end
 
   test "#show is not authorized when you are not the owner nor the creator of the evaluation" do
     sign_in(users(:marcel))
 
-    get :show, id: @submitted_document.id
+    get :show, params: { id: @submitted_document.id }
     assert_redirected_to root_path
     assert_equal "You are not authorized to perform this action.", flash[:danger]
   end
 
   test "#diff" do
-    get :diff, id: @submitted_document.id, compared_id: @compared_submitted_document.id
+    get :diff, params: { id: @submitted_document.id, compared_id: @compared_submitted_document.id }
 
     assert assigns(:reference)
     assert assigns(:compared)
@@ -41,7 +41,7 @@ class SubmittedDocumentsControllerTest < ActionController::TestCase
   test "#diff is not authorized when signed out" do
     sign_out
 
-    get :diff, id: @submitted_document.id, compared_id: @compared_submitted_document.id
+    get :diff, params: { id: @submitted_document.id, compared_id: @compared_submitted_document.id }
     assert_redirected_to_auth_new
   end
 end

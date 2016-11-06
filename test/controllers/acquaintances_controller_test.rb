@@ -13,7 +13,7 @@ class AcquaintancesControllerTest < ActionController::TestCase
       provider: "google",
     )])
 
-    get :index, format: :json
+    get :index, params: { format: :json }
 
     assert_response :ok
     assert_equal([{
@@ -27,7 +27,7 @@ class AcquaintancesControllerTest < ActionController::TestCase
     Rails.cache.clear
 
     assert_enqueued_with(job: AcquaintanceFindingJob, queue: "default") do
-      get :index, format: :json
+      get :index, params: { format: :json }
     end
 
     assert_equal [], JSON.parse(response.body)

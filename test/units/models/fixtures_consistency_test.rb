@@ -112,29 +112,35 @@ class FixturesConsistencyTest < ActiveSupport::TestCase
     table_name = document.class.table_name
     fixture_name = reverse_lookup(document)
 
-    messages << format_message(
-      table_name,
-      fixture_name,
-      "indexes are not eql\n" \
-      "  \e[32m + `#{indexes}`\e[0m\n" \
-      "  \e[31m - `#{document.indexes}`\e[0m",
-    ) unless indexes == document.indexes
+    unless indexes == document.indexes
+      messages << format_message(
+        table_name,
+        fixture_name,
+        "indexes are not eql\n" \
+        "  \e[32m + `#{indexes}`\e[0m\n" \
+        "  \e[31m - `#{document.indexes}`\e[0m",
+      )
+    end
 
-    messages << format_message(
-      table_name,
-      fixture_name,
-      "fingerprints are not eql\n" \
-      "  \e[32m+ `#{fingerprints}`\e[0m\n" \
-      "  \e[31m- `#{document.fingerprints}`\e[0m",
-    ) unless fingerprints == document.fingerprints
+    unless fingerprints == document.fingerprints
+      messages << format_message(
+        table_name,
+        fixture_name,
+        "fingerprints are not eql\n" \
+        "  \e[32m+ `#{fingerprints}`\e[0m\n" \
+        "  \e[31m- `#{document.fingerprints}`\e[0m",
+      )
+    end
   end
 
   def validate_file(document, file, messages = [])
-    messages << format_message(
-      document.class.table_name,
-      reverse_lookup(document),
-      "file \e[31m#{fixture_file_path(file)}\e[0m does not exists",
-    ) unless file.exists?
+    unless file.exists?
+      messages << format_message(
+        document.class.table_name,
+        reverse_lookup(document),
+        "file \e[31m#{fixture_file_path(file)}\e[0m does not exists",
+      )
+    end
   end
 
   def validate_fixture(fixture, fixture_name, messages = [])
@@ -168,13 +174,15 @@ class FixturesConsistencyTest < ActiveSupport::TestCase
     expected = document.generate_sanitized_content.strip
     actual = document.sanitized_file.read_content.strip
 
-    messages << format_message(
-      document.class.table_name,
-      reverse_lookup(document),
-      "content of the sanitized document is not eql for #{fixture_file_path(document.sanitized_file)} \n" \
-      "  \e[32m + `#{expected}`\e[0m\n" \
-      "  \e[31m - `#{actual}`\e[0m",
-    ) unless expected == actual
+    unless expected == actual
+      messages << format_message(
+        document.class.table_name,
+        reverse_lookup(document),
+        "content of the sanitized document is not eql for #{fixture_file_path(document.sanitized_file)} \n" \
+        "  \e[32m + `#{expected}`\e[0m\n" \
+        "  \e[31m - `#{actual}`\e[0m",
+      )
+    end
   end
 
   def fixture_file_path(file)

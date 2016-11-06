@@ -5,7 +5,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     mock_auth_request_for(:google, user: users(:gaston))
 
     assert_no_difference("User.count", "Authorization.count") do
-      post :callback, provider: :google
+      post :callback, params: { provider: :google }
     end
 
     assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
@@ -16,7 +16,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     mock_auth_request_for(:google, user: users(:gaston))
     request.env["omniauth.origin"] = auth_new_url
 
-    post :callback, provider: :google
+    post :callback, params: { provider: :google }
 
     assert_not_nil session[Remets::AUTH_SESSION_KEY]
     assert_redirected_to account_profile_path
@@ -26,7 +26,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     mock_auth_request_for(:google, user: users(:gaston))
     session[Remets::ORIGIN_KEY] = "https://google.ca"
 
-    post :callback, provider: :google
+    post :callback, params: { provider: :google }
 
     assert_not_nil session[Remets::AUTH_SESSION_KEY]
     assert_redirected_to "https://google.ca"
@@ -50,7 +50,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
     )
 
     assert_difference(["User.count", "Authorization.count"]) do
-      post :callback, provider: :google
+      post :callback, params: { provider: :google }
     end
 
     assert_equal User.last.id, session[Remets::AUTH_SESSION_KEY]
@@ -74,7 +74,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
 
     assert_no_difference("User.count") do
       assert_difference("Authorization.count") do
-        post :callback, provider: :google
+        post :callback, params: { provider: :google }
       end
     end
 
@@ -95,7 +95,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
   end
 
   test "#create with an existing user" do
-    post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "password" }
+    post :create, params: { authentication: { email: "rinfrette.gaston@gmail.com", password: "password" } }
     assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
     assert_redirected_to account_profile_path
   end
@@ -103,7 +103,7 @@ class AuthenticationsControllerTest < ActionController::TestCase
   test "#create with the origin redirects to the origin" do
     session[Remets::ORIGIN_KEY] = "https://google.ca"
 
-    post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "password" }
+    post :create, params: { authentication: { email: "rinfrette.gaston@gmail.com", password: "password" } }
 
     assert_not_nil session[Remets::AUTH_SESSION_KEY]
     assert_redirected_to "https://google.ca"
@@ -111,14 +111,14 @@ class AuthenticationsControllerTest < ActionController::TestCase
   end
 
   test "#create with an existing user but invalid password" do
-    post :create, authentication: { email: "rinfrette.gaston@gmail.com", password: "potato" }
+    post :create, params: { authentication: { email: "rinfrette.gaston@gmail.com", password: "potato" } }
     assert_nil session[Remets::AUTH_SESSION_KEY]
     assert_equal "Email/Password combination does not match", flash[:danger]
     assert_response :ok
   end
 
   test "#create with a non existing user" do
-    post :create, authentication: { email: "asdasdasd@gmail.com", password: "potato" }
+    post :create, params: { authentication: { email: "asdasdasd@gmail.com", password: "potato" } }
     assert_nil session[Remets::AUTH_SESSION_KEY]
     assert_equal "Email/Password combination does not match", flash[:danger]
     assert_response :ok
@@ -127,11 +127,11 @@ class AuthenticationsControllerTest < ActionController::TestCase
   test "#create will remember the user" do
     user = users(:gaston)
 
-    post :create, authentication: {
+    post :create, params: { authentication: {
       email: user.email,
       password: "password",
       remember_me: true,
-    }
+    } }
 
     user.reload
 
