@@ -1,4 +1,4 @@
-class BoilerplateDocument < ActiveRecord::Base
+class BoilerplateDocument < ApplicationRecord
   include HasFile
   include HasSanitizedFile
 

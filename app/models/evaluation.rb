@@ -1,4 +1,4 @@
-class Evaluation < ActiveRecord::Base
+class Evaluation < ApplicationRecord
   has_many :reference_documents
   has_many :boilerplate_documents
   has_many :submissions

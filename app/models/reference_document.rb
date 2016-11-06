@@ -1,4 +1,4 @@
-class ReferenceDocument < ActiveRecord::Base
+class ReferenceDocument < ApplicationRecord
   include HasFile
 
   belongs_to :evaluation

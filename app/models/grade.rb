@@ -1,4 +1,4 @@
-class Grade < ActiveRecord::Base
+class Grade < ApplicationRecord
   has_many :graded_documents
 
   belongs_to :submission

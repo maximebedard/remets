@@ -1,4 +1,4 @@
-class SubmittedDocument < ActiveRecord::Base
+class SubmittedDocument < ApplicationRecord
   include HasFile
   include HasSanitizedFile
 

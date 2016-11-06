@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   ADMIN_ROLE = "admin".freeze
   USER_ROLE = "user".freeze
   ROLES = [USER_ROLE, ADMIN_ROLE].freeze

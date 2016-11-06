@@ -1,4 +1,4 @@
-class Submission < ActiveRecord::Base
+class Submission < ApplicationRecord
   has_many :submitted_documents
   has_many :document_matches, through: :submitted_documents
 

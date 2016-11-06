@@ -1,4 +1,4 @@
-class AcquaintanceFindingJob < ActiveJob::Base
+class AcquaintanceFindingJob < ApplicationJob
   queue_as :default
 
   def perform(user)

@@ -1,4 +1,4 @@
-class Subscription < ActiveRecord::Base
+class Subscription < ApplicationRecord
   belongs_to :user, inverse_of: :subscriptions
   belongs_to :evaluation, inverse_of: :subscriptions
 

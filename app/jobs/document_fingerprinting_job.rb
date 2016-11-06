@@ -1,4 +1,4 @@
-class DocumentFingerprintingJob < ActiveJob::Base
+class DocumentFingerprintingJob < ApplicationJob
   queue_as :default
 
   def perform(document)

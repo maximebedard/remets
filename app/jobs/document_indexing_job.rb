@@ -1,4 +1,4 @@
-class DocumentIndexingJob < ActiveJob::Base
+class DocumentIndexingJob < ApplicationJob
   queue_as :default
 
   def perform(reference)

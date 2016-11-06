@@ -1,4 +1,4 @@
-class DocumentSanitizationJob < ActiveJob::Base
+class DocumentSanitizationJob < ApplicationJob
   queue_as :default
 
   def perform(document)

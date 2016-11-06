@@ -1,4 +1,4 @@
-class Organization < ActiveRecord::Base
+class Organization < ApplicationRecord
   has_many :memberships, inverse_of: :organization, dependent: :destroy
   has_many :users, through: :memberships
 
