@@ -1,9 +1,7 @@
 class ApplicationController < ActionController::Base
-  # include Pundit
-  include Authenticated
+  include Authentication
 
-  rescue_from Remets::NotAuthenticatedError, with: :user_must_be_authenticated
-  # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Remets::NotAuthenticationError, with: :user_must_be_authenticated
 
   protect_from_forgery with: :exception
 

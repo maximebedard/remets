@@ -1,10 +1,12 @@
-module Authenticated
+module Authentication
   extend ActiveSupport::Concern
 
   included do
-    helper_method :current_user,
+    helper_method(
+      :current_user,
       :signed_in?,
-      :signed_out?
+      :signed_out?,
+    )
   end
 
   def current_user
@@ -34,18 +36,21 @@ module Authenticated
   private
 
   def user_from_session
-    User.find_by(id: session[Remets::AUTH_SESSION_KEY])
+    user_by_id(session[Remets::AUTH_SESSION_KEY])
   end
 
   def user_from_cookies
-    user = User.find_by(id: cookies.signed[Remets::AUTH_REMEMBER_KEY])
+    user = user_by_id(cookies.signed[Remets::AUTH_REMEMBER_KEY])
     return unless user && user.remembered?(cookies[Remets::AUTH_REMEMBER_TOKEN])
 
-    self.current_user = user
     user
   end
 
+  def user_by_id(id)
+    id && User.find_by(id: id)
+  end
+
   def __must_be_authenticated!
-    raise Remets::NotAuthenticatedError if signed_out?
+    raise Remets::NotAuthenticationError if signed_out?
   end
 end

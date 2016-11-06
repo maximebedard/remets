@@ -35,7 +35,7 @@ class ApplicationPolicy
   end
 
   def authenticate!
-    raise Remets::NotAuthenticatedError unless authenticated?
+    raise Remets::NotAuthenticationError unless authenticated?
   end
 
   def authenticated?

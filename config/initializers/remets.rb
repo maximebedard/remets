@@ -4,5 +4,5 @@ module Remets
   AUTH_REMEMBER_TOKEN = "_remets_remember_token".freeze
   ORIGIN_KEY = "_remets_origin".freeze
 
-  NotAuthenticatedError = Class.new(StandardError)
+  NotAuthenticationError = Class.new(StandardError)
 end
