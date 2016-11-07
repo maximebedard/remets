@@ -1,5 +1,5 @@
 module Remets
-  module AuthenticationHelper
+  module OmniAuthHelper
     extend ActiveSupport::Concern
 
     included do
@@ -44,11 +44,6 @@ module Remets
         user: user,
         authorization: authorization,
       )
-    end
-
-    def assert_redirected_to_auth_new(origin: request.url)
-      assert_equal origin, session[Remets::ORIGIN_KEY]
-      assert_redirected_to auth_new_path
     end
   end
 end

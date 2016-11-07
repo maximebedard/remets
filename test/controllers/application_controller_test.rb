@@ -2,13 +2,13 @@ require "test_helper"
 
 class ApplicationControllerTest < ActionController::TestCase
   test "#current_user returns the user from the session" do
-    @controller.session[Remets::AUTH_SESSION_KEY] = users(:gaston)
+    session[Remets::AUTH_SESSION_KEY] = users(:gaston)
 
     assert_equal "rinfrette.gaston@gmail.com", @controller.current_user.email
   end
 
   test "#current_user returns nil when the session is not present" do
-    @controller.session.delete(Remets::AUTH_SESSION_KEY)
+    session.delete(Remets::AUTH_SESSION_KEY)
 
     assert_nil @controller.current_user
   end

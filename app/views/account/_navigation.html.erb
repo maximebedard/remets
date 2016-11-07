@@ -3,16 +3,16 @@
     <div class="rs-panel-heading">
       <h3>Settings</h3>
     </div>
-    <div class="rs-panel-item <%= active_for("accounts") %>">
+    <div class="rs-panel-item <%= active_link?("accounts") %>">
       <%= link_to "Profile", edit_account_profile_path %>
     </div>
-    <div class="rs-panel-item <%= active_for("security") %>">
+    <div class="rs-panel-item <%= active_link?("security") %>">
       <%= link_to "Security", edit_account_security_path %>
     </div>
-    <div class="rs-panel-item <%= active_for("security") %>">
+    <div class="rs-panel-item <%= active_link?("security") %>">
       <%= link_to "Integrations", account_integrations_path %>
     </div>
-    <div class="rs-panel-item <%= active_for("organizations") %>">
+    <div class="rs-panel-item <%= active_link?("organizations") %>">
       <%= link_to "Organizations", account_organizations_path %>
     </div>
   </div>

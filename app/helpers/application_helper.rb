@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def active_for(name)
+  def active_link?(name)
     "active" if controller.controller_name == name
   end
 end

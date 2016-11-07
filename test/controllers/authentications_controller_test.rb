@@ -95,15 +95,19 @@ class AuthenticationsControllerTest < ActionController::TestCase
   end
 
   test "#create with an existing user" do
-    post :create, params: { authentication: { email: "rinfrette.gaston@gmail.com", password: "password" } }
+    authentication_params = { email: "rinfrette.gaston@gmail.com", password: "password" }
+
+    post :create, params: { authentication: authentication_params }
+
     assert_equal users(:gaston).id, session[Remets::AUTH_SESSION_KEY]
     assert_redirected_to account_profile_path
   end
 
   test "#create with the origin redirects to the origin" do
     session[Remets::ORIGIN_KEY] = "https://google.ca"
+    authentication_params = { email: "rinfrette.gaston@gmail.com", password: "password" }
 
-    post :create, params: { authentication: { email: "rinfrette.gaston@gmail.com", password: "password" } }
+    post :create, params: { authentication: authentication_params }
 
     assert_not_nil session[Remets::AUTH_SESSION_KEY]
     assert_redirected_to "https://google.ca"
@@ -111,14 +115,20 @@ class AuthenticationsControllerTest < ActionController::TestCase
   end
 
   test "#create with an existing user but invalid password" do
-    post :create, params: { authentication: { email: "rinfrette.gaston@gmail.com", password: "potato" } }
+    authentication_params = { email: "rinfrette.gaston@gmail.com", password: "potato" }
+
+    post :create, params: { authentication: authentication_params }
+
     assert_nil session[Remets::AUTH_SESSION_KEY]
     assert_equal "Email/Password combination does not match", flash[:danger]
     assert_response :ok
   end
 
   test "#create with a non existing user" do
-    post :create, params: { authentication: { email: "asdasdasd@gmail.com", password: "potato" } }
+    authentication_params = { email: "asdasdasd@gmail.com", password: "potato" }
+
+    post :create, params: { authentication: authentication_params  }
+
     assert_nil session[Remets::AUTH_SESSION_KEY]
     assert_equal "Email/Password combination does not match", flash[:danger]
     assert_response :ok
@@ -126,15 +136,11 @@ class AuthenticationsControllerTest < ActionController::TestCase
 
   test "#create will remember the user" do
     user = users(:gaston)
+    authentication_params = { email: user.email, password: "password", remember_me: true }
 
-    post :create, params: { authentication: {
-      email: user.email,
-      password: "password",
-      remember_me: true,
-    } }
+    post :create, params: { authentication: authentication_params }
 
     user.reload
-
     assert_equal user.id, session[Remets::AUTH_SESSION_KEY]
     assert_equal user.id, cookies.permanent.signed[Remets::AUTH_REMEMBER_KEY]
     assert user.remembered?(cookies.permanent[Remets::AUTH_REMEMBER_TOKEN])
@@ -143,12 +149,14 @@ class AuthenticationsControllerTest < ActionController::TestCase
 
   test "#failure" do
     get :failure
+
     assert_redirected_to root_path
     assert_equal "An error occured when authenticating with Google.", flash[:danger]
   end
 
   test "#destroy" do
     get :destroy
+
     assert_redirected_to root_path
     assert_nil session[Remets::AUTH_SESSION_KEY]
   end

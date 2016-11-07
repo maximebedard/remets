@@ -14,5 +14,10 @@ module Remets
     def sign_out
       @controller.current_user = nil
     end
+
+    def assert_redirected_to_auth_new(origin: request.url)
+      assert_equal origin, session[Remets::ORIGIN_KEY]
+      assert_redirected_to auth_new_path
+    end
   end
 end

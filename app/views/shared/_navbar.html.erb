@@ -17,15 +17,15 @@
     <div id="navbar" class="collapse navbar-collapse">
       <% if signed_in? %>
       <ul class="nav navbar-nav navbar-left">
-        <li class="<%= active_for("evaluations") %>">
+        <li class="<%= active_link?("evaluations") %>">
           <%= link_to "Evaluations", evaluations_path %>
         </li>
 
-        <li class="<%= active_for("submissions") %>">
+        <li class="<%= active_link?("submissions") %>">
           <%= link_to "Submissions", submissions_path %>
         </li>
 
-        <li class="<%= active_for("profiles") %>">
+        <li class="<%= active_link?("profiles") %>">
           <%= link_to "Upcoming evaluations", account_profile_path %>
         </li>
       </ul>
@@ -43,7 +43,7 @@
             </ul>
           </li>
         <% else %>
-          <li class="<%= active_for("authentications") %>">
+          <li class="<%= active_link?("authentications") %>">
             <%= link_to "Sign in", auth_new_path %>
           </li>
         <% end %>

@@ -1,5 +1,5 @@
 module Remets
-  module IntegrationAuthenticationHelper
+  module IntegrationSessionHelper
     extend ActiveSupport::Concern
 
     def sign_in(
@@ -7,12 +7,15 @@ module Remets
       password: "password",
       remember_me: false
     )
-      get "/auth/new"
-      post_via_redirect "/auth", authentication: {
+      authentication_params = {
         email: user.email,
         password: password,
         remember_me: remember_me,
       }
+
+      get "/auth/new"
+      post "/auth", params: { authentication: authentication_params }
+      follow_redirect!
     end
   end
 end

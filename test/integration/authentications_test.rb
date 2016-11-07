@@ -1,3 +1,4 @@
+
 require "test_helper"
 
 class AuthenticationsTest < ActionDispatch::IntegrationTest
@@ -29,7 +30,8 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
       assert_equal @user, sess.controller.current_user
       assert_equal @user.id, sess.session[Remets::AUTH_SESSION_KEY]
 
-      sess.delete_via_redirect "/auth/destroy"
+      sess.delete "/auth/destroy"
+      sess.follow_redirect!
 
       assert_equal "/", sess.path
       assert_nil sess.controller.current_user
@@ -65,7 +67,8 @@ class AuthenticationsTest < ActionDispatch::IntegrationTest
       assert_not_nil sess.cookies[Remets::AUTH_REMEMBER_KEY]
       assert_not_nil sess.cookies[Remets::AUTH_REMEMBER_TOKEN]
 
-      sess.delete_via_redirect "/auth/destroy"
+      sess.delete "/auth/destroy"
+      sess.follow_redirect!
 
       assert_equal "/", sess.path
       assert_nil sess.controller.current_user
