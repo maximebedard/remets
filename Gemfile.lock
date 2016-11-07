@@ -8,6 +8,18 @@ GIT
       sprockets (~> 4.x)
       sprockets-rails (< 4.0)
 
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: af6dad2a6c31e31617712b15f455b2a3d3eb1c06
+  specs:
+    rack-protection (2.0.0.beta2)
+      rack
+    sinatra (2.0.0.beta2)
+      mustermann (= 1.0.0.beta2)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0.beta2)
+      tilt (~> 2.0)
+
 PATH
   remote: ../fast_winnower
   specs:
@@ -85,6 +97,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     debug_inspector (0.0.2)
+    docile (1.1.5)
     erubis (2.7.0)
     execjs (2.7.0)
     faraday (0.9.2)
@@ -104,6 +117,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    json (2.0.2)
     jwt (1.5.6)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -121,6 +135,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mustermann (1.0.0.beta2)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -155,8 +170,6 @@ GEM
     public_suffix (2.0.3)
     puma (3.6.0)
     rack (2.0.1)
-    rack-protection (1.5.3)
-      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     railroady (1.5.2)
@@ -208,8 +221,11 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.2, >= 3.2.1)
-    sinatra (1.0)
-      rack (>= 1.0)
+    simplecov (0.12.0)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     slop (3.6.0)
     sprockets (4.0.0.beta4)
       concurrent-ruby (~> 1.0)
@@ -220,6 +236,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (0.19.1)
     thread_safe (0.3.5)
+    tilt (2.0.5)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -245,7 +262,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
-  codeclimate-test-reporter
+  codeclimate-test-reporter (~> 1.0.0)
   fast_winnower!
   font-awesome-sass
   jbuilder
@@ -264,7 +281,8 @@ DEPENDENCIES
   ruby-prof
   sass-rails!
   sidekiq
-  sinatra
+  simplecov
+  sinatra!
   sprockets
   turbolinks
   uglifier

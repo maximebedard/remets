@@ -2,7 +2,7 @@ require "test_helper"
 
 class DocumentIndexingJobTest < ActiveSupport::TestCase
   include Remets::MockAmazonS3
-  self.use_transactional_fixtures = true
+  self.use_transactional_tests = true
 
   test "#perform does nothing when no documents are fingerprinted" do
     assert_no_difference("DocumentMatch.count", "Match.count") do

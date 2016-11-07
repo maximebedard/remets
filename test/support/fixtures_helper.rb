@@ -6,4 +6,4 @@ module Remets
   end
 end
 
-ActiveRecord::FixtureSet.context_class.include Remets::FixturesHelper
+ActiveRecord::FixtureSet.context_class.include(Remets::FixturesHelper)

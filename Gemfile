@@ -15,7 +15,7 @@ gem "rails", "~> 5.0.0"
 gem "responders"
 gem "sass-rails", github: "rails/sass-rails"
 gem "sidekiq"
-gem "sinatra", require: false
+gem "sinatra", github: "sinatra/sinatra", require: false
 gem "sprockets"
 gem "turbolinks"
 gem "uglifier"
@@ -39,9 +39,10 @@ group :development do
 end
 
 group :test do
-  gem "codeclimate-test-reporter", require: false
+  gem "simplecov", require: false
+  gem "codeclimate-test-reporter", "~> 1.0.0", require: false
   gem "mocha", require: false
-  gem "webmock"
+  gem "webmock", require: false
 end
 
 group :production do
