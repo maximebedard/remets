@@ -5,8 +5,9 @@ class EvaluationUpdater
   end
 
   def call
-    build_subscriptions
-    build_organization_association
+    associate_subscriptions(params.delete(:subscriptions))
+    associate_organization(params.delete(:organization))
+
     update_attributes
   end
 
@@ -14,22 +15,24 @@ class EvaluationUpdater
 
   attr_reader :evaluation, :params
 
-  def build_subscriptions
-    evaluation.subscriptions = ConnectionsBuilder.new(
-      evaluation,
-      params.delete(:subscriptions),
-      provider: ConnectionsProviders::SubscriptionProvider.new,
-    ).call
+  def associate_subscriptions(subscription_emails)
+    subscriptions = AssociateByEmail
+      .new(evaluation, subscription_emails, builder: RelationshipBuilders::Subscription.new)
+      .call
+
+    evaluation.subscriptions = subscriptions
   end
 
-  def build_organization_association
-    return unless memberships = evaluation.user.memberships.find_by(
-      organization_id: params.delete(:organization),
-    )
-    params.merge!(organization_id: memberships.organization_id)
+  def associate_organization(organization_id)
+    membership = evaluation
+      .user
+      .memberships
+      .find_by(organization_id: organization_id)
+
+    evaluation.organization = membership && membership.organization
   end
 
   def update_attributes
-    evaluation.update_attributes(params)
+    evaluation.update(params)
   end
 end

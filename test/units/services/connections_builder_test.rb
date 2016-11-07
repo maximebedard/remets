@@ -1,13 +1,13 @@
 require "test_helper"
 
-class ConnectionsBuilderTest < ActiveSupport::TestCase
+class AssociateByEmailTest < ActiveSupport::TestCase
   setup do
     @organization = organizations(:ets)
-    @provider = ConnectionsProviders::MembershipProvider.new
-    @service = ConnectionsBuilder.new(
+    @builder = RelationshipBuilders::Membership.new
+    @service = AssociateByEmail.new(
       @organization,
       [users(:henry).email, users(:clement).email],
-      provider: @provider,
+      builder: @builder,
     )
   end
 

@@ -5,7 +5,8 @@ class OrganizationUpdater
   end
 
   def call
-    build_memberships
+    associate_memberships(params.delete(:memberships))
+
     update_attributes
   end
 
@@ -13,17 +14,15 @@ class OrganizationUpdater
 
   attr_reader :organization, :params
 
-  def build_memberships
-    organization.memberships = ConnectionsBuilder.new(
-      organization,
-      params.delete(:memberships),
-      provider: ConnectionsProviders::MembershipProvider.new,
-    ).call(
-      include_owner: true,
-    )
+  def associate_memberships(memberships_emails)
+    memberships = AssociateByEmail
+      .new(organization, memberships_emails, builder: RelationshipBuilders::Membership.new)
+      .call(include_owner: true)
+
+    organization.memberships = memberships
   end
 
   def update_attributes
-    organization.update_attributes(params)
+    organization.update(params)
   end
 end
