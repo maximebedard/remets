@@ -4,15 +4,11 @@ class SubmissionsController < ApplicationController
 
   def all
     @submissions = current_user.submissions
-    authorize(@submissions)
-
     respond_with(@submissions)
   end
 
   def index
     @submissions = evaluation.submissions.where(user: current_user)
-    authorize(@submissions)
-
     respond_with(@submissions)
   end
 
@@ -23,15 +19,11 @@ class SubmissionsController < ApplicationController
 
   def new
     @submission = evaluation.submissions.where(user: current_user).new
-    authorize(@submission)
-
     respond_with(@submission)
   end
 
   def create
     @submission = evaluation.submissions.where(user: current_user).new
-    authorize(@submission)
-
     @submission.update(submission_params)
     respond_with(@submission)
   end
